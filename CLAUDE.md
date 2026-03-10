@@ -4,53 +4,29 @@ This file provides guidance to Claude Code when working in this repository.
 
 ## Project Overview
 
-<!-- TODO: Describe what this project does -->
+Update this section with a description of what this project does, its purpose, and any high-level context useful for a new contributor.
 
 ## Development Commands
 
 ### Build
-```bash
-# TODO: Add build command, e.g.:
-# npm run build
-# make build
-# go build ./...
-```
+
+Add the build command once the tech stack is decided, e.g. `npm run build`, `make build`, or `go build ./...`.
 
 ### Run
-```bash
-# TODO: Add run command, e.g.:
-# npm start
-# python main.py
-# ./bin/app
-```
+
+Add the run command once the tech stack is decided, e.g. `npm start`, `python main.py`, or `./bin/app`.
 
 ### Test
-```bash
-# TODO: Add test command, e.g.:
-# npm test
-# pytest
-# go test ./...
-# make test
-```
+
+Add the test command once the tech stack is decided, e.g. `npm test`, `pytest`, or `go test ./...`.
 
 ### Lint / Format
-```bash
-# TODO: Add lint/format commands, e.g.:
-# npm run lint
-# ruff check . && ruff format .
-# golangci-lint run
-```
+
+Add the lint/format command once the tech stack is decided, e.g. `npm run lint`, `ruff check . && ruff format .`, or `golangci-lint run`.
 
 ## Architecture
 
-```
-.
-├── src/          # Application source code
-├── tests/        # Test files
-└── docs/         # Documentation
-```
-
-<!-- TODO: Update to reflect actual directory structure -->
+Update this section to reflect the actual directory structure once files are added. Include a brief description of each top-level directory and its purpose.
 
 ## Code Style
 
@@ -58,8 +34,7 @@ This file provides guidance to Claude Code when working in this repository.
 - Prefer clarity over cleverness.
 - Keep functions small and focused.
 - Write tests for non-trivial logic.
-
-<!-- TODO: Add specific linter configs, formatter settings, or style guides -->
+- Refer to any linter/formatter config files (e.g. `.eslintrc`, `pyproject.toml`, `.golangci.yml`) for language-specific rules.
 
 ## Git Workflow
 
