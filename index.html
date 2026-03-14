@@ -1,137 +1,612 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bs">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Business Ideas</title>
+  <title>Advokat Milan Misić | Advokatska Kancelarija</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:  #0b1729;
+      --navy2: #102040;
+      --gold:  #c9a84c;
+      --gold2: #e8c96a;
+      --white: #f5f5f0;
+      --gray:  #9aa3b0;
+      --border: rgba(201,168,76,0.25);
     }
+
+    html { scroll-behavior: smooth; }
 
     body {
-      background: #f5f0ff;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-family: 'Lato', sans-serif;
+      background: var(--navy);
+      color: var(--white);
+      line-height: 1.7;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5%;
+      height: 70px;
+      background: rgba(11,23,41,0.96);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(8px);
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      color: var(--gold);
+      letter-spacing: 0.03em;
+      text-decoration: none;
+    }
+
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      color: var(--white);
+      text-decoration: none;
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+
+    /* ── HERO ── */
+    #hero {
       min-height: 100vh;
-      display: flex;
-      justify-content: center;
-    }
-
-    .container {
-      max-width: 480px;
-      width: 100%;
-      background: #ffffff;
-      padding: 24px 16px;
-    }
-
-    h1 {
-      font-size: 22px;
-      font-weight: 700;
-      color: #1a1a2e;
-      margin-bottom: 20px;
-      text-align: center;
-    }
-
-    .card {
-      background: #f3ecff;
-      border-radius: 16px;
-      padding: 20px;
-      margin-bottom: 16px;
-      display: flex;
-      gap: 14px;
-    }
-
-    .card-number {
-      flex-shrink: 0;
-      width: 36px;
-      height: 36px;
-      background: #7b2ff7;
-      color: #ffffff;
-      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 15px;
-      font-weight: 700;
-      margin-top: 2px;
+      text-align: center;
+      padding: 100px 5% 60px;
+      background:
+        linear-gradient(180deg, rgba(11,23,41,0.7) 0%, rgba(11,23,41,0.95) 100%),
+        url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1600&q=80') center/cover no-repeat;
     }
 
-    .card-content h2 {
-      font-size: 17px;
-      font-weight: 700;
-      color: #6a0dad;
-      margin-bottom: 8px;
-      line-height: 1.3;
+    .hero-inner { max-width: 780px; }
+
+    .hero-label {
+      display: inline-block;
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--gold);
     }
 
-    .card-content p {
-      font-size: 15px;
-      color: #3a3a4a;
-      line-height: 1.6;
+    .hero-inner h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+      color: var(--white);
+    }
+
+    .hero-inner h1 span { color: var(--gold); }
+
+    .hero-tagline {
+      font-size: 1.1rem;
+      color: var(--gray);
+      max-width: 560px;
+      margin: 0 auto 2.5rem;
+      font-weight: 300;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.9rem 2.4rem;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: background 0.25s, color 0.25s;
+      border-radius: 2px;
+    }
+    .btn:hover { background: var(--gold); color: var(--navy); }
+    .btn-solid { background: var(--gold); color: var(--navy); }
+    .btn-solid:hover { background: var(--gold2); }
+
+    /* ── SECTIONS ── */
+    section { padding: 100px 5%; }
+
+    .section-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      line-height: 1.25;
+    }
+
+    .divider {
+      width: 50px;
+      height: 2px;
+      background: var(--gold);
+      margin-bottom: 2rem;
+    }
+
+    /* ── ABOUT ── */
+    #about { background: var(--navy2); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 5rem;
+      align-items: center;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .about-img-wrap {
+      position: relative;
+    }
+
+    .about-img-placeholder {
+      width: 100%;
+      aspect-ratio: 3/4;
+      background: linear-gradient(135deg, #1a3055, #0d2040);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 4rem;
+      color: var(--gold);
+      border-radius: 2px;
+    }
+
+    .about-img-wrap::after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      right: -15px;
+      width: 100%;
+      height: 100%;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      z-index: -1;
+    }
+
+    .about-text p {
+      color: var(--gray);
+      margin-bottom: 1.25rem;
+      font-size: 1rem;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--gold);
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--gray);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    /* ── AREAS OF LAW ── */
+    #oblasti { background: var(--navy); }
+
+    .areas-header { max-width: 1100px; margin: 0 auto 3.5rem; }
+
+    .areas-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .area-card {
+      background: var(--navy2);
+      border: 1px solid var(--border);
+      padding: 2.5rem 2rem;
+      border-radius: 2px;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+
+    .area-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-4px);
+    }
+
+    .area-icon {
+      font-size: 2.2rem;
+      margin-bottom: 1.25rem;
+      display: block;
+    }
+
+    .area-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      margin-bottom: 0.75rem;
+      color: var(--white);
+    }
+
+    .area-card p { color: var(--gray); font-size: 0.95rem; }
+
+    .area-services {
+      list-style: none;
+      margin-top: 1.25rem;
+    }
+
+    .area-services li {
+      color: var(--gray);
+      font-size: 0.88rem;
+      padding: 0.3rem 0;
+      padding-left: 1rem;
+      position: relative;
+    }
+
+    .area-services li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+    }
+
+    /* ── CONTACT ── */
+    #kontakt { background: var(--navy2); }
+
+    .contact-wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .contact-info h2 { margin-bottom: 0.5rem; }
+
+    .contact-items { margin-top: 2rem; }
+
+    .contact-item {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      align-items: flex-start;
+    }
+
+    .contact-item-icon {
+      width: 42px;
+      height: 42px;
+      background: rgba(201,168,76,0.1);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      border-radius: 2px;
+    }
+
+    .contact-item-text strong {
+      display: block;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--gold);
+      margin-bottom: 0.2rem;
+    }
+
+    .contact-item-text span { color: var(--gray); font-size: 0.95rem; }
+
+    /* ── FORM ── */
+    .contact-form { display: flex; flex-direction: column; gap: 1.25rem; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+
+    .form-group label {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray);
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(201,168,76,0.2);
+      color: var(--white);
+      padding: 0.85rem 1rem;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.95rem;
+      border-radius: 2px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus { border-color: var(--gold); }
+
+    .form-group select option { background: var(--navy2); }
+
+    .form-group textarea { resize: vertical; min-height: 130px; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #07101e;
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    footer p { color: var(--gray); font-size: 0.85rem; }
+    footer a { color: var(--gold); text-decoration: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .about-grid,
+      .contact-wrap { grid-template-columns: 1fr; gap: 2.5rem; }
+      .about-img-wrap { display: none; }
+      .form-row { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .stats { grid-template-columns: repeat(3, 1fr); gap: 1rem; }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Business Ideas</h1>
 
-    <div class="card">
-      <div class="card-number">1</div>
-      <div class="card-content">
-        <h2>AI-Powered Contract Review</h2>
-        <p>An automated platform that uses artificial intelligence to review, summarize, and flag risks in legal contracts within minutes, saving businesses thousands in attorney fees.</p>
+  <!-- NAVIGATION -->
+  <nav>
+    <a href="#hero" class="nav-logo">Advokat Misić</a>
+    <ul class="nav-links">
+      <li><a href="#about">O meni</a></li>
+      <li><a href="#oblasti">Oblasti prava</a></li>
+      <li><a href="#kontakt">Kontakt</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-inner">
+      <span class="hero-label">Advokatska Kancelarija</span>
+      <h1>Milan <span>Misić</span></h1>
+      <p class="hero-tagline">
+        Profesionalna pravna zaštita Vaših interesa — sa iskustvom, povjerenjem i posvećenošću svakom klijentu.
+      </p>
+      <a href="#kontakt" class="btn btn-solid">Zakažite konsultaciju</a>
+      &nbsp;&nbsp;
+      <a href="#oblasti" class="btn">Oblasti prava</a>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="about-grid">
+      <div class="about-img-wrap">
+        <div class="about-img-placeholder">MM</div>
+      </div>
+      <div class="about-text">
+        <p class="section-label">O meni</p>
+        <h2 class="section-title">Advokat Milan Misić</h2>
+        <div class="divider"></div>
+        <p>
+          Advokat Milan Misić pruža stručnu pravnu pomoć fizičkim i pravnim licima već godinama.
+          Sa dubokim razumijevanjem domaćeg pravnog sistema i predanim pristupom svakom predmetu,
+          zastupam klijente pred svim sudovima i upravnim organima.
+        </p>
+        <p>
+          Moj cilj je pružiti jasnu, transparentnu i efikasnu pravnu uslugu — bez nepotrebnih
+          komplikacija. Svaki slučaj tretira se individualno, uz punu diskreciju i profesionalnost.
+        </p>
+        <p>
+          Vjerujem da svaki klijent zaslužuje kvalitetnu pravnu zaštitu i razumijevanje svojih
+          prava. Tu sam da Vam pomognem u svakom koraku pravnog procesa.
+        </p>
+        <div class="stats">
+          <div>
+            <span class="stat-num">15+</span>
+            <span class="stat-label">Godina iskustva</span>
+          </div>
+          <div>
+            <span class="stat-num">500+</span>
+            <span class="stat-label">Riješenih predmeta</span>
+          </div>
+          <div>
+            <span class="stat-num">3</span>
+            <span class="stat-label">Oblasti prava</span>
+          </div>
+        </div>
       </div>
     </div>
+  </section>
 
-    <div class="card">
-      <div class="card-number">2</div>
-      <div class="card-content">
-        <h2>Online Dispute Resolution</h2>
-        <p>A digital platform that connects parties in a dispute with certified mediators and arbitrators to resolve conflicts quickly and affordably without going to court.</p>
-      </div>
+  <!-- AREAS OF LAW -->
+  <section id="oblasti">
+    <div class="areas-header">
+      <p class="section-label">Specijalizacije</p>
+      <h2 class="section-title">Oblasti prava</h2>
+      <div class="divider"></div>
     </div>
+    <div class="areas-grid">
 
-    <div class="card">
-      <div class="card-number">3</div>
-      <div class="card-content">
-        <h2>Legal Document Automation</h2>
-        <p>A SaaS tool that enables individuals and small businesses to generate legally sound documents—NDAs, leases, wills—through a guided questionnaire interface.</p>
+      <div class="area-card">
+        <span class="area-icon">⚖️</span>
+        <h3>Krivično pravo</h3>
+        <p>Stručna odbrana u svim fazama krivičnog postupka, od istrage do sudskog postupka.</p>
+        <ul class="area-services">
+          <li>Odbrana osumnjičenih i optuženih</li>
+          <li>Zastupanje oštećenih</li>
+          <li>Žalbe i vanredni pravni lijekovi</li>
+          <li>Savjetovanje u prekršajnim postupcima</li>
+        </ul>
       </div>
-    </div>
 
-    <div class="card">
-      <div class="card-number">4</div>
-      <div class="card-content">
-        <h2>Lawyer Marketplace</h2>
-        <p>A peer-to-peer platform matching clients with vetted freelance lawyers based on practice area, availability, and budget, with transparent pricing and reviews.</p>
+      <div class="area-card">
+        <span class="area-icon">🏢</span>
+        <h3>Privredno pravo</h3>
+        <p>Pravna podrška privrednim subjektima u poslovanju, ugovornim i statusnim pitanjima.</p>
+        <ul class="area-services">
+          <li>Osnivanje privrednih društava</li>
+          <li>Izrada i pregled ugovora</li>
+          <li>Privredni sporovi i arbitraža</li>
+          <li>Stečaj i likvidacija</li>
+        </ul>
       </div>
-    </div>
 
-    <div class="card">
-      <div class="card-number">5</div>
-      <div class="card-content">
-        <h2>Compliance Management SaaS</h2>
-        <p>A subscription software that helps startups and SMEs stay compliant with local regulations, tax laws, and industry standards through automated alerts and checklists.</p>
+      <div class="area-card">
+        <span class="area-icon">🏠</span>
+        <h3>Nekretnine</h3>
+        <p>Sveobuhvatna pravna pomoć pri kupovini, prodaji i regulisanju imovinskih odnosa.</p>
+        <ul class="area-services">
+          <li>Ugovori o kupoprodaji nekretnina</li>
+          <li>Uknjižba i upis prava vlasništva</li>
+          <li>Imovinsko-pravni sporovi</li>
+          <li>Due diligence provjera nekretnina</li>
+        </ul>
       </div>
-    </div>
 
-    <div class="card">
-      <div class="card-number">6</div>
-      <div class="card-content">
-        <h2>Legal Analytics Platform</h2>
-        <p>A data-driven tool that gives law firms insights into case outcomes, judge tendencies, opposing counsel strategies, and litigation trends through advanced analytics.</p>
-      </div>
     </div>
+  </section>
 
-    <div class="card">
-      <div class="card-number">7</div>
-      <div class="card-content">
-        <h2>Legal Subscription Service</h2>
-        <p>A Netflix-style monthly membership program where clients pay a flat fee for unlimited consultations and document reviews from a network of lawyers across various practice areas, making legal advice accessible and predictable for individuals and small businesses.</p>
+  <!-- CONTACT -->
+  <section id="kontakt">
+    <div class="contact-wrap">
+      <div class="contact-info">
+        <p class="section-label">Kontakt</p>
+        <h2 class="section-title">Stupite u kontakt</h2>
+        <div class="divider"></div>
+        <p style="color: var(--gray); margin-bottom: 0.5rem;">
+          Dostupan sam za konsultacije radnim danima. Prva konsultacija je besplatna.
+        </p>
+        <div class="contact-items">
+          <div class="contact-item">
+            <div class="contact-item-icon">📍</div>
+            <div class="contact-item-text">
+              <strong>Adresa</strong>
+              <span>Ulica, Broj, Grad</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">📞</div>
+            <div class="contact-item-text">
+              <strong>Telefon</strong>
+              <span>+387 XX XXX XXX</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">✉️</div>
+            <div class="contact-item-text">
+              <strong>Email</strong>
+              <span>advokat@misic.ba</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">🕐</div>
+            <div class="contact-item-text">
+              <strong>Radno vrijeme</strong>
+              <span>Pon – Pet: 09:00 – 17:00</span>
+            </div>
+          </div>
+        </div>
       </div>
+
+      <form class="contact-form" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="ime">Ime i prezime</label>
+            <input type="text" id="ime" placeholder="Vaše ime" required />
+          </div>
+          <div class="form-group">
+            <label for="email">Email adresa</label>
+            <input type="email" id="email" placeholder="vas@email.com" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="telefon">Telefon (opciono)</label>
+          <input type="tel" id="telefon" placeholder="+387 XX XXX XXX" />
+        </div>
+        <div class="form-group">
+          <label for="oblast">Oblast prava</label>
+          <select id="oblast">
+            <option value="">— Odaberite oblast —</option>
+            <option>Krivično pravo</option>
+            <option>Privredno pravo</option>
+            <option>Nekretnine</option>
+            <option>Ostalo</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="poruka">Vaša poruka</label>
+          <textarea id="poruka" placeholder="Opišite ukratko Vaš pravni problem ili upit..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-solid" style="border:none;cursor:pointer;font-family:'Lato',sans-serif;font-size:0.85rem;letter-spacing:0.12em;">
+          Pošaljite upit
+        </button>
+      </form>
     </div>
-  </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2024 Advokat Milan Misić. Sva prava zadržana.</p>
+    <p>Izradio sa ♥ — <a href="#">advokat@misic.ba</a></p>
+  </footer>
+
+  <script>
+    function handleSubmit(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('button[type="submit"]');
+      btn.textContent = 'Poruka poslana ✓';
+      btn.style.background = '#2a6e3f';
+      btn.style.borderColor = '#2a6e3f';
+      btn.disabled = true;
+      setTimeout(() => {
+        btn.textContent = 'Pošaljite upit';
+        btn.style.background = '';
+        btn.style.borderColor = '';
+        btn.disabled = false;
+        e.target.reset();
+      }, 3000);
+    }
+  </script>
+
 </body>
 </html>
