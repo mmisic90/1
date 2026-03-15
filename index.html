@@ -2,136 +2,366 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <title>Business Ideas</title>
   <style>
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+      -webkit-tap-highlight-color: transparent;
     }
 
     body {
       background: #f5f0ff;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       min-height: 100vh;
+      min-height: -webkit-fill-available;
       display: flex;
+      flex-direction: column;
+      align-items: center;
       justify-content: center;
+      padding: env(safe-area-inset-top, 16px) env(safe-area-inset-right, 16px) env(safe-area-inset-bottom, 16px) env(safe-area-inset-left, 16px);
     }
 
-    .container {
+    .wrapper {
       max-width: 480px;
       width: 100%;
-      background: #ffffff;
-      padding: 24px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
     }
 
     h1 {
-      font-size: 22px;
-      font-weight: 700;
+      font-size: 24px;
+      font-weight: 800;
       color: #1a1a2e;
-      margin-bottom: 20px;
       text-align: center;
+      letter-spacing: -0.5px;
+    }
+
+    /* Step indicator */
+    .steps-indicator {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .step-dot {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #e0d4ff;
+      color: #9b6dff;
+      font-size: 13px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s, color 0.3s, transform 0.3s;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .step-dot.active {
+      background: #7b2ff7;
+      color: #ffffff;
+      transform: scale(1.15);
+      box-shadow: 0 4px 12px rgba(123, 47, 247, 0.4);
+    }
+
+    .step-dot.done {
+      background: #c4a7ff;
+      color: #ffffff;
+    }
+
+    .step-line {
+      height: 3px;
+      flex: 1;
+      max-width: 48px;
+      background: #e0d4ff;
+      border-radius: 2px;
+      transition: background 0.3s;
+    }
+
+    .step-line.done {
+      background: #c4a7ff;
+    }
+
+    /* Card */
+    .card-container {
+      width: 100%;
+      perspective: 800px;
     }
 
     .card {
-      background: #f3ecff;
-      border-radius: 16px;
-      padding: 20px;
-      margin-bottom: 16px;
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 28px 24px;
+      box-shadow: 0 8px 32px rgba(123, 47, 247, 0.12);
+      display: none;
+      flex-direction: column;
+      gap: 16px;
+      animation: slideIn 0.35s cubic-bezier(0.34, 1.26, 0.64, 1);
+    }
+
+    .card.active {
       display: flex;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.97);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
       gap: 14px;
     }
 
     .card-number {
       flex-shrink: 0;
-      width: 36px;
-      height: 36px;
-      background: #7b2ff7;
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, #7b2ff7, #a855f7);
       color: #ffffff;
-      border-radius: 50%;
+      border-radius: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 15px;
-      font-weight: 700;
+      font-size: 20px;
+      font-weight: 800;
+      box-shadow: 0 4px 12px rgba(123, 47, 247, 0.35);
+    }
+
+    .card-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: #9b6dff;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    .card-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: #1a1a2e;
+      line-height: 1.25;
       margin-top: 2px;
     }
 
-    .card-content h2 {
-      font-size: 17px;
-      font-weight: 700;
-      color: #6a0dad;
-      margin-bottom: 8px;
-      line-height: 1.3;
+    .card-divider {
+      height: 1px;
+      background: #f0e8ff;
+      border-radius: 1px;
     }
 
-    .card-content p {
-      font-size: 15px;
-      color: #3a3a4a;
-      line-height: 1.6;
+    .card-body {
+      font-size: 16px;
+      color: #4a4a5a;
+      line-height: 1.65;
+    }
+
+    .card-tag {
+      align-self: flex-start;
+      background: #f3ecff;
+      color: #7b2ff7;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 5px 12px;
+      border-radius: 20px;
+    }
+
+    /* Navigation */
+    .nav {
+      display: flex;
+      gap: 12px;
+      width: 100%;
+    }
+
+    .btn {
+      flex: 1;
+      padding: 16px;
+      border: none;
+      border-radius: 16px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s, opacity 0.15s;
+      -webkit-appearance: none;
+    }
+
+    .btn:active {
+      transform: scale(0.96);
+    }
+
+    .btn-prev {
+      background: #f0e8ff;
+      color: #7b2ff7;
+    }
+
+    .btn-prev:disabled {
+      opacity: 0.35;
+      pointer-events: none;
+    }
+
+    .btn-next {
+      background: linear-gradient(135deg, #7b2ff7, #a855f7);
+      color: #ffffff;
+      box-shadow: 0 4px 16px rgba(123, 47, 247, 0.35);
+    }
+
+    .btn-next:active {
+      box-shadow: 0 2px 8px rgba(123, 47, 247, 0.25);
+    }
+
+    /* Counter */
+    .counter {
+      font-size: 13px;
+      color: #9b6dff;
+      font-weight: 600;
+      text-align: center;
     }
   </style>
 </head>
 <body>
-  <div class="container">
+  <div class="wrapper">
     <h1>Business Ideas</h1>
 
-    <div class="card">
-      <div class="card-number">1</div>
-      <div class="card-content">
-        <h2>AI-Powered Contract Review</h2>
-        <p>An automated platform that uses artificial intelligence to review, summarize, and flag risks in legal contracts within minutes, saving businesses thousands in attorney fees.</p>
-      </div>
+    <!-- Step indicators -->
+    <div class="steps-indicator" id="stepsIndicator"></div>
+
+    <!-- Cards -->
+    <div class="card-container" id="cardContainer"></div>
+
+    <!-- Navigation -->
+    <div class="nav">
+      <button class="btn btn-prev" id="btnPrev" onclick="changeStep(-1)" disabled>← Back</button>
+      <button class="btn btn-next" id="btnNext" onclick="changeStep(1)">Next →</button>
     </div>
 
-    <div class="card">
-      <div class="card-number">2</div>
-      <div class="card-content">
-        <h2>Online Dispute Resolution</h2>
-        <p>A digital platform that connects parties in a dispute with certified mediators and arbitrators to resolve conflicts quickly and affordably without going to court.</p>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-number">3</div>
-      <div class="card-content">
-        <h2>Legal Document Automation</h2>
-        <p>A SaaS tool that enables individuals and small businesses to generate legally sound documents—NDAs, leases, wills—through a guided questionnaire interface.</p>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-number">4</div>
-      <div class="card-content">
-        <h2>Lawyer Marketplace</h2>
-        <p>A peer-to-peer platform matching clients with vetted freelance lawyers based on practice area, availability, and budget, with transparent pricing and reviews.</p>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-number">5</div>
-      <div class="card-content">
-        <h2>Compliance Management SaaS</h2>
-        <p>A subscription software that helps startups and SMEs stay compliant with local regulations, tax laws, and industry standards through automated alerts and checklists.</p>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-number">6</div>
-      <div class="card-content">
-        <h2>Legal Analytics Platform</h2>
-        <p>A data-driven tool that gives law firms insights into case outcomes, judge tendencies, opposing counsel strategies, and litigation trends through advanced analytics.</p>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-number">7</div>
-      <div class="card-content">
-        <h2>Legal Subscription Service</h2>
-        <p>A Netflix-style monthly membership program where clients pay a flat fee for unlimited consultations and document reviews from a network of lawyers across various practice areas, making legal advice accessible and predictable for individuals and small businesses.</p>
-      </div>
-    </div>
+    <div class="counter" id="counter"></div>
   </div>
+
+  <script>
+    const ideas = [
+      {
+        title: "AI-Powered Contract Review",
+        tag: "LegalTech · AI",
+        body: "An automated platform that uses artificial intelligence to review, summarize, and flag risks in legal contracts within minutes, saving businesses thousands in attorney fees."
+      },
+      {
+        title: "Online Dispute Resolution",
+        tag: "LegalTech · Marketplace",
+        body: "A digital platform that connects parties in a dispute with certified mediators and arbitrators to resolve conflicts quickly and affordably without going to court."
+      },
+      {
+        title: "Legal Document Automation",
+        tag: "SaaS · Productivity",
+        body: "A SaaS tool that enables individuals and small businesses to generate legally sound documents—NDAs, leases, wills—through a guided questionnaire interface."
+      },
+      {
+        title: "Lawyer Marketplace",
+        tag: "Marketplace · Services",
+        body: "A peer-to-peer platform matching clients with vetted freelance lawyers based on practice area, availability, and budget, with transparent pricing and reviews."
+      }
+    ];
+
+    let current = 0;
+    const total = ideas.length;
+
+    const stepsEl = document.getElementById('stepsIndicator');
+    const containerEl = document.getElementById('cardContainer');
+    const btnPrev = document.getElementById('btnPrev');
+    const btnNext = document.getElementById('btnNext');
+    const counterEl = document.getElementById('counter');
+
+    // Build step dots
+    ideas.forEach((_, i) => {
+      if (i > 0) {
+        const line = document.createElement('div');
+        line.className = 'step-line';
+        line.id = `line-${i}`;
+        stepsEl.appendChild(line);
+      }
+      const dot = document.createElement('div');
+      dot.className = 'step-dot' + (i === 0 ? ' active' : '');
+      dot.textContent = i + 1;
+      dot.id = `dot-${i}`;
+      dot.onclick = () => goTo(i);
+      stepsEl.appendChild(dot);
+    });
+
+    // Build cards
+    ideas.forEach((idea, i) => {
+      const card = document.createElement('div');
+      card.className = 'card' + (i === 0 ? ' active' : '');
+      card.id = `card-${i}`;
+      card.innerHTML = `
+        <div class="card-header">
+          <div class="card-number">${i + 1}</div>
+          <div>
+            <div class="card-label">Step ${i + 1} of ${total}</div>
+            <div class="card-title">${idea.title}</div>
+          </div>
+        </div>
+        <div class="card-divider"></div>
+        <div class="card-body">${idea.body}</div>
+        <div class="card-tag">${idea.tag}</div>
+      `;
+      containerEl.appendChild(card);
+    });
+
+    function updateUI() {
+      // Cards
+      document.querySelectorAll('.card').forEach((c, i) => {
+        c.classList.toggle('active', i === current);
+      });
+
+      // Dots
+      document.querySelectorAll('.step-dot').forEach((d, i) => {
+        d.classList.remove('active', 'done');
+        if (i === current) d.classList.add('active');
+        else if (i < current) d.classList.add('done');
+      });
+
+      // Lines
+      for (let i = 1; i < total; i++) {
+        const line = document.getElementById(`line-${i}`);
+        if (line) line.classList.toggle('done', i <= current);
+      }
+
+      // Buttons
+      btnPrev.disabled = current === 0;
+      btnNext.textContent = current === total - 1 ? 'Done ✓' : 'Next →';
+
+      // Counter
+      counterEl.textContent = `${current + 1} / ${total}`;
+    }
+
+    function goTo(index) {
+      current = Math.max(0, Math.min(total - 1, index));
+      updateUI();
+    }
+
+    function changeStep(dir) {
+      if (dir === 1 && current === total - 1) return; // Done — no action
+      goTo(current + dir);
+    }
+
+    updateUI();
+  </script>
 </body>
 </html>
