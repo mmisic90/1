@@ -18,7 +18,10 @@ Add the run command once the tech stack is decided, e.g. `npm start`, `python ma
 
 ### Test
 
-Add the test command once the tech stack is decided, e.g. `npm test`, `pytest`, or `go test ./...`.
+```bash
+npm test
+npm run test:coverage  # with coverage report
+```
 
 ### Lint / Format
 
