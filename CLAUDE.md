@@ -4,37 +4,64 @@ This file provides guidance to Claude Code when working in this repository.
 
 ## Project Overview
 
-Update this section with a description of what this project does, its purpose, and any high-level context useful for a new contributor.
+Business Ideas Showcase — a mobile-optimized, single-page web application that displays business ideas (legal technology/SaaS) in an interactive carousel with step-based navigation. Built with vanilla HTML5, CSS3, and JavaScript with zero external dependencies.
+
+Features:
+- Step indicator with progress dots and click-to-jump navigation
+- Card-based UI showing idea title, description, and category tags
+- Previous/Next button navigation
+- iPhone PWA support with safe-area insets for notched devices
+- Purple gradient theme (#7b2ff7 to #a855f7)
 
 ## Development Commands
 
 ### Build
 
-Add the build command once the tech stack is decided, e.g. `npm run build`, `make build`, or `go build ./...`.
+No build step required. This is a static HTML file with inline CSS and JavaScript.
 
 ### Run
 
-Add the run command once the tech stack is decided, e.g. `npm start`, `python main.py`, or `./bin/app`.
+Open `index.html` directly in a browser, or serve locally:
+
+```bash
+python3 -m http.server 8000
+```
 
 ### Test
 
-Add the test command once the tech stack is decided, e.g. `npm test`, `pytest`, or `go test ./...`.
+No test framework is configured. Verify changes by opening `index.html` in a browser and testing navigation (dots, prev/next buttons, step counter).
 
 ### Lint / Format
 
-Add the lint/format command once the tech stack is decided, e.g. `npm run lint`, `ruff check . && ruff format .`, or `golangci-lint run`.
+No linter or formatter is configured. Follow the existing code style conventions described below.
 
 ## Architecture
 
-Update this section to reflect the actual directory structure once files are added. Include a brief description of each top-level directory and its purpose.
+Single-file architecture — all code lives in `index.html`:
+
+```
+/
+├── .github/workflows/claude.yml   # GitHub Actions: Claude Code Action integration
+├── CLAUDE.md                      # This file
+└── index.html                     # Entire application (HTML + CSS + JS)
+```
+
+`index.html` is organized into three inline sections:
+
+1. **HTML** — Semantic markup with mobile viewport meta tags, PWA configuration, step indicator container, card container, and navigation buttons.
+2. **CSS** (`<style>`) — Mobile-first responsive design using CSS Grid/Flexbox, `slideIn` animation (350ms cubic-bezier), safe-area insets, and state styles (active, done, disabled).
+3. **JavaScript** (`<script>`) — Ideas data array, current step tracking, and DOM manipulation functions:
+   - `updateUI()` — Refreshes active states, step dots, and card content
+   - `goTo(index)` — Navigates to a specific step
+   - `changeStep(dir)` — Steps forward or backward by direction (+1/-1)
 
 ## Code Style
 
-- Follow the conventions of the language/framework in use.
-- Prefer clarity over cleverness.
-- Keep functions small and focused.
-- Write tests for non-trivial logic.
-- Refer to any linter/formatter config files (e.g. `.eslintrc`, `pyproject.toml`, `.golangci.yml`) for language-specific rules.
+- Vanilla JavaScript (ES6+), no frameworks or libraries.
+- BEM-like CSS class naming (`.card-header`, `.card-body`, `.btn-prev`).
+- Mobile-first CSS with progressive enhancement.
+- Clear, descriptive variable names (`ideas`, `current`, `total`).
+- Direct DOM manipulation via `getElementById`, `querySelectorAll`, `createElement`.
 
 ## Git Workflow
 
@@ -43,9 +70,15 @@ Update this section to reflect the actual directory structure once files are add
 - Keep commits focused and atomic.
 - Do not commit secrets, credentials, or generated build artifacts.
 
+## CI/CD
+
+GitHub Actions workflow (`.github/workflows/claude.yml`) enables Claude Code Action. It triggers when `@claude` is mentioned in issue comments, PR comments, or PR reviews.
+
 ## Notes for Claude
 
-- Read existing code before suggesting modifications.
+- This is a single-file application — all edits go in `index.html`.
+- No build step, no dependencies to install.
+- Read the existing HTML/CSS/JS structure before making changes.
 - Prefer editing existing files over creating new ones.
-- Do not add unnecessary comments, docstrings, or abstractions.
-- Run tests before committing code changes.
+- Test by opening `index.html` in a browser and verifying navigation behavior.
+- Business idea data is stored as a JavaScript array in the `<script>` block — add/modify ideas there.
