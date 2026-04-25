@@ -2,22 +2,16 @@
 <html lang="bs">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Advokat Milan Misić | Advokatska Kancelarija</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <title>Business Ideas</title>
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --navy:  #0b1729;
-      --navy2: #102040;
-      --gold:  #c9a84c;
-      --gold2: #e8c96a;
-      --white: #f5f5f0;
-      --gray:  #9aa3b0;
-      --border: rgba(201,168,76,0.25);
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
     }
 
     html { scroll-behavior: smooth; }
@@ -66,6 +60,7 @@
     /* ── HERO ── */
     #hero {
       min-height: 100vh;
+      min-height: -webkit-fill-available;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -392,6 +387,19 @@
   </style>
 </head>
 <body>
+  <div class="wrapper">
+    <h1>Business Ideas</h1>
+
+    <!-- Step indicators -->
+    <div class="steps-indicator" id="stepsIndicator"></div>
+
+    <!-- Cards -->
+    <div class="card-container" id="cardContainer"></div>
+
+    <!-- Navigation -->
+    <div class="nav">
+      <button class="btn btn-prev" id="btnPrev" disabled>← Back</button>
+      <button class="btn btn-next" id="btnNext">Next →</button>
 
   <!-- NAVIGATION -->
   <nav>
@@ -467,146 +475,17 @@
     </div>
     <div class="areas-grid">
 
-      <div class="area-card">
-        <span class="area-icon">⚖️</span>
-        <h3>Krivično pravo</h3>
-        <p>Stručna odbrana u svim fazama krivičnog postupka, od istrage do sudskog postupka.</p>
-        <ul class="area-services">
-          <li>Odbrana osumnjičenih i optuženih</li>
-          <li>Zastupanje oštećenih</li>
-          <li>Žalbe i vanredni pravni lijekovi</li>
-          <li>Savjetovanje u prekršajnim postupcima</li>
-        </ul>
-      </div>
+    <div class="counter" id="counter"></div>
+  </div>
 
-      <div class="area-card">
-        <span class="area-icon">🏢</span>
-        <h3>Privredno pravo</h3>
-        <p>Pravna podrška privrednim subjektima u poslovanju, ugovornim i statusnim pitanjima.</p>
-        <ul class="area-services">
-          <li>Osnivanje privrednih društava</li>
-          <li>Izrada i pregled ugovora</li>
-          <li>Privredni sporovi i arbitraža</li>
-          <li>Stečaj i likvidacija</li>
-        </ul>
-      </div>
+  <script type="module">
+    import ideas from './src/ideas.js';
+    import { createCarousel } from './src/carousel.js';
 
-      <div class="area-card">
-        <span class="area-icon">🏠</span>
-        <h3>Nekretnine</h3>
-        <p>Sveobuhvatna pravna pomoć pri kupovini, prodaji i regulisanju imovinskih odnosa.</p>
-        <ul class="area-services">
-          <li>Ugovori o kupoprodaji nekretnina</li>
-          <li>Uknjižba i upis prava vlasništva</li>
-          <li>Imovinsko-pravni sporovi</li>
-          <li>Due diligence provjera nekretnina</li>
-        </ul>
-      </div>
+    const carousel = createCarousel(ideas, document);
 
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section id="kontakt">
-    <div class="contact-wrap">
-      <div class="contact-info">
-        <p class="section-label">Kontakt</p>
-        <h2 class="section-title">Stupite u kontakt</h2>
-        <div class="divider"></div>
-        <p style="color: var(--gray); margin-bottom: 0.5rem;">
-          Dostupan sam za konsultacije radnim danima. Prva konsultacija je besplatna.
-        </p>
-        <div class="contact-items">
-          <div class="contact-item">
-            <div class="contact-item-icon">📍</div>
-            <div class="contact-item-text">
-              <strong>Adresa</strong>
-              <span>Ulica, Broj, Grad</span>
-            </div>
-          </div>
-          <div class="contact-item">
-            <div class="contact-item-icon">📞</div>
-            <div class="contact-item-text">
-              <strong>Telefon</strong>
-              <span>+387 XX XXX XXX</span>
-            </div>
-          </div>
-          <div class="contact-item">
-            <div class="contact-item-icon">✉️</div>
-            <div class="contact-item-text">
-              <strong>Email</strong>
-              <span>advokat@misic.ba</span>
-            </div>
-          </div>
-          <div class="contact-item">
-            <div class="contact-item-icon">🕐</div>
-            <div class="contact-item-text">
-              <strong>Radno vrijeme</strong>
-              <span>Pon – Pet: 09:00 – 17:00</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <form class="contact-form" onsubmit="handleSubmit(event)">
-        <div class="form-row">
-          <div class="form-group">
-            <label for="ime">Ime i prezime</label>
-            <input type="text" id="ime" placeholder="Vaše ime" required />
-          </div>
-          <div class="form-group">
-            <label for="email">Email adresa</label>
-            <input type="email" id="email" placeholder="vas@email.com" required />
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="telefon">Telefon (opciono)</label>
-          <input type="tel" id="telefon" placeholder="+387 XX XXX XXX" />
-        </div>
-        <div class="form-group">
-          <label for="oblast">Oblast prava</label>
-          <select id="oblast">
-            <option value="">— Odaberite oblast —</option>
-            <option>Krivično pravo</option>
-            <option>Privredno pravo</option>
-            <option>Nekretnine</option>
-            <option>Ostalo</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="poruka">Vaša poruka</label>
-          <textarea id="poruka" placeholder="Opišite ukratko Vaš pravni problem ili upit..." required></textarea>
-        </div>
-        <button type="submit" class="btn btn-solid" style="border:none;cursor:pointer;font-family:'Lato',sans-serif;font-size:0.85rem;letter-spacing:0.12em;">
-          Pošaljite upit
-        </button>
-      </form>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <p>© 2024 Advokat Milan Misić. Sva prava zadržana.</p>
-    <p>Izradio sa ♥ — <a href="#">advokat@misic.ba</a></p>
-  </footer>
-
-  <script>
-    function handleSubmit(e) {
-      e.preventDefault();
-      const btn = e.target.querySelector('button[type="submit"]');
-      btn.textContent = 'Poruka poslana ✓';
-      btn.style.background = '#2a6e3f';
-      btn.style.borderColor = '#2a6e3f';
-      btn.disabled = true;
-      setTimeout(() => {
-        btn.textContent = 'Pošaljite upit';
-        btn.style.background = '';
-        btn.style.borderColor = '';
-        btn.disabled = false;
-        e.target.reset();
-      }, 3000);
-    }
+    document.getElementById('btnPrev').onclick = () => carousel.changeStep(-1);
+    document.getElementById('btnNext').onclick = () => carousel.changeStep(1);
   </script>
-
 </body>
 </html>

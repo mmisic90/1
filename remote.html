@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <title>Remote Control</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background: linear-gradient(180deg, #1a1a2e 0%, #16162a 100%);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      min-height: 100vh;
+      min-height: -webkit-fill-available;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: env(safe-area-inset-top, 20px) env(safe-area-inset-right, 16px) env(safe-area-inset-bottom, 20px) env(safe-area-inset-left, 16px);
+      color: #ffffff;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .remote {
+      max-width: 380px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      padding: 24px 20px 32px;
+      background: linear-gradient(180deg, #242445 0%, #1e1e3a 100%);
+      border-radius: 40px;
+      box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(123, 47, 247, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    /* Header */
+    .remote-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 0 8px;
+    }
+
+    .brand {
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      background: linear-gradient(135deg, #7b2ff7, #a855f7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .power-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 2px solid #3a3a5c;
+      background: transparent;
+      color: #ef4444;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .power-btn:active {
+      background: rgba(239, 68, 68, 0.15);
+      transform: scale(0.92);
+    }
+
+    .power-btn.on {
+      border-color: #22c55e;
+      color: #22c55e;
+      box-shadow: 0 0 16px rgba(34, 197, 94, 0.3);
+    }
+
+    /* Display */
+    .display {
+      width: 100%;
+      background: #111128;
+      border-radius: 20px;
+      padding: 16px 20px;
+      text-align: center;
+      border: 1px solid #2a2a4a;
+      min-height: 72px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      transition: opacity 0.3s;
+    }
+
+    .display.off {
+      opacity: 0.2;
+    }
+
+    .display-channel {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    .display-label {
+      font-size: 12px;
+      color: #9b6dff;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    /* Volume & Channel row */
+    .vol-ch-row {
+      display: flex;
+      gap: 16px;
+      width: 100%;
+    }
+
+    .vol-ch-group {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .vol-ch-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #6b6b8d;
+      margin-bottom: 4px;
+    }
+
+    .vol-ch-btn {
+      width: 100%;
+      height: 48px;
+      border: none;
+      border-radius: 14px;
+      background: #2a2a4e;
+      color: #ffffff;
+      font-size: 22px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .vol-ch-btn:active {
+      background: #7b2ff7;
+      transform: scale(0.95);
+    }
+
+    .vol-ch-value {
+      font-size: 16px;
+      font-weight: 700;
+      color: #c4a7ff;
+      padding: 4px 0;
+      min-width: 30px;
+      text-align: center;
+    }
+
+    /* D-Pad */
+    .dpad-container {
+      position: relative;
+      width: 200px;
+      height: 200px;
+    }
+
+    .dpad-btn {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      border: none;
+      border-radius: 16px;
+      background: #2a2a4e;
+      color: #ffffff;
+      font-size: 20px;
+      cursor: pointer;
+      transition: all 0.15s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .dpad-btn:active {
+      background: #7b2ff7;
+      transform: scale(0.9);
+    }
+
+    .dpad-up { top: 0; left: 50%; transform: translateX(-50%); }
+    .dpad-up:active { transform: translateX(-50%) scale(0.9); }
+    .dpad-down { bottom: 0; left: 50%; transform: translateX(-50%); }
+    .dpad-down:active { transform: translateX(-50%) scale(0.9); }
+    .dpad-left { left: 0; top: 50%; transform: translateY(-50%); }
+    .dpad-left:active { transform: translateY(-50%) scale(0.9); }
+    .dpad-right { right: 0; top: 50%; transform: translateY(-50%); }
+    .dpad-right:active { transform: translateY(-50%) scale(0.9); }
+
+    .dpad-ok {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 72px;
+      height: 72px;
+      border: none;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #7b2ff7, #a855f7);
+      color: #ffffff;
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: all 0.15s;
+      box-shadow: 0 4px 20px rgba(123, 47, 247, 0.4);
+    }
+
+    .dpad-ok:active {
+      transform: translate(-50%, -50%) scale(0.9);
+      box-shadow: 0 2px 10px rgba(123, 47, 247, 0.3);
+    }
+
+    /* Media controls */
+    .media-row {
+      display: flex;
+      gap: 12px;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .media-btn {
+      width: 56px;
+      height: 48px;
+      border: none;
+      border-radius: 14px;
+      background: #2a2a4e;
+      color: #c4a7ff;
+      font-size: 18px;
+      cursor: pointer;
+      transition: all 0.15s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .media-btn:active {
+      background: #7b2ff7;
+      color: #ffffff;
+      transform: scale(0.92);
+    }
+
+    .media-btn.play-pause {
+      width: 64px;
+      background: linear-gradient(135deg, #7b2ff7, #a855f7);
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(123, 47, 247, 0.3);
+    }
+
+    .media-btn.play-pause:active {
+      box-shadow: 0 2px 6px rgba(123, 47, 247, 0.2);
+    }
+
+    /* Mute button */
+    .mute-btn {
+      width: 100%;
+      height: 44px;
+      border: none;
+      border-radius: 14px;
+      background: #2a2a4e;
+      color: #6b6b8d;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .mute-btn:active {
+      background: #3a3a5c;
+      transform: scale(0.97);
+    }
+
+    .mute-btn.muted {
+      background: rgba(239, 68, 68, 0.15);
+      color: #ef4444;
+    }
+
+    /* Number pad */
+    .numpad {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      width: 100%;
+    }
+
+    .num-btn {
+      height: 48px;
+      border: none;
+      border-radius: 14px;
+      background: #2a2a4e;
+      color: #ffffff;
+      font-size: 18px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .num-btn:active {
+      background: #7b2ff7;
+      transform: scale(0.93);
+    }
+
+    /* Source buttons */
+    .source-row {
+      display: flex;
+      gap: 8px;
+      width: 100%;
+    }
+
+    .source-btn {
+      flex: 1;
+      height: 40px;
+      border: 1px solid #3a3a5c;
+      border-radius: 12px;
+      background: transparent;
+      color: #6b6b8d;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .source-btn:active {
+      background: #7b2ff7;
+      color: #ffffff;
+      border-color: #7b2ff7;
+      transform: scale(0.95);
+    }
+
+    .source-btn.active {
+      border-color: #7b2ff7;
+      color: #c4a7ff;
+    }
+
+    /* Back link */
+    .back-link {
+      margin-top: 12px;
+      font-size: 13px;
+      color: #6b6b8d;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+
+    .back-link:hover {
+      color: #9b6dff;
+    }
+  </style>
+</head>
+<body>
+  <div class="remote">
+    <!-- Header -->
+    <div class="remote-header">
+      <div class="brand">Remote</div>
+      <button class="power-btn on" id="powerBtn" onclick="togglePower()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+          <path d="M12 2v8"/>
+          <path d="M18.36 6.64A9 9 0 1 1 5.64 6.64"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Display -->
+    <div class="display" id="display">
+      <div class="display-channel" id="displayChannel">CH 1</div>
+      <div class="display-label" id="displayLabel">HDMI 1</div>
+    </div>
+
+    <!-- Volume & Channel -->
+    <div class="vol-ch-row">
+      <div class="vol-ch-group">
+        <div class="vol-ch-label">Volume</div>
+        <button class="vol-ch-btn" onclick="adjustVolume(1)">+</button>
+        <div class="vol-ch-value" id="volValue">50</div>
+        <button class="vol-ch-btn" onclick="adjustVolume(-1)">−</button>
+        <button class="mute-btn" id="muteBtn" onclick="toggleMute()">MUTE</button>
+      </div>
+      <div class="vol-ch-group">
+        <div class="vol-ch-label">Channel</div>
+        <button class="vol-ch-btn" onclick="adjustChannel(1)">▲</button>
+        <div class="vol-ch-value" id="chValue">1</div>
+        <button class="vol-ch-btn" onclick="adjustChannel(-1)">▼</button>
+        <button class="mute-btn" onclick="goToChannel()" style="color:#9b6dff">GO</button>
+      </div>
+    </div>
+
+    <!-- D-Pad -->
+    <div class="dpad-container">
+      <button class="dpad-btn dpad-up" onclick="dpadAction('up')">▲</button>
+      <button class="dpad-btn dpad-down" onclick="dpadAction('down')">▼</button>
+      <button class="dpad-btn dpad-left" onclick="dpadAction('left')">◀</button>
+      <button class="dpad-btn dpad-right" onclick="dpadAction('right')">▶</button>
+      <button class="dpad-ok" onclick="dpadAction('ok')">OK</button>
+    </div>
+
+    <!-- Media controls -->
+    <div class="media-row">
+      <button class="media-btn" onclick="mediaAction('prev')">⏮</button>
+      <button class="media-btn" onclick="mediaAction('rew')">⏪</button>
+      <button class="media-btn play-pause" id="playPauseBtn" onclick="mediaAction('playpause')">▶</button>
+      <button class="media-btn" onclick="mediaAction('ff')">⏩</button>
+      <button class="media-btn" onclick="mediaAction('next')">⏭</button>
+    </div>
+
+    <!-- Number pad -->
+    <div class="numpad">
+      <button class="num-btn" onclick="numInput(1)">1</button>
+      <button class="num-btn" onclick="numInput(2)">2</button>
+      <button class="num-btn" onclick="numInput(3)">3</button>
+      <button class="num-btn" onclick="numInput(4)">4</button>
+      <button class="num-btn" onclick="numInput(5)">5</button>
+      <button class="num-btn" onclick="numInput(6)">6</button>
+      <button class="num-btn" onclick="numInput(7)">7</button>
+      <button class="num-btn" onclick="numInput(8)">8</button>
+      <button class="num-btn" onclick="numInput(9)">9</button>
+      <button class="num-btn" style="color:#6b6b8d" onclick="clearInput()">CLR</button>
+      <button class="num-btn" onclick="numInput(0)">0</button>
+      <button class="num-btn" style="background:linear-gradient(135deg,#7b2ff7,#a855f7)" onclick="goToChannel()">GO</button>
+    </div>
+
+    <!-- Source buttons -->
+    <div class="source-row">
+      <button class="source-btn active" onclick="setSource(this, 'HDMI 1')">HDMI 1</button>
+      <button class="source-btn" onclick="setSource(this, 'HDMI 2')">HDMI 2</button>
+      <button class="source-btn" onclick="setSource(this, 'USB')">USB</button>
+      <button class="source-btn" onclick="setSource(this, 'AV')">AV</button>
+    </div>
+  </div>
+
+  <a href="index.html" class="back-link">← Back to Business Ideas</a>
+
+  <script>
+    let power = true;
+    let volume = 50;
+    let channel = 1;
+    let muted = false;
+    let playing = false;
+    let channelInput = '';
+    let inputTimeout = null;
+    let currentSource = 'HDMI 1';
+
+    const displayEl = document.getElementById('display');
+    const displayChannel = document.getElementById('displayChannel');
+    const displayLabel = document.getElementById('displayLabel');
+    const volValue = document.getElementById('volValue');
+    const chValue = document.getElementById('chValue');
+    const muteBtn = document.getElementById('muteBtn');
+    const powerBtn = document.getElementById('powerBtn');
+    const playPauseBtn = document.getElementById('playPauseBtn');
+
+    function togglePower() {
+      power = !power;
+      powerBtn.classList.toggle('on', power);
+      displayEl.classList.toggle('off', !power);
+      if (power) {
+        showMessage('Power On', currentSource);
+      } else {
+        displayChannel.textContent = '';
+        displayLabel.textContent = '';
+      }
+    }
+
+    function adjustVolume(dir) {
+      if (!power) return;
+      if (muted) toggleMute();
+      volume = Math.max(0, Math.min(100, volume + dir * 5));
+      volValue.textContent = volume;
+      showMessage('VOL ' + volume, volume === 0 ? 'Minimum' : volume === 100 ? 'Maximum' : '');
+    }
+
+    function toggleMute() {
+      if (!power) return;
+      muted = !muted;
+      muteBtn.classList.toggle('muted', muted);
+      muteBtn.textContent = muted ? 'UNMUTE' : 'MUTE';
+      showMessage(muted ? 'MUTED' : 'VOL ' + volume, '');
+    }
+
+    function adjustChannel(dir) {
+      if (!power) return;
+      channel = channel + dir;
+      if (channel < 1) channel = 999;
+      if (channel > 999) channel = 1;
+      chValue.textContent = channel;
+      showMessage('CH ' + channel, currentSource);
+    }
+
+    function numInput(num) {
+      if (!power) return;
+      clearTimeout(inputTimeout);
+      channelInput += String(num);
+      if (channelInput.length > 3) channelInput = String(num);
+      showMessage('CH ' + channelInput + '_', 'Press GO or wait...');
+      inputTimeout = setTimeout(() => {
+        goToChannel();
+      }, 2000);
+    }
+
+    function clearInput() {
+      channelInput = '';
+      clearTimeout(inputTimeout);
+      showMessage('CH ' + channel, currentSource);
+    }
+
+    function goToChannel() {
+      if (!power) return;
+      clearTimeout(inputTimeout);
+      if (channelInput) {
+        const ch = parseInt(channelInput, 10);
+        if (ch >= 1 && ch <= 999) {
+          channel = ch;
+          chValue.textContent = channel;
+        }
+        channelInput = '';
+      }
+      showMessage('CH ' + channel, currentSource);
+    }
+
+    function dpadAction(dir) {
+      if (!power) return;
+      const labels = { up: '▲ Up', down: '▼ Down', left: '◀ Left', right: '▶ Right', ok: 'Select' };
+      showMessage(labels[dir], 'Navigation');
+    }
+
+    function mediaAction(action) {
+      if (!power) return;
+      if (action === 'playpause') {
+        playing = !playing;
+        playPauseBtn.textContent = playing ? '⏸' : '▶';
+        showMessage(playing ? 'Playing' : 'Paused', '');
+      } else {
+        const labels = { prev: '⏮ Previous', rew: '⏪ Rewind', ff: '⏩ Fast Forward', next: '⏭ Next' };
+        showMessage(labels[action], '');
+      }
+    }
+
+    function setSource(btn, source) {
+      if (!power) return;
+      currentSource = source;
+      document.querySelectorAll('.source-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      showMessage('Input: ' + source, '');
+    }
+
+    function showMessage(main, sub) {
+      displayChannel.textContent = main;
+      displayLabel.textContent = sub || '';
+    }
+  </script>
+</body>
+</html>
