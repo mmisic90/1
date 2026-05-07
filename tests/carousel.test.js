@@ -69,6 +69,27 @@ describe('carousel initialization', () => {
     });
   });
 
+  it('renders card image when provided', () => {
+    ideas.forEach((idea, i) => {
+      const card = document.getElementById(`card-${i}`);
+      const img = card.querySelector('.card-image');
+      if (idea.image) {
+        expect(img).not.toBeNull();
+        expect(img.getAttribute('src')).toBe(idea.image);
+        expect(img.getAttribute('alt')).toBe(idea.imageAlt || idea.title);
+      } else {
+        expect(img).toBeNull();
+      }
+    });
+  });
+
+  it('omits card image when idea has no image field', () => {
+    setupDOM();
+    const ideaNoImage = [{ title: 'No Image', tag: 'test', body: 'no image here' }];
+    createCarousel(ideaNoImage, document);
+    expect(document.querySelector('.card-image')).toBeNull();
+  });
+
   it('starts on the first card', () => {
     expect(carousel.getCurrent()).toBe(0);
     expect(document.getElementById('card-0').classList.contains('active')).toBe(true);
