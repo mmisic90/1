@@ -12,6 +12,15 @@ function setupDOM() {
       <div class="counter" id="counter"></div>
     </div>
   `;
+  if (typeof localStorage !== 'undefined') localStorage.clear();
+}
+
+function makeMockStorage(initialJson = null) {
+  const data = { value: initialJson };
+  return {
+    getItem: () => data.value,
+    setItem: (_key, value) => { data.value = value; },
+  };
 }
 
 describe('carousel initialization', () => {
@@ -261,6 +270,88 @@ describe('edge case: two ideas', () => {
     carousel.changeStep(-1);
     expect(carousel.getCurrent()).toBe(0);
     expect(document.getElementById('btnPrev').disabled).toBe(true);
+  });
+});
+
+describe('voting integration', () => {
+  it('renders a vote button and count for every idea', () => {
+    setupDOM();
+    createCarousel(ideas, document, makeMockStorage());
+
+    ideas.forEach((_, i) => {
+      expect(document.getElementById(`vote-btn-${i}`)).not.toBeNull();
+      expect(document.getElementById(`vote-count-${i}`).textContent).toBe('0 glasova');
+    });
+  });
+
+  it('clicking a vote button increments that idea count', () => {
+    setupDOM();
+    createCarousel(ideas, document, makeMockStorage());
+
+    document.getElementById('vote-btn-1').click();
+
+    expect(document.getElementById('vote-count-1').textContent).toBe('1 glas');
+    expect(document.getElementById('card-1').classList.contains('voted')).toBe(true);
+    expect(document.getElementById('vote-btn-1').classList.contains('voted')).toBe(true);
+  });
+
+  it('voting another idea moves the vote', () => {
+    setupDOM();
+    createCarousel(ideas, document, makeMockStorage());
+
+    document.getElementById('vote-btn-0').click();
+    document.getElementById('vote-btn-2').click();
+
+    expect(document.getElementById('vote-count-0').textContent).toBe('0 glasova');
+    expect(document.getElementById('vote-count-2').textContent).toBe('1 glas');
+    expect(document.getElementById('card-0').classList.contains('voted')).toBe(false);
+    expect(document.getElementById('card-2').classList.contains('voted')).toBe(true);
+  });
+
+  it('clicking the same vote button again toggles the vote off', () => {
+    setupDOM();
+    createCarousel(ideas, document, makeMockStorage());
+
+    document.getElementById('vote-btn-3').click();
+    document.getElementById('vote-btn-3').click();
+
+    expect(document.getElementById('vote-count-3').textContent).toBe('0 glasova');
+    expect(document.getElementById('card-3').classList.contains('voted')).toBe(false);
+    expect(document.getElementById('vote-btn-3').classList.contains('voted')).toBe(false);
+  });
+
+  it('loads existing votes from storage on init', () => {
+    setupDOM();
+    const seeded = makeMockStorage(JSON.stringify({ counts: { 2: 1 }, myVote: 2 }));
+    createCarousel(ideas, document, seeded);
+
+    expect(document.getElementById('vote-count-2').textContent).toBe('1 glas');
+    expect(document.getElementById('card-2').classList.contains('voted')).toBe(true);
+  });
+
+  it('persists votes back to storage', () => {
+    setupDOM();
+    const storage = makeMockStorage();
+    let lastWrite = null;
+    storage.setItem = (_k, v) => { lastWrite = v; };
+    createCarousel(ideas, document, storage);
+
+    document.getElementById('vote-btn-1').click();
+
+    expect(lastWrite).not.toBeNull();
+    const parsed = JSON.parse(lastWrite);
+    expect(parsed.myVote).toBe(1);
+    expect(parsed.counts[1]).toBe(1);
+  });
+
+  it('uses Serbian pluralization for vote counts', () => {
+    setupDOM();
+    const seeded = makeMockStorage(JSON.stringify({ counts: { 0: 1, 1: 3, 2: 5 }, myVote: 0 }));
+    createCarousel(ideas, document, seeded);
+
+    expect(document.getElementById('vote-count-0').textContent).toBe('1 glas');
+    expect(document.getElementById('vote-count-1').textContent).toBe('3 glasa');
+    expect(document.getElementById('vote-count-2').textContent).toBe('5 glasova');
   });
 });
 

@@ -1,12 +1,18 @@
-export function createCarousel(ideas, document) {
+import { loadVotes, saveVotes, castVote, getCount } from './voting.js';
+
+export function createCarousel(ideas, document, storage) {
   const stepsEl = document.getElementById('stepsIndicator');
   const containerEl = document.getElementById('cardContainer');
   const btnPrev = document.getElementById('btnPrev');
   const btnNext = document.getElementById('btnNext');
   const counterEl = document.getElementById('counter');
 
+  const voteStorage = storage
+    || (typeof localStorage !== 'undefined' ? localStorage : null);
+
   let current = 0;
   const total = ideas.length;
+  let votes = voteStorage ? loadVotes(voteStorage) : { counts: {}, myVote: null };
 
   function buildStepDots() {
     ideas.forEach((_, i) => {
@@ -41,9 +47,47 @@ export function createCarousel(ideas, document) {
         <div class="card-divider"></div>
         <div class="card-body">${idea.body}</div>
         <div class="card-tag">${idea.tag}</div>
+        <div class="vote-block">
+          <button class="vote-btn" id="vote-btn-${i}" data-idea-index="${i}" type="button">
+            <span class="vote-btn-label">★ Glasaj za ovu ideju</span>
+          </button>
+          <span class="vote-count" id="vote-count-${i}">0 glasova</span>
+        </div>
       `;
       containerEl.appendChild(card);
+
+      const btn = card.querySelector(`#vote-btn-${i}`);
+      btn.addEventListener('click', () => handleVote(i));
     });
+  }
+
+  function voteCountLabel(n) {
+    if (n === 1) return '1 glas';
+    if (n >= 2 && n <= 4) return `${n} glasa`;
+    return `${n} glasova`;
+  }
+
+  function updateVotes() {
+    ideas.forEach((_, i) => {
+      const card = document.getElementById(`card-${i}`);
+      const btn = document.getElementById(`vote-btn-${i}`);
+      const countEl = document.getElementById(`vote-count-${i}`);
+      const isVoted = votes.myVote === i;
+
+      if (card) card.classList.toggle('voted', isVoted);
+      if (btn) {
+        btn.classList.toggle('voted', isVoted);
+        const label = btn.querySelector('.vote-btn-label');
+        if (label) label.textContent = isVoted ? '✓ Glasao' : '★ Glasaj za ovu ideju';
+      }
+      if (countEl) countEl.textContent = voteCountLabel(getCount(votes, i));
+    });
+  }
+
+  function handleVote(ideaIndex) {
+    votes = castVote(votes, ideaIndex);
+    if (voteStorage) saveVotes(votes, voteStorage);
+    updateVotes();
   }
 
   function updateUI() {
@@ -65,6 +109,8 @@ export function createCarousel(ideas, document) {
     btnPrev.disabled = current === 0;
     btnNext.textContent = current === total - 1 ? 'Done ✓' : 'Next →';
     counterEl.textContent = `${current + 1} / ${total}`;
+
+    updateVotes();
   }
 
   function goTo(index) {
@@ -81,5 +127,12 @@ export function createCarousel(ideas, document) {
   buildCards();
   updateUI();
 
-  return { goTo, changeStep, updateUI, getCurrent: () => current };
+  return {
+    goTo,
+    changeStep,
+    updateUI,
+    getCurrent: () => current,
+    getVotes: () => votes,
+    vote: handleVote,
+  };
 }
