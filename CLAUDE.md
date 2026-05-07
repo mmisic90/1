@@ -100,19 +100,16 @@ Below the carousel markup, the file also contains a law firm landing page with `
 
 ## Known Issues / Tech Debt
 
-These exist in the codebase today. Be aware of them when making changes:
+Remaining issues after recent fixes:
 
-1. **Missing CSS custom properties** — `index.html` references `var(--navy)`, `var(--gold)`, `var(--white)`, `var(--gray)`, `var(--border)`, `var(--navy2)`, `var(--gold2)` but has no `:root` block defining them. Colors will fall back to browser defaults (broken styling).
+1. **Incomplete landing page** — The contact section (`#kontakt`) is referenced in nav links and hero CTA but doesn't exist in the HTML body. CSS styles for `.contact-wrap`, `.contact-form`, and `footer` are defined but unused. The areas-of-law grid (`#oblasti .areas-grid`) is empty — no `area-card` elements.
 
-2. **Broken HTML nesting in `index.html`** — The `<div class="nav">` on line 400 is never closed. The `<div class="wrapper">` on line 390 is never closed. The `<div class="areas-grid">` on line 476 is never closed. The `#counter` div ends up nested inside `areas-grid`. The browser's error recovery handles this, but the DOM tree won't match the intended layout.
-
-3. **Incomplete landing page** — The contact section (`#kontakt`) is referenced in nav links and hero CTA but doesn't exist in the HTML body. CSS styles for `.contact-wrap`, `.contact-form`, and `footer` are defined but unused. The areas-of-law grid (`#oblasti .areas-grid`) is empty — no `area-card` elements.
-
-4. **No carousel-specific CSS** — `index.html` has extensive CSS for the law firm landing page but none for `.wrapper`, `.card`, `.card-container`, `.steps-indicator`, `.step-dot`, `.step-line`, `.counter`, `.card-header`, `.card-number`, `.card-label`, `.card-title`, `.card-body`, `.card-tag`, or `.card-divider`. The carousel will render unstyled.
-
-5. **`.btn` class collision** — Both the carousel prev/next buttons and the landing page CTA links use `.btn`. The CSS defines `.btn` as a gold-bordered inline-block link style, which will apply to the carousel buttons too.
-
-6. **External font not loaded** — CSS references `'Lato'` and `'Playfair Display'` font families but no `<link>` or `@import` loads them. The browser falls back to `sans-serif`/`serif`.
+Previously fixed:
+- `:root` CSS custom properties now defined (`--navy`, `--gold`, `--white`, `--gray`, `--border`, `--navy2`, `--gold2`)
+- HTML nesting corrected (wrapper, carousel-nav, areas-grid all properly closed)
+- Carousel CSS added for all generated elements (`.card`, `.step-dot`, `.step-line`, `.counter`, etc.)
+- `.btn` class collision resolved — carousel buttons now use `.carousel-btn`
+- Google Fonts loaded via `<link>` for Lato and Playfair Display
 
 ## Test Setup
 
@@ -155,6 +152,6 @@ GitHub Actions workflow (`.github/workflows/claude.yml`) triggers on `@claude` m
 - Do not add unnecessary comments, docstrings, or abstractions
 - Run `npm test` before committing code changes
 - `remote.html` has no tests — if adding non-trivial logic there, extract testable functions to `src/`
-- `index.html` has broken HTML structure (see Known Issues above) — structural edits need careful attention to the nesting problems
-- The carousel JS logic is well-tested and clean; the HTML pages have significant issues
+- `index.html` still has an incomplete landing page (see Known Issues) — contact section and area cards are missing
+- The carousel uses `.carousel-btn` (not `.btn`) to avoid collision with landing page styles
 - When adding new ideas to `ideas.js`, update the test in `ideas.test.js` that asserts `ideas.length === 4`
