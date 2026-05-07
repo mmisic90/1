@@ -375,6 +375,49 @@
     footer p { color: var(--gray); font-size: 0.85rem; }
     footer a { color: var(--gold); text-decoration: none; }
 
+    /* ── VOTE BLOCK ── */
+    .vote-block {
+      margin-top: 1.5rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--border, rgba(201,168,76,0.2));
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .vote-btn {
+      background: transparent;
+      border: 1px solid var(--gold, #c9a84c);
+      color: var(--gold, #c9a84c);
+      padding: 0.7rem 1.4rem;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+
+    .vote-btn:hover { background: var(--gold, #c9a84c); color: var(--navy, #0b1729); }
+
+    .vote-btn.voted {
+      background: var(--gold, #c9a84c);
+      color: var(--navy, #0b1729);
+      border-color: var(--gold, #c9a84c);
+    }
+
+    .vote-count {
+      font-size: 0.85rem;
+      color: var(--gray, #aab3c0);
+      letter-spacing: 0.05em;
+    }
+
+    .card.voted {
+      border-color: var(--gold, #c9a84c);
+      box-shadow: 0 0 0 1px var(--gold, #c9a84c);
     /* ── CARD IMAGE ── */
     .card-image {
       display: block;
