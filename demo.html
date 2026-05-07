@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="bs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Demo carousel sa slikama</title>
+  <style>
+    :root {
+      --navy: #0b1729;
+      --navy2: #0f1e36;
+      --gold: #c9a84c;
+      --gray: #a0a8b4;
+      --border: rgba(201, 168, 76, 0.25);
+      --white: #fff;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, sans-serif;
+      background: var(--navy);
+      color: var(--white);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .wrapper {
+      width: 100%;
+      max-width: 520px;
+      background: var(--navy2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+    }
+    h1 {
+      font-size: 1.2rem;
+      color: var(--gold);
+      margin-bottom: 1rem;
+      text-align: center;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* Step dots */
+    .steps {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+    .dot {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--gray);
+      font-size: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .dot.active { background: var(--gold); color: var(--navy); border-color: var(--gold); }
+    .dot.done { background: rgba(201, 168, 76, 0.2); color: var(--gold); }
+    .line { width: 30px; height: 1px; background: var(--border); }
+    .line.done { background: var(--gold); }
+
+    /* Card */
+    .card { display: none; }
+    .card.active { display: block; animation: fade 0.3s; }
+    @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+
+    .card-image {
+      display: block;
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 4px;
+      margin-bottom: 1rem;
+      border: 1px solid var(--border);
+    }
+    .card-title { font-size: 1.3rem; margin-bottom: 0.4rem; }
+    .card-body { font-size: 0.95rem; color: var(--gray); margin-bottom: 0.8rem; line-height: 1.5; }
+    .card-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid var(--gold);
+      padding: 0.25rem 0.6rem;
+      border-radius: 2px;
+    }
+
+    /* Nav */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 1.5rem;
+    }
+    button {
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      padding: 0.5rem 1.2rem;
+      border-radius: 2px;
+      cursor: pointer;
+      letter-spacing: 0.08em;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+    }
+    button:hover:not(:disabled) { background: var(--gold); color: var(--navy); }
+    button:disabled { opacity: 0.3; cursor: not-allowed; }
+    .counter { color: var(--gray); font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <h1>Svjetski simboli</h1>
+    <div class="steps" id="steps"></div>
+    <div id="cards"></div>
+    <div class="nav">
+      <button id="prev" disabled>← Nazad</button>
+      <span class="counter" id="counter"></span>
+      <button id="next">Naprijed →</button>
+    </div>
+  </div>
+
+  <script type="module">
+    // --- 1. PODACI (isti oblik kao src/ideas.js) ---
+    const items = [
+      {
+        title: "Ajfelov toranj",
+        tag: "Pariz · 1889",
+        body: "Gvozdena kula visoka 330 m, najpoznatiji simbol Pariza i Francuske.",
+        image: "https://images.unsplash.com/photo-1543349689-9a4d426bee8e?w=800&q=80",
+        imageAlt: "Ajfelov toranj snimljen u sumrak"
+      },
+      {
+        title: "Veliki kineski zid",
+        tag: "Kina · 7. vijek p.n.e.",
+        body: "Niz utvrđenja dugih više od 21.000 km, građenih kroz više dinastija.",
+        image: "https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=800&q=80",
+        imageAlt: "Veliki kineski zid u planinama"
+      },
+      {
+        title: "Koloseum",
+        tag: "Rim · 80. n.e.",
+        body: "Najveći antički amfiteatar, primao oko 50.000 gledalaca na borbe gladijatora.",
+        image: "https://images.unsplash.com/photo-1552432552-06c0b0a94dda?w=800&q=80",
+        imageAlt: "Rimski Koloseum osvijetljen po danu"
+      },
+      {
+        title: "Mačak bez slike",
+        tag: "Test · fallback",
+        body: "Ovaj primjer namjerno nema 'image' polje — provjerava da kartica i dalje radi.",
+        // image: izostavljeno
+      }
+    ];
+
+    // --- 2. CAROUSEL LOGIKA (ista šema kao src/carousel.js) ---
+    function createCarousel(items, document) {
+      const stepsEl = document.getElementById('steps');
+      const cardsEl = document.getElementById('cards');
+      const btnPrev = document.getElementById('prev');
+      const btnNext = document.getElementById('next');
+      const counterEl = document.getElementById('counter');
+
+      let current = 0;
+      const total = items.length;
+
+      // Build dots
+      items.forEach((_, i) => {
+        if (i > 0) {
+          const line = document.createElement('div');
+          line.className = 'line';
+          line.id = `line-${i}`;
+          stepsEl.appendChild(line);
+        }
+        const dot = document.createElement('div');
+        dot.className = 'dot' + (i === 0 ? ' active' : '');
+        dot.textContent = i + 1;
+        dot.id = `dot-${i}`;
+        dot.onclick = () => goTo(i);
+        stepsEl.appendChild(dot);
+      });
+
+      // Build cards
+      items.forEach((item, i) => {
+        const card = document.createElement('div');
+        card.className = 'card' + (i === 0 ? ' active' : '');
+        card.id = `card-${i}`;
+
+        // ⬇ KLJUČNI DIO — fallback ako nema image, vidjeli smo u testu
+        const imageMarkup = item.image
+          ? `<img class="card-image" src="${item.image}" alt="${item.imageAlt || item.title}" loading="lazy" />`
+          : '';
+
+        card.innerHTML = `
+          ${imageMarkup}
+          <div class="card-title">${item.title}</div>
+          <div class="card-body">${item.body}</div>
+          <span class="card-tag">${item.tag}</span>
+        `;
+        cardsEl.appendChild(card);
+      });
+
+      function updateUI() {
+        document.querySelectorAll('.card').forEach((c, i) =>
+          c.classList.toggle('active', i === current)
+        );
+        document.querySelectorAll('.dot').forEach((d, i) => {
+          d.classList.remove('active', 'done');
+          if (i === current) d.classList.add('active');
+          else if (i < current) d.classList.add('done');
+        });
+        for (let i = 1; i < total; i++) {
+          const line = document.getElementById(`line-${i}`);
+          if (line) line.classList.toggle('done', i <= current);
+        }
+        btnPrev.disabled = current === 0;
+        btnNext.disabled = current === total - 1;
+        counterEl.textContent = `${current + 1} / ${total}`;
+      }
+
+      function goTo(i) {
+        current = Math.max(0, Math.min(total - 1, i));
+        updateUI();
+      }
+
+      btnPrev.onclick = () => goTo(current - 1);
+      btnNext.onclick = () => goTo(current + 1);
+
+      updateUI();
+    }
+
+    createCarousel(items, document);
+  </script>
+</body>
+</html>
