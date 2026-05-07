@@ -30,6 +30,9 @@ export function createCarousel(ideas, document) {
       const card = document.createElement('div');
       card.className = 'card' + (i === 0 ? ' active' : '');
       card.id = `card-${i}`;
+      const imageMarkup = idea.image
+        ? `<img class="card-image" src="${idea.image}" alt="${idea.imageAlt || idea.title}" loading="lazy" />`
+        : '';
       card.innerHTML = `
         <div class="card-header">
           <div class="card-number">${i + 1}</div>
@@ -39,6 +42,7 @@ export function createCarousel(ideas, document) {
           </div>
         </div>
         <div class="card-divider"></div>
+        ${imageMarkup}
         <div class="card-body">${idea.body}</div>
         <div class="card-tag">${idea.tag}</div>
       `;
