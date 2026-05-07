@@ -6,7 +6,18 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <title>Business Ideas</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --navy: #0b1729;
+      --navy2: #0f1f35;
+      --gold: #c9a84c;
+      --gold2: #b8953f;
+      --white: #f0f0f0;
+      --gray: #a0a8b8;
+      --border: rgba(201,168,76,0.15);
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -375,58 +386,181 @@
     footer p { color: var(--gray); font-size: 0.85rem; }
     footer a { color: var(--gold); text-decoration: none; }
 
-    /* ── VOTE BLOCK ── */
-    .vote-block {
-      margin-top: 1.5rem;
-      padding-top: 1.25rem;
-      border-top: 1px solid var(--border, rgba(201,168,76,0.2));
+    /* ── CAROUSEL ── */
+    .wrapper {
+      max-width: 640px;
+      margin: 2rem auto;
+      padding: 2rem 1.5rem;
+    }
+
+    .wrapper > h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      color: var(--white);
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .steps-indicator {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0;
+      margin-bottom: 1.5rem;
     }
 
-    .vote-btn {
-      background: transparent;
-      border: 1px solid var(--gold, #c9a84c);
-      color: var(--gold, #c9a84c);
-      padding: 0.7rem 1.4rem;
-      font-family: 'Lato', sans-serif;
-      font-size: 0.85rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      border-radius: 2px;
+    .step-dot {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--navy2);
+      border: 2px solid var(--border);
+      color: var(--gray);
+      font-size: 0.8rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       cursor: pointer;
-      transition: background 0.2s, color 0.2s, border-color 0.2s;
+      transition: all 0.25s;
+      flex-shrink: 0;
     }
 
-    .vote-btn:hover { background: var(--gold, #c9a84c); color: var(--navy, #0b1729); }
-
-    .vote-btn.voted {
-      background: var(--gold, #c9a84c);
-      color: var(--navy, #0b1729);
-      border-color: var(--gold, #c9a84c);
+    .step-dot.active {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--navy);
     }
 
-    .vote-count {
-      font-size: 0.85rem;
-      color: var(--gray, #aab3c0);
-      letter-spacing: 0.05em;
+    .step-dot.done {
+      background: rgba(201,168,76,0.2);
+      border-color: var(--gold);
+      color: var(--gold);
     }
 
-    .card.voted {
-      border-color: var(--gold, #c9a84c);
-      box-shadow: 0 0 0 1px var(--gold, #c9a84c);
-    /* ── CARD IMAGE ── */
-    .card-image {
-      display: block;
-      width: 100%;
-      max-height: 280px;
-      object-fit: cover;
-      border-radius: 4px;
-      margin: 1rem 0 1.25rem;
+    .step-line {
+      width: 40px;
+      height: 2px;
+      background: var(--border);
+      transition: background 0.25s;
+    }
+
+    .step-line.done {
+      background: var(--gold);
+    }
+
+    .card-container {
+      position: relative;
+      min-height: 200px;
+    }
+
+    .card {
+      display: none;
+      background: var(--navy2);
       border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 2rem;
+    }
+
+    .card.active {
+      display: block;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .card-number {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--gold);
+      color: var(--navy);
+      font-weight: 700;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .card-label {
+      font-size: 0.75rem;
+      color: var(--gray);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: var(--white);
+      font-weight: 600;
+    }
+
+    .card-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 1rem 0;
+    }
+
+    .card-body {
+      color: var(--gray);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+
+    .card-tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      color: var(--gold);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.8rem;
+      border: 1px solid rgba(201,168,76,0.3);
+      border-radius: 2px;
+    }
+
+    .carousel-nav {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 1.5rem;
+      gap: 1rem;
+    }
+
+    .carousel-btn {
+      padding: 0.7rem 1.8rem;
+      border: 1px solid var(--gold);
+      border-radius: 2px;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      transition: background 0.25s, color 0.25s, opacity 0.25s;
+      font-family: inherit;
+      background: transparent;
+      color: var(--gold);
+    }
+
+    .carousel-btn:hover:not(:disabled) {
+      background: var(--gold);
+      color: var(--navy);
+    }
+
+    .carousel-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    .counter {
+      text-align: center;
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      color: var(--gray);
+      letter-spacing: 0.1em;
     }
 
     /* ── RESPONSIVE ── */
@@ -441,6 +575,7 @@
   </style>
 </head>
 <body>
+  <!-- CAROUSEL -->
   <div class="wrapper">
     <h1>Business Ideas</h1>
 
@@ -451,9 +586,13 @@
     <div class="card-container" id="cardContainer"></div>
 
     <!-- Navigation -->
-    <div class="nav">
-      <button class="btn btn-prev" id="btnPrev" disabled>← Back</button>
-      <button class="btn btn-next" id="btnNext">Next →</button>
+    <div class="carousel-nav">
+      <button class="carousel-btn btn-prev" id="btnPrev" disabled>← Back</button>
+      <button class="carousel-btn btn-next" id="btnNext">Next →</button>
+    </div>
+
+    <div class="counter" id="counter"></div>
+  </div>
 
   <!-- NAVIGATION -->
   <nav>
@@ -527,10 +666,8 @@
       <h2 class="section-title">Oblasti prava</h2>
       <div class="divider"></div>
     </div>
-    <div class="areas-grid">
-
-    <div class="counter" id="counter"></div>
-  </div>
+    <div class="areas-grid"></div>
+  </section>
 
   <script type="module">
     import ideas from './src/ideas.js';
