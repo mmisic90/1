@@ -26,6 +26,26 @@ const ideas = [
     body: "A peer-to-peer platform matching clients with vetted freelance lawyers based on practice area, availability, and budget, with transparent pricing and reviews.",
     image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&q=80",
     imageAlt: "Lawyer at desk reviewing case files"
+  },
+  {
+    title: "AI Legal Research Assistant",
+    tag: "LegalTech · AI",
+    body: "An intelligent search tool that lets lawyers query case law, statutes, and regulations in plain language, returning ranked precedents with citations and concise summaries within seconds."
+  },
+  {
+    title: "Subscription Legal Helpline",
+    tag: "Subscription · B2C",
+    body: "A monthly membership giving households and small businesses unlimited access to licensed lawyers via chat and video for everyday legal questions—predictable pricing, no hourly billing."
+  },
+  {
+    title: "Smart Contract Notary",
+    tag: "Blockchain · LegalTech",
+    body: "A decentralized notary service that timestamps and cryptographically anchors documents on a public blockchain, providing tamper-proof proof of existence accepted across jurisdictions."
+  },
+  {
+    title: "Court Filing Automation",
+    tag: "SaaS · Productivity",
+    body: "A platform that auto-generates, formats, and electronically files routine court documents—motions, responses, scheduling orders—directly into local court e-filing systems."
   }
 ];
 
