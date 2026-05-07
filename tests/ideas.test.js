@@ -2,8 +2,8 @@ import { describe, it, expect } from 'vitest';
 import ideas from '../src/ideas.js';
 
 describe('ideas data', () => {
-  it('contains 4 ideas', () => {
-    expect(ideas.length).toBe(4);
+  it('contains 8 ideas', () => {
+    expect(ideas.length).toBe(8);
   });
 
   it('each idea has required fields', () => {

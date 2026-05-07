@@ -129,7 +129,7 @@ describe('updateUI', () => {
 
   it('updates counter text', () => {
     carousel.goTo(2);
-    expect(document.getElementById('counter').textContent).toBe('3 / 4');
+    expect(document.getElementById('counter').textContent).toBe(`3 / ${ideas.length}`);
   });
 
   it('marks current dot as active', () => {
