@@ -376,6 +376,43 @@ describe('voting integration', () => {
   });
 });
 
+describe('xss safety', () => {
+  it('does not interpret html in idea fields as markup', () => {
+    setupDOM();
+    const malicious = [{
+      title: '<img src=x onerror="window.__pwned=1">',
+      tag: '<script>window.__pwned=1<\/script>',
+      body: '<svg onload="window.__pwned=1"></svg>',
+    }];
+    createCarousel(malicious, document);
+
+    const card = document.getElementById('card-0');
+    expect(card.querySelector('img[onerror]')).toBeNull();
+    expect(card.querySelector('script')).toBeNull();
+    expect(card.querySelector('svg')).toBeNull();
+    expect(card.querySelector('.card-title').textContent).toBe(malicious[0].title);
+    expect(card.querySelector('.card-body').textContent).toBe(malicious[0].body);
+    expect(card.querySelector('.card-tag').textContent).toBe(malicious[0].tag);
+  });
+
+  it('escapes html in image alt attribute', () => {
+    setupDOM();
+    const malicious = [{
+      title: 'Img idea',
+      tag: 't',
+      body: 'b',
+      image: 'https://example.com/x.png',
+      imageAlt: '" onerror="window.__pwned=1" x="',
+    }];
+    createCarousel(malicious, document);
+
+    const img = document.querySelector('.card-image');
+    expect(img).not.toBeNull();
+    expect(img.getAttribute('alt')).toBe(malicious[0].imageAlt);
+    expect(img.getAttribute('onerror')).toBeNull();
+  });
+});
+
 describe('full navigation flow', () => {
   it('navigates through all steps and back', () => {
     setupDOM();
