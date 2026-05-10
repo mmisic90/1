@@ -31,37 +31,57 @@ export function createCarousel(ideas, document, storage) {
     });
   }
 
+  function el(tag, className, textContent) {
+    const node = document.createElement(tag);
+    if (className) node.className = className;
+    if (textContent !== undefined) node.textContent = textContent;
+    return node;
+  }
+
   function buildCards() {
     ideas.forEach((idea, i) => {
-      const card = document.createElement('div');
-      card.className = 'card' + (i === 0 ? ' active' : '');
+      const card = el('div', 'card' + (i === 0 ? ' active' : ''));
       card.id = `card-${i}`;
-      const imageMarkup = idea.image
-        ? `<img class="card-image" src="${idea.image}" alt="${idea.imageAlt || idea.title}" loading="lazy" />`
-        : '';
-      card.innerHTML = `
-        <div class="card-header">
-          <div class="card-number">${i + 1}</div>
-          <div>
-            <div class="card-label">Step ${i + 1} of ${total}</div>
-            <div class="card-title">${idea.title}</div>
-          </div>
-        </div>
-        <div class="card-divider"></div>
-        ${imageMarkup}
-        <div class="card-body">${idea.body}</div>
-        <div class="card-tag">${idea.tag}</div>
-        <div class="vote-block">
-          <button class="vote-btn" id="vote-btn-${i}" data-idea-index="${i}" type="button">
-            <span class="vote-btn-label">★ Glasaj za ovu ideju</span>
-          </button>
-          <span class="vote-count" id="vote-count-${i}">0 glasova</span>
-        </div>
-      `;
+
+      const header = el('div', 'card-header');
+      header.appendChild(el('div', 'card-number', String(i + 1)));
+      const headerText = el('div');
+      headerText.appendChild(el('div', 'card-label', `Step ${i + 1} of ${total}`));
+      headerText.appendChild(el('div', 'card-title', idea.title));
+      header.appendChild(headerText);
+      card.appendChild(header);
+
+      card.appendChild(el('div', 'card-divider'));
+
+      if (idea.image) {
+        const img = document.createElement('img');
+        img.className = 'card-image';
+        img.src = idea.image;
+        img.alt = idea.imageAlt || idea.title;
+        img.loading = 'lazy';
+        card.appendChild(img);
+      }
+
+      card.appendChild(el('div', 'card-body', idea.body));
+      card.appendChild(el('div', 'card-tag', idea.tag));
+
+      const voteBlock = el('div', 'vote-block');
+      const voteBtn = document.createElement('button');
+      voteBtn.className = 'vote-btn';
+      voteBtn.id = `vote-btn-${i}`;
+      voteBtn.dataset.ideaIndex = String(i);
+      voteBtn.type = 'button';
+      voteBtn.appendChild(el('span', 'vote-btn-label', '★ Glasaj za ovu ideju'));
+      voteBlock.appendChild(voteBtn);
+
+      const voteCount = el('span', 'vote-count', '0 glasova');
+      voteCount.id = `vote-count-${i}`;
+      voteBlock.appendChild(voteCount);
+      card.appendChild(voteBlock);
+
       containerEl.appendChild(card);
 
-      const btn = card.querySelector(`#vote-btn-${i}`);
-      btn.addEventListener('click', () => handleVote(i));
+      voteBtn.addEventListener('click', () => handleVote(i));
     });
   }
 
