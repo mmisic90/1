@@ -367,12 +367,20 @@ describe('voting integration', () => {
 
   it('uses Serbian pluralization for vote counts', () => {
     setupDOM();
-    const seeded = makeMockStorage(JSON.stringify({ counts: { 0: 1, 1: 3, 2: 5 }, myVote: 0 }));
+    const seeded = makeMockStorage(JSON.stringify({
+      counts: { 0: 1, 1: 3, 2: 5, 3: 11, 4: 14, 5: 21, 6: 22, 7: 25 },
+      myVote: 0,
+    }));
     createCarousel(ideas, document, seeded);
 
     expect(document.getElementById('vote-count-0').textContent).toBe('1 glas');
     expect(document.getElementById('vote-count-1').textContent).toBe('3 glasa');
     expect(document.getElementById('vote-count-2').textContent).toBe('5 glasova');
+    expect(document.getElementById('vote-count-3').textContent).toBe('11 glasova');
+    expect(document.getElementById('vote-count-4').textContent).toBe('14 glasova');
+    expect(document.getElementById('vote-count-5').textContent).toBe('21 glas');
+    expect(document.getElementById('vote-count-6').textContent).toBe('22 glasa');
+    expect(document.getElementById('vote-count-7').textContent).toBe('25 glasova');
   });
 });
 
