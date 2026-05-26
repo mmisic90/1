@@ -374,6 +374,36 @@ describe('voting integration', () => {
     expect(document.getElementById('vote-count-1').textContent).toBe('3 glasa');
     expect(document.getElementById('vote-count-2').textContent).toBe('5 glasova');
   });
+
+  it.each([
+    [0, '0 glasova'],
+    [1, '1 glas'],
+    [2, '2 glasa'],
+    [3, '3 glasa'],
+    [4, '4 glasa'],
+    [5, '5 glasova'],
+    [10, '10 glasova'],
+    [11, '11 glasova'],
+    [12, '12 glasova'],
+    [13, '13 glasova'],
+    [14, '14 glasova'],
+    [15, '15 glasova'],
+    [21, '21 glas'],
+    [22, '22 glasa'],
+    [24, '24 glasa'],
+    [25, '25 glasova'],
+    [100, '100 glasova'],
+    [101, '101 glas'],
+    [102, '102 glasa'],
+    [111, '111 glasova'],
+    [112, '112 glasova'],
+    [121, '121 glas'],
+  ])('renders count %i as "%s"', (count, expected) => {
+    setupDOM();
+    const seeded = makeMockStorage(JSON.stringify({ counts: { 0: count }, myVote: null }));
+    createCarousel(ideas, document, seeded);
+    expect(document.getElementById('vote-count-0').textContent).toBe(expected);
+  });
 });
 
 describe('xss safety', () => {
