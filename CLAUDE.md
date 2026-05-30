@@ -2,6 +2,11 @@
 
 This file provides guidance to Claude Code when working in this repository.
 
+## Komunikacija / Communication
+
+- **Uvek komuniciraj sa korisnikom na srpskom jeziku.**
+- Engleski je opcioni i koristi se samo kada je prirodno: tehnički termini, nazivi alata/komandi i kod.
+
 ## Project Overview
 
 A vanilla JavaScript web app with two pages:
