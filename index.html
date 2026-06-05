@@ -186,6 +186,15 @@
       border-radius: 2px;
     }
 
+    .about-img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      display: block;
+    }
+
     .about-img-wrap::after {
       content: '';
       position: absolute;
@@ -622,7 +631,10 @@
   <section id="about">
     <div class="about-grid">
       <div class="about-img-wrap">
-        <div class="about-img-placeholder">MM</div>
+        <img
+          class="about-img"
+          src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&q=80"
+          alt="Laptop prikazuje pravni ugovor sa holografskim AI oznakama i markerima rizika koji svijetle zlatnom bojom preko ključnih klauzula; advokatska ruka iznad tačpeda, tamni stol i topla stona lampa u pozadini." />
       </div>
       <div class="about-text">
         <p class="section-label">O meni</p>
