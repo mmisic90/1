@@ -14,7 +14,8 @@ card-a, i registar kadrova prije snimanja ili Higgsfield generacije.
 | `reel-01-storyboard.png` | 01 — Sixty Seconds | Hodnik suda, jednotačkasta perspektiva, lone figure prema vratima, gold vanishing point |
 | `reel-02-storyboard.png` | 02 — Seven Passes | Almost-overhead still life: tungsten lampa, prazan dokument, Mont Blanc, navy stol |
 | `reel-03-storyboard.png` | 03 — The Library | Simetričan biblioteka prolaz sa toplom lampom na stočiću u dnu (v1 — bez portreta) |
-| `reel-03-storyboard-v2.png` | 03 — The Library | Ista kompozicija + dva ukrašena okvira sa portretima na bočnim zidovima (placeholder za Bogišića i Jovanovića — v2, **trenutno preferirana**) |
+| `reel-03-storyboard-v2.png` | 03 — The Library | Ista kompozicija + dva ukrašena okvira sa portretima na bočnim zidovima (placeholder za Bogišića i Jovanovića — v2) |
+| `reel-03-storyboard-v3.png` | 03 — The Library | Photoreal kabinetski hodnik: navy zidovi, herringbone parket, kožni tomovi levo, galerija portreta u baroknim ramovima desno, mesingane lampe sa zelenim staklom, portret kroz vrata na kraju hodnika — **trenutno preferirana** |
 
 ## Šta uzeti iz ovih frame-ova
 
@@ -29,6 +30,9 @@ card-a, i registar kadrova prije snimanja ili Higgsfield generacije.
 
 - Tekst "SEVENPASSES" u storyboard 02 treba biti "SEVEN PASSES." (Canva
   render quirk — popraviti u finalnom editu)
+- Chapter card u v3 piše "1. THE LIBRARY / Dignified Law Firm" — treba
+  biti "03. THE LIBRARY." bez podnaslova (Canva quirk — chapter card
+  je u finalnom Reel-u svakako overlay u editu, ne pečeni tekst)
 - Knjige u storyboard 03 nemaju zlatne hrbatove kakvi su u promptu —
   u snimanju koristiti prave kožno povezane tomove (npr. Sl. list,
   ZOO komentari) sa gold-embossed naslovima
