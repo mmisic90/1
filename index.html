@@ -666,8 +666,126 @@
       <h2 class="section-title">Oblasti prava</h2>
       <div class="divider"></div>
     </div>
-    <div class="areas-grid"></div>
+    <div class="areas-grid">
+      <div class="area-card">
+        <span class="area-icon">⚖️</span>
+        <h3>Krivično pravo</h3>
+        <p>Odbrana i zastupanje u svim fazama krivičnog postupka, uz punu diskreciju i posvećenost.</p>
+        <ul class="area-services">
+          <li>Odbrana osumnjičenih i optuženih</li>
+          <li>Zastupanje oštećenih</li>
+          <li>Pravni lijekovi i žalbe</li>
+          <li>Zastupanje pred svim sudovima</li>
+        </ul>
+      </div>
+      <div class="area-card">
+        <span class="area-icon">📋</span>
+        <h3>Građansko pravo</h3>
+        <p>Zaštita imovinskih i ličnih prava u parničnim i vanparničnim postupcima.</p>
+        <ul class="area-services">
+          <li>Imovinski i svojinski sporovi</li>
+          <li>Ugovori i naknada štete</li>
+          <li>Nasljedni postupci</li>
+          <li>Izvršni postupci</li>
+        </ul>
+      </div>
+      <div class="area-card">
+        <span class="area-icon">🏢</span>
+        <h3>Privredno i radno pravo</h3>
+        <p>Pravna podrška privrednim subjektima i zaštita prava iz radnog odnosa.</p>
+        <ul class="area-services">
+          <li>Osnivanje i registracija firmi</li>
+          <li>Izrada i analiza ugovora</li>
+          <li>Radni sporovi</li>
+          <li>Naplata potraživanja</li>
+        </ul>
+      </div>
+    </div>
   </section>
+
+  <!-- CONTACT -->
+  <section id="kontakt">
+    <div class="contact-wrap">
+      <div class="contact-info">
+        <p class="section-label">Kontakt</p>
+        <h2 class="section-title">Zakažite konsultaciju</h2>
+        <div class="divider"></div>
+        <p style="color: var(--gray);">
+          Za sva pravna pitanja i zakazivanje termina, slobodno me kontaktirajte.
+          Odgovaram u najkraćem mogućem roku.
+        </p>
+        <div class="contact-items">
+          <div class="contact-item">
+            <div class="contact-item-icon">📍</div>
+            <div class="contact-item-text">
+              <strong>Adresa</strong>
+              <span>Bulevar bb, Banja Luka, BiH</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">📞</div>
+            <div class="contact-item-text">
+              <strong>Telefon</strong>
+              <span>+387 65 000 000</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">✉️</div>
+            <div class="contact-item-text">
+              <strong>Email</strong>
+              <span>kontakt@advokat-misic.ba</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">🕒</div>
+            <div class="contact-item-text">
+              <strong>Radno vrijeme</strong>
+              <span>Pon – Pet: 09:00 – 17:00</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <form class="contact-form" onsubmit="return false;">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="ime">Ime i prezime</label>
+            <input type="text" id="ime" name="ime" placeholder="Vaše ime" required />
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="vas@email.com" required />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="telefon">Telefon</label>
+            <input type="tel" id="telefon" name="telefon" placeholder="+387 ..." />
+          </div>
+          <div class="form-group">
+            <label for="oblast">Oblast prava</label>
+            <select id="oblast" name="oblast">
+              <option value="krivicno">Krivično pravo</option>
+              <option value="gradjansko">Građansko pravo</option>
+              <option value="privredno">Privredno i radno pravo</option>
+              <option value="ostalo">Ostalo</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="poruka">Poruka</label>
+          <textarea id="poruka" name="poruka" placeholder="Ukratko opišite Vaš pravni problem..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-solid">Pošaljite poruku</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 Advokatska kancelarija Milan Misić. Sva prava zadržana.</p>
+    <p><a href="#hero">Nazad na vrh ↑</a></p>
+  </footer>
 
   <script type="module">
     import ideas from './src/ideas.js';

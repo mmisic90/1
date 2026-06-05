@@ -100,11 +100,10 @@ Below the carousel markup, the file also contains a law firm landing page with `
 
 ## Known Issues / Tech Debt
 
-Remaining issues after recent fixes:
-
-1. **Incomplete landing page** — The contact section (`#kontakt`) is referenced in nav links and hero CTA but doesn't exist in the HTML body. CSS styles for `.contact-wrap`, `.contact-form`, and `footer` are defined but unused. The areas-of-law grid (`#oblasti .areas-grid`) is empty — no `area-card` elements.
+No known outstanding issues. The landing page is complete.
 
 Previously fixed:
+- **Landing page completed** — Added the contact section (`#kontakt`) with contact details and a form, the footer, and three `area-card` elements in `#oblasti .areas-grid` (Krivično, Građansko, Privredno i radno pravo). CSS for `.contact-wrap`, `.contact-form`, and `footer` is now used.
 - `:root` CSS custom properties now defined (`--navy`, `--gold`, `--white`, `--gray`, `--border`, `--navy2`, `--gold2`)
 - HTML nesting corrected (wrapper, carousel-nav, areas-grid all properly closed)
 - Carousel CSS added for all generated elements (`.card`, `.step-dot`, `.step-line`, `.counter`, etc.)
@@ -152,6 +151,6 @@ GitHub Actions workflow (`.github/workflows/claude.yml`) triggers on `@claude` m
 - Do not add unnecessary comments, docstrings, or abstractions
 - Run `npm test` before committing code changes
 - `remote.html` has no tests — if adding non-trivial logic there, extract testable functions to `src/`
-- `index.html` still has an incomplete landing page (see Known Issues) — contact section and area cards are missing
+- `index.html` landing page is complete (hero, about, areas of law, contact, footer)
 - The carousel uses `.carousel-btn` (not `.btn`) to avoid collision with landing page styles
 - When adding new ideas to `ideas.js`, update the test in `ideas.test.js` that asserts `ideas.length === 4`
