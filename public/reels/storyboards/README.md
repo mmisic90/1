@@ -15,7 +15,8 @@ card-a, i registar kadrova prije snimanja ili Higgsfield generacije.
 | `reel-02-storyboard.png` | 02 — Seven Passes | Almost-overhead still life: tungsten lampa, prazan dokument, Mont Blanc, navy stol |
 | `reel-03-storyboard.png` | 03 — The Library | Simetričan biblioteka prolaz sa toplom lampom na stočiću u dnu (v1 — bez portreta) |
 | `reel-03-storyboard-v2.png` | 03 — The Library | Ista kompozicija + dva ukrašena okvira sa portretima na bočnim zidovima (placeholder za Bogišića i Jovanovića — v2) |
-| `reel-03-storyboard-v3.png` | 03 — The Library | Photoreal kabinetski hodnik: navy zidovi, herringbone parket, kožni tomovi levo, galerija portreta u baroknim ramovima desno, mesingane lampe sa zelenim staklom, portret kroz vrata na kraju hodnika — **trenutno preferirana** |
+| `reel-03-storyboard-v3.png` | 03 — The Library | Photoreal kabinetski hodnik: navy zidovi, herringbone parket, kožni tomovi levo, galerija portreta u baroknim ramovima desno, mesingane lampe sa zelenim staklom, portret kroz vrata na kraju hodnika (3/4 ugao) |
+| `reel-03-storyboard-v4.png` | 03 — The Library | Strikna frontalna Kubrick simetrija: **tri velika portreta u nizu** na centralnom zidu (Bogišić / Miletić / Jovanović), mesingana lampa sa zelenim staklom u prvom planu, knjige levo-desno simetrično — **trenutno preferirana** |
 
 ## Šta uzeti iz ovih frame-ova
 
@@ -36,18 +37,23 @@ card-a, i registar kadrova prije snimanja ili Higgsfield generacije.
 - Knjige u storyboard 03 nemaju zlatne hrbatove kakvi su u promptu —
   u snimanju koristiti prave kožno povezane tomove (npr. Sl. list,
   ZOO komentari) sa gold-embossed naslovima
-- Portreti u `reel-03-storyboard-v2.png` su **generički bradati pravnici
-  19. veka**, NE prepoznatljivi likovi Bogišića i Jovanovića. AI
-  generatori ne daju pouzdane likove istorijskih osoba. Za finalnu
-  realizaciju (snimanje ili Higgsfield image-to-video) treba:
-  1. Nabaviti **javno-dostupne fotografije** oba lica:
-     - Valtazar Bogišić (1834–1908) — fotografije iz 1880-ih/90-ih,
-       PD u BiH/RS/CG zbog isteka 70+ godina od smrti
-     - Slobodan Jovanović (1869–1958) — fotografije iz 1920-ih/30-ih,
-       PD iz istog razloga
+- Portreti u `reel-03-storyboard-v2.png` i `reel-03-storyboard-v4.png`
+  su **generički bradati pravnici 19. veka**, NE prepoznatljivi likovi
+  Bogišića, Miletića i Jovanovića. AI generatori ne daju pouzdane
+  likove istorijskih osoba. Za finalnu realizaciju (snimanje ili
+  Higgsfield image-to-video) treba:
+  1. Nabaviti **javno-dostupne fotografije** sva tri lica:
+     - Valtazar Bogišić (1834–1908) — pravnik, autor Opšteg
+       imovinskog zakonika za Crnu Goru, fotografije 1880–90-ih
+     - Svetozar Miletić (1826–1901) — pravnik, političar, gradonačelnik
+       Novog Sada, fotografije 1860–90-ih
+     - Slobodan Jovanović (1869–1958) — pravnik, autor ustavnog prava
+       i istoričar, fotografije 1920–30-ih
+     Sva tri su PD u BiH/RS/CG zbog isteka 70+ godina od smrti.
   2. Uramiti ih u stilske zlatne barokne okvire (digital overlay
      ili fizički štampati i okačiti u prostoru za snimanje)
-  3. Postaviti na bočne zidove biblioteke, ne na hodnik prolaza
+  3. Postaviti na centralni zid biblioteke u nizu (po v4 kompoziciji),
+     kamera frontalno na zid
 
 ## Kako ovo koristiti
 
