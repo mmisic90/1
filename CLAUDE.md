@@ -11,7 +11,7 @@ This file provides guidance to Claude Code when working in this repository.
 
 A vanilla JavaScript web app with two pages:
 
-1. **Business Ideas Carousel** (`index.html`) — a step-by-step card carousel presenting LegalTech business ideas. Also embeds an incomplete law firm landing page for "Advokat Misić" (hero, about, areas of law sections). Language: Bosnian (`lang="bs"`).
+1. **Law Firm Site** (`index.html`) — the landing page for the "Advokat Misić" law firm. Opens with a full-screen cinematic intro video (`public/reels/reel-03-lineage-animatic.mp4`) that ends on the founder's portrait and routes the visitor into the "O meni" (about) section. Sections: hero, about, areas of law (oblasti), contact (kontakt), footer. Language: Bosnian (`lang="bs"`).
 2. **TV Remote Control** (`remote.html`) — an interactive media remote UI with power toggle, volume/channel controls, d-pad, media playback, number pad, and input source selection. Links back to `index.html`.
 
 No build step. No bundler. Open HTML files directly in a browser.
@@ -99,9 +99,9 @@ All functions check `if (!power) return` — no action when powered off. Number 
 
 ### `index.html` — page structure
 
-The carousel widget (wrapper, step indicators, card container, nav buttons, counter) is wired up via an inline `<script type="module">` that imports from `src/`. Button click handlers are set in the script, not in HTML attributes.
+A single-page law firm site. On load, a full-screen intro overlay (`#intro` containing `#introVideo`) plays the lineage video; an inline `<script>` controls it (muted autoplay + playsinline, "Preskoči" skip → `#hero`, end-of-video CTA → `#about`, shown once per session via `sessionStorage`, autoplay-blocked fallback reveals the CTA). Below the overlay: `<nav>`, `<section id="hero">`, `<section id="about">` (portrait + bio), `<section id="oblasti">`, `<section id="kontakt">`, and `<footer>`.
 
-Below the carousel markup, the file also contains a law firm landing page with `<nav>`, `<section id="hero">`, `<section id="about">`, and `<section id="oblasti">`.
+The business-ideas carousel was removed from this page. `src/carousel.js` and `src/ideas.js` remain as standalone modules with their own passing unit tests, but are no longer wired into any page.
 
 ## Known Issues / Tech Debt
 
