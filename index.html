@@ -405,8 +405,17 @@
     #introVideo {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      /* Default (desktop / landscape): show the full vertical video,
+         letterboxed against the navy background. */
+      object-fit: contain;
       object-position: center;
+      background: #05080f;
+    }
+
+    /* On portrait viewports (mobile), fill the screen — the video and
+       the screen are both ~9:16 so there's effectively no crop. */
+    @media (orientation: portrait) {
+      #introVideo { object-fit: cover; }
     }
 
     /* suptilni vinjet preko videa */
@@ -441,7 +450,7 @@
     .intro-cta {
       position: absolute;
       left: 0; right: 0;
-      bottom: 9%;
+      bottom: 7%;
       z-index: 3;
       text-align: center;
       padding: 0 6%;
@@ -451,27 +460,6 @@
       pointer-events: none;
     }
     .intro-cta.show { opacity: 1; transform: none; pointer-events: auto; }
-    .intro-cta::before {
-      content: '';
-      position: absolute;
-      inset: -60% 0 -30% 0;
-      z-index: -1;
-      background: linear-gradient(180deg, transparent, rgba(5,8,15,0.9));
-    }
-    .intro-cta .ic-name {
-      font-family: 'Playfair Display', serif;
-      color: var(--gold);
-      font-size: clamp(1.4rem, 5vw, 2.3rem);
-      letter-spacing: 0.04em;
-      margin-bottom: 0.4rem;
-    }
-    .intro-cta .ic-sub {
-      color: var(--gray);
-      font-size: 0.85rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      margin-bottom: 1.5rem;
-    }
     .intro-enter {
       display: inline-block;
       cursor: pointer;
@@ -519,8 +507,6 @@
     </video>
     <button class="intro-skip" id="introSkip" type="button">Preskoči ↦</button>
     <div class="intro-cta" id="introCta">
-      <div class="ic-name">Advokat Milan Misić</div>
-      <div class="ic-sub">Tradicija · Posvećenost · Povjerenje</div>
       <a href="#about" class="intro-enter" id="introEnter">Saznajte više o meni →</a>
     </div>
   </div>
