@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-  <title>Business Ideas</title>
+  <title>Advokat Milan Misić — Advokatska kancelarija</title>
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -386,183 +386,6 @@
     footer p { color: var(--gray); font-size: 0.85rem; }
     footer a { color: var(--gold); text-decoration: none; }
 
-    /* ── CAROUSEL ── */
-    .wrapper {
-      max-width: 640px;
-      margin: 2rem auto;
-      padding: 2rem 1.5rem;
-    }
-
-    .wrapper > h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.8rem;
-      color: var(--white);
-      margin-bottom: 1.5rem;
-      text-align: center;
-    }
-
-    .steps-indicator {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0;
-      margin-bottom: 1.5rem;
-    }
-
-    .step-dot {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background: var(--navy2);
-      border: 2px solid var(--border);
-      color: var(--gray);
-      font-size: 0.8rem;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.25s;
-      flex-shrink: 0;
-    }
-
-    .step-dot.active {
-      background: var(--gold);
-      border-color: var(--gold);
-      color: var(--navy);
-    }
-
-    .step-dot.done {
-      background: rgba(201,168,76,0.2);
-      border-color: var(--gold);
-      color: var(--gold);
-    }
-
-    .step-line {
-      width: 40px;
-      height: 2px;
-      background: var(--border);
-      transition: background 0.25s;
-    }
-
-    .step-line.done {
-      background: var(--gold);
-    }
-
-    .card-container {
-      position: relative;
-      min-height: 200px;
-    }
-
-    .card {
-      display: none;
-      background: var(--navy2);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 2rem;
-    }
-
-    .card.active {
-      display: block;
-    }
-
-    .card-header {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 1rem;
-    }
-
-    .card-number {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: var(--gold);
-      color: var(--navy);
-      font-weight: 700;
-      font-size: 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
-    .card-label {
-      font-size: 0.75rem;
-      color: var(--gray);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-    }
-
-    .card-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.2rem;
-      color: var(--white);
-      font-weight: 600;
-    }
-
-    .card-divider {
-      height: 1px;
-      background: var(--border);
-      margin: 1rem 0;
-    }
-
-    .card-body {
-      color: var(--gray);
-      font-size: 0.95rem;
-      line-height: 1.7;
-      margin-bottom: 1rem;
-    }
-
-    .card-tag {
-      display: inline-block;
-      font-size: 0.75rem;
-      color: var(--gold);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      padding: 0.3rem 0.8rem;
-      border: 1px solid rgba(201,168,76,0.3);
-      border-radius: 2px;
-    }
-
-    .carousel-nav {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 1.5rem;
-      gap: 1rem;
-    }
-
-    .carousel-btn {
-      padding: 0.7rem 1.8rem;
-      border: 1px solid var(--gold);
-      border-radius: 2px;
-      font-size: 0.85rem;
-      letter-spacing: 0.08em;
-      cursor: pointer;
-      transition: background 0.25s, color 0.25s, opacity 0.25s;
-      font-family: inherit;
-      background: transparent;
-      color: var(--gold);
-    }
-
-    .carousel-btn:hover:not(:disabled) {
-      background: var(--gold);
-      color: var(--navy);
-    }
-
-    .carousel-btn:disabled {
-      opacity: 0.3;
-      cursor: not-allowed;
-    }
-
-    .counter {
-      text-align: center;
-      margin-top: 1rem;
-      font-size: 0.85rem;
-      color: var(--gray);
-      letter-spacing: 0.1em;
-    }
-
     /* ── INTRO / KINO-UVOD ── */
     body.intro-active { overflow: hidden; height: 100vh; }
 
@@ -700,25 +523,6 @@
       <div class="ic-sub">Tradicija · Posvećenost · Povjerenje</div>
       <a href="#about" class="intro-enter" id="introEnter">Saznajte više o meni →</a>
     </div>
-  </div>
-
-  <!-- CAROUSEL -->
-  <div class="wrapper">
-    <h1>Business Ideas</h1>
-
-    <!-- Step indicators -->
-    <div class="steps-indicator" id="stepsIndicator"></div>
-
-    <!-- Cards -->
-    <div class="card-container" id="cardContainer"></div>
-
-    <!-- Navigation -->
-    <div class="carousel-nav">
-      <button class="carousel-btn btn-prev" id="btnPrev" disabled>← Back</button>
-      <button class="carousel-btn btn-next" id="btnNext">Next →</button>
-    </div>
-
-    <div class="counter" id="counter"></div>
   </div>
 
   <!-- NAVIGATION -->
@@ -917,16 +721,6 @@
     <p>© 2026 Advokatska kancelarija Milan Misić. Sva prava zadržana.</p>
     <p><a href="#hero">Nazad na vrh ↑</a></p>
   </footer>
-
-  <script type="module">
-    import ideas from './src/ideas.js';
-    import { createCarousel } from './src/carousel.js';
-
-    const carousel = createCarousel(ideas, document);
-
-    document.getElementById('btnPrev').onclick = () => carousel.changeStep(-1);
-    document.getElementById('btnNext').onclick = () => carousel.changeStep(1);
-  </script>
 
   <!-- KINO-UVOD: kontrola reprodukcije i prelaz na "O meni" -->
   <script>
