@@ -672,11 +672,11 @@
   <script type="module">
     import ideas from './src/ideas.js';
     import { createCarousel } from './src/carousel.js';
+    import { wireCarousel } from './src/wire.js';
 
     const carousel = createCarousel(ideas, document);
 
-    document.getElementById('btnPrev').onclick = () => carousel.changeStep(-1);
-    document.getElementById('btnNext').onclick = () => carousel.changeStep(1);
+    wireCarousel(document, carousel);
   </script>
 </body>
 </html>

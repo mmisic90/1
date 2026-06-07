@@ -14,8 +14,9 @@ No build step. No bundler. Open HTML files directly in a browser.
 ## Development Commands
 
 ```bash
-npm install          # Install dev dependencies (vitest, jsdom)
+npm install          # Install dev dependencies (vitest, jsdom, coverage-v8)
 npm test             # Run all tests (vitest run)
+npm run coverage     # Run tests with a v8 coverage report
 ```
 
 No linter or formatter is configured. Follow existing code style.
@@ -25,14 +26,21 @@ No linter or formatter is configured. Follow existing code style.
 ```
 .
 ├── src/
-│   ├── carousel.js          # createCarousel() — builds dots, cards, handles navigation
-│   └── ideas.js             # Default export: array of 4 idea objects {title, tag, body}
+│   ├── carousel.js          # createCarousel() — builds dots, cards, voting, navigation
+│   ├── ideas.js             # Default export: array of idea objects {title, tag, body, image?}
+│   ├── remote.js            # createRemote() — TV remote state machine
+│   ├── voting.js            # localStorage-backed vote tally helpers
+│   └── wire.js              # DOM glue helpers (wireCarousel, wireRemote)
 ├── tests/
-│   ├── carousel.test.js     # 36 tests across 8 describe blocks
-│   └── ideas.test.js        # 4 tests: data shape validation
+│   ├── carousel.test.js     # carousel init/nav/voting/XSS
+│   ├── ideas.test.js        # data shape validation
+│   ├── remote.test.js       # remote state machine
+│   ├── voting.test.js       # vote tally helpers
+│   ├── wire.test.js         # HTML wiring integration
+│   └── landing.test.js      # index.html landing-page structure
 ├── index.html               # Carousel + law firm landing page (ES module imports)
-├── remote.html              # TV remote control (inline script, no modules)
-├── vitest.config.js         # Vitest config: jsdom environment
+├── remote.html              # TV remote control (ES module imports + global handlers)
+├── vitest.config.js         # Vitest config: jsdom environment + v8 coverage
 ├── .github/workflows/
 │   └── claude.yml           # GitHub Action: Claude Code on @claude mentions
 └── .gitignore               # Ignores node_modules/
@@ -75,11 +83,11 @@ Step dots: `<div class="step-dot" id="dot-{i}">` with `<div class="step-line" id
 
 ### `src/ideas.js`
 
-Default export: array of 4 objects. Each has `title` (string), `tag` (string), `body` (string). All values are non-empty and titles are unique. The test suite enforces this shape.
+Default export: array of idea objects. Each has `title` (string), `tag` (string), `body` (string), and optionally `image`/`imageAlt`. All values are non-empty and titles are unique. The test suite enforces this shape.
 
 ### `remote.html`
 
-Self-contained — all JS is inline using global functions (no ES modules). Key state variables:
+Imports `createRemote` from `src/remote.js` via `<script type="module">`, then `wireRemote(window, remote)` (from `src/wire.js`) exposes the returned methods as globals so the inline `onclick="togglePower()"` attributes resolve. Key state variables:
 
 | Variable | Type | Default | Range |
 |---|---|---|---|
@@ -90,7 +98,7 @@ Self-contained — all JS is inline using global functions (no ES modules). Key 
 | `playing` | boolean | `false` | — |
 | `currentSource` | string | `'HDMI 1'` | HDMI 1, HDMI 2, USB, AV |
 
-All functions check `if (!power) return` — no action when powered off. Number pad input has a 2-second timeout before auto-submitting the channel. No tests exist for this page.
+All functions check `if (!power) return` — no action when powered off. Number pad input has a 2-second timeout before auto-submitting the channel. Logic lives in `src/remote.js` and is covered by `tests/remote.test.js`.
 
 ### `index.html` — page structure
 
@@ -115,8 +123,10 @@ Previously fixed:
 
 - **Framework**: Vitest 4.x
 - **Environment**: jsdom (configured in `vitest.config.js`)
-- **Pattern**: Each test file calls `setupDOM()` in `beforeEach` to inject the required HTML skeleton into `document.body.innerHTML`, then calls `createCarousel(ideas, document)` using the real ideas data and the jsdom-provided `document`
-- **Test structure**: `carousel.test.js` has 8 `describe` blocks — initialization (6 tests), updateUI (8), goTo (4), changeStep (5), dot click (2), single idea edge case (2), two ideas edge case (1), full navigation flow (1). `ideas.test.js` has 1 `describe` block with 4 tests.
+- **Pattern**: DOM-driven test files define a `setupDOM()` helper that injects the required HTML skeleton into `document.body.innerHTML`, then exercise the module under test. `landing.test.js` instead reads `index.html` from disk and parses it with `DOMParser` (no script execution).
+- **Test files**: `carousel.test.js` (init/nav/voting/XSS), `ideas.test.js` (data shape), `remote.test.js` (remote state machine), `voting.test.js` (tally helpers), `wire.test.js` (HTML wiring integration), `landing.test.js` (landing-page structure).
+- **Coverage**: `npm run coverage` (v8 provider, scoped to `src/**`). Core modules are at 100% statements/functions/lines.
+- **Expected failures**: `landing.test.js` uses `it.fails()` to pin documented landing-page debt (missing `#kontakt` section, empty areas grid). These count as passes until the debt is fixed — when fixed, convert them to normal assertions.
 - **Run**: `npm test` (alias for `vitest run`)
 - **No watch mode configured** — use `npx vitest` for watch mode during development
 - All tests must pass before committing
@@ -151,7 +161,7 @@ GitHub Actions workflow (`.github/workflows/claude.yml`) triggers on `@claude` m
 - Prefer editing existing files over creating new ones
 - Do not add unnecessary comments, docstrings, or abstractions
 - Run `npm test` before committing code changes
-- `remote.html` has no tests — if adding non-trivial logic there, extract testable functions to `src/`
-- `index.html` still has an incomplete landing page (see Known Issues) — contact section and area cards are missing
+- Page glue lives in `src/wire.js` so it can be unit-tested — keep new wiring there rather than inline in HTML
+- `index.html` still has an incomplete landing page (see Known Issues) — contact section and area cards are missing; `landing.test.js` pins this debt via `it.fails()`
 - The carousel uses `.carousel-btn` (not `.btn`) to avoid collision with landing page styles
-- When adding new ideas to `ideas.js`, update the test in `ideas.test.js` that asserts `ideas.length === 4`
+- When adding/removing ideas in `ideas.js`, update the count assertion in `ideas.test.js` (`ideas.length`)

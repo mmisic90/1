@@ -374,6 +374,27 @@ describe('voting integration', () => {
     expect(document.getElementById('vote-count-1').textContent).toBe('3 glasa');
     expect(document.getElementById('vote-count-2').textContent).toBe('5 glasova');
   });
+
+  it('covers all pluralization boundaries (0, 2, 4)', () => {
+    setupDOM();
+    const seeded = makeMockStorage(JSON.stringify({ counts: { 0: 0, 1: 2, 2: 4 }, myVote: null }));
+    createCarousel(ideas, document, seeded);
+
+    expect(document.getElementById('vote-count-0').textContent).toBe('0 glasova');
+    expect(document.getElementById('vote-count-1').textContent).toBe('2 glasa');
+    expect(document.getElementById('vote-count-2').textContent).toBe('4 glasa');
+  });
+
+  it('getVotes() reflects the current vote state', () => {
+    setupDOM();
+    const carousel = createCarousel(ideas, document, makeMockStorage());
+
+    expect(carousel.getVotes()).toEqual({ counts: {}, myVote: null });
+
+    carousel.vote(2);
+    expect(carousel.getVotes().myVote).toBe(2);
+    expect(carousel.getVotes().counts[2]).toBe(1);
+  });
 });
 
 describe('xss safety', () => {

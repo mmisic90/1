@@ -76,6 +76,7 @@ describe('togglePower', () => {
     remote.adjustChannel(1);
     remote.numInput(5);
     remote.goToChannel();
+    remote.clearInput();
     remote.dpadAction('up');
     remote.mediaAction('playpause');
     remote.setSource(null, 'USB');
