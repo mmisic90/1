@@ -80,6 +80,7 @@ export function createRemote(document, options = {}) {
   }
 
   function clearInput() {
+    if (!state.power) return;
     state.channelInput = '';
     clearTimeout(inputTimeout);
     showMessage('CH ' + state.channel, state.currentSource);

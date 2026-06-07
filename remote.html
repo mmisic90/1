@@ -461,8 +461,9 @@
 
   <script type="module">
     import { createRemote } from './src/remote.js';
+    import { wireRemote } from './src/wire.js';
     const remote = createRemote(document);
-    Object.assign(window, remote);
+    wireRemote(window, remote);
   </script>
 </body>
 </html>
