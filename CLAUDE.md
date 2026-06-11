@@ -2,10 +2,11 @@
 
 This file provides guidance to Claude Code when working in this repository.
 
-## Komunikacija / Communication
+## Komunikacija
 
-- **Uvek komuniciraj sa korisnikom na srpskom jeziku.**
-- Engleski je opcioni i koristi se samo kada je prirodno: tehnički termini, nazivi alata/komandi i kod.
+- **Uvek komuniciraj sa korisnikom isključivo na srpskom jeziku, ekavski izgovor (ekavica).**
+- Ekavica važi svuda: u chatu, u dokumentima koje pišeš (.md, izveštaji), u commit porukama i PR opisima. Ne ijekavica: ne "prije/provjera/dio" → već "pre/provera/deo".
+- Engleski samo gde je prirodno: tehnički termini, nazivi alata/komandi i kod.
 
 ## Project Overview
 
