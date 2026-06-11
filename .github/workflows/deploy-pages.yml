@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - claude/create-claude-docs-pcOyU
-      - claude/start-http-server-e7qhA
   workflow_dispatch:
 
 permissions:
