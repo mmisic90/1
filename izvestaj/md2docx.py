@@ -4,8 +4,15 @@ Upotreba: python3 md2docx.py ulaz.md [izlaz.docx]
 """
 import re, sys
 from docx import Document
-from docx.shared import Pt, Cm
+from docx.shared import Pt, Cm, RGBColor
 from docx.enum.text import WD_ALIGN_PARAGRAPH
+
+BLACK = RGBColor(0, 0, 0)
+
+
+def blacken(p):
+    for r in p.runs:
+        r.font.color.rgb = BLACK
 
 
 def add_runs(p, text):
@@ -62,13 +69,18 @@ def convert(src_path, out_path):
             p.paragraph_format.left_indent = Cm(1.0)
             p.style = doc.styles['Quote'] if 'Quote' in [s.name for s in doc.styles] else p.style
         elif line.startswith('### '):
-            add_runs(doc.add_heading('', level=3), line[4:])
+            p = doc.add_heading('', level=3)
+            add_runs(p, line[4:])
+            blacken(p)
         elif line.startswith('## '):
-            add_runs(doc.add_heading('', level=2), line[3:])
+            p = doc.add_heading('', level=2)
+            add_runs(p, line[3:])
+            blacken(p)
         elif line.startswith('# '):
             p = doc.add_heading('', level=1)
             add_runs(p, line[2:])
             p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+            blacken(p)
         elif re.match(r'^\d+\.\s', line):
             p = doc.add_paragraph()
             add_runs(p, line)
