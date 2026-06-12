@@ -31,10 +31,12 @@ def convert(src_path, out_path):
     doc = Document()
     st = doc.styles['Normal']
     st.font.name = 'Times New Roman'
-    st.font.size = Pt(11)
+    st.font.size = Pt(12)
     for sec in doc.sections:
-        sec.left_margin = Cm(2.5)
-        sec.right_margin = Cm(2.5)
+        sec.left_margin = Cm(2.54)
+        sec.right_margin = Cm(2.54)
+        sec.top_margin = Cm(2.54)
+        sec.bottom_margin = Cm(2.54)
 
     lines = src.split('\n')
     i = 0
