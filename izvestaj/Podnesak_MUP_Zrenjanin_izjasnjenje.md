@@ -1,124 +1,126 @@
-# REPUBLIKA SRBIJA — MINISTARSTVO UNUTRAŠNJIH POSLOVA
+# МИНИСТАРСТВО УНУТРАШЊИХ ПОСЛОВА
 
-**DIREKCIJA POLICIJE — POLICIJSKA UPRAVA ZRENJANIN**
-[Odeljenje/Odsek kriminalističke policije — *upisati organizacionu jedinicu*]
-Zrenjanin
+**ПУ ЗРЕЊАНИН**
+Др Зорана Каменковића бр. 10, 23000 Зрењанин
 
-**VEZA:** Krivična prijava / službena beleška povodom događaja od 11.09.2025. godine
-**Broj predmeta:** KU br. [_______/2025] (*upisati broj predmeta / KU broj*)
-**Postupajući službenik:** [_____________________]
+**ВЕЗА:** крађа на броду Бечеј 1, пријављена дана 11.09.2025. године; Допис пуномоћника оштећеног са одштетним захтевом од 24.09.2025. године; КУ бр. [_______] (*уписати број предмета*)
 
 ---
 
-**OŠTEĆENI / PODNOSILAC:** „VUKOVIĆ COMMERCE 2015" d.o.o. za proizvodnju, trgovinu i usluge, Veternik, Novosadski put br. 106, MB: 21085251, PIB: 108875815, koga zastupa direktor Stevan Janković
+**ОШТЕЋЕНИ:** VUKOVIĆ COMMERCE 2015 DOO VETERNIK из Ветерника, ул. Новосадски пут бр. 106, МБ: 21085251, ПИБ: 108875815, а којег оштећеног по приложеној пуномоћи заступа адв. Милан Мишић из Новог Сада, ул. Максима Горког бр. 6
 
-**PUNOMOĆNIK:** Milan Mišić, advokat iz [___________], ul. [_____________________] (punomoćje u prilogu)
+**ШТЕТНИК:**
+1. BEGEJ SHIPYARDS GROUP DOO ZRENJANIN из Зрењанина, ул. Темишварски друм ББ, МБ: 21541575, ПИБ: 111793711
+2. Душко Топаловић, ЈМБГ: 2310981710203, као директор прив. друштва BEGEJ SHIPYARDS GROUP DOO ZRENJANIN из Зрењанина, ул. Темишварски друм ББ, МБ: 21541575, ПИБ: 111793711
 
 ---
 
-# IZJAŠNJENJE OŠTEĆENOG NA OKOLNOSTI VREDNOSTI OTUĐENIH STVARI — TAKSATIVNI POPIS OTUĐENIH I OŠTEĆENIH STVARI — SA ODŠTETNIM ZAHTEVOM
+# ИЗЈАШЊЕЊЕ ПУНОМОЋНИКА ОШТЕЋЕНОГ НА ОКОЛНОСТИ ВРЕДНОСТИ ОТУЂЕНИХ СТВАРИ — ТАКСАТИВНИ ПОПИС ОТУЂЕНИХ И ОШТЕЋЕНИХ СТВАРИ — СА ПРЕЦИЗИРАНИМ ОДШТЕТНИМ ЗАХТЕВОМ
 
-*(dopuna krivične prijave — izjašnjenje po zahtevu postupajućeg organa)*
+2 примерка
 
-Postupajući po zahtevu tog organa da se oštećeni izjasni na okolnosti vrednosti otuđenih stvari, i to taksativno u odštetnom zahtevu, kao i na okolnosti starosti broda i otuđenih delova, kome je brod ostavljen na remont i ko je trebalo da izvrši primopredaju broda po završenim radovima, oštećeni daje sledeće
+Поштовани,
 
-## I — ČINJENIČNI OSNOV
+поступајући по захтеву тог органа да се оштећени изјасни на околности вредности отуђених ствари, и то таксативно у одштетном захтеву, као и на околности колико је година брод стар као и отуђени делови, коме је брод остављен на ремонт и ко је требало да изврши примопредају брода по завршеним радовима, дајемо следеће изјашњење:
 
-1. Oštećeno privredno društvo „Vuković Commerce 2015" d.o.o. iz Veternika isključivi je vlasnik samohodne barže (motornog teretnjaka) **„BEČEJ I", ENI broj 36000187**, upisane u uložak br. 2, na strani 9, sveske br. I Glavne knjige upisnika brodova unutrašnje plovidbe Lučke kapetanije Novi Sad. Pravo svojine oštećenog uknjiženo je Rešenjem LK Novi Sad broj 342-2/15 UBUP I od 03.09.2015. godine, što se dokazuje Izvodom Lučke kapetanije Novi Sad broj 342-1561/24-II od 09.09.2024. godine (prilog).
+## I — ЧИЊЕНИЧНИ ОСНОВ
 
-2. Predmetno plovilo predato je na remont brodogradilištu **„BEGEJ SHIPYARDS GROUP" d.o.o. Zrenjanin**, Temišvarski drum bb, Zrenjanin, MB: 21541575, PIB: 111793711 (pretežna delatnost: popravka i održavanje brodova i čamaca — šifra 3315), [*upisati: broj i datum ugovora o remontu / radnog naloga, odnosno osnov predaje*], dana [____________] godine. Plovilo se nalazilo na lokalitetu Perlez, kod prevodnice Perlez.
+1. Оштећено прив. друштво VUKOVIĆ COMMERCE 2015 DOO VETERNIK искључиви је власник самоходне барже (моторног теретњака) **„Бечеј I", ENI број 36000187**, уписане у уложак бр. 2, на страни 9, свеске бр. I Главне књиге уписника бродова унутрашње пловидбе Лучке капетаније Нови Сад. Право својине оштећеног укњижено је Решењем ЛК Нови Сад број 342-2/15 УБУП I од 03.09.2015. године, што се доказује Изводом Лучке капетаније Нови Сад број 342-1561/24-II од 09.09.2024. године (достављен уз допис од 24.09.2025. године).
 
-3. Za dan **11.09.2025. godine** bila je ugovorena primopredaja plovila po završenim radovima. Primopredaji su pristupili: Milan Mišić, advokat (punomoćnik oštećenog), Dejan Dimitrijević, zaposleni preduzeća „Begej Shipyards Group" d.o.o. Zrenjanin, i dr Milan Radošević, sudski veštak (po Rešenju Ministarstva pravde RS br. 740-05-02215/2014-22 od 08.12.2014. godine).
+2. Предметни брод предат је на ремонт штетнику 1. реда — бродоградилишту BEGEJ SHIPYARDS GROUP DOO ZRENJANIN, чија је претежна регистрована делатност поправка и одржавање бродова и чамаца (шифра делатности 3315), [*уписати: број и датум уговора о ремонту / радног налога, односно основ предаје*], дана [____________] године. Брод се налазио на локалитету Перлез, код преводнице Перлез.
 
-4. Pregledom plovila na dan primopredaje utvrđeno je da je plovilo u neispravnom i nefunkcionalnom stanju — da su sa plovila otuđeni vitalni delovi i oprema i da je plovilo vandalizovano, o čemu je sudski veštak sačinio **Izveštaj o zatečenom stanju od 24.09.2025. godine** sa fotodokumentacijom (prilog). Događaj je istog dana prijavljen nadležnoj policijskoj upravi, čiji su službenici izašli na lice mesta i izvršili uviđaj. Zaposleni „Begej Shipyards Group" d.o.o. napustili su mesto ugovorene primopredaje odmah po pozivanju policije, a pre dolaska policijskih službenika.
+3. За дан **11.09.2025. године** била је уговорена примопредаја брода по завршеним радовима, на основу Понуде за Записник о преузимању брода, понуђене од стране штетника 1. и 2. реда (достављена уз допис од 24.09.2025. године). Примопредаји су приступили: адв. Милан Мишић (пуномоћник оштећеног), Дејан Димитријевић, запослени штетника 1. реда и др Милан Радошевић, судски вештак машинске струке (по Решењу Министарства правде РС бр. 740-05-02215/2014-22 од 08.12.2014. године).
 
-## II — IZJAŠNJENJE NA POSTAVLJENA PITANJA
+4. Прегледом брода на дан примопредаје утврђено је да је брод у неисправном и нефункционалном стању — да су са брода отуђени витални делови и опрема и да је брод вандализован, о чему је судски вештак сачинио **Извештај о затеченом стању од 24.09.2025. године** са фотодокументацијом (достављен уз допис од 24.09.2025. године). Догађај је истог дана пријављен том органу, чији су службеници изашли на лице места и извршили увиђај. Запослени штетника 1. реда напустили су место уговорене примопредаје одмах по позивању полиције, а пре доласка полицијских службеника.
 
-### 1. Starost broda
+## II — ИЗЈАШЊЕЊЕ НА ПОСТАВЉЕНА ПИТАЊА
 
-Brod „Bečej I" izgrađen je **1978. godine** u brodogradilištu Balatonfüred, Mađarska (list A upisnika brodova). Na dan ugovorene primopredaje (11.09.2025. godine) brod je bio star **47 godina**.
+### 1. Колико је брод стар
 
-Osnovne karakteristike broda prema upisniku: motorni teretnjak sa sopstvenim pogonom; najveća nosivost 886,00 t; dva dizel motora ukupne snage 212,20 kW; dva (2) Z pogona; trup od čelika; najveća dužina 69,71 m; najveća širina 8,62 m.
+Брод „Бечеј I" изграђен је **1978. године** у бродоградилишту Balatonfüred, Мађарска (лист А уписника бродова). На дан уговорене примопредаје (11.09.2025. године) брод је био стар **47 година**.
 
-### 2. Starost otuđenih delova
+Основне карактеристике брода према уписнику: моторни теретњак са сопственим погоном; највећа носивост 886,00 т; два дизел мотора укупне снаге 212,20 kW; два (2) Z погона; труп од челика; највећа дужина 69,71 м; највећа ширина 8,62 м.
 
-Otuđeni delovi i oprema bili su ugrađeni i u funkciji u trenutku predaje plovila na remont. Starost pojedinih delova odgovara godini gradnje broda (1978), dok su pojedini delovi i oprema naknadno ugrađeni, i to: [*upisati — npr. radar, radio stanica, agregat: godina nabavke/ugradnje, računi/dokumentacija ukoliko postoje*]. Tačna starost i stanje svakog pojedinačnog dela biće utvrđeni veštačenjem, odnosno celokupnom defektažom plovila od strane servisera mašinske i elektro struke, kako je konstatovano u izveštaju sudskog veštaka.
+### 2. Колико су стари отуђени делови
 
-### 3. Kome je brod ostavljen na remont
+Отуђени делови и опрема били су уграђени и у функцији у тренутку предаје брода на ремонт. Старост појединих делова одговара години градње брода (1978), док су поједини делови и опрема накнадно уграђени, и то: [*уписати — нпр. радар, радио станица, агрегат: година набавке/уградње, рачуни/документација уколико постоје*]. Тачна старост и стање сваког појединачног дела биће утврђени вештачењем, односно целокупном дефектажом брода од стране сервисера машинске и електро струке, како је констатовано у извештају судског вештака.
 
-Brod je ostavljen na remont brodogradilištu **„BEGEJ SHIPYARDS GROUP" d.o.o. Zrenjanin**, sa sedištem na adresi Temišvarski drum bb, Zrenjanin, MB: 21541575, PIB: 111793711, čija je pretežna registrovana delatnost popravka i održavanje brodova i čamaca (šifra delatnosti 3315), [*upisati: broj i datum ugovora o remontu, odnosno osnov predaje; datum predaje plovila*]. Plovilo je od predaje do dana ugovorene primopredaje bilo u državini i pod nadzorom navedenog privrednog društva.
+### 3. Коме је брод остављен на ремонт
 
-### 4. Ko je trebalo da izvrši primopredaju broda po završenim radovima
+Брод је остављен на ремонт штетнику 1. реда — бродоградилишту **BEGEJ SHIPYARDS GROUP DOO ZRENJANIN**, ул. Темишварски друм ББ, Зрењанин, МБ: 21541575, ПИБ: 111793711. Брод је од предаје до дана уговорене примопредаје био у државини и под надзором штетника 1. реда, који као професионално бродоградилиште одговара за поверену ствар по повишеном стандарду пажње доброг стручњака (чл. 18. ст. 2. ЗОО).
 
-Primopredaju broda po završenim radovima trebalo je da izvrši **„BEGEJ SHIPYARDS GROUP" d.o.o. Zrenjanin** (MB: 21541575, PIB: 111793711), kao izvođač radova kome je plovilo povereno, preko svog odgovornog lica [*upisati ime i funkciju odgovornog lica / lica određenog za primopredaju*], a oštećenom kao vlasniku plovila. Primopredaja je bila ugovorena za 11.09.2025. godine na lokalitetu Perlez i nije izvršena iz razloga navedenih u tački I.4. ovog podneska.
+### 4. Ко је требало да изврши примопредају брода по завршеним радовима
 
-## III — TAKSATIVNI POPIS OTUĐENIH I OŠTEĆENIH STVARI
+Примопредају брода по завршеним радовима требало је да изврше **штетници 1. и 2. реда** — BEGEJ SHIPYARDS GROUP DOO ZRENJANIN, преко директора Душка Топаловића, који су оштећеном и понудили Записник о преузимању брода, са примопредајом заказаном за дан 11.09.2025. године. Примопредаја није извршена из разлога наведених у тачки I.4. овог изјашњења.
 
-Na osnovu Izveštaja o zatečenom stanju sudskog veštaka dr Milana Radoševića od 24.09.2025. godine sa fotodokumentacijom, taksativno se popisuju:
+## III — ТАКСАТИВНИ ПОПИС ОТУЂЕНИХ И ОШТЕЋЕНИХ СТВАРИ
 
-### A) Otuđene stvari (nedostaju, odnosno pokradene su sa plovila)
+На основу Извештаја о затеченом стању судског вештака др Милана Радошевића од 24.09.2025. године са фотодокументацијом, таксативно се пописују:
 
-1. brodski agregat;
-2. radar;
-3. radio stanica;
-4. dva (2) brodska propulzera marke „Schottel" sa celokupnim pripadajućim sistemom — dva Z pogona (sredstvo poriva/pogona plovila);
-5. razvodni ormani (pokradeni, sa isečenom električnom instalacijom);
-6. spojni elementi od pogonskog agregata do propulzera (pokradeni);
-7. glava motora jednog pogonskog agregata (skinuta sa motora).
+### А) Отуђене ствари (недостају, односно покрадене су са брода)
 
-### B) Oštećene, odnosno uništene stvari
+1. бродски агрегат;
+2. радар;
+3. радио станица;
+4. два (2) бродска пропулзера марке „Schottel" са целокупним припадајућим системом — два Z погона (средство порива/погона брода);
+5. разводни ормани (покрадени, са исеченом електричном инсталацијом);
+6. спојни елементи од погонског агрегата до пропулзера (покрадени);
+7. глава мотора једног погонског агрегата (скинута са мотора).
 
-1. brodska kabina (oštećena);
-2. vrata kabine (oštećena);
-3. električna instalacija plovila (isečena);
-4. brodske kabine — stambeni prostor (vandalizovan);
-5. mašinski prostor (oštećen);
-6. jedan pogonski agregat — motor (oštećen skidanjem glave motora);
-7. hidraulična instalacija u mašinskom prostoru (isečena).
+### Б) Оштећене, односно уништене ствари
 
-Sve napred navedeno fotografisano je na dan primopredaje i dokumentovano u fotodokumentaciji koja čini sastavni deo izveštaja sudskog veštaka.
+1. бродска кабина (оштећена);
+2. врата кабине (оштећена);
+3. електрична инсталација брода (исечена);
+4. бродске кабине — стамбени простор (вандализован);
+5. машински простор (оштећен);
+6. један погонски агрегат — мотор (оштећен скидањем главе мотора);
+7. хидраулична инсталација у машинском простору (исечена).
 
-## IV — ODŠTETNI ZAHTEV (IMOVINSKOPRAVNI ZAHTEV)
+Све напред наведено фотографисано је на дан примопредаје и документовано у фотодокументацији која чини саставни део извештаја судског вештака.
 
-Na ime štete prouzrokovane izvršenjem krivičnog dela, oštećeni, saglasno čl. 252–256. Zakonika o krivičnom postupku, a u vezi sa čl. 154, 155, 185, 186, 189. i 395. Zakona o obligacionim odnosima, ističe imovinskopravni zahtev, i to:
+## IV — ПРЕЦИЗИРАНИ ОДШТЕТНИ ЗАХТЕВ
 
-| Vid štete | Iznos |
+Одштетни захтев истакнут дописом пуномоћника оштећеног од 24.09.2025. године овим се **прецизира**, тако да се на име штете проузроковане извршењем кривичног дела, сагласно чл. 252–256. Законика о кривичном поступку, а у вези са чл. 154, 155, 185, 186, 189. и 395. Закона о облигационим односима, према штетницима 1. и 2. реда истиче одштетни захтев, и то:
+
+| Вид штете | Износ |
 |---|---|
-| **Obična (stvarna) šteta** — vrednost otuđenih stvari iz tačke III/A i troškovi popravke oštećenih stvari iz tačke III/B | **400.000,00 EUR** |
-| **Izgubljena dobit (izmakla korist)** — dobit koju je oštećeni osnovano očekivao od privrednog iskorišćavanja plovila (prevoz tereta), a koja je izostala usled potpune nefunkcionalnosti plovila | **800.000,00 EUR** |
-| **UKUPNO** | **1.200.000,00 EUR** |
+| **Обична (стварна) штета** — вредност отуђених ствари из тачке III/А и трошкови поправке оштећених ствари из тачке III/Б | **400.000,00 евра** |
+| **Изгубљена добит (измакла корист)** — добит коју је оштећени основано очекивао од привредног искоришћавања брода (превоз терета), а која је изостала услед потпуне нефункционалности брода | **800.000,00 евра** |
+| **УКУПНО** | **1.200.000,00 евра** (словима: милион и двеста хиљада евра) |
 
-sve u dinarskoj protivvrednosti po srednjem kursu Narodne banke Srbije na dan isplate, sa zakonskom zateznom kamatom od dana izvršenja krivičnog dela do isplate.
+све у динарској противвредности по продајном курсу НБС на дан исплате, са законском затезном каматом од дана извршења кривичног дела до исплате.
 
-Izgubljena dobit obračunata je polazeći od [*upisati: ugovori o prevozu / pisma o namerama / prosečna dnevna vozarina za plovilo navedene nosivosti × broj dana van eksploatacije — dokumentacija će biti naknadno dostavljena*].
+Изгубљена добит обрачуната је полазећи од [*уписати: уговори о превозу / писма о намерама / просечна дневна возарина за брод наведене носивости × број дана ван експлоатације — документација ће бити накнадно достављена*].
 
-**Napomena o vrednosti pojedinačnih stvari:** vrednost svake pojedinačne otuđene, odnosno oštećene stvari iz tačke III biće precizno utvrđena celokupnom defektažom plovila od strane servisera mašinske i elektro struke i veštačenjem ekonomsko-finansijske, odnosno mašinske struke, kako je konstatovano u izveštaju sudskog veštaka. Oštećeni zadržava pravo da odštetni zahtev precizira, odnosno izmeni po izvršenoj defektaži i veštačenju, kao i da deo zahteva ostvaruje u parničnom postupku (čl. 252. st. 2. i čl. 258. ZKP).
+**Напомена о вредности појединачних ствари:** вредност сваке појединачне отуђене, односно оштећене ствари из тачке III биће прецизно утврђена целокупном дефектажом брода од стране сервисера машинске и електро струке и вештачењем одговарајуће струке, како је констатовано у извештају судског вештака. Оштећени задржава право да одштетни захтев прецизира, односно измени по извршеној дефектажи и вештачењу, као и да део захтева остварује у парничном поступку (чл. 252. ст. 2. и чл. 258. ЗКП).
 
-## V — PREDLOG
+## V — ПРЕДЛОГ
 
-Predlaže se da postupajući organ:
+Предлаже се да поступајући орган:
 
-1. primi ovo izjašnjenje i odštetni zahtev u spise predmeta i o njemu obavesti nadležno javno tužilaštvo;
-2. od „Begej Shipyards Group" d.o.o. Zrenjanin pribavi dokumentaciju o prijemu plovila na remont, izvedenim radovima i licima koja su imala pristup plovilu;
-3. preduzme mere iz svoje nadležnosti radi pronalaska otuđenih stvari (posebno dva propulzera „Schottel", radara, radio stanice i agregata) i identifikovanja izvršilaca;
-4. o preduzetim merama obavesti oštećenog preko punomoćnika.
+1. прими ово изјашњење и прецизирани одштетни захтев у списе предмета и о њему обавести надлежно јавно тужилаштво;
+2. од штетника 1. реда прибави документацију о пријему брода на ремонт, изведеним радовима и лицима која су имала приступ броду;
+3. предузме мере из своје надлежности ради проналаска отуђених ствари (посебно два пропулзера „Schottel", радара, радио станице и агрегата) и идентификовања извршилаца;
+4. о предузетим мерама обавести оштећеног преко пуномоћника.
 
-## PRILOZI
+## ДОКАЗИ
 
-1. Izvod iz Glavne knjige upisnika brodova unutrašnje plovidbe, LK Novi Sad, br. 342-1561/24-II od 09.09.2024. godine;
-2. Izveštaj o zatečenom stanju sudskog veštaka dr Milana Radoševića od 24.09.2025. godine sa fotodokumentacijom;
-3. Ugovor o remontu / radni nalog [*dostaviti — upisati*];
-4. Punomoćje;
-5. [*ostala dokumentacija — upisati*].
+Достављени уз допис пуномоћника оштећеног од 24.09.2025. године:
+
+1. Бродско сведочанство Републике Србије за предметни брод;
+2. Извод Лучке капетаније Нови Сад за предметни брод;
+3. Понуда за Записник о преузимању брода, заказану за дан 11.09.2025. године, понуђен од стране штетника 1. и 2. реда;
+4. Извештај о затеченом стању предметног брода на дан 11.09.2025. године, израђен од стране судског вештака машинске струке др Милана Радошевића из Новог Сада;
+5. пуномоћ.
 
 ---
 
-U [___________], dana [____.____.2026.] godine
+За кореспонденцију: адв. Милан Мишић, Нови Сад, Максима Горког бр. 6, моб. телефон: 064/0327-019, мејл: milan.misic.advokat@gmail.com
 
-**OŠTEĆENI**
-„Vuković Commerce 2015" d.o.o., Veternik
+Нови Сад,
+дана [____.____.2026.] године
 
-po punomoćniku:
-**Milan Mišić, advokat**
+**адв. Милан Мишић**
 
 \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
