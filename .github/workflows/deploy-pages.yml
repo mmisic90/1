@@ -26,8 +26,14 @@ jobs:
       - uses: actions/configure-pages@v5
         with:
           enablement: true
+      # Objavljuje SAMO sajt — nikad ceo repo (pravni dokumenti i skillovi ne smeju na javni Pages)
+      - name: Pripremi dist samo sa sajtom
+        run: |
+          mkdir dist
+          cp index.html remote.html dist/
+          cp -r src dist/src
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: dist
       - id: deployment
         uses: actions/deploy-pages@v4
