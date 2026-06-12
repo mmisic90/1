@@ -50,6 +50,12 @@ def convert(src_path, out_path):
         if line.strip() == '---':
             i += 1
             continue
+        if line.startswith('[R] '):
+            p = doc.add_paragraph()
+            add_runs(p, line[4:])
+            p.alignment = WD_ALIGN_PARAGRAPH.RIGHT
+            i += 1
+            continue
         if line.startswith('> '):
             p = doc.add_paragraph()
             add_runs(p, line[2:])
