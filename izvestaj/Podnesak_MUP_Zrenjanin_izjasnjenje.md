@@ -10,7 +10,7 @@ Zrenjanin
 
 ---
 
-**OŠTEĆENI / PODNOSILAC:** „VUKOVIĆ COMMERCE 2015" d.o.o., Veternik, Novosadski put br. 106, MB: [___________], PIB: [___________], koga zastupa zakonski zastupnik [_____________________]
+**OŠTEĆENI / PODNOSILAC:** „VUKOVIĆ COMMERCE 2015" d.o.o. za proizvodnju, trgovinu i usluge, Veternik, Novosadski put br. 106, MB: 21085251, PIB: 108875815, koga zastupa direktor Stevan Janković
 
 **PUNOMOĆNIK:** Milan Mišić, advokat iz [___________], ul. [_____________________] (punomoćje u prilogu)
 
@@ -26,7 +26,7 @@ Postupajući po zahtevu tog organa da se oštećeni izjasni na okolnosti vrednos
 
 1. Oštećeno privredno društvo „Vuković Commerce 2015" d.o.o. iz Veternika isključivi je vlasnik samohodne barže (motornog teretnjaka) **„BEČEJ I", ENI broj 36000187**, upisane u uložak br. 2, na strani 9, sveske br. I Glavne knjige upisnika brodova unutrašnje plovidbe Lučke kapetanije Novi Sad. Pravo svojine oštećenog uknjiženo je Rešenjem LK Novi Sad broj 342-2/15 UBUP I od 03.09.2015. godine, što se dokazuje Izvodom Lučke kapetanije Novi Sad broj 342-1561/24-II od 09.09.2024. godine (prilog).
 
-2. Predmetno plovilo predato je na remont brodogradilištu **„Begej Shipyards Group" d.o.o., Zrenjanin** [*upisati: broj i datum ugovora o remontu / radnog naloga, odnosno osnov predaje*], dana [____________] godine. Plovilo se nalazilo na lokalitetu Perlez, kod prevodnice Perlez.
+2. Predmetno plovilo predato je na remont brodogradilištu **„BEGEJ SHIPYARDS GROUP" d.o.o. Zrenjanin**, Temišvarski drum bb, Zrenjanin, MB: 21541575, PIB: 111793711 (pretežna delatnost: popravka i održavanje brodova i čamaca — šifra 3315), [*upisati: broj i datum ugovora o remontu / radnog naloga, odnosno osnov predaje*], dana [____________] godine. Plovilo se nalazilo na lokalitetu Perlez, kod prevodnice Perlez.
 
 3. Za dan **11.09.2025. godine** bila je ugovorena primopredaja plovila po završenim radovima. Primopredaji su pristupili: Milan Mišić, advokat (punomoćnik oštećenog), Dejan Dimitrijević, zaposleni preduzeća „Begej Shipyards Group" d.o.o. Zrenjanin, i dr Milan Radošević, sudski veštak (po Rešenju Ministarstva pravde RS br. 740-05-02215/2014-22 od 08.12.2014. godine).
 
@@ -46,11 +46,11 @@ Otuđeni delovi i oprema bili su ugrađeni i u funkciji u trenutku predaje plovi
 
 ### 3. Kome je brod ostavljen na remont
 
-Brod je ostavljen na remont brodogradilištu **„Begej Shipyards Group" d.o.o., Zrenjanin**, [*upisati: sedište, MB/PIB; broj i datum ugovora o remontu, odnosno osnov predaje; datum predaje plovila*]. Plovilo je od predaje do dana ugovorene primopredaje bilo u državini i pod nadzorom navedenog privrednog društva.
+Brod je ostavljen na remont brodogradilištu **„BEGEJ SHIPYARDS GROUP" d.o.o. Zrenjanin**, sa sedištem na adresi Temišvarski drum bb, Zrenjanin, MB: 21541575, PIB: 111793711, čija je pretežna registrovana delatnost popravka i održavanje brodova i čamaca (šifra delatnosti 3315), [*upisati: broj i datum ugovora o remontu, odnosno osnov predaje; datum predaje plovila*]. Plovilo je od predaje do dana ugovorene primopredaje bilo u državini i pod nadzorom navedenog privrednog društva.
 
 ### 4. Ko je trebalo da izvrši primopredaju broda po završenim radovima
 
-Primopredaju broda po završenim radovima trebalo je da izvrši **„Begej Shipyards Group" d.o.o., Zrenjanin**, kao izvođač radova kome je plovilo povereno, preko svog odgovornog lica [*upisati ime i funkciju odgovornog lica / lica određenog za primopredaju*], a oštećenom kao vlasniku plovila. Primopredaja je bila ugovorena za 11.09.2025. godine na lokalitetu Perlez i nije izvršena iz razloga navedenih u tački I.4. ovog podneska.
+Primopredaju broda po završenim radovima trebalo je da izvrši **„BEGEJ SHIPYARDS GROUP" d.o.o. Zrenjanin** (MB: 21541575, PIB: 111793711), kao izvođač radova kome je plovilo povereno, preko svog odgovornog lica [*upisati ime i funkciju odgovornog lica / lica određenog za primopredaju*], a oštećenom kao vlasniku plovila. Primopredaja je bila ugovorena za 11.09.2025. godine na lokalitetu Perlez i nije izvršena iz razloga navedenih u tački I.4. ovog podneska.
 
 ## III — TAKSATIVNI POPIS OTUĐENIH I OŠTEĆENIH STVARI
 
