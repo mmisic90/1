@@ -1,77 +1,77 @@
-# Compliance извештај — ПУНИ шаблон (релоцирано из SKILL.md v4.1 + v5 ред ЛАНАЦ)
+# Compliance izveštaj — PUNI šablon (relocirano iz SKILL.md v4.1 + v5 red LANAC)
 
-Тело SKILL.md v5 носи обавезу; ОВДЕ је меродаван пуни формат. Попунити СВАКО поље.
+Telo SKILL.md v5 nosi obavezu; OVDE je merodavan puni format. Popuniti SVAKO polje.
 
 ---
 
-## ⛔ ЗАВРШНА ИНСТРУКЦИЈА — ОБАВЕЗАН COMPLIANCE ИЗВЕШТАЈ
+## ⛔ ZAVRŠNA INSTRUKCIJA — OBAVEZAN COMPLIANCE IZVEŠTAJ
 
-**ОВО ЈЕ ПОСЛЕДЊА СТВАР КОЈУ ЧИТАШ. ПОСЛЕДЊА = НАЈВАЖНИЈА.**
+**OVO JE POSLEDNJA STVAR KOJU ČITAŠ. POSLEDNJA = NAJVAŽNIJA.**
 
-После СВАКЕ анализе — пре достављања документа или одговора —
-МОРАШ приложити Compliance извештај. Без извештаја = skill НИЈЕ примењен.
-Корисник МОРА видети овај извештај. Не сме бити сакривен, скраћен, или
-прескочен. НИКАДА. БЕЗ ИЗУЗЕТКА.
+Posle SVAKE analize — pre dostavljanja dokumenta ili odgovora —
+MORAŠ priložiti Compliance izveštaj. Bez izveštaja = skill NIJE primenjen.
+Korisnik MORA videti ovaj izveštaj. Ne sme biti sakriven, skraćen, ili
+preskočen. NIKADA. BEZ IZUZETKA.
 
-### Формат (ОБАВЕЗАН — попунити СВАКО поље):
+### Format (OBAVEZAN — popuniti SVAKO polje):
 
 ```
 ╔═══════════════════════════════════════════════════════════════╗
-║ ⚖️ COMPLIANCE ИЗВЕШТАЈ — PRAVNA-ANALIZA                      ║
+║ ⚖️ COMPLIANCE IZVEŠTAJ — PRAVNA-ANALIZA                      ║
 ╠═══════════════════════════════════════════════════════════════╣
-║ ПРЕДМЕТ: [назив/број]                                        ║
-║ СТРАНКЕ: [тужилац/окривљени/тужени]                          ║
-║ ОБЛАСТ: [кривица/парница/извршење/управно/радно/...]         ║
+║ PREDMET: [naziv/broj]                                        ║
+║ STRANKE: [tužilac/okrivljeni/tuženi]                          ║
+║ OBLAST: [krivica/parnica/izvršenje/upravno/radno/...]         ║
 ╠═══════════════════════════════════════════════════════════════╣
-║ ФАЗА │ СТАТУС  │ КЉУЧНИ ИЗЛАЗ                               ║
+║ FAZA │ STATUS  │ KLJUČNI IZLAZ                               ║
 ║──────┼─────────┼────────────────────────────────────────────║
-║ Ф0   │ ✅/⏭️   │ Теорија: [1 реч.] Хипотеза: [X, P=Y%]    ║
-║ 0.1  │ ✅/⏭️   │ Режим: [FULL/СТАНДАРД] Разлог: [намера]   ║
-║ Ф1   │ ✅/⏭️   │ Прочитано: [N] стр. Чињеница: [N]         ║
-║      │         │ Верификација средине: [да/не]               ║
-║      │         │ Тест горила: [да/не → резултат]             ║
-║ Ф2   │ ✅/⏭️   │ Везе: 🔴[N] 🟡[N] 🟢[N] 🔵[N] ⚫[N]     ║
-║      │         │ ХИТ ЛИСТА: ①[шта] ②[шта] ③[шта]           ║
-║ Ф3   │ ✅/⏭️   │ Аргументи: [N] (јаки:[N] средњи:[N] слаби:[N])
-║      │         │ Граф: независних [N] од [N]                 ║
-║ 3.3б │ ✅/⏭️   │ ЕСЉП: [чл.X примењен / није применљив]     ║
-║ 3.6  │ ✅/⏭️   │ Ризик: П[X] Ч[Y] Пр[Z] = [W/10]          ║
-║ Ф4   │ ✅/⏭️   │ Матрица отпорности: [N]/[N] преживело      ║
-║ 4.Ђ  │ ✅/⏭️   │ Уставни суд: [применљив/није]              ║
-║ Ф5   │ ✅/⏭️   │ „Једна ствар": [наслов аргумента]          ║
-║ Ф6   │ ✅/⏭️   │ Документ: [тип] [страна]                   ║
+║ F0   │ ✅/⏭️   │ Teorija: [1 reč.] Hipoteza: [X, P=Y%]    ║
+║ 0.1  │ ✅/⏭️   │ Režim: [FULL/STANDARD] Razlog: [namera]   ║
+║ F1   │ ✅/⏭️   │ Pročitano: [N] str. Činjenica: [N]         ║
+║      │         │ Verifikacija sredine: [da/ne]               ║
+║      │         │ Test gorila: [da/ne → rezultat]             ║
+║ F2   │ ✅/⏭️   │ Veze: 🔴[N] 🟡[N] 🟢[N] 🔵[N] ⚫[N]     ║
+║      │         │ HIT LISTA: ①[šta] ②[šta] ③[šta]           ║
+║ F3   │ ✅/⏭️   │ Argumenti: [N] (jaki:[N] srednji:[N] slabi:[N])
+║      │         │ Graf: nezavisnih [N] od [N]                 ║
+║ 3.3b │ ✅/⏭️   │ ESLJP: [čl.X primenjen / nije primenljiv]     ║
+║ 3.6  │ ✅/⏭️   │ Rizik: P[X] Č[Y] Pr[Z] = [W/10]          ║
+║ F4   │ ✅/⏭️   │ Matrica otpornosti: [N]/[N] preživelo      ║
+║ 4.Đ  │ ✅/⏭️   │ Ustavni sud: [primenljiv/nije]              ║
+║ F5   │ ✅/⏭️   │ „Jedna stvar": [naslov argumenta]          ║
+║ F6   │ ✅/⏭️   │ Dokument: [tip] [strana]                   ║
 ║ 6.1  │ ✅/⏭️   │ HANDOFF → [krivica/tuzba-parnica/izvrsenje] ║
-║      │         │ Пакет: [7/7 поља] target:[скил]            ║
-║ 6.4  │ ✅/⏭️   │ Верификација: ✅[N]% 🟡[N]% 🔴[N]% ⛔[N]%║
-║ ЛАНАЦ│ ✅/⛔   │ target SKILL.md УЧИТАН: [да/не] пакет [X/7] ║
+║      │         │ Paket: [7/7 polja] target:[skil]            ║
+║ 6.4  │ ✅/⏭️   │ Verifikacija: ✅[N]% 🟡[N]% 🔴[N]% ⛔[N]%║
+║ LANAC│ ✅/⛔   │ target SKILL.md UČITAN: [da/ne] paket [X/7] ║
 ╠═══════════════════════════════════════════════════════════════╣
-║ ИЗВРШЕНО: [X] од [Y] фаза ([Z%])                            ║
-║ ПРЕСКОЧЕНО: [листа + РАЗЛОГ]                                 ║
+║ IZVRŠENO: [X] od [Y] faza ([Z%])                            ║
+║ PRESKOČENO: [lista + RAZLOG]                                 ║
 ╠═══════════════════════════════════════════════════════════════╣
-║ ПРЕТРАГЕ (шта сам стварно претражио):                        ║
-║  PropisSoft: [чл. X, чл. Y, чл. Z] → [нађено/није]         ║
-║  ВКС/Суд.пракса: [број одлуке] → [нађено/није]             ║
-║  ЕСЉП: [кључне речи] → [нађено/није]                        ║
+║ PRETRAGE (šta sam stvarno pretražio):                        ║
+║  PropisSoft: [čl. X, čl. Y, čl. Z] → [nađeno/nije]         ║
+║  VKS/Sud.praksa: [broj odluke] → [nađeno/nije]             ║
+║  ESLJP: [ključne reči] → [nađeno/nije]                        ║
 ╠═══════════════════════════════════════════════════════════════╣
-║ АКО ЈЕ АКТИВИРАН GOD-SKILL:                                 ║
-║ God-skill compliance: [ДА → видети GS извештај / НЕ]        ║
+║ AKO JE AKTIVIRAN GOD-SKILL:                                 ║
+║ God-skill compliance: [DA → videti GS izveštaj / NE]        ║
 ╠═══════════════════════════════════════════════════════════════╣
-║ 📊 ФИНАЛНА БАЈЕСОВСКА ОЦЕНА: [X%]                           ║
-║ 📊 СТРАТЕШКА ПРЕПОРУКА: [1 реченица]                        ║
+║ 📊 FINALNA BAJESOVSKA OCENA: [X%]                           ║
+║ 📊 STRATEŠKA PREPORUKA: [1 rečenica]                        ║
 ╚═══════════════════════════════════════════════════════════════╝
 ```
 
-### Правила:
-1. **Извештај је ОБАВЕЗАН** — без обзира на режим, дужину, хитност.
-2. **ПРЕТРАГЕ секција је КРИТИЧНА** — тачно шта претражено и нађено.
-   Ако нисам претражио — МОРА писати „⛔ НИСАМ ПРЕТРАЖИО".
-3. **Ако Ф4 матрица показује ❌** — извештај МОРА то нагласити.
-4. **Ако Ф3.6 ризик ВИСОК (1-4/10)** — извештај МОРА ставити ⚠️.
-5. **Два skill-а активна** → два извештаја, један испод другог.
-6. **Батцх** → извештај за СВАКИ документ + dashboard на крају.
-7. **HANDOFF (v4)** — ако се предаје извршном скилу, поље 6.1 МОРА
-   показати target скил + потпуност пакета (X/7 поља). Непотпун пакет
-   (< 7/7) се НЕ предаје — означи ⚠️ и допуни пре предаје.
+### Pravila:
+1. **Izveštaj je OBAVEZAN** — bez obzira na režim, dužinu, hitnost.
+2. **PRETRAGE sekcija je KRITIČNA** — tačno šta pretraženo i nađeno.
+   Ako nisam pretražio — MORA pisati „⛔ NISAM PRETRAŽIO".
+3. **Ako F4 matrica pokazuje ❌** — izveštaj MORA to naglasiti.
+4. **Ako F3.6 rizik VISOK (1-4/10)** — izveštaj MORA staviti ⚠️.
+5. **Dva skill-a aktivna** → dva izveštaja, jedan ispod drugog.
+6. **Batch** → izveštaj za SVAKI dokument + dashboard na kraju.
+7. **HANDOFF (v4)** — ako se predaje izvršnom skilu, polje 6.1 MORA
+   pokazati target skil + potpunost paketa (X/7 polja). Nepotpun paket
+   (< 7/7) se NE predaje — označi ⚠️ i dopuni pre predaje.
 
-**АКО НЕ ПРИКАЖЕШ ОВАЈ ИЗВЕШТАЈ — SKILL НИЈЕ ПРИМЕЊЕН.
-КОРИСНИК ИМА ПРАВО ДА ОДБИЈЕ ОДГОВОР БЕЗ ИЗВЕШТАЈА.**
+**AKO NE PRIKAŽEŠ OVAJ IZVEŠTAJ — SKILL NIJE PRIMENJEN.
+KORISNIK IMA PRAVO DA ODBIJE ODGOVOR BEZ IZVEŠTAJA.**

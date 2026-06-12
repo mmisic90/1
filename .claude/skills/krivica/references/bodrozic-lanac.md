@@ -1,31 +1,31 @@
-# ЗЛАТНИ ЛАНАЦ: Lingens → Feldek → Bodrožić
+# ZLATNI LANAC: Lingens → Feldek → Bodrožić
 
-Оперативни фајл за примену у одбрани по чл. 170 КЗ (увреда) и чл. 171 КЗ (клевета, до 2012).
+Operativni fajl za primenu u odbrani po čl. 170 KZ (uvreda) i čl. 171 KZ (kleveta, do 2012).
 
-## ТРИ КАРИКЕ
+## TRI KARIKE
 
-**1. Lingens v. Austria (1986), 9815/82, §46** — ТЕМЕЉ
-Чињенице доказиве, истинитост вредносних судова НИЈЕ. Захтев за доказ истинитости вредносног суда сам по себи крши чл. 10.
+**1. Lingens v. Austria (1986), 9815/82, §46** — TEMELj
+Činjenice dokazive, istinitost vrednosnih sudova NIJE. Zahtev za dokaz istinitosti vrednosnog suda sam po sebi krši čl. 10.
 
-**2. Feldek v. Slovakia (2001), 29032/95, §86** — РАЗВОЈ
-Вредносни суд не мора садржати експлицитне чињенице. Широки евалуативни термини ("фашистичка прошлост") су вредносни судови, не прецизни описи партијске припадности.
+**2. Feldek v. Slovakia (2001), 29032/95, §86** — RAZVOJ
+Vrednosni sud ne mora sadržati eksplicitne činjenice. Široki evaluativni termini ("fašistička prošlost") su vrednosni sudovi, ne precizni opisi partijske pripadnosti.
 
-**3. Bodrožić v. Serbia (2009), 32550/05, §52** — ПРИМЕНА НА СРБИЈУ
-ЈЕДНОГЛАСНА пресуда ПРОТИВ СРБИЈЕ. Називање неког "фашистом/нацистом/комунистом" не може се поистоветити са чињеничном тврдњом о партијској припадности. Пет обавеза за српске судове.
+**3. Bodrožić v. Serbia (2009), 32550/05, §52** — PRIMENA NA SRBIJU
+JEDNOGLASNA presuda PROTIV SRBIJE. Nazivanje nekog "fašistom/nacistom/komunistom" ne može se poistovetiti sa činjeničnom tvrdnjom o partijskoj pripadnosti. Pet obaveza za srpske sudove.
 
-## КАКО СЕ КОРИСТИ У АКТУ
+## KAKO SE KORISTI U AKTU
 
-Редослед у одбрани:
-1. Поставити Lingens као темељ — обавеза разликовања чињ./вред.
-2. Додати Feldek за ширину евалуативних термина
-3. Закуцати Bodrožić као ПРЕСУДУ ПРОТИВ СРБИЈЕ — српски судови имају обавезу по чл. 18 ст. 3 Устава
+Redosled u odbrani:
+1. Postaviti Lingens kao temelj — obaveza razlikovanja činj./vred.
+2. Dodati Feldek za širinu evaluativnih termina
+3. Zakucati Bodrožić kao PRESUDU PROTIV SRBIJE — srpski sudovi imaju obavezu po čl. 18 st. 3 Ustava
 
-## ПРОШИРЕНА ПРИМЕНА
+## PROŠIRENA PRIMENA
 
-По логици §52 Bodrožić, исти стандард важи за било који политички евалуативни израз: "аутократа", "диктатор", "ултранационалиста", "шовиниста", "фанатик" — уколико је у контексту јавне дебате и има довољну чињеничну основу.
+Po logici §52 Bodrožić, isti standard važi za bilo koji politički evaluativni izraz: "autokrata", "diktator", "ultranacionalista", "šovinista", "fanatik" — ukoliko je u kontekstu javne debate i ima dovoljnu činjeničnu osnovu.
 
-## УПОЗОРЕЊЕ
+## UPOZORENJE
 
-⛔ Број представке Bodrožić je 32550/05, НЕ 38435/05.
-38435/05 = засебан предмет Bodrožić i Vujin v. Serbia (исти дан, другачије чињенице — сатирично поређење адвоката са плавушом).
-Погрешан број у акту = тренутно урушавање кредибилитета.
+⛔ Broj predstavke Bodrožić je 32550/05, NE 38435/05.
+38435/05 = zaseban predmet Bodrožić i Vujin v. Serbia (isti dan, drugačije činjenice — satirično poređenje advokata sa plavušom).
+Pogrešan broj u aktu = trenutno urušavanje kredibiliteta.

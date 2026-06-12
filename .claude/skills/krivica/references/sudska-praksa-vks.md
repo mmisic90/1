@@ -1,245 +1,245 @@
-# Судска пракса ВКС — Кривични поступак
+# Sudska praksa VKS — Krivični postupak
 
-## Садржај
+## Sadržaj
 
-1. [Битна повреда одредаба кривичног поступка (чл. 438 ЗКП)](#1-битна-повреда)
-2. [Повреда кривичног закона (чл. 439 ЗКП)](#2-повреда-кривичног-закона)
-3. [Незаконити докази (чл. 84 ЗКП)](#3-незаконити-докази)
-4. [Застарелост кривичног гоњења (чл. 103–104 КЗ)](#4-застарелост)
-5. [Притвор (чл. 211 ЗКП)](#5-притвор)
-6. [Ин дубио про рео (чл. 16 ЗКП)](#6-ин-дубио-про-рео)
-7. [Одлука о казни / кривичној санкцији](#7-одлука-о-казни)
-8. [Чињенично стање (чл. 440–441 ЗКП)](#8-чињенично-стање)
-9. [ЕСЉП пракса — чл. 6 Конвенције](#9-есљп-пракса)
-10. [Захтев за заштиту законитости — процедурална питања](#10-ззз-процедура)
+1. [Bitna povreda odredaba krivičnog postupka (čl. 438 ZKP)](#1-bitna-povreda)
+2. [Povreda krivičnog zakona (čl. 439 ZKP)](#2-povreda-krivičnog-zakona)
+3. [Nezakoniti dokazi (čl. 84 ZKP)](#3-nezakoniti-dokazi)
+4. [Zastarelost krivičnog gonjenja (čl. 103–104 KZ)](#4-zastarelost)
+5. [Pritvor (čl. 211 ZKP)](#5-pritvor)
+6. [In dubio pro reo (čl. 16 ZKP)](#6-in-dubio-pro-reo)
+7. [Odluka o kazni / krivičnoj sankciji](#7-odluka-o-kazni)
+8. [Činjenično stanje (čl. 440–441 ZKP)](#8-činjenično-stanje)
+9. [ESLJP praksa — čl. 6 Konvencije](#9-esljp-praksa)
+10. [Zahtev za zaštitu zakonitosti — proceduralna pitanja](#10-zzz-procedura)
 
 ---
 
-## 1. Битна повреда одредаба кривичног поступка (чл. 438 ЗКП)
+## 1. Bitna povreda odredaba krivičnog postupka (čl. 438 ZKP)
 
 ### Kzz 1420/2022
-- **Правно питање:** Неразумљива изрека пресуде и контрадикторност разлога
-- **Став ВКС:** Изрека пресуде мора бити јасна, разумљива и одређена. Контрадикторност између изреке и образложења представља битну повреду из чл. 438 ст. 1 тач. 1 ЗКП.
-- **Примена:** Жалба на пресуду, ЗЗЗ — кад изрека не одговара образложењу
-- **Извор:** https://vrh.sud.rs
+- **Pravno pitanje:** Nerazumljiva izreka presude i kontradiktornost razloga
+- **Stav VKS:** Izreka presude mora biti jasna, razumljiva i određena. Kontradiktornost između izreke i obrazloženja predstavlja bitnu povredu iz čl. 438 st. 1 tač. 1 ZKP.
+- **Primena:** Žalba na presudu, ZZZ — kad izreka ne odgovara obrazloženju
+- **Izvor:** https://vrh.sud.rs
 
 ### Kzz 657/2022
-- **Правно питање:** Изузеће судије и незаконити докази
-- **Став ВКС:** Судија који је морао бити изузет, а учествовао је у доношењу пресуде — битна повреда чл. 438 ст. 1 тач. 2 ЗКП. Докази прибављени уз учешће таквог судије су незаконити.
-- **Примена:** Жалба, ЗЗЗ — кад постоји основ за изузеће судије
-- **Извор:** https://vrh.sud.rs
+- **Pravno pitanje:** Izuzeće sudije i nezakoniti dokazi
+- **Stav VKS:** Sudija koji je morao biti izuzet, a učestvovao je u donošenju presude — bitna povreda čl. 438 st. 1 tač. 2 ZKP. Dokazi pribavljeni uz učešće takvog sudije su nezakoniti.
+- **Primena:** Žalba, ZZZ — kad postoji osnov za izuzeće sudije
+- **Izvor:** https://vrh.sud.rs
 
 ### Kzz 638/2022
-- **Правно питање:** Незаконити докази — чл. 438 ст. 2 тач. 1 ЗКП
-- **Став ВКС:** Пресуда која се заснива на доказу на коме се по закону не може заснивати представља битну повреду из чл. 438 ст. 2 тач. 1 ЗКП. Суд је дужан да ex officio води рачуна о законитости доказа.
-- **Примена:** Жалба, ЗЗЗ — кад пресуда почива на незаконитим доказима
-- **Извор:** https://vrh.sud.rs
+- **Pravno pitanje:** Nezakoniti dokazi — čl. 438 st. 2 tač. 1 ZKP
+- **Stav VKS:** Presuda koja se zasniva na dokazu na kome se po zakonu ne može zasnivati predstavlja bitnu povredu iz čl. 438 st. 2 tač. 1 ZKP. Sud je dužan da ex officio vodi računa o zakonitosti dokaza.
+- **Primena:** Žalba, ZZZ — kad presuda počiva na nezakonitim dokazima
+- **Izvor:** https://vrh.sud.rs
 
 ### Kzz 892/2023
-- **Правно питање:** Повреда права на одбрану
-- **Став ВКС:** Недозвољавање браниоцу да испитује сведоке или ускраћивање права на завршну реч представља битну повреду чл. 438 ст. 1 тач. 3 ЗКП — повреда права одбране.
-- **Примена:** Жалба — кад је окривљеном ускраћено право на одбрану
-- **Извор:** https://vrh.sud.rs
+- **Pravno pitanje:** Povreda prava na odbranu
+- **Stav VKS:** Nedozvoljavanje braniocu da ispituje svedoke ili uskraćivanje prava na završnu reč predstavlja bitnu povredu čl. 438 st. 1 tač. 3 ZKP — povreda prava odbrane.
+- **Primena:** Žalba — kad je okrivljenom uskraćeno pravo na odbranu
+- **Izvor:** https://vrh.sud.rs
 
 ---
 
-## 2. Повреда кривичног закона (чл. 439 ЗКП)
+## 2. Povreda krivičnog zakona (čl. 439 ZKP)
 
 ### Kzz 304/2023
-- **Правно питање:** Чл. 439 тач. 1 — да ли је дело за које се окривљени гони кривично дело
-- **Став ВКС:** Повреда кривичног закона постоји кад суд утврђене чињенице погрешно правно квалификује, тј. подведе под погрешну законску одредбу.
-- **Примена:** Жалба, ЗЗЗ — погрешна правна квалификација
-- **Извор:** https://vrh.sud.rs
+- **Pravno pitanje:** Čl. 439 tač. 1 — da li je delo za koje se okrivljeni goni krivično delo
+- **Stav VKS:** Povreda krivičnog zakona postoji kad sud utvrđene činjenice pogrešno pravno kvalifikuje, tj. podvede pod pogrešnu zakonsku odredbu.
+- **Primena:** Žalba, ZZZ — pogrešna pravna kvalifikacija
+- **Izvor:** https://vrh.sud.rs
 
 ### Kzz 1308/2022
-- **Правно питање:** Чл. 439 тач. 1 и 2 — прекорачење овлашћења суда
-- **Став ВКС:** Суд не може осудити окривљеног за теже кривично дело од оног за које је оптужен (забрана реформације ин пеиус у контексту правне квалификације).
-- **Примена:** ЗЗЗ — кад другостепени суд погоршава положај окривљеног
-- **Извор:** https://vrh.sud.rs
+- **Pravno pitanje:** Čl. 439 tač. 1 i 2 — prekoračenje ovlašćenja suda
+- **Stav VKS:** Sud ne može osuditi okrivljenog za teže krivično delo od onog za koje je optužen (zabrana reformacije in peius u kontekstu pravne kvalifikacije).
+- **Primena:** ZZZ — kad drugostepeni sud pogoršava položaj okrivljenog
+- **Izvor:** https://vrh.sud.rs
 
 ### Kzz 524/2022
-- **Правно питање:** Погрешна правна квалификација — граница између кривичних дела
-- **Став ВКС:** Код разграничења сродних кривичних дела (нпр. тешка крађа / разбојништво; превара / злоупотреба) суд мора прецизно утврдити субјективни елемент — умишљај.
-- **Примена:** Жалба, ЗЗЗ — кад је погрешно квалификовано дело
-- **Извор:** https://vrh.sud.rs
+- **Pravno pitanje:** Pogrešna pravna kvalifikacija — granica između krivičnih dela
+- **Stav VKS:** Kod razgraničenja srodnih krivičnih dela (npr. teška krađa / razbojništvo; prevara / zloupotreba) sud mora precizno utvrditi subjektivni element — umišljaj.
+- **Primena:** Žalba, ZZZ — kad je pogrešno kvalifikovano delo
+- **Izvor:** https://vrh.sud.rs
 
 ### Kzz 741/2023
-- **Правно питање:** Повреда КЗ — примена закона који је за окривљеног неповољнији
-- **Став ВКС:** Суд мора применити закон који је блажи за окривљеног (чл. 5 ст. 2 КЗ). Примена строжег закона представља повреду из чл. 439 тач. 4 ЗКП.
-- **Примена:** Жалба, ЗЗЗ — темпорална примена КЗ
-- **Извор:** https://vrh.sud.rs
+- **Pravno pitanje:** Povreda KZ — primena zakona koji je za okrivljenog nepovoljniji
+- **Stav VKS:** Sud mora primeniti zakon koji je blaži za okrivljenog (čl. 5 st. 2 KZ). Primena strožeg zakona predstavlja povredu iz čl. 439 tač. 4 ZKP.
+- **Primena:** Žalba, ZZZ — temporalna primena KZ
+- **Izvor:** https://vrh.sud.rs
 
 ---
 
-## 3. Незаконити докази (чл. 84 ЗКП)
+## 3. Nezakoniti dokazi (čl. 84 ZKP)
 
 ### Kzz 350/2022
-- **Правно питање:** Незаконити докази — „плодови отровног дрвета"
-- **Став ВКС:** Докази прибављени кршењем права окривљеног не могу се користити у поступку, нити могу бити основ за прибављање других доказа. Доктрина „fruit of the poisonous tree" примењива је у српском праву кроз чл. 84 ст. 1 и 2 ЗКП.
-- **Примена:** Сви акти — кад су докази прибављени повредом права одбране
-- **Извор:** https://vrh.sud.rs
+- **Pravno pitanje:** Nezakoniti dokazi — „plodovi otrovnog drveta"
+- **Stav VKS:** Dokazi pribavljeni kršenjem prava okrivljenog ne mogu se koristiti u postupku, niti mogu biti osnov za pribavljanje drugih dokaza. Doktrina „fruit of the poisonous tree" primenjiva je u srpskom pravu kroz čl. 84 st. 1 i 2 ZKP.
+- **Primena:** Svi akti — kad su dokazi pribavljeni povredom prava odbrane
+- **Izvor:** https://vrh.sud.rs
 
 ### Kzz 446/2023
-- **Правно питање:** Документи прибављени незаконитим претресом
-- **Став ВКС:** Претрес стана без наредбе суда или без присуства потребних лица чини све прибављене доказе незаконитим (чл. 84 ст. 1 у вези са чл. 152–160 ЗКП).
-- **Примена:** Жалба, ЗЗЗ — кад претрес није спроведен у складу са ЗКП
-- **Извор:** https://vrh.sud.rs
+- **Pravno pitanje:** Dokumenti pribavljeni nezakonitim pretresom
+- **Stav VKS:** Pretres stana bez naredbe suda ili bez prisustva potrebnih lica čini sve pribavljene dokaze nezakonitim (čl. 84 st. 1 u vezi sa čl. 152–160 ZKP).
+- **Primena:** Žalba, ZZZ — kad pretres nije sproveden u skladu sa ZKP
+- **Izvor:** https://vrh.sud.rs
 
 ### Kzz 205/2024
-- **Правно питање:** Незаконити електронски докази
-- **Став ВКС:** Електронски докази прибављени без одговарајуће наредбе суда (чл. 166 ЗКП) представљају незаконите доказе. Садржај мобилних телефона и рачунара ужива заштиту приватности.
-- **Примена:** Жалба, ЗЗЗ — кад су електронски докази прибављени без наредбе
-- **Извор:** https://vrh.sud.rs
+- **Pravno pitanje:** Nezakoniti elektronski dokazi
+- **Stav VKS:** Elektronski dokazi pribavljeni bez odgovarajuće naredbe suda (čl. 166 ZKP) predstavljaju nezakonite dokaze. Sadržaj mobilnih telefona i računara uživa zaštitu privatnosti.
+- **Primena:** Žalba, ZZZ — kad su elektronski dokazi pribavljeni bez naredbe
+- **Izvor:** https://vrh.sud.rs
 
 ### Kzz 119/2023
-- **Правно питање:** Исказ окривљеног дат без поуке о правима
-- **Став ВКС:** Исказ окривљеног дат без претходне поуке о правима из чл. 68 и 69 ЗКП је незаконит доказ. Суд не може засновати пресуду на таквом исказу.
-- **Примена:** Жалба — кад је окривљени испитан без поуке о правима
-- **Извор:** https://vrh.sud.rs
+- **Pravno pitanje:** Iskaz okrivljenog dat bez pouke o pravima
+- **Stav VKS:** Iskaz okrivljenog dat bez prethodne pouke o pravima iz čl. 68 i 69 ZKP je nezakonit dokaz. Sud ne može zasnovati presudu na takvom iskazu.
+- **Primena:** Žalba — kad je okrivljeni ispitan bez pouke o pravima
+- **Izvor:** https://vrh.sud.rs
 
 ---
 
-## 4. Застарелост кривичног гоњења (чл. 103–104 КЗ)
+## 4. Zastarelost krivičnog gonjenja (čl. 103–104 KZ)
 
 ### Kzz 858/2023
-- **Правно питање:** Продужено дело и застарелост
-- **Став ВКС:** Код продуженог кривичног дела, застарелост почиње тећи од последње радње извршења. Ако је апсолутна застарелост наступила пре правноснажности, суд је дужан да ex officio обустави поступак.
-- **Примена:** ЗЗЗ, жалба — кад се тврди застарелост код продуженог дела
-- **Извор:** https://vrh.sud.rs
+- **Pravno pitanje:** Produženo delo i zastarelost
+- **Stav VKS:** Kod produženog krivičnog dela, zastarelost počinje teći od poslednje radnje izvršenja. Ako je apsolutna zastarelost nastupila pre pravnosnažnosti, sud je dužan da ex officio obustavi postupak.
+- **Primena:** ZZZ, žalba — kad se tvrdi zastarelost kod produženog dela
+- **Izvor:** https://vrh.sud.rs
 
 ### Kzz 167/2023
-- **Правно питање:** Апсолутна застарелост и beneficium cohaesionis
-- **Став ВКС:** Apsolутна застарелост наступа у сваком случају кад протекне двоструко време потребно за релативну застарелост. Beneficium cohaesionis — ако за једног од саучесника наступи застарелост, суд мора по службеној дужности проверити и за остале.
-- **Примена:** ЗЗЗ — кад је наступила апсолутна застарелост
-- **Извор:** https://vrh.sud.rs
+- **Pravno pitanje:** Apsolutna zastarelost i beneficium cohaesionis
+- **Stav VKS:** Apsolutna zastarelost nastupa u svakom slučaju kad protekne dvostruko vreme potrebno za relativnu zastarelost. Beneficium cohaesionis — ako za jednog od saučesnika nastupi zastarelost, sud mora po službenoj dužnosti proveriti i za ostale.
+- **Primena:** ZZZ — kad je nastupila apsolutna zastarelost
+- **Izvor:** https://vrh.sud.rs
 
 ### Kzz 323/2022
-- **Правно питање:** Апсолутна застарелост — рачунање рокова
-- **Став ВКС:** Рок апсолутне застарелости рачуна се од дана извршења дела до дана правноснажности пресуде. Суд је дужан ex officio да води рачуна о застарелости.
-- **Примена:** Жалба, ЗЗЗ — кад постоји сумња да је наступила застарелост
-- **Извор:** https://vrh.sud.rs
+- **Pravno pitanje:** Apsolutna zastarelost — računanje rokova
+- **Stav VKS:** Rok apsolutne zastarelosti računa se od dana izvršenja dela do dana pravnosnažnosti presude. Sud je dužan ex officio da vodi računa o zastarelosti.
+- **Primena:** Žalba, ZZZ — kad postoji sumnja da je nastupila zastarelost
+- **Izvor:** https://vrh.sud.rs
 
 ### Kzz 28/2022
-- **Правно питање:** Прекид застарелости
-- **Став ВКС:** Застарелост се прекида сваком процесном радњом надлежног органа предузетом ради гоњења учиниоца (чл. 104 ст. 6 КЗ). Рок почиње изнова.
-- **Примена:** Жалба — кад тужилаштво тврди прекид застарелости
-- **Извор:** https://vrh.sud.rs
+- **Pravno pitanje:** Prekid zastarelosti
+- **Stav VKS:** Zastarelost se prekida svakom procesnom radnjom nadležnog organa preduzetom radi gonjenja učinioca (čl. 104 st. 6 KZ). Rok počinje iznova.
+- **Primena:** Žalba — kad tužilaštvo tvrdi prekid zastarelosti
+- **Izvor:** https://vrh.sud.rs
 
 ---
 
-## 5. Притвор (чл. 211 ЗКП)
+## 5. Pritvor (čl. 211 ZKP)
 
 ### Kzz 1052/2023
-- **Правно питање:** Жалба на притвор — образложеност решења
-- **Став ВКС:** Решење о одређивању или продужењу притвора мора садржати конкретне разлоге за сваки притворски основ. Паушално позивање на „опасност од бекства" без конкретних чињеница представља повреду чл. 211 ЗКП.
-- **Примена:** Жалба на притвор — кад решење нема конкретне разлоге
-- **Извор:** https://vrh.sud.rs
+- **Pravno pitanje:** Žalba na pritvor — obrazloženost rešenja
+- **Stav VKS:** Rešenje o određivanju ili produženju pritvora mora sadržati konkretne razloge za svaki pritvorski osnov. Paušalno pozivanje na „opasnost od bekstva" bez konkretnih činjenica predstavlja povredu čl. 211 ZKP.
+- **Primena:** Žalba na pritvor — kad rešenje nema konkretne razloge
+- **Izvor:** https://vrh.sud.rs
 
 ### Kzz 527/2024
-- **Правно питање:** Чл. 74 и 212 ЗКП — трајање притвора
-- **Став ВКС:** Притвор мора трајати најкраће потребно време. Суд мора образложити зашто блаже мере (забрана напуштања, јављање полицији) нису довољне. Утврђена повреда — продужење притвора без разматрања блажих мера.
-- **Примена:** Жалба на притвор — кад суд није размотрио блаже мере
-- **Извор:** https://vrh.sud.rs
+- **Pravno pitanje:** Čl. 74 i 212 ZKP — trajanje pritvora
+- **Stav VKS:** Pritvor mora trajati najkraće potrebno vreme. Sud mora obrazložiti zašto blaže mere (zabrana napuštanja, javljanje policiji) nisu dovoljne. Utvrđena povreda — produženje pritvora bez razmatranja blažih mera.
+- **Primena:** Žalba na pritvor — kad sud nije razmotrio blaže mere
+- **Izvor:** https://vrh.sud.rs
 
 ### Kzz 389/2023
-- **Правно питање:** Притворски основ чл. 211 ст. 1 тач. 3 — опасност од понављања
-- **Став ВКС:** За притвор по основу опасности од понављања дела морају постојати конкретне околности које указују на ту опасност — ранија осуђиваност сама по себи није довољна.
-- **Примена:** Жалба на притвор по тач. 3
-- **Извор:** https://vrh.sud.rs
+- **Pravno pitanje:** Pritvorski osnov čl. 211 st. 1 tač. 3 — opasnost od ponavljanja
+- **Stav VKS:** Za pritvor po osnovu opasnosti od ponavljanja dela moraju postojati konkretne okolnosti koje ukazuju na tu opasnost — ranija osuđivanost sama po sebi nije dovoljna.
+- **Primena:** Žalba na pritvor po tač. 3
+- **Izvor:** https://vrh.sud.rs
 
 ---
 
-## 6. Ин дубио про рео (чл. 16 ЗКП)
+## 6. In dubio pro reo (čl. 16 ZKP)
 
 ### Kzz 412/2023
-- **Правно питање:** Примена начела ин дубио про рео
-- **Став ВКС:** Кад постоји сумња у погледу чињеница које чине обележја кривичног дела или од којих зависи примена неке одредбе кривичног закона, суд је дужан да ту сумњу решi у корист окривљеног.
-- **Примена:** Завршна реч, жалба — увек кад докази нису јединствени
-- **Извор:** https://vrh.sud.rs
+- **Pravno pitanje:** Primena načela in dubio pro reo
+- **Stav VKS:** Kad postoji sumnja u pogledu činjenica koje čine obeležja krivičnog dela ili od kojih zavisi primena neke odredbe krivičnog zakona, sud je dužan da tu sumnju reši u korist okrivljenog.
+- **Primena:** Završna reč, žalba — uvek kad dokazi nisu jedinstveni
+- **Izvor:** https://vrh.sud.rs
 
 ### Kzz 756/2022
-- **Правно питање:** Ин дубио про рео и оцена доказа
-- **Став ВКС:** Начело ин дубио про рео не значи да суд не сме ценити противречне доказе, али ако после савесне оцене доказа остане разумна сумња, мора пресудити у корист окривљеног.
-- **Примена:** Завршна реч, жалба — кад су докази противречни
-- **Извор:** https://vrh.sud.rs
+- **Pravno pitanje:** In dubio pro reo i ocena dokaza
+- **Stav VKS:** Načelo in dubio pro reo ne znači da sud ne sme ceniti protivrečne dokaze, ali ako posle savesne ocene dokaza ostane razumna sumnja, mora presuditi u korist okrivljenog.
+- **Primena:** Završna reč, žalba — kad su dokazi protivrečni
+- **Izvor:** https://vrh.sud.rs
 
 ---
 
-## 7. Одлука о казни / кривичној санкцији
+## 7. Odluka o kazni / krivičnoj sankciji
 
 ### Kzz 623/2023
-- **Правно питање:** Одмеравање казне — олакшавајуће и отежавајуће околности
-- **Став ВКС:** Суд мора навести конкретне олакшавајуће и отежавајуће околности и образложити зашто је изрекао одређену казну. Паушално навођење („суд је ценио све околности") није довољно.
-- **Примена:** Жалба на казну — кад казна није адекватно образложена
-- **Извор:** https://vrh.sud.rs
+- **Pravno pitanje:** Odmeravanje kazne — olakšavajuće i otežavajuće okolnosti
+- **Stav VKS:** Sud mora navesti konkretne olakšavajuće i otežavajuće okolnosti i obrazložiti zašto je izrekao određenu kaznu. Paušalno navođenje („sud je cenio sve okolnosti") nije dovoljno.
+- **Primena:** Žalba na kaznu — kad kazna nije adekvatno obrazložena
+- **Izvor:** https://vrh.sud.rs
 
 ### Kzz 981/2022
-- **Правно питање:** Условна осуда — услови за изрицање
-- **Став ВКС:** При изрицању условне осуде суд мора ценити да ли ће упозорење уз претњу казном бити довољно за остварење сврхе кажњавања (чл. 66 КЗ).
-- **Примена:** Жалба — кад одбрана тражи условну осуду
-- **Извор:** https://vrh.sud.rs
+- **Pravno pitanje:** Uslovna osuda — uslovi za izricanje
+- **Stav VKS:** Pri izricanju uslovne osude sud mora ceniti da li će upozorenje uz pretnju kaznom biti dovoljno za ostvarenje svrhe kažnjavanja (čl. 66 KZ).
+- **Primena:** Žalba — kad odbrana traži uslovnu osudu
+- **Izvor:** https://vrh.sud.rs
 
 ---
 
-## 8. Чињенично стање (чл. 440–441 ЗКП)
+## 8. Činjenično stanje (čl. 440–441 ZKP)
 
 ### Kzz 1089/2022
-- **Правно питање:** Погрешно утврђено чињенично стање
-- **Став ВКС:** Чињенично стање је погрешно утврђено кад суд неку одлучну чињеницу утврди супротно садржају изведених доказа или кад изведе погрешан закључак из утврђених чињеница.
-- **Примена:** Жалба — кад суд погрешно цени доказе
-- **Извор:** https://vrh.sud.rs
+- **Pravno pitanje:** Pogrešno utvrđeno činjenično stanje
+- **Stav VKS:** Činjenično stanje je pogrešno utvrđeno kad sud neku odlučnu činjenicu utvrdi suprotno sadržaju izvedenih dokaza ili kad izvede pogrešan zaključak iz utvrđenih činjenica.
+- **Primena:** Žalba — kad sud pogrešno ceni dokaze
+- **Izvor:** https://vrh.sud.rs
 
 ### Kzz 567/2023
-- **Правно питање:** Непотпуно утврђено чињенично стање
-- **Став ВКС:** Чињенично стање је непотпуно утврђено кад суд није утврдио неку одлучну чињеницу или кад на то указују нови докази. Суд мора утврдити све релевантне чињенице, укључујући и оне на које указује одбрана.
-- **Примена:** Жалба — кад суд није извео све релевантне доказе
-- **Извор:** https://vrh.sud.rs
+- **Pravno pitanje:** Nepotpuno utvrđeno činjenično stanje
+- **Stav VKS:** Činjenično stanje je nepotpuno utvrđeno kad sud nije utvrdio neku odlučnu činjenicu ili kad na to ukazuju novi dokazi. Sud mora utvrditi sve relevantne činjenice, uključujući i one na koje ukazuje odbrana.
+- **Primena:** Žalba — kad sud nije izveo sve relevantne dokaze
+- **Izvor:** https://vrh.sud.rs
 
 ---
 
-## 9. ЕСЉП пракса — чл. 6 Конвенције
+## 9. ESLJP praksa — čl. 6 Konvencije
 
-### Кључне одлуке
+### Ključne odluke
 
-- **Salduz v. Turkey (2008)** — Право на приступ адвокату од првог саслушања. Ако окривљени није имао адвоката при давању исказа полицији, такав исказ је незаконит.
-- **Taxquet v. Belgium (2010)** — Образложеност пресуде. Свака пресуда мора бити довољно образложена да окривљени разуме зашто је осуђен.
-- **Schatschaschwili v. Germany (2015)** — Право на испитивање сведока. Ако окривљени није имао прилику да испита кључног сведока, пресуда заснована претежно на исказу тог сведока крши чл. 6 ст. 3 (д) Конвенције.
-- **Al-Khawaja and Tahery v. UK (2011)** — Сведоци одсутни са суђења. Осуда не може бити заснована искључиво или у одлучујућој мери на исказу сведока кога одбрана није могла испитати.
-- **Ibrahim and Others v. UK (2016)** — Право на браниоца и правично суђење.
+- **Salduz v. Turkey (2008)** — Pravo na pristup advokatu od prvog saslušanja. Ako okrivljeni nije imao advokata pri davanju iskaza policiji, takav iskaz je nezakonit.
+- **Taxquet v. Belgium (2010)** — Obrazloženost presude. Svaka presuda mora biti dovoljno obrazložena da okrivljeni razume zašto je osuđen.
+- **Schatschaschwili v. Germany (2015)** — Pravo na ispitivanje svedoka. Ako okrivljeni nije imao priliku da ispita ključnog svedoka, presuda zasnovana pretežno na iskazu tog svedoka krši čl. 6 st. 3 (d) Konvencije.
+- **Al-Khawaja and Tahery v. UK (2011)** — Svedoci odsutni sa suđenja. Osuda ne može biti zasnovana isključivo ili u odlučujućoj meri na iskazu svedoka koga odbrana nije mogla ispitati.
+- **Ibrahim and Others v. UK (2016)** — Pravo na branioca i pravično suđenje.
 
-### Чл. 7 Конвенције — Nulla poena sine lege
-- **Kokkinakis v. Greece (1993)** — Забрана кажњавања без закона. Дело мора бити јасно дефинисано законом у време извршења.
-- **Kononov v. Latvia (2010)** — Принцип легалитета — nullum crimen sine lege, nulla poena sine lege.
+### Čl. 7 Konvencije — Nulla poena sine lege
+- **Kokkinakis v. Greece (1993)** — Zabrana kažnjavanja bez zakona. Delo mora biti jasno definisano zakonom u vreme izvršenja.
+- **Kononov v. Latvia (2010)** — Princip legaliteta — nullum crimen sine lege, nulla poena sine lege.
 
 ---
 
-## 10. Захтев за заштиту законитости — процедурална питања
+## 10. Zahtev za zaštitu zakonitosti — proceduralna pitanja
 
 ### Kzz 215/2023
-- **Правно питање:** Рок за подношење ЗЗЗ
-- **Став ВКС:** Рок за подношење ЗЗЗ је 30 дана од достављања правноснажне одлуке браниоцу (чл. 484 ст. 1 ЗКП). Окривљени може поднети ЗЗЗ искључиво преко браниоца (чл. 483 ст. 2 ЗКП).
-- **Примена:** ЗЗЗ — процедурална питања
-- **Извор:** https://vrh.sud.rs
+- **Pravno pitanje:** Rok za podnošenje ZZZ
+- **Stav VKS:** Rok za podnošenje ZZZ je 30 dana od dostavljanja pravnosnažne odluke braniocu (čl. 484 st. 1 ZKP). Okrivljeni može podneti ZZZ isključivo preko branioca (čl. 483 st. 2 ZKP).
+- **Primena:** ZZZ — proceduralna pitanja
+- **Izvor:** https://vrh.sud.rs
 
 ### Kzz 98/2024
-- **Правно питање:** Основи за подношење ЗЗЗ (чл. 485 ЗКП)
-- **Став ВКС:** ЗЗЗ се може поднети само због повреде закона (ЗКП и КЗ), али не и због погрешно утврђеног чињеничног стања. ВКС не може преиспитивати чињенична утврђења нижих судова.
-- **Примена:** ЗЗЗ — шта може бити предмет преиспитивања
-- **Извор:** https://vrh.sud.rs
+- **Pravno pitanje:** Osnovi za podnošenje ZZZ (čl. 485 ZKP)
+- **Stav VKS:** ZZZ se može podneti samo zbog povrede zakona (ZKP i KZ), ali ne i zbog pogrešno utvrđenog činjeničnog stanja. VKS ne može preispitivati činjenična utvrđenja nižih sudova.
+- **Primena:** ZZZ — šta može biti predmet preispitivanja
+- **Izvor:** https://vrh.sud.rs
 
 ### Kzz 445/2022
-- **Правно питање:** Одлагање извршења пресуде по ЗЗЗ
-- **Став ВКС:** ВКС може одложити извршење правноснажне пресуде до доношења одлуке о ЗЗЗ (чл. 488 ст. 2 ЗКП). Ово је важно право окривљеног — увек тражити одлагање у ЗЗЗ.
-- **Примена:** ЗЗЗ — увек укључити захтев за одлагање извршења
-- **Извор:** https://vrh.sud.rs
+- **Pravno pitanje:** Odlaganje izvršenja presude po ZZZ
+- **Stav VKS:** VKS može odložiti izvršenje pravnosnažne presude do donošenja odluke o ZZZ (čl. 488 st. 2 ZKP). Ovo je važno pravo okrivljenog — uvek tražiti odlaganje u ZZZ.
+- **Primena:** ZZZ — uvek uključiti zahtev za odlaganje izvršenja
+- **Izvor:** https://vrh.sud.rs
 
 ---
 
-## Напомена
+## Napomena
 
-Ова листа садржи репрезентативне одлуке ВКС по темама. При писању сваког конкретног акта, **обавезно претражити актуелну праксу** на:
-- https://vrh.sud.rs (Врховни суд)
+Ova lista sadrži reprezentativne odluke VKS po temama. Pri pisanju svakog konkretnog akta, **obavezno pretražiti aktuelnu praksu** na:
+- https://vrh.sud.rs (Vrhovni sud)
 - https://propissoft.profisistem.rs (PropisSoft)
-- Апелациони судови (НС, БГ, КГ)
+- Apelacioni sudovi (NS, BG, KG)
 
-Свака коришћена одлука судске праксе мора бити сачувана у засебном .docx документу (обавеза из CLAUDE.md).
+Svaka korišćena odluka sudske prakse mora biti sačuvana u zasebnom .docx dokumentu (obaveza iz CLAUDE.md).

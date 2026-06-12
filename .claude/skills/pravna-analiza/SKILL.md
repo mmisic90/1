@@ -1,18 +1,18 @@
 ---
 name: pravna-analiza
 description: >
-  Главни аналитички skill за правни рад адвоката Милана Мишића (Нови Сад,
-  Максима Горког 6). Активирај за: правне документе (пресуде, решења,
-  оптужнице, уговоре, закључке извршитеља, жалбе, записнике, налазе вештака,
-  катастар), анализу спора, правну стратегију, припрему поднеска. Тригери:
-  „анализирај пресуду", „прочитај спис", „направи жалбу/тужбу/предлог за
-  извршење", „одговор на оптужницу", „рок", „рочиште", „застарелост",
-  „надлежност". ОБАВЕЗАН ПРЕДУСЛОВ за krivica, tuzba-parnica, izvrsenje.
-  ОБАВЕЗАН ИЗЛАЗ: канонски HANDOFF пакет + ОДМАХ учитати SKILL.md циљног
-  скила У ИСТОМ ОДГОВОРУ — ланац се НЕ СМЕ прекинути после анализе.
-  Domain-agnostic: ЕСЉП логику делегира у istrazivanje-prakse. НЕ активирати
-  за: knjižice за сина, Instagram „Уз Раме Са Студентима", технички debugging,
-  академска питања без клијентског контекста, креативни рад.
+  Glavni analitički skill za pravni rad advokata Milana Mišića (Novi Sad,
+  Maksima Gorkog 6). Aktiviraj za: pravne dokumente (presude, rešenja,
+  optužnice, ugovore, zaključke izvršitelja, žalbe, zapisnike, nalaze veštaka,
+  katastar), analizu spora, pravnu strategiju, pripremu podneska. Trigeri:
+  „analiziraj presudu", „pročitaj spis", „napravi žalbu/tužbu/predlog za
+  izvršenje", „odgovor na optužnicu", „rok", „ročište", „zastarelost",
+  „nadležnost". OBAVEZAN PREDUSLOV za krivica, tuzba-parnica, izvrsenje.
+  OBAVEZAN IZLAZ: kanonski HANDOFF paket + ODMAH učitati SKILL.md ciljnog
+  skila U ISTOM ODGOVORU — lanac se NE SME prekinuti posle analize.
+  Domain-agnostic: ESLJP logiku delegira u istrazivanje-prakse. NE aktivirati
+  za: knjižice za sina, Instagram „Uz Rame Sa Studentima", tehnički debugging,
+  akademska pitanja bez klijentskog konteksta, kreativni rad.
 metadata:
   author: "Milan Mišić, advokat"
   version: "5.0.0"
@@ -22,408 +22,410 @@ metadata:
   category: "legal-analysis"
   last-updated: "2026-06-10"
   changelog-v5: >
-    (1) Тело скраћено са 1098 на ~420 линија — НИШТА није обрисано:
-    Ф0.1 детаљи режима, Ф3.6 пуна матрица ризика, БАТЦХ pipeline и пуни
-    Compliance шаблони РЕЛОЦИРАНИ у references/ са обавезним read-гејтовима.
-    (2) Фиx Обрасца 3 (прекид ланца): ново правило НЕПРЕКИДНОСТИ ЛАНЦА —
-    после Ф6.1 ОБАВЕЗНО view циљног SKILL.md у истом одговору; сваки фазни
-    блок завршава „→ СЛЕДЕЋЕ"; Compliance ред „ЛАНАЦ". (3) Архитектонска
-    одлука примењена: ЕСЉП тригери = делегација у istrazivanje-prakse
-    (pravna-analiza остаје domain-agnostic, 3.3б је чек-тачка, не власник).
-    (4) Анти-сикофантија из v4.1 задржана у Ф0.
+    (1) Telo skraćeno sa 1098 na ~420 linija — NIŠTA nije obrisano:
+    F0.1 detalji režima, F3.6 puna matrica rizika, BATCH pipeline i puni
+    Compliance šabloni RELOCIRANI u references/ sa obaveznim read-gejtovima.
+    (2) Fix Obrasca 3 (prekid lanca): novo pravilo NEPREKIDNOSTI LANCA —
+    posle F6.1 OBAVEZNO view ciljnog SKILL.md u istom odgovoru; svaki fazni
+    blok završava „→ SLEDEĆE"; Compliance red „LANAC". (3) Arhitektonska
+    odluka primenjena: ESLJP trigeri = delegacija u istrazivanje-prakse
+    (pravna-analiza ostaje domain-agnostic, 3.3b je ček-tačka, ne vlasnik).
+    (4) Anti-sikofantija iz v4.1 zadržana u F0.
 ---
 
-# Правна анализа — Когнитивни мотор v5
+# Pravna analiza — Kognitivni motor v5
 
-## ⚠️ NEGATIVE TRIGGERS — НЕ АКТИВИРАЈ ЗА:
+> **Pismo:** instrukcije ovog skila su latinica (token-ekonomija, vidi `_policy/politika-pisma.md`); izlazni pravni akt je uvek ćirilica — kontroliše `stil-pisanja`.
 
-| Контекст | Зашто не / ко преузима |
+## ⚠️ NEGATIVE TRIGGERS — NE AKTIVIRAJ ZA:
+
+| Kontekst | Zašto ne / ko preuzima |
 |---|---|
-| Књижице за Релју / приче / песме | Креативни рад |
-| Instagram „Уз Раме Са Студентима" | Маркетинг — друга методологија |
-| Cowork/MCP/Claude Code/Python debugging | Технички домен |
-| Академска питања без клијентског контекста | Едукација, не услуга |
-| Општа конверзација, превод, email без правне суштине | Нема правног задатка |
-| Предлог за извршење, блокада, пленидба, опомена пред извршење | `izvrsenje` (директно или преко handoff-а одавде) |
-| Привремена мера (експлицитни тригери) | `izvrsenje` |
+| Knjižice za Relju / priče / pesme | Kreativni rad |
+| Instagram „Uz Rame Sa Studentima" | Marketing — druga metodologija |
+| Cowork/MCP/Claude Code/Python debugging | Tehnički domen |
+| Akademska pitanja bez klijentskog konteksta | Edukacija, ne usluga |
+| Opšta konverzacija, prevod, email bez pravne suštine | Nema pravnog zadatka |
+| Predlog za izvršenje, blokada, plenidba, opomena pred izvršenje | `izvrsenje` (direktno ili preko handoff-a odavde) |
+| Privremena mera (eksplicitni trigeri) | `izvrsenje` |
 
-**Composability:** активан само за тренутни правни задатак; ослобађа контекст
-на не-правну тему; враћа се без поновне инструкције („назад на извршење Стојшин").
+**Composability:** aktivan samo za trenutni pravni zadatak; oslobađa kontekst
+na ne-pravnu temu; vraća se bez ponovne instrukcije („nazad na izvršenje Stojšin").
 
 ---
 
-## ⛓️ ПРАВИЛО НЕПРЕКИДНОСТИ ЛАНЦА (v5 — НАЈВАЖНИЈЕ НОВО ПРАВИЛО)
+## ⛓️ PRAVILO NEPREKIDNOSTI LANCA (v5 — NAJVAŽNIJE NOVO PRAVILO)
 
-Дијагностикован quality bug (Образац 3): скилови се активирају појединачно,
-али ланац ПУЦА после анализе — handoff се испише, а извршни скил се никад
-не учита. Ово је ЗАБРАЊЕНО. Од v5 важи:
+Dijagnostikovan quality bug (Obrazac 3): skilovi se aktiviraju pojedinačno,
+ali lanac PUCA posle analize — handoff se ispiše, a izvršni skil se nikad
+ne učita. Ovo je ZABRANJENO. Od v5 važi:
 
 ```
-1. pravna-analiza НИЈЕ завршен скил. Завршетак Ф6.1 = ПОЛОВИНА посла.
-2. Чим је handoff пакет потпун (7/7 + predmet), У ИСТОМ ОДГОВОРУ,
-   БЕЗ ЧЕКАЊА НОВЕ ПОРУКЕ КОРИСНИКА:
+1. pravna-analiza NIJE završen skil. Završetak F6.1 = POLOVINA posla.
+2. Čim je handoff paket potpun (7/7 + predmet), U ISTOM ODGOVORU,
+   BEZ ČEKANJA NOVE PORUKE KORISNIKA:
    → view /mnt/skills/user/<target>/SKILL.md   (krivica | tuzba-parnica | izvrsenje)
-   → настави по Кораку 0 циљног скила.
-3. ЈЕДИНИ изузетак: корисник није дао зелено светло за генерисање
-   документа („крени/генериши/иди"). Тада: учитај циљни SKILL.md,
-   изврши његов Корак 0 (валидација пакета), и СТАНИ са поруком:
-   „Handoff предат скилу [X], пакет валидиран [7/7]. Чекам зелено светло."
-4. Забрањено завршити одговор у стању: handoff произведен + циљни
-   SKILL.md НЕучитан. То стање не постоји.
-5. Стање ланца се води у сваком одговору:
-   ЛАНАЦ: god-skill[✅/⏭️] → pravna-analiza[фаза] → istrazivanje-prakse[✅/⏭️/⛔]
-          → <target>[✅учитан/⛔] → stil-pisanja[✅/⏭️] → verifikator[✅/⏭️]
+   → nastavi po Koraku 0 ciljnog skila.
+3. JEDINI izuzetak: korisnik nije dao zeleno svetlo za generisanje
+   dokumenta („kreni/generiši/idi"). Tada: učitaj ciljni SKILL.md,
+   izvrši njegov Korak 0 (validacija paketa), i STANI sa porukom:
+   „Handoff predat skilu [X], paket validiran [7/7]. Čekam zeleno svetlo."
+4. Zabranjeno završiti odgovor u stanju: handoff proizveden + ciljni
+   SKILL.md NEučitan. To stanje ne postoji.
+5. Stanje lanca se vodi u svakom odgovoru:
+   LANAC: god-skill[✅/⏭️] → pravna-analiza[faza] → istrazivanje-prakse[✅/⏭️/⛔]
+          → <target>[✅učitan/⛔] → stil-pisanja[✅/⏭️] → verifikator[✅/⏭️]
 ```
 
-Исто важи узводно и бочно:
-- Документ постоји а **god-skill-deep-reader** није покренут → покрени га ПРЕ Ф0.
-- Ф3 тражи праксу → **istrazivanje-prakse** се ПОЗИВА (не имитира се).
-- Пре генерисања акта по плану → **premortem** (Корак 3.5 извршних скилова).
-- Документ иде ван канцеларије → **stil-pisanja** па **verifikator** (увек последњи).
+Isto važi uzvodno i bočno:
+- Dokument postoji a **god-skill-deep-reader** nije pokrenut → pokreni ga PRE F0.
+- F3 traži praksu → **istrazivanje-prakse** se POZIVA (ne imitira se).
+- Pre generisanja akta po planu → **premortem** (Korak 3.5 izvršnih skilova).
+- Dokument ide van kancelarije → **stil-pisanja** pa **verifikator** (uvek poslednji).
 
 ---
 
-## ФИЛОЗОФИЈА
+## FILOZOFIJA
 
-Адвокат који прати чеклисту је просечан. Адвокат који МИСЛИ на начин који
-аутоматски хвата ствари изван чеклисте — тај је изузетан. Овај skill намеће
-**начин мишљења**: чита чињенице, примењује право и гради стратегију —
-паралелно, у сваком тренутку.
+Advokat koji prati čeklistu je prosečan. Advokat koji MISLI na način koji
+automatski hvata stvari izvan čekliste — taj je izuzetan. Ovaj skill nameće
+**način mišljenja**: čita činjenice, primenjuje pravo i gradi strategiju —
+paralelno, u svakom trenutku.
 
-Мотивација: AI је написао жалбу тврдећи да „другостепени суд није отворио
-претрес" — а суд је одржао 7-8 претреса кроз документ. Проблем није чеклиста
-него НАЧИН ЧИТАЊА.
+Motivacija: AI je napisao žalbu tvrdeći da „drugostepeni sud nije otvorio
+pretres" — a sud je održao 7-8 pretresa kroz dokument. Problem nije čeklista
+nego NAČIN ČITANJA.
 
-**Три принципа:**
-1. **Ништа не постоји док га не видиш** — нема странице/извора = не знаш.
-2. **Свака тврдња има противтврдњу** — без замисливог контра-аргумента ниси размислио.
-3. **Једна ствар мења све** — у сваком предмету ЈЕДНА чињеница/аргумент тежи највише.
+**Tri principa:**
+1. **Ništa ne postoji dok ga ne vidiš** — nema stranice/izvora = ne znaš.
+2. **Svaka tvrdnja ima protivtvrdnju** — bez zamislivog kontra-argumenta nisi razmislio.
+3. **Jedna stvar menja sve** — u svakom predmetu JEDNA činjenica/argument teži najviše.
 
-**ТРИ КАНАЛА раде паралелно током целе анализе:**
-КАНАЛ Ч (чињенице: шта се десило, шта је доказиво) │ КАНАЛ П (право: који
-чланови, како суд примењује, где је суд погрешио) │ КАНАЛ С (стратегија:
-шта помаже клијенту, најбољи/најгори исход, слаба тачка).
-Детаљно: `references/kognitivni-motor.md` — **ОБАВЕЗНО прочитати на почетку.**
+**TRI KANALA rade paralelno tokom cele analize:**
+KANAL Č (činjenice: šta se desilo, šta je dokazivo) │ KANAL P (pravo: koji
+članovi, kako sud primenjuje, gde je sud pogrešio) │ KANAL S (strategija:
+šta pomaže klijentu, najbolji/najgori ishod, slaba tačka).
+Detaljno: `references/kognitivni-motor.md` — **OBAVEZNO pročitati na početku.**
 
 ---
 
-## 🔌 УЛАЗ → РУТЕР → ИЗЛАЗ
+## 🔌 ULAZ → RUTER → IZLAZ
 
 ```
-god-skill-deep-reader ──► PRAVNA-ANALIZA (Ф0–Ф6 + РУТЕР) ──► HANDOFF (Ф6.1)
-   (рентген, мрежа веза,                                        │
-    Бајес улаз)                              ┌──────────────────┼─────────────────┐
+god-skill-deep-reader ──► PRAVNA-ANALIZA (F0–F6 + RUTER) ──► HANDOFF (F6.1)
+   (rentgen, mreža veza,                                        │
+    Bajes ulaz)                              ┌──────────────────┼─────────────────┐
                                              ▼                  ▼                 ▼
                                           krivica         tuzba-parnica      izvrsenje
 ```
 
-**УЛАЗ:** ако постоји документ а god-skill није покренут → покрени га ПРЕ Ф0
-(структурални рентген, контролисано читање, ХИТ ЛИСТА, Бајес). Бланко задатак
-без документа → директно Ф0.
+**ULAZ:** ako postoji dokument a god-skill nije pokrenut → pokreni ga PRE F0
+(strukturalni rentgen, kontrolisano čitanje, HIT LISTA, Bajes). Blanko zadatak
+bez dokumenta → direktno F0.
 
-**РУТЕР (одмах по Ф0):**
+**RUTER (odmah po F0):**
 
-| Тип предмета | Област (`oblasti-checkliste.md`) | Кључни закони | → Циљни скил |
+| Tip predmeta | Oblast (`oblasti-checkliste.md`) | Ključni zakoni | → Ciljni skil |
 |---|---|---|---|
-| Кривични | §1 КРИВИЦА | КЗ, ЗКП | `krivica` |
-| Парнични (општи) | §2 ПАРНИЦА | ЗПП, ЗОО | `tuzba-parnica` |
-| Привредни спор | §3 ПРИВРЕДНИ | ЗОО, ЗПД, ЗПП | `tuzba-parnica` (привредни суд) |
-| Извршни | §4 ИЗВРШЕЊЕ | ЗИО | `izvrsenje` |
-| Некретнине/катастар | §5 НЕКРЕТНИНЕ | ЗоОСПН, ЗДКН, ЗПП | `tuzba-parnica` или `izvrsenje` |
-| Уговори | §6 УГОВОРИ | ЗОО | `tuzba-parnica` |
-| Управни спор | §7 УПРАВНО | ЗУС, ЗУП | нема скила → pravna-analiza пише (6.2) |
-| Радни спор | §8 РАДНО | ЗОР, ЗПП | `tuzba-parnica` |
+| Krivični | §1 KRIVICA | KZ, ZKP | `krivica` |
+| Parnični (opšti) | §2 PARNICA | ZPP, ZOO | `tuzba-parnica` |
+| Privredni spor | §3 PRIVREDNI | ZOO, ZPD, ZPP | `tuzba-parnica` (privredni sud) |
+| Izvršni | §4 IZVRŠENJE | ZIO | `izvrsenje` |
+| Nekretnine/katastar | §5 NEKRETNINE | ZoOSPN, ZDKN, ZPP | `tuzba-parnica` ili `izvrsenje` |
+| Ugovori | §6 UGOVORI | ZOO | `tuzba-parnica` |
+| Upravni spor | §7 UPRAVNO | ZUS, ZUP | nema skila → pravna-analiza piše (6.2) |
+| Radni spor | §8 RADNO | ZOR, ZPP | `tuzba-parnica` |
 
-Више области → доминантна фаза (где је клијент САДА) одређује циљ; остале су
-пратеће провере. Ниједна област (прекршајни, стечајни, породични) → 6.2 +
-експлицитна напомена кориснику.
+Više oblasti → dominantna faza (gde je klijent SADA) određuje cilj; ostale su
+prateće provere. Nijedna oblast (prekršajni, stečajni, porodični) → 6.2 +
+eksplicitna napomena korisniku.
 
 ---
 
-## 🚧 FAILURE GATES (компактно — тихо прескакање = повреда GUARDRAILS Г.3)
+## 🚧 FAILURE GATES (kompaktno — tiho preskakanje = povreda GUARDRAILS G.3)
 
-| Прелаз | Тип | Услов проласка | Ако падне |
+| Prelaz | Tip | Uslov prolaska | Ako padne |
 |---|---|---|---|
-| Ф0→Ф1 | SOFT | Теорија + хипотеза постоје | STOP, питај корисника |
-| Ф0.1→Ф1 | SOFT | Режим одлучен/потврђен | 1 кратко питање |
-| Ф1→Ф2 | HARD | Цео документ + верификација средине + тест горила | STOP → врати се у средину / тражи upload |
-| Ф2→Ф3 | HARD | Све чињенице П1–П4 класиране + ХИТ ЛИСТА | STOP → назад у Ф1/Ф2 |
-| Ф3→Ф4 | HARD | Чланови ✅PropisSoft (НИКАД 🟡 за чланове); пракса ✅ или ⛔ (НИКАД 🟡 за бројеве одлука) | STOP → `scripts/verify_clanovi.py` / propissoft.profisistem.rs / позови `istrazivanje-prakse` |
-| Ф4→Ф5 | SOFT | Adversarial 4 перспективе + матрица отпорности | ⚠️ упозори: нема НЕУНИШТИВОГ / само 1 независан |
-| Ф5→Ф6 | HARD | „Једна ствар" записана + Бајес ≥ 60% | STOP → слаб случај (саопшти) или назад у Ф4 |
-| Ф6→испорука | HARD | verifikator ≥ 80% | 60–79% упозори+чекај; <60% назад Ф3+Ф4; honeypot пао → нов чат |
+| F0→F1 | SOFT | Teorija + hipoteza postoje | STOP, pitaj korisnika |
+| F0.1→F1 | SOFT | Režim odlučen/potvrđen | 1 kratko pitanje |
+| F1→F2 | HARD | Ceo dokument + verifikacija sredine + test gorila | STOP → vrati se u sredinu / traži upload |
+| F2→F3 | HARD | Sve činjenice P1–P4 klasirane + HIT LISTA | STOP → nazad u F1/F2 |
+| F3→F4 | HARD | Članovi ✅PropisSoft (NIKAD 🟡 za članove); praksa ✅ ili ⛔ (NIKAD 🟡 za brojeve odluka) | STOP → `scripts/verify_clanovi.py` / propissoft.profisistem.rs / pozovi `istrazivanje-prakse` |
+| F4→F5 | SOFT | Adversarial 4 perspektive + matrica otpornosti | ⚠️ upozori: nema NEUNIŠTIVOG / samo 1 nezavisan |
+| F5→F6 | HARD | „Jedna stvar" zapisana + Bajes ≥ 60% | STOP → slab slučaj (saopšti) ili nazad u F4 |
+| F6→isporuka | HARD | verifikator ≥ 80% | 60–79% upozori+čekaj; <60% nazad F3+F4; honeypot pao → nov čat |
 
-Формат пријаве пада гејта: `🚧 GATE [X→Y] ПАО / Разлог / Опције (а)(б)(в) / Чекам одлуку.`
+Format prijave pada gejta: `🚧 GATE [X→Y] PAO / Razlog / Opcije (a)(b)(v) / Čekam odluku.`
 
 ---
 
-## СЕДАМ ФАЗА
+## SEDAM FAZA
 
 ```
-Ф0 ТЕОРИЈА → Ф0.1 РЕЖИМ → Ф1 ФОРЕНЗИЧКО ЧИТАЊЕ → Ф2 CROSS-REFERENCE
-→ Ф3 ПРАВНА АНАЛИЗА → Ф4 ADVERSARIAL → Ф5 „ЈЕДНА СТВАР" → Ф6 ГЕНЕРИСАЊЕ+HANDOFF
+F0 TEORIJA → F0.1 REŽIM → F1 FORENZIČKO ČITANJE → F2 CROSS-REFERENCE
+→ F3 PRAVNA ANALIZA → F4 ADVERSARIAL → F5 „JEDNA STVAR" → F6 GENERISANJE+HANDOFF
 ```
 
-### ФАЗА 0 — ТЕОРИЈА СЛУЧАЈА (пре читања, 30 сек)
+### FAZA 0 — TEORIJA SLUČAJA (pre čitanja, 30 sek)
 
 ```
 ╔══════════════════════════════════════════════╗
-║ СУШТИНА: [1 реченица]  СТРАНКЕ: [ко→циљ]    ║
-║ ОБЛАСТ: [→ учитај §X из oblasti-checkliste]  ║
-║ ЗАДАТАК: [шта произвести]                    ║
-║ ХИПОТЕЗА: [шта МИСЛИМ да ће анализа показати]║
+║ SUŠTINA: [1 rečenica]  STRANKE: [ko→cilj]    ║
+║ OBLAST: [→ učitaj §X iz oblasti-checkliste]  ║
+║ ZADATAK: [šta proizvesti]                    ║
+║ HIPOTEZA: [šta MISLIM da će analiza pokazati]║
 ╚══════════════════════════════════════════════╝
 ```
-Хипотеза се ПРОВЕРАВА у Ф1–Ф2 — мења се, не форсира.
+Hipoteza se PROVERAVA u F1–F2 — menja se, ne forsira.
 
-**АНТИ-СИКОФАНТИЈА према налогодавцу (v4.1, задржано):** ако захтев садржи
-унапред задат исход („докажи да је уговор ништав") → задржи као РАДНУ хипотезу,
-али Ф4 постаје ПОЈАЧАНА (најјачи контра-аргументи, не симболични). Анализа СМЕ
-закључити супротно жељи клијента — „уговор НИЈЕ ништав, ево зашто" је вредан
-налаз, саопштава се искрено. Слаб основ = означен слабим, и кад га клијент жели.
+**ANTI-SIKOFANTIJA prema nalogodavcu (v4.1, zadržano):** ako zahtev sadrži
+unapred zadat ishod („dokaži da je ugovor ništav") → zadrži kao RADNU hipotezu,
+ali F4 postaje POJAČANA (najjači kontra-argumenti, ne simbolični). Analiza SME
+zaključiti suprotno želji klijenta — „ugovor NIJE ništav, evo zašto" je vredan
+nalaz, saopštava se iskreno. Slab osnov = označen slabim, i kad ga klijent želi.
 
-**→ СЛЕДЕЋЕ: Ф0.1 одмах, у истом кораку.**
+**→ SLEDEĆE: F0.1 odmah, u istom koraku.**
 
-### ФАЗА 0.1 — РЕЖИМ (FULL / СТАНДАРД) — процени НАМЕРУ, не речи
+### FAZA 0.1 — REŽIM (FULL / STANDARD) — proceni NAMERU, ne reči
 
-- 🟢 **FULL без питања:** кривична материја (УВЕК), уставна жалба, ЕСЉП, сваки
-  правни лек, учитан документ за анализу, нов предмет, рок/рочиште/ВСП/стратегија,
-  било шта што имплицира важност, ризик, хитност или незадовољство.
-- 🔴 **СТАНДАРД без питања:** експлицитна рутина, шаблон, „као прошли пут",
-  корисник ДИКТИРА — Claude КУЦА.
-- 🟡 **Нејасно → 1 питање:** `Предмет: [разумео]. 🟢 FULL или 🔴 СТАНДАРД?`
-  (батцх: једном на почетку, предлог по групи).
-- ⚠️ **ЕСКАЛАЦИЈА (СТАНДАРД→FULL):** Ф1–Ф2 открије контрадикцију/замку/застарелост
-  → СТАНИ: „Кренуо сам СТАНДАРД, Ф2 открила [шта]. Ескалација на FULL?" Не настављај без потврде.
-- ⬇️ **ДЕЕСКАЛАЦИЈА (FULL→СТАНДАРД):** документ стварно једноставан → понуди
-  прелаз, чекај одговор; без одговора остајеш FULL.
+- 🟢 **FULL bez pitanja:** krivična materija (UVEK), ustavna žalba, ESLJP, svaki
+  pravni lek, učitan dokument za analizu, nov predmet, rok/ročište/VSP/strategija,
+  bilo šta što implicira važnost, rizik, hitnost ili nezadovoljstvo.
+- 🔴 **STANDARD bez pitanja:** eksplicitna rutina, šablon, „kao prošli put",
+  korisnik DIKTIRA — Claude KUCA.
+- 🟡 **Nejasno → 1 pitanje:** `Predmet: [razumeo]. 🟢 FULL ili 🔴 STANDARD?`
+  (batch: jednom na početku, predlog po grupi).
+- ⚠️ **ESKALACIJA (STANDARD→FULL):** F1–F2 otkrije kontradikciju/zamku/zastarelost
+  → STANI: „Krenuo sam STANDARD, F2 otkrila [šta]. Eskalacija na FULL?" Ne nastavljaj bez potvrde.
+- ⬇️ **DEESKALACIJA (FULL→STANDARD):** dokument stvarno jednostavan → ponudi
+  prelaz, čekaj odgovor; bez odgovora ostaješ FULL.
 
-Пуни критеријуми и формулације: `references/rezim-i-eskalacija.md` —
-**ОБАВЕЗНО прочитати при првој граничној процени у сесији.**
+Puni kriterijumi i formulacije: `references/rezim-i-eskalacija.md` —
+**OBAVEZNO pročitati pri prvoj graničnoj proceni u sesiji.**
 
-**→ СЛЕДЕЋЕ: Ф1 (документ) или Ф3 (бланко задатак без документа).**
+**→ SLEDEĆE: F1 (dokument) ili F3 (blanko zadatak bez dokumenta).**
 
-### ФАЗА 1 — ФОРЕНЗИЧКО ЧИТАЊЕ
+### FAZA 1 — FORENZIČKO ČITANJE
 
-- PDF у контексту → СВАКА страница; путања → pdf-reading skill; усмено →
-  ⚠️УСМЕНИ НАВОД; 20+ стр → блокови по 10 уз повезивање.
-- Три канала паралелно (Ч извлачи, П квалификује, С маркира помаже/штети).
-- **Класа поузданости за СВАКУ информацију:** ✅П1 дословно │ 🟡П2 изведено │
-  🔴П3 реконструкција→ОЗНАЧИ │ ⛔П4 не постоји→НЕ УНОСИ.
-- **ВЕРИФИКАЦИЈА СРЕДИНЕ:** 3 насумичне стране из средине поново („lost in the
-  middle" — једина превенција).
-- **ТЕСТ ГОРИЛА:** „Шта ОЧИГЛЕДНО постоји а прескочио сам јер сам тражио друго?"
-  (нпр. рок за жалбу истекао).
+- PDF u kontekstu → SVAKA stranica; putanja → pdf-reading skill; usmeno →
+  ⚠️USMENI NAVOD; 20+ str → blokovi po 10 uz povezivanje.
+- Tri kanala paralelno (Č izvlači, P kvalifikuje, S markira pomaže/šteti).
+- **Klasa pouzdanosti za SVAKU informaciju:** ✅P1 doslovno │ 🟡P2 izvedeno │
+  🔴P3 rekonstrukcija→OZNAČI │ ⛔P4 ne postoji→NE UNOSI.
+- **VERIFIKACIJA SREDINE:** 3 nasumične strane iz sredine ponovo („lost in the
+  middle" — jedina prevencija).
+- **TEST GORILA:** „Šta OČIGLEDNO postoji a preskočio sam jer sam tražio drugo?"
+  (npr. rok za žalbu istekao).
 
-Протоколи: `references/forenzicko-citanje.md` — **читати кад читаш документ.**
+Protokoli: `references/forenzicko-citanje.md` — **čitati kad čitaš dokument.**
 
-**→ СЛЕДЕЋЕ: Ф2 — без линеарног „прочитао сам, идемо даље".**
+**→ SLEDEĆE: F2 — bez linearnog „pročitao sam, idemo dalje".**
 
-### ФАЗА 2 — CROSS-REFERENCE МАПА
+### FAZA 2 — CROSS-REFERENCE MAPA
 
-Приоритет повезивања: ① чињенице које ШТЕТЕ клијенту (контрадикција = оружје)
-② спорне квалификације ③ остало. Резултат = **ХИТ ЛИСТА топ 3 везе** — све три
-МОРАЈУ бити адресиране у Ф3, без изузетка.
+Prioritet povezivanja: ① činjenice koje ŠTETE klijentu (kontradikcija = oružje)
+② sporne kvalifikacije ③ ostalo. Rezultat = **HIT LISTA top 3 veze** — sve tri
+MORAJU biti adresirane u F3, bez izuzetka.
 
-Пет типова веза: 🔴 КОНТРАДИКЦИЈА │ 🟡 ТИШИНА │ 🟢 ПОТВРДА │ 🔵 ДОПУНА │ ⚫ ВРЕМЕНСКА РУПА.
+Pet tipova veza: 🔴 KONTRADIKCIJA │ 🟡 TIŠINA │ 🟢 POTVRDA │ 🔵 DOPUNA │ ⚫ VREMENSKA RUPA.
 
-**Тест обрнуте тврдње (ТОП 5 закључака):** „Ако тврдим СУПРОТНО — да ли документ
-подржава?" ДА → 🔴П3. (Овај тест хвата грешку „суд није отворио претрес".)
-**Каузални ланац:** догађај→узрок→последица; тражи прекинуту карику.
-**Више докумената → МАСТЕР ИНДЕКС** по чињеници са 🔴/🟢 ознакама по документу.
-Матрице по типу предмета: `references/oblasti-checkliste.md`.
+**Test obrnute tvrdnje (TOP 5 zaključaka):** „Ako tvrdim SUPROTNO — da li dokument
+podržava?" DA → 🔴P3. (Ovaj test hvata grešku „sud nije otvorio pretres".)
+**Kauzalni lanac:** događaj→uzrok→posledica; traži prekinutu kariku.
+**Više dokumenata → MASTER INDEKS** po činjenici sa 🔴/🟢 oznakama po dokumentu.
+Matrice po tipu predmeta: `references/oblasti-checkliste.md`.
 
-**→ СЛЕДЕЋЕ: Ф3.**
+**→ SLEDEĆE: F3.**
 
-### ФАЗА 3 — ПРАВНА АНАЛИЗА + ГРАФ ЗАВИСНОСТИ
+### FAZA 3 — PRAVNA ANALIZA + GRAF ZAVISNOSTI
 
-**3.1 Картица аргумента (за сваки):** ЧИЊЕНИЦА (стр.+цитат+П-класа) │ ВЕЗА Ф2 │
-НОРМА (чл./ст./закон ✅PropisSoft) │ ПРАКСА (✅нађено/⛔нема) │ ПОМАЖЕ │ РИЗИК │
-ТИП резоновања (дедуктивно/индуктивно/аналогно) │ снага ■■■■□.
+**3.1 Kartica argumenta (za svaki):** ČINJENICA (str.+citat+P-klasa) │ VEZA F2 │
+NORMA (čl./st./zakon ✅PropisSoft) │ PRAKSA (✅nađeno/⛔nema) │ POMAŽE │ RIZIK │
+TIP rezonovanja (deduktivno/induktivno/analogno) │ snaga ■■■■□.
 
-**3.2 Граф зависности:** означи НЕЗАВИСАН/ЗАВИСИ-ОД-#N. 3 средња НЕЗАВИСНА >
-5 јаких ЗАВИСНИХ. Детаљно: `references/argument-graf.md`.
+**3.2 Graf zavisnosti:** označi NEZAVISAN/ZAVISI-OD-#N. 3 srednja NEZAVISNA >
+5 jakih ZAVISNIH. Detaljno: `references/argument-graf.md`.
 
-**3.3 Судска пракса → ДЕЛЕГАЦИЈА (не ради се овде):** позови
-`istrazivanje-prakse` skill (учитај његов SKILL.md и спроведи протокол).
-Редослед извора и анти-фабрикација живе ТАМО. Не нађено = ⛔. НИКАД не измишљај.
+**3.3 Sudska praksa → DELEGACIJA (ne radi se ovde):** pozovi
+`istrazivanje-prakse` skill (učitaj njegov SKILL.md i sprovedi protokol).
+Redosled izvora i anti-fabrikacija žive TAMO. Ne nađeno = ⛔. NIKAD ne izmišljaj.
 
-**3.3б Уставни/ЕСЉП чек (domain-agnostic — власник логике је istrazivanje-prakse):**
-за сваки аргумент провери □ уставна димензија? □ конвенцијска димензија?
-Ако сигнал постоји (кривична материја, слобода изражавања, притвор, претрес,
-имовина у извршењу, дискриминација...) → **позови `istrazivanje-prakse`** који
-носи ауто-тригер табелу и правила активације по домену (кривица=увек; остало
-по тежини). Локални подсетник димензија: `references/ustavni-i-esljp-sloj.md`.
-Ако ЕСЉП димензија постоји → кандидат за „Једну ствар" (Ф5).
+**3.3b Ustavni/ESLJP ček (domain-agnostic — vlasnik logike je istrazivanje-prakse):**
+za svaki argument proveri □ ustavna dimenzija? □ konvencijska dimenzija?
+Ako signal postoji (krivična materija, sloboda izražavanja, pritvor, pretres,
+imovina u izvršenju, diskriminacija...) → **pozovi `istrazivanje-prakse`** koji
+nosi auto-triger tabelu i pravila aktivacije po domenu (krivica=uvek; ostalo
+po težini). Lokalni podsetnik dimenzija: `references/ustavni-i-esljp-sloj.md`.
+Ako ESLJP dimenzija postoji → kandidat za „Jednu stvar" (F5).
 
-**3.4 Закони:** PropisSoft ПРВО, никад из меморије; провери суседне чланове.
+**3.4 Zakoni:** PropisSoft PRVO, nikad iz memorije; proveri susedne članove.
 
-**3.5 Стратешка процена:** најбољи/најгори исход, вероватноћа+зашто,
-алтернативни пут (поравнање/споразум/повлачење), финансије (ВСП vs трошкови),
-следећи корак, временски оквир.
+**3.5 Strateška procena:** najbolji/najgori ishod, verovatnoća+zašto,
+alternativni put (poravnanje/sporazum/povlačenje), finansije (VSP vs troškovi),
+sledeći korak, vremenski okvir.
 
-**3.6 КВАНТИФИКАЦИЈА РИЗИКА (ОБАВЕЗНА, скраћени приказ):**
+**3.6 KVANTIFIKACIJA RIZIKA (OBAVEZNA, skraćeni prikaz):**
 ```
-ПРАВНИ [1-10] + ЧИЊЕНИЧНИ [1-10] + ПРОЦЕСНИ (рок/надлежност/легитимација/
-застарелост) [1-10] → ПРОСЕК [W/10]   │   + ФИНАНСИЈСКИ: ВСП/трошкови/ROI
-8-10 НИЗАК → агресивно │ 5-7 СРЕДЊИ → пажљиво+алтернатива │ 1-4 ВИСОК → поравнање/повлачење
+PRAVNI [1-10] + ČINJENIČNI [1-10] + PROCESNI (rok/nadležnost/legitimacija/
+zastarelost) [1-10] → PROSEK [W/10]   │   + FINANSIJSKI: VSP/troškovi/ROI
+8-10 NIZAK → agresivno │ 5-7 SREDNJI → pažljivo+alternativa │ 1-4 VISOK → poravnanje/povlačenje
 ```
-Пуна матрица са свим пољима: `references/rizik-matrica.md` —
-**ОБАВЕЗНО учитати и попунити ЦЕЛУ матрицу у FULL режиму.**
-Оцена се САОПШТАВА кориснику — лоше прогнозе се не скривају.
+Puna matrica sa svim poljima: `references/rizik-matrica.md` —
+**OBAVEZNO učitati i popuniti CELU matricu u FULL režimu.**
+Ocena se SAOPŠTAVA korisniku — loše prognoze se ne skrivaju.
 
-**→ СЛЕДЕЋЕ: Ф4 (никад директно у писање).**
+**→ SLEDEĆE: F4 (nikad direktno u pisanje).**
 
-### ФАЗА 4 — ADVERSARIAL SIMULATOR (4 перспективе)
+### FAZA 4 — ADVERSARIAL SIMULATOR (4 perspektive)
 
-**А) СУДИЈА** (шта убеђује/иритира; суштина у прва 2 пасуса?) │ **Б) ПРОТИВНИК**
-(КОНТРА → КОНТРА-НА-КОНТРУ → преживљава?) │ **В) АПЕЛАЦИОНИ СУД** (жалбено
-отпорни аргументи?) │ **Ђ) УСТАВНИ СУД + ЕСЉП** (повреда? ДА = „нуклеарна
-опција" — саопшти; НЕ = не троши ресурсе на уставну жалбу).
+**A) SUDIJA** (šta ubeđuje/iritira; suština u prva 2 pasusa?) │ **B) PROTIVNIK**
+(KONTRA → KONTRA-NA-KONTRU → preživljava?) │ **V) APELACIONI SUD** (žalbeno
+otporni argumenti?) │ **Đ) USTAVNI SUD + ESLJP** (povreda? DA = „nuklearna
+opcija" — saopšti; NE = ne troši resurse na ustavnu žalbu).
 
-**Г) Комплетност:** сви основи? пропуштен доказ ЗА/ПРОТИВ (ПРОТИВ → реци
-кориснику)? рок/надлежност/легитимација? застарелост (УВЕК рачуница —
-`scripts/check_rok.py`)? петит ↔ аргументација? боља квалификација?
+**G) Kompletnost:** svi osnovi? propušten dokaz ZA/PROTIV (PROTIV → reci
+korisniku)? rok/nadležnost/legitimacija? zastarelost (UVEK računica —
+`scripts/check_rok.py`)? petit ↔ argumentacija? bolja kvalifikacija?
 
-**Д) ОБАВЕЗНО ПОНОВНО ЧИТАЊЕ:** стране 3 најјача аргумента + стране
-контрадикција из Ф2 + изрека/диспозитив (хвата грешке Ф1).
+**D) OBAVEZNO PONOVNO ČITANJE:** strane 3 najjača argumenta + strane
+kontradikcija iz F2 + izreka/dispozitiv (hvata greške F1).
 
-**Е) МАТРИЦА ОТПОРНОСТИ (обавезна):** табела АРГ × {Судија, Противник,
-Апелација, Уст.суд} → НЕУНИШТИВ / ЈАК / РИЗИЧАН / УСЛОВАН / ОДБАЦИ.
-❌ код Судије → ИСКЉУЧИ из документа. НЕУНИШТИВ → иде ПРВИ.
-Бајес update: пре Ф4 [X%] → после Ф4 [Y%]. Детаљно:
-`references/adversarial-simulator.md` — **читати у Ф4 FULL режима.**
+**E) MATRICA OTPORNOSTI (obavezna):** tabela ARG × {Sudija, Protivnik,
+Apelacija, Ust.sud} → NEUNIŠTIV / JAK / RIZIČAN / USLOVAN / ODBACI.
+❌ kod Sudije → ISKLJUČI iz dokumenta. NEUNIŠTIV → ide PRVI.
+Bajes update: pre F4 [X%] → posle F4 [Y%]. Detaljno:
+`references/adversarial-simulator.md` — **čitati u F4 FULL režima.**
 
-**→ СЛЕДЕЋЕ: Ф5.**
+**→ SLEDEĆE: F5.**
 
-### ФАЗА 5 — „ЈЕДНА СТВАР"
+### FAZA 5 — „JEDNA STVAR"
 
-Питања: (1) једна реченица судији? (2) један аргумент који остаје? (3) шта
-противник НЕ МОЖЕ да одговори? (4) која чињеница мења контекст свега?
+Pitanja: (1) jedna rečenica sudiji? (2) jedan argument koji ostaje? (3) šta
+protivnik NE MOŽE da odgovori? (4) koja činjenica menja kontekst svega?
 ```
-„ЈЕДНА СТВАР": [реченица] │ ЗАШТО │ ДОКАЗ: стр.[X]+[Y] ✅П1 │ НЕОДБРАЊИВО: [зашто]
+„JEDNA STVAR": [rečenica] │ ZAŠTO │ DOKAZ: str.[X]+[Y] ✅P1 │ NEODBRANJIVO: [zašto]
 ```
-**Иде ПРВА у документу.** Без ње нема Ф6 (HARD gate) — или је случај слаб
-(саопшти) или ниси довољно размислио (назад у Ф4).
+**Ide PRVA u dokumentu.** Bez nje nema F6 (HARD gate) — ili je slučaj slab
+(saopšti) ili nisi dovoljno razmislio (nazad u F4).
 
-**→ СЛЕДЕЋЕ: Ф6 — handoff, НЕ проза.**
+**→ SLEDEĆE: F6 — handoff, NE proza.**
 
-### ФАЗА 6 — ГЕНЕРИСАЊЕ И ПРЕДАЈА
+### FAZA 6 — GENERISANJE I PREDAJA
 
-#### 6.1 КАНОНСКИ HANDOFF (машински пакет — извршни скил га чита у Кораку 0)
+#### 6.1 KANONSKI HANDOFF (mašinski paket — izvršni skil ga čita u Koraku 0)
 
-Обавезних **7 поља + `predmet`** (пуни YAML формат + попуњени примери:
-`references/handoff-protokol-izlaz.md` — **ОБАВЕЗНО учитати при састављању**):
+Obaveznih **7 polja + `predmet`** (puni YAML format + popunjeni primeri:
+`references/handoff-protokol-izlaz.md` — **OBAVEZNO učitati pri sastavljanju**):
 
 ```yaml
 handoff:
   source: "pravna-analiza v5"
-  target: krivica | tuzba-parnica | izvrsenje      # из РУТЕРА
+  target: krivica | tuzba-parnica | izvrsenje      # iz RUTERA
   predmet: {tip_postupka, stranka, perspektiva, sud, broj_predmeta}
-  teorija_slucaja:      # ① Ф0 — реченица, хипотеза, вероватноћа
-  cinjenicna_mapa:      # ② Ф1-2 — чињенице са П1/П2/П3 (⛔П4 НИКАД) + контрадикције
-  argumenti:            # ③ Ф3 — јаки/средњи/слаби + граф (независних/укупних) + правни слојеви
-  adversarial:          # ④ Ф4 — преживело судија/противник + одбачено са разлогом
-  jedna_stvar:          # ⑤ Ф5 — аргумент, зашто, доказ ✅П1, неодбрањиво → ПРВО У ДОКУМЕНТУ
-  praksa:               # ⑥ од istrazivanje-prakse — суд, број, датум, ЛИНК, ratio, П1/П2
-  strateska_procena:    # ⑦ Ф3.5+3.6 — исходи, rizik_1_10, препорука
+  teorija_slucaja:      # ① F0 — rečenica, hipoteza, verovatnoća
+  cinjenicna_mapa:      # ② F1-2 — činjenice sa P1/P2/P3 (⛔P4 NIKAD) + kontradikcije
+  argumenti:            # ③ F3 — jaki/srednji/slabi + graf (nezavisnih/ukupnih) + pravni slojevi
+  adversarial:          # ④ F4 — preživelo sudija/protivnik + odbačeno sa razlogom
+  jedna_stvar:          # ⑤ F5 — argument, zašto, dokaz ✅P1, neodbranjivo → PRVO U DOKUMENTU
+  praksa:               # ⑥ od istrazivanje-prakse — sud, broj, datum, LINK, ratio, P1/P2
+  strateska_procena:    # ⑦ F3.5+3.6 — ishodi, rizik_1_10, preporuka
 ```
 
-**Потпуност:** 7/7 + predmet или се НЕ предаје. Празно поље = експлицитно
-(`praksa: []` + „нема верификоване праксе — циљни скил активира fallback"),
-никад двосмислено.
+**Potpunost:** 7/7 + predmet ili se NE predaje. Prazno polje = eksplicitno
+(`praksa: []` + „nema verifikovane prakse — ciljni skil aktivira fallback"),
+nikad dvosmisleno.
 
-**⛓️ ОДМАХ ЗАТИМ (правило непрекидности — без изузетка):**
+**⛓️ ODMAH ZATIM (pravilo neprekidnosti — bez izuzetka):**
 ```
-view /mnt/skills/user/<target>/SKILL.md   ← У ИСТОМ ОДГОВОРУ
-→ изврши Корак 0 циљног скила (валидација пакета)
-→ зелено светло постоји? ДА → циљни скил генерише (→ stil-pisanja → verifikator)
-                          НЕ → стани после Корака 0: „Чекам зелено светло."
+view /mnt/skills/user/<target>/SKILL.md   ← U ISTOM ODGOVORU
+→ izvrši Korak 0 ciljnog skila (validacija paketa)
+→ zeleno svetlo postoji? DA → ciljni skil generiše (→ stil-pisanja → verifikator)
+                          NE → stani posle Koraka 0: „Čekam zeleno svetlo."
 ```
 
-#### 6.2 Писање без специјализованог скила (управно, прекршајно, стечај, породично)
-Стил адв. Мишића (учитај `stil-pisanja`) + docx skill + структура из
-`references/oblasti-checkliste.md` + ОБАВЕЗНО `verifikator` пре испоруке.
+#### 6.2 Pisanje bez specijalizovanog skila (upravno, prekršajno, stečaj, porodično)
+Stil adv. Mišića (učitaj `stil-pisanja`) + docx skill + struktura iz
+`references/oblasti-checkliste.md` + OBAVEZNO `verifikator` pre isporuke.
 
-#### 6.3 Рекурзивна верификација
-Свака реченица са тврдњом: постоји у Ф1-2? број/датум/износ проверен? члан
-✅PropisSoft? → па цео документ прочитај КАО ДА ГА НИКАД НИСИ ВИДЕО.
+#### 6.3 Rekurzivna verifikacija
+Svaka rečenica sa tvrdnjom: postoji u F1-2? broj/datum/iznos proveren? član
+✅PropisSoft? → pa ceo dokument pročitaj KAO DA GA NIKAD NISI VIDEO.
 
-#### 6.4 Верификациони извештај
-`Тврдње N │ ✅П1 n(%) 🟡П2 n(%) 🔴П3 n(%) ⛔П4 n(%) │ ОЦЕНА │ „Једна ствар" у
-документу? │ Граф: независних X/Y │ ⚠️ ЗА ПРОВЕРУ: [тврдња→извор]`
-Пуни систем квалитета: `references/kvalitet-i-verifikacija.md`.
-
----
-
-## БАТЦХ РЕЖИМ (2+ предмета)
-
-Покреће се чим стигне више предмета. Тока: ПРИЈЕМ И КЛАСИФИКАЦИЈА (групе „исте
-природе": исти тип + иста област + иста структура потраживања, 2/3 = иста) →
-ПРИОРИТИЗАЦИЈА (① рок<5 дана ② ВСП>500.000 ③ сложени ④ стандардни) → ОБРАДА
-(први у групи = пуне фазе; остали скраћено — Ф1 бројеви/датуми/имена
-ПОЈЕДИНАЧНО никад copy-paste, Ф4/Ф5 наслеђују) → ERROR RECOVERY (<80% изолуј,
-не заустављај батцх; пад квалитета кроз батцх → СТОП+обавести; забрањено
-копирање чињеница између предмета) → DASHBOARD после СВАКОГ документа.
-
-Пуни pipeline, шаблони пријема, dashboard и recovery формати:
-`references/batch-pipeline.md` — **ОБАВЕЗНО учитати чим батцх крене.**
-Compliance извештај: за СВАКИ документ + dashboard на крају.
+#### 6.4 Verifikacioni izveštaj
+`Tvrdnje N │ ✅P1 n(%) 🟡P2 n(%) 🔴P3 n(%) ⛔P4 n(%) │ OCENA │ „Jedna stvar" u
+dokumentu? │ Graf: nezavisnih X/Y │ ⚠️ ZA PROVERU: [tvrdnja→izvor]`
+Puni sistem kvaliteta: `references/kvalitet-i-verifikacija.md`.
 
 ---
 
-## ЗАБРАЊЕНО (апсолутно)
+## BATCH REŽIM (2+ predmeta)
 
-1. Измишљање чињеница (не пише = не постоји) │ 2. Измишљање праксе (не нађено
-= ⛔) │ 3. Закони из меморије (PropisSoft прво) │ 4. Прескакање фаза (интерно
-увек све) │ 5. Копирање чињеница између предмета │ 6. Игнорисање контрадикција
-│ 7. Тихо решавање нејасноћа (стани, питај, чекај) │ 8. „Да, сигуран сам" без
-шта+где проверено │ 9. Писање у корист противне стране │ 10. Скривање лоших
-вести │ **11. (v5) Прекид ланца: handoff без учитаног циљног SKILL.md у истом одговору.**
+Pokreće se čim stigne više predmeta. Toka: PRIJEM I KLASIFIKACIJA (grupe „iste
+prirode": isti tip + ista oblast + ista struktura potraživanja, 2/3 = ista) →
+PRIORITIZACIJA (① rok<5 dana ② VSP>500.000 ③ složeni ④ standardni) → OBRADA
+(prvi u grupi = pune faze; ostali skraćeno — F1 brojevi/datumi/imena
+POJEDINAČNO nikad copy-paste, F4/F5 nasleđuju) → ERROR RECOVERY (<80% izoluj,
+ne zaustavljaj batch; pad kvaliteta kroz batch → STOP+obavesti; zabranjeno
+kopiranje činjenica između predmeta) → DASHBOARD posle SVAKOG dokumenta.
 
----
-
-## КОМУНИКАЦИЈА
-
-Документ учитан: „Крећем Ф0-1." → Ф0+Ф1+Ф2 → „Настављам Ф3-5?" │ „Брзо":
-скрати ПРИКАЗ не процес (минимум: контрадикције + „Једна ствар" + ранг) │
-Лоша вест: „Уочио сам проблем: [опис]. Опције: [1/2/3]."
+Puni pipeline, šabloni prijema, dashboard i recovery formati:
+`references/batch-pipeline.md` — **OBAVEZNO učitati čim batch krene.**
+Compliance izveštaj: za SVAKI dokument + dashboard na kraju.
 
 ---
 
-## РЕФЕРЕНТНИ ФАЈЛОВИ (прогресивно учитавање — читати по гејту, не „по жељи")
+## ZABRANJENO (apsolutno)
 
-| Фајл | Садржај | ОБАВЕЗНО кад |
+1. Izmišljanje činjenica (ne piše = ne postoji) │ 2. Izmišljanje prakse (ne nađeno
+= ⛔) │ 3. Zakoni iz memorije (PropisSoft prvo) │ 4. Preskakanje faza (interno
+uvek sve) │ 5. Kopiranje činjenica između predmeta │ 6. Ignorisanje kontradikcija
+│ 7. Tiho rešavanje nejasnoća (stani, pitaj, čekaj) │ 8. „Da, siguran sam" bez
+šta+gde provereno │ 9. Pisanje u korist protivne strane │ 10. Skrivanje loših
+vesti │ **11. (v5) Prekid lanca: handoff bez učitanog ciljnog SKILL.md u istom odgovoru.**
+
+---
+
+## KOMUNIKACIJA
+
+Dokument učitan: „Krećem F0-1." → F0+F1+F2 → „Nastavljam F3-5?" │ „Brzo":
+skrati PRIKAZ ne proces (minimum: kontradikcije + „Jedna stvar" + rang) │
+Loša vest: „Uočio sam problem: [opis]. Opcije: [1/2/3]."
+
+---
+
+## REFERENTNI FAJLOVI (progresivno učitavanje — čitati po gejtu, ne „po želji")
+
+| Fajl | Sadržaj | OBAVEZNO kad |
 |---|---|---|
-| `references/kognitivni-motor.md` | Три канала, типови резоновања | УВЕК на почетку |
-| `references/rezim-i-eskalacija.md` | FULL/СТАНДАРД пуни критеријуми, ескалација | Прва гранична процена режима |
-| `references/forenzicko-citanje.md` | Протоколи читања, тест горила | Ф1 |
-| `references/oblasti-checkliste.md` | 8 области: матрице и чеклисте | Ф0 (избор §) и Ф2 |
-| `references/argument-graf.md` | Граф зависности, архитектура | Ф3, Ф5 |
-| `references/rizik-matrica.md` | Ф3.6 ПУНА матрица ризика | Ф3.6 у FULL режиму |
-| `references/adversarial-simulator.md` | 4 перспективе детаљно | Ф4 FULL |
-| `references/ustavni-i-esljp-sloj.md` | Устав РС / ЕКЉП подсетник димензија | Ф3.3б, Ф4.Ђ |
-| `references/handoff-protokol-izlaz.md` | Канонски пакет + примери | Ф6.1 (свака предаја) |
-| `references/kvalitet-i-verifikacija.md` | Верификациони систем | Ф6.3–6.4 |
-| `references/batch-pipeline.md` | Пуни батцх pipeline + dashboard | Чим стигне 2+ предмета |
-| `references/compliance-izvestaj.md` | ПУНИ шаблон Compliance извештаја | Пре СВАКЕ испоруке |
-| `references/pattern-biblioteka.md` | Обрасци грешака, замке | По потреби |
-| `references/triggering-tests.md` | Тестови активације | Одржавање скила |
+| `references/kognitivni-motor.md` | Tri kanala, tipovi rezonovanja | UVEK na početku |
+| `references/rezim-i-eskalacija.md` | FULL/STANDARD puni kriterijumi, eskalacija | Prva granična procena režima |
+| `references/forenzicko-citanje.md` | Protokoli čitanja, test gorila | F1 |
+| `references/oblasti-checkliste.md` | 8 oblasti: matrice i čekliste | F0 (izbor §) i F2 |
+| `references/argument-graf.md` | Graf zavisnosti, arhitektura | F3, F5 |
+| `references/rizik-matrica.md` | F3.6 PUNA matrica rizika | F3.6 u FULL režimu |
+| `references/adversarial-simulator.md` | 4 perspektive detaljno | F4 FULL |
+| `references/ustavni-i-esljp-sloj.md` | Ustav RS / EKLJP podsetnik dimenzija | F3.3b, F4.Đ |
+| `references/handoff-protokol-izlaz.md` | Kanonski paket + primeri | F6.1 (svaka predaja) |
+| `references/kvalitet-i-verifikacija.md` | Verifikacioni sistem | F6.3–6.4 |
+| `references/batch-pipeline.md` | Puni batch pipeline + dashboard | Čim stigne 2+ predmeta |
+| `references/compliance-izvestaj.md` | PUNI šablon Compliance izveštaja | Pre SVAKE isporuke |
+| `references/pattern-biblioteka.md` | Obrasci grešaka, zamke | Po potrebi |
+| `references/triggering-tests.md` | Testovi aktivacije | Održavanje skila |
 
 ---
 
-## ⛔ ЗАВРШНА ИНСТРУКЦИЈА — COMPLIANCE ИЗВЕШТАЈ (последње = најважније)
+## ⛔ ZAVRŠNA INSTRUKCIJA — COMPLIANCE IZVEŠTAJ (poslednje = najvažnije)
 
-После СВАКЕ анализе, пре испоруке: **учитај `references/compliance-izvestaj.md`
-и попуни ПУНИ шаблон** (предмет/странке/област; ред по фази Ф0–6.4 са кључним
-излазом; ИЗВРШЕНО X/Y; ПРЕСКОЧЕНО+разлог; **ПРЕТРАГЕ** — тачно шта претражено
-на PropisSoft/ВКС/ЕСЉП и шта нађено, иначе „⛔ НИСАМ ПРЕТРАЖИО"; god-skill
-compliance; Бајес оцена; стратешка препорука; **(v5) ред ЛАНАЦ:** target скил
-учитан ✅/⛔ + потпуност пакета X/7).
+Posle SVAKE analize, pre isporuke: **učitaj `references/compliance-izvestaj.md`
+i popuni PUNI šablon** (predmet/stranke/oblast; red po fazi F0–6.4 sa ključnim
+izlazom; IZVRŠENO X/Y; PRESKOČENO+razlog; **PRETRAGE** — tačno šta pretraženo
+na PropisSoft/VKS/ESLJP i šta nađeno, inače „⛔ NISAM PRETRAŽIO"; god-skill
+compliance; Bajes ocena; strateška preporuka; **(v5) red LANAC:** target skil
+učitan ✅/⛔ + potpunost paketa X/7).
 
-Правила: извештај обавезан без обзира на режим/хитност │ Ф4 ❌ и Ф3.6 ризик
-1-4/10 морају бити НАГЛАШЕНИ │ два активна скила = два извештаја │ батцх =
-извештај по документу + dashboard │ непотпун handoff (<7/7) се НЕ предаје.
+Pravila: izveštaj obavezan bez obzira na režim/hitnost │ F4 ❌ i F3.6 rizik
+1-4/10 moraju biti NAGLAŠENI │ dva aktivna skila = dva izveštaja │ batch =
+izveštaj po dokumentu + dashboard │ nepotpun handoff (<7/7) se NE predaje.
 
-**БЕЗ ОВОГ ИЗВЕШТАЈА SKILL НИЈЕ ПРИМЕЊЕН. БЕЗ УЧИТАНОГ ЦИЉНОГ СКИЛА ЛАНАЦ
-НИЈЕ ЗАТВОРЕН. КОРИСНИК ИМА ПРАВО ДА ОДБИЈЕ ОДГОВОР БЕЗ ОБА.**
+**BEZ OVOG IZVEŠTAJA SKILL NIJE PRIMENJEN. BEZ UČITANOG CILJNOG SKILA LANAC
+NIJE ZATVOREN. KORISNIK IMA PRAVO DA ODBIJE ODGOVOR BEZ OBA.**

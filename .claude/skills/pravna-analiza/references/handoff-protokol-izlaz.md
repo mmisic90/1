@@ -1,33 +1,33 @@
-# Канонски HANDOFF протокол — излаз `pravna-analiza` v4
+# Kanonski HANDOFF protokol — izlaz `pravna-analiza` v4
 
-Овај фајл дефинише **тачан** формат пакета који `pravna-analiza` Фаза 6.1 испоручује извршним скиловима (`krivica`, `tuzba-parnica`, `izvrsenje`). Циљ: handoff између мозга стека и извршних скилова буде машински поуздан, без губитка информација.
-
----
-
-## Зашто канонски формат
-
-Пре v4, `pravna-analiza` је предавала неформалан ASCII цртеж. Извршни скилови (krivica Корак 0, tuzba-parnica Корак 0) очекивали су структуриран садржај са тачно 7 поља. Резултат: губитак информација на најкритичнијем прелазу — мозак говори прозом, извршиоци чекају формат.
-
-v4 затвара тај процеп: Ф6.1 испоручује **један канонски пакет** који оба стила (krivica описни ⓵–⓻ + tuzba-parnica строги YAML) разумеју.
+Ovaj fajl definiše **tačan** format paketa koji `pravna-analiza` Faza 6.1 isporučuje izvršnim skilovima (`krivica`, `tuzba-parnica`, `izvrsenje`). Cilj: handoff između mozga steka i izvršnih skilova bude mašinski pouzdan, bez gubitka informacija.
 
 ---
 
-## Мапирање поља → шта који скил чита
+## Zašto kanonski format
 
-| Поље | krivica Корак 0 | tuzba-parnica Корак 0 | izvrsenje |
+Pre v4, `pravna-analiza` je predavala neformalan ASCII crtež. Izvršni skilovi (krivica Korak 0, tuzba-parnica Korak 0) očekivali su strukturiran sadržaj sa tačno 7 polja. Rezultat: gubitak informacija na najkritičnijem prelazu — mozak govori prozom, izvršioci čekaju format.
+
+v4 zatvara taj procep: F6.1 isporučuje **jedan kanonski paket** koji oba stila (krivica opisni ⓵–⓻ + tuzba-parnica strogi YAML) razumeju.
+
+---
+
+## Mapiranje polja → šta koji skil čita
+
+| Polje | krivica Korak 0 | tuzba-parnica Korak 0 | izvrsenje |
 |---|---|---|---|
-| `predmet.perspektiva` | „одбрана" увек | „tuzilac"/„tuzeni" | „poverilac"/„duznik"/„predlagac" |
-| `teorija_slucaja` | ① | teorija_slucaja | теорија |
-| `cinjenicna_mapa` | ② | cinjenicna_mapa | чињенице |
-| `argumenti` | ③ | argumenti | основ |
-| `adversarial` | ④ | adversarial | стрес |
-| `jedna_stvar` | ⑤ → први пасус | jedna_stvar → први пасус | кључ |
-| `praksa` | ⑥ | praksa | пракса ЗИО |
-| `strateska_procena` | ⑦ | strateska_procena | процена ризика |
+| `predmet.perspektiva` | „odbrana" uvek | „tuzilac"/„tuzeni" | „poverilac"/„duznik"/„predlagac" |
+| `teorija_slucaja` | ① | teorija_slucaja | teorija |
+| `cinjenicna_mapa` | ② | cinjenicna_mapa | činjenice |
+| `argumenti` | ③ | argumenti | osnov |
+| `adversarial` | ④ | adversarial | stres |
+| `jedna_stvar` | ⑤ → prvi pasus | jedna_stvar → prvi pasus | ključ |
+| `praksa` | ⑥ | praksa | praksa ZIO |
+| `strateska_procena` | ⑦ | strateska_procena | procena rizika |
 
 ---
 
-## Пример попуњеног пакета (кривични предмет)
+## Primer popunjenog paketa (krivični predmet)
 
 ```yaml
 handoff:
@@ -37,93 +37,93 @@ handoff:
 
   predmet:
     tip_postupka: "krivicni"
-    stranka: "[име окривљеног]"
+    stranka: "[ime okrivljenog]"
     perspektiva: "odbrana"
-    sud: "Основни суд у Новом Саду"
-    broj_predmeta: "К 123/26"
+    sud: "Osnovni sud u Novom Sadu"
+    broj_predmeta: "K 123/26"
 
   teorija_slucaja:
     jedna_recenica: >
-      Оптужба за дело клевете не стоји јер је исказ окривљеног
-      вредносни суд о питању од јавног интереса, заштићен чл. 10 ЕКЉП.
+      Optužba za delo klevete ne stoji jer je iskaz okrivljenog
+      vrednosni sud o pitanju od javnog interesa, zaštićen čl. 10 EKLJP.
     hipoteza: >
-      Ако докажемо да је изјава вредносни суд (не чињеничка тврдња),
-      нема dela — Lingens против Аустрије.
+      Ako dokažemo da je izjava vrednosni sud (ne činjenička tvrdnja),
+      nema dela — Lingens protiv Austrije.
     verovatnoca_uspeha: "70%"
 
   cinjenicna_mapa:
-    - cinjenica: "Окривљени је изјаву дао на јавној трибини"
-      klasa: "П1"
-      izvor: "стр. 3, пасус 2 оптужнице"
-      status: "потврђено"
-    - cinjenica: "Тема трибине била јавна набавка општине"
-      klasa: "П1"
-      izvor: "стр. 3, пасус 4"
-      status: "потврђено"
+    - cinjenica: "Okrivljeni je izjavu dao na javnoj tribini"
+      klasa: "P1"
+      izvor: "str. 3, pasus 2 optužnice"
+      status: "potvrđeno"
+    - cinjenica: "Tema tribine bila javna nabavka opštine"
+      klasa: "P1"
+      izvor: "str. 3, pasus 4"
+      status: "potvrđeno"
     kontradikcije:
       - >
-        Приватни тужилац у тач. 2 признаје да је тема била јавна
-        набавка, што сам потврђује јавни интерес — поткопава сопствену
-        тезу о приватном нападу.
+        Privatni tužilac u tač. 2 priznaje da je tema bila javna
+        nabavka, što sam potvrđuje javni interes — potkopava sopstvenu
+        tezu o privatnom napadu.
 
   argumenti:
     jaki:
-      - "Вредносни суд, не чињеничка тврдња (чл. 10 ЕКЉП + Lingens)"
-      - "Питање од јавног интереса (Castells, Feldek)"
+      - "Vrednosni sud, ne činjenička tvrdnja (čl. 10 EKLJP + Lingens)"
+      - "Pitanje od javnog interesa (Castells, Feldek)"
     srednji:
-      - "Недостатак умишљаја (чл. 18 КЗ)"
+      - "Nedostatak umišljaja (čl. 18 KZ)"
     slabi:
-      - "Истинитост изјаве (тешко доказива, ризично)"
+      - "Istinitost izjave (teško dokaziva, rizično)"
     graf_zavisnosti:
       nezavisnih: 2
       ukupnih: 3
     pravni_slojevi:
-      - "КЗ чл. 170 (клевета), чл. 18 (умишљај)"
-      - "Устав чл. 46 (слобода изражавања)"
-      - "ЕКЉП чл. 10 + пракса (Lingens, Castells, Feldek, Bodrožić)"
+      - "KZ čl. 170 (kleveta), čl. 18 (umišljaj)"
+      - "Ustav čl. 46 (sloboda izražavanja)"
+      - "EKLJP čl. 10 + praksa (Lingens, Castells, Feldek, Bodrožić)"
 
   adversarial:
     sudija_prezivelo: 2
     protivnik_prezivelo: 2
     odbaceno:
-      - "Истинитост изјаве — судија би тражио доказ који немамо"
+      - "Istinitost izjave — sudija bi tražio dokaz koji nemamo"
 
   jedna_stvar:
     argument: >
-      Изјава је вредносни суд о питању од јавног интереса — а вредносни
-      суд по природи не подлеже доказу истинитости (Lingens, пар. 46).
+      Izjava je vrednosni sud o pitanju od javnog interesa — a vrednosni
+      sud po prirodi ne podleže dokazu istinitosti (Lingens, par. 46).
     zasto: >
-      Ако суд прихвати да је реч о вредносном суду, цело дело пада —
-      нема шта да се доказује као неистинито.
-    dokaz: "стр. 3 оптужнице (тема = јавна набавка) ← ✅П1"
+      Ako sud prihvati da je reč o vrednosnom sudu, celo delo pada —
+      nema šta da se dokazuje kao neistinito.
+    dokaz: "str. 3 optužnice (tema = javna nabavka) ← ✅P1"
     neodbrativo: >
-      Приватни тужилац сам признаје јавни карактер теме (тач. 2),
-      па не може тврдити да је напад био приватан.
+      Privatni tužilac sam priznaje javni karakter teme (tač. 2),
+      pa ne može tvrditi da je napad bio privatan.
 
   praksa:
-    - sud: "ЕСЉП"
-      broj: "Lingens против Аустрије, 9815/82"
+    - sud: "ESLJP"
+      broj: "Lingens protiv Austrije, 9815/82"
       datum: "08.07.1986"
-      link: "приложен пун текст (.docx у стеку)"
+      link: "priložen pun tekst (.docx u steku)"
       ratio: >
-        Разлика између чињеница (подложне доказу) и вредносних судова
-        (неподложни доказу истинитости) — кључна за чл. 10.
+        Razlika između činjenica (podložne dokazu) i vrednosnih sudova
+        (nepodložni dokazu istinitosti) — ključna za čl. 10.
       verifikovano: true
-      poverenje: "П1"
+      poverenje: "P1"
 
   strateska_procena:
-    najbolji_ishod: "Ослобађајућа пресуда — нема дела"
-    realan_ishod: "Ослобађајућа или одбачај приватне тужбе"
-    najgori_ishod: "Осуда уз условну — ако суд одбије ЕКЉП аргумент"
+    najbolji_ishod: "Oslobađajuća presuda — nema dela"
+    realan_ishod: "Oslobađajuća ili odbačaj privatne tužbe"
+    najgori_ishod: "Osuda uz uslovnu — ako sud odbije EKLJP argument"
     rizik_1_10: 3
     preporuka: >
-      Тежиште на вредносни суд + јавни интерес. Истинитост НЕ истицати
-      као главни аргумент (ризично). ЕСЉП пракса је одлучујућа.
+      Težište na vrednosni sud + javni interes. Istinitost NE isticati
+      kao glavni argument (rizično). ESLJP praksa je odlučujuća.
 ```
 
 ---
 
-## Пример (парнични предмет — скраћено)
+## Primer (parnični predmet — skraćeno)
 
 ```yaml
 handoff:
@@ -132,67 +132,67 @@ handoff:
   predmet:
     tip_postupka: "parnicni"
     perspektiva: "tuzilac"
-    sud: "Основни суд у Новом Саду"
+    sud: "Osnovni sud u Novom Sadu"
   teorija_slucaja:
-    jedna_recenica: "Дужник није платио испоручену робу — наплата + камата."
+    jedna_recenica: "Dužnik nije platio isporučenu robu — naplata + kamata."
     verovatnoca_uspeha: "85%"
   jedna_stvar:
-    argument: "Потписана отпремница + неспорна фактура = неспоран дуг."
-    dokaz: "Прилог 1 (отпремница са печатом) ← ✅П1"
+    argument: "Potpisana otpremnica + nesporna faktura = nesporan dug."
+    dokaz: "Prilog 1 (otpremnica sa pečatom) ← ✅P1"
   praksa:
     - sud: "VKS"
-      broj: "Прев 123/2024"
+      broj: "Prev 123/2024"
       verifikovano: true
-      poverenje: "П1"
+      poverenje: "P1"
   strateska_procena:
-    realan_ishod: "Усвајајућа пресуда у целости"
+    realan_ishod: "Usvajajuća presuda u celosti"
     rizik_1_10: 2
-# (остала поља попуњена по канону)
+# (ostala polja popunjena po kanonu)
 ```
 
 ---
 
-## Правила испоруке
+## Pravila isporuke
 
-1. **Потпуност:** свих 7 поља + `predmet`. Празно поље → експлицитно `[]` или `null` + напомена, никад двосмислено.
-2. **П-класа:** ниједан ⛔П4 у `cinjenicna_mapa`. Само П1/П2/П3.
-3. **Пракса:** свака одлука са `link` или pasted пун текст + `verifikovano: true`. Без тога → не улази у пакет.
-4. **target:** одређује РУТЕР на основу `tip_postupka`. Један пакет → један target.
-5. **Fallback:** ако извршни скил добије непотпун пакет → СТОП, тражи допуну (не попуњава из меморије).
-
----
-
-## Веза са Кораком 0 извршних скилова
-
-- `krivica` Корак 0.1 чита поља ⓵–⓻ описно
-- `tuzba-parnica` Корак 0.1 чита иста поља као YAML кључеве
-- `izvrsenje` чита `predmet.perspektiva` + чињенице + пракса ЗИО
-
-Сви читају ИСТИ пакет. То је суштина v4 стандардизације.
+1. **Potpunost:** svih 7 polja + `predmet`. Prazno polje → eksplicitno `[]` ili `null` + napomena, nikad dvosmisleno.
+2. **P-klasa:** nijedan ⛔P4 u `cinjenicna_mapa`. Samo P1/P2/P3.
+3. **Praksa:** svaka odluka sa `link` ili pasted pun tekst + `verifikovano: true`. Bez toga → ne ulazi u paket.
+4. **target:** određuje RUTER na osnovu `tip_postupka`. Jedan paket → jedan target.
+5. **Fallback:** ako izvršni skil dobije nepotpun paket → STOP, traži dopunu (ne popunjava iz memorije).
 
 ---
 
-## Target-specific додатна поља
+## Veza sa Korakom 0 izvršnih skilova
 
-Канонских 7 поља су заједничка. Поједини скилови траже **додатна** поља — кад је `target` тај скил, допуни пакет:
+- `krivica` Korak 0.1 čita polja ⓵–⓻ opisno
+- `tuzba-parnica` Korak 0.1 čita ista polja kao YAML ključeve
+- `izvrsenje` čita `predmet.perspektiva` + činjenice + praksa ZIO
 
-**target: tuzba-parnica** (парница тражи новчане оквире):
+Svi čitaju ISTI paket. To je suština v4 standardizacije.
+
+---
+
+## Target-specific dodatna polja
+
+Kanonskih 7 polja su zajednička. Pojedini skilovi traže **dodatna** polja — kad je `target` taj skil, dopuni paket:
+
+**target: tuzba-parnica** (parnica traži novčane okvire):
 ```yaml
   praksa:
-    - iznos_dosudjen: 250000        # досуђени износ у сличним предметима (динари)
+    - iznos_dosudjen: 250000        # dosuđeni iznos u sličnim predmetima (dinari)
   strateska_procena:
-    vsp_preporuka: 250000           # препоручена вредност спора (динари)
+    vsp_preporuka: 250000           # preporučena vrednost spora (dinari)
 ```
 
-**target: izvrsenje** (извршење тражи исправу + средство):
+**target: izvrsenje** (izvršenje traži ispravu + sredstvo):
 ```yaml
   predmet:
-    vrsta_isprave: "verodostojna" | "izvrsna"   # одређује Протокол А или Б
+    vrsta_isprave: "verodostojna" | "izvrsna"   # određuje Protokol A ili B
     sredstvo_izvrsenja: "racun" | "nepokretnost" | "pokretne" | "zarada"
-  iznos_potrazivanja: 250000        # главница (динари)
-  kamata_od: "ISO-датум доспелости"
+  iznos_potrazivanja: 250000        # glavnica (dinari)
+  kamata_od: "ISO-datum dospelosti"
 ```
 
-**target: krivica** — нема додатних поља преко канонских 7 (кривица не барата новчаним захтевом на исти начин).
+**target: krivica** — nema dodatnih polja preko kanonskih 7 (krivica ne barata novčanim zahtevom na isti način).
 
-Ако `target` скил тражи додатно поље којег нема → извршни скил активира свој Корак 0.3 (непотпун handoff) и тражи допуну. Никад не попуњавај из меморије.
+Ako `target` skil traži dodatno polje kojeg nema → izvršni skil aktivira svoj Korak 0.3 (nepotpun handoff) i traži dopunu. Nikad ne popunjavaj iz memorije.

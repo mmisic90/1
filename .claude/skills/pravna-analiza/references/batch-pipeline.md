@@ -1,113 +1,113 @@
-# БАТЦХ pipeline — пун протокол (релоцирано из SKILL.md v4.1 — ВЕРБАТИМ)
+# BATCH pipeline — pun protokol (relocirano iz SKILL.md v4.1 — VERBATIM)
 
-Учитава се ОБАВЕЗНО чим у задатак уђе 2+ предмета. Dashboard се ажурира после
-СВАКОГ документа; корисник га добија на „статус" / „колико још".
+Učitava se OBAVEZNO čim u zadatak uđe 2+ predmeta. Dashboard se ažurira posle
+SVAKOG dokumenta; korisnik ga dobija na „status" / „koliko još".
 
 ---
 
-## БАТЦХ РЕЖИМ — СТРУКТУРИРАН PIPELINE
+## BATCH REŽIM — STRUKTURIRAN PIPELINE
 
-### КОРАК 1: ПРИЈЕМ И КЛАСИФИКАЦИЈА
+### KORAK 1: PRIJEM I KLASIFIKACIJA
 ```
 ╔════════════════════════════════════════════════╗
-║ БАТЦХ ПРИЈЕМ                                    ║
+║ BATCH PRIJEM                                    ║
 ╠════════════════════════════════════════════════╣
-║ Примљено: [N] предмета                         ║
+║ Primljeno: [N] predmeta                         ║
 ║                                                ║
-║ КЛАСИФИКАЦИЈА (аутоматска):                    ║
-║ #1: [странка] → ТИП: [тужба/извршење/жалба]   ║
-║     ОБЛАСТ: [парница/кривица/извршење]          ║
-║     ХИТНОСТ: [рок за X дана]                   ║
-║     ВСП: [износ]                                ║
+║ KLASIFIKACIJA (automatska):                    ║
+║ #1: [stranka] → TIP: [tužba/izvršenje/žalba]   ║
+║     OBLAST: [parnica/krivica/izvršenje]          ║
+║     HITNOST: [rok za X dana]                   ║
+║     VSP: [iznos]                                ║
 ║ #2: ...                                        ║
 ║ #N: ...                                        ║
 ╠════════════════════════════════════════════════╣
-║ ГРУПЕ „ИСТЕ ПРИРОДЕ":                          ║
-║  Група А: #1, #3, #7 (тужбе наплата)           ║
-║  Група Б: #2, #5 (извршења)                    ║
-║  Група В: #4, #6 (различити) → пуне фазе       ║
+║ GRUPE „ISTE PRIRODE":                          ║
+║  Grupa A: #1, #3, #7 (tužbe naplata)           ║
+║  Grupa B: #2, #5 (izvršenja)                    ║
+║  Grupa V: #4, #6 (različiti) → pune faze       ║
 ╚════════════════════════════════════════════════╝
 ```
 
-**КРИТЕРИЈУМИ „ИСТЕ ПРИРОДЕ":**
-- Исти тип документа (тужба, извршење, жалба)
-- Иста област права
-- Истa структура потраживања (нпр. све фактурне наплате)
-→ Ако 2 од 3 испуњена = иста природа → скраћене фазе за 2+
-→ Ако 1 или 0 = различита → пуне фазе за сваки
+**KRITERIJUMI „ISTE PRIRODE":**
+- Isti tip dokumenta (tužba, izvršenje, žalba)
+- Ista oblast prava
+- Ista struktura potraživanja (npr. sve fakturne naplate)
+→ Ako 2 od 3 ispunjena = ista priroda → skraćene faze za 2+
+→ Ako 1 ili 0 = različita → pune faze za svaki
 
-### КОРАК 2: ПРИОРИТИЗАЦИЈА
+### KORAK 2: PRIORITIZACIJA
 ```
-РЕДОСЛЕД ОБРАДЕ:
+REDOSLED OBRADE:
 ══════════════════════════════════════════
 
-ПРИОРИТЕТ 1 — ХИТНИ (рок < 5 дана):
-  [предмет] → РОК: [датум] → ОДМАХ
+PRIORITET 1 — HITNI (rok < 5 dana):
+  [predmet] → ROK: [datum] → ODMAH
 
-ПРИОРИТЕТ 2 — ВИСОКИ ВСП (>500.000 дин):
-  [предмет] → ВСП: [износ] → пуне фазе
+PRIORITET 2 — VISOKI VSP (>500.000 din):
+  [predmet] → VSP: [iznos] → pune faze
 
-ПРИОРИТЕТ 3 — СЛОЖЕНИ (кривица, управно):
-  [предмет] → пуне фазе
+PRIORITET 3 — SLOŽENI (krivica, upravno):
+  [predmet] → pune faze
 
-ПРИОРИТЕТ 4 — СТАНДАРДНИ (тужбе наплата, извршења):
-  [предмети из исте групе] → скраћене фазе
+PRIORITET 4 — STANDARDNI (tužbe naplata, izvršenja):
+  [predmeti iz iste grupe] → skraćene faze
 ```
 
-### КОРАК 3: ОБРАДА
+### KORAK 3: OBRADA
 ```
-ЗА СВАКУ ГРУПУ:
-  1. ПРВИ у групи → ПУНЕ ФАЗЕ 0-6
-  2. ОСТАЛИ исте природе → СКРАЋЕНО:
-     Ф0: 10 секунди (само странке и износ)
-     Ф1: Само бројеве/датуме/имена (ПОЈЕДИНАЧНО, никад copy-paste)
-     Ф2: Само ако нешто ОДСТУПА од првог
-     Ф3: Примени исте аргументе, прилагоди чињенице
-     Ф4: ПРЕСКОЧИ (већ урађено за први)
-     Ф5: ПРЕСКОЧИ (иста „Једна ствар")
-     Ф6: Генериши + верификуј бројеве/имена/датуме
+ZA SVAKU GRUPU:
+  1. PRVI u grupi → PUNE FAZE 0-6
+  2. OSTALI iste prirode → SKRAĆENO:
+     F0: 10 sekundi (samo stranke i iznos)
+     F1: Samo brojeve/datume/imena (POJEDINAČNO, nikad copy-paste)
+     F2: Samo ako nešto ODSTUPA od prvog
+     F3: Primeni iste argumente, prilagodi činjenice
+     F4: PRESKOČI (već urađeno za prvi)
+     F5: PRESKOČI (ista „Jedna stvar")
+     F6: Generiši + verifikuj brojeve/imena/datume
 
-ЗА РАЗЛИЧИТЕ:
-  → Пуне фазе за сваки. Без пречица.
-```
-
-### КОРАК 4: ERROR RECOVERY
-```
-АКО ДОКУМЕНТ ПАДНЕ ИСПОД 80%:
-  → ИЗОЛУЈ — не заустављај цео батцх
-  → Означи ⚠️ у dashboard-у
-  → Настави са осталима
-  → На крају: врати се на проблематичне
-  → Саопшти кориснику: „Предмет #X захтева додатну проверу"
-
-АКО ДЕТЕКТУJЕШ ПАД КВАЛИТЕТА КРОЗ БАТЦХ:
-  (нпр. #1 = 95%, #2 = 90%, #3 = 82%, #4 = 75%)
-  → god-skill 8А детектује тренд пада
-  → СТОП. Паузирај. Обавести корисника.
-  → Могући узрок: замор контекста, мешање података
-  → Решење: рестартуј Ф1 за наредне предмете
+ZA RAZLIČITE:
+  → Pune faze za svaki. Bez prečica.
 ```
 
-### КОРАК 5: DASHBOARD
+### KORAK 4: ERROR RECOVERY
+```
+AKO DOKUMENT PADNE ISPOD 80%:
+  → IZOLUJ — ne zaustavljaj ceo batch
+  → Označi ⚠️ u dashboard-u
+  → Nastavi sa ostalima
+  → Na kraju: vrati se na problematične
+  → Saopšti korisniku: „Predmet #X zahteva dodatnu proveru"
+
+AKO DETEKTUJEŠ PAD KVALITETA KROZ BATCH:
+  (npr. #1 = 95%, #2 = 90%, #3 = 82%, #4 = 75%)
+  → god-skill 8A detektuje trend pada
+  → STOP. Pauziraj. Obavesti korisnika.
+  → Mogući uzrok: zamor konteksta, mešanje podataka
+  → Rešenje: restartuj F1 za naredne predmete
+```
+
+### KORAK 5: DASHBOARD
 ```
 ╔═══════════════════════════════════════════════════╗
-║ БАТЦХ DASHBOARD — [датум]                         ║
+║ BATCH DASHBOARD — [datum]                         ║
 ╠═══════════════════════════════════════════════════╣
-║ #  │ Тип           │ Странка        │ Оцена  │ ⏱  ║
+║ #  │ Tip           │ Stranka        │ Ocena  │ ⏱  ║
 ║────┼────────────────┼────────────────┼────────┼────║
-║ 1  │ Тужба наплата  │ Петровић д.о.о.│ 🟢 92% │ ✅ ║
-║ 2  │ Извршење       │ Марковић       │ 🟢 88% │ ✅ ║
-║ 3  │ Жалба кривица  │ Богнић В.      │ 🟡 74% │ ⚠️ ║
-║ 4  │ Тужба наплата  │ Јовановић      │ 🟢 95% │ ✅ ║
-║ 5  │ Управно        │ Стевикић       │ ⏳ —   │ 🔄 ║
+║ 1  │ Tužba naplata  │ Petrović d.o.o.│ 🟢 92% │ ✅ ║
+║ 2  │ Izvršenje       │ Marković       │ 🟢 88% │ ✅ ║
+║ 3  │ Žalba krivica  │ Bognić V.      │ 🟡 74% │ ⚠️ ║
+║ 4  │ Tužba naplata  │ Jovanović      │ 🟢 95% │ ✅ ║
+║ 5  │ Upravno        │ Stevikić       │ ⏳ —   │ 🔄 ║
 ╠═══════════════════════════════════════════════════╣
-║ ЗАВРШЕНО: [X]/[N] │ ПРОСЕК: [Y%]                 ║
-║ ⚠️ ЗА ПРОВЕРУ: #3 (испод прага)                  ║
-║ ТРЕНД: [стабилан/пада/расте]                      ║
+║ ZAVRŠENO: [X]/[N] │ PROSEK: [Y%]                 ║
+║ ⚠️ ZA PROVERU: #3 (ispod praga)                  ║
+║ TREND: [stabilan/pada/raste]                      ║
 ╚═══════════════════════════════════════════════════╝
 ```
 
-**ПРАВИЛО:** Dashboard се ажурира после СВАКОГ документа.
-Корисник га види кад год каже „статус" или „колико још".
+**PRAVILO:** Dashboard se ažurira posle SVAKOG dokumenta.
+Korisnik ga vidi kad god kaže „status" ili „koliko još".
 
 ---

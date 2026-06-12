@@ -1,49 +1,49 @@
 # Triggering Tests — tuzba-parnica
 
-**Филозофија:** Парничнопроцесни акти. После pravna-analiza handoff-а.
+**Filozofija:** Parničnoprocesni akti. Posle pravna-analiza handoff-a.
 
-**Anthropic Skills Guide (стр. 14-15):** *"Triggering tests ensure your skill loads at the right times."*
+**Anthropic Skills Guide (str. 14-15):** *"Triggering tests ensure your skill loads at the right times."*
 
-**Употреба:** Месечно — копирај примере у нов чат. Провери: да ли се skill тачно активирао (или не активирао)?
-
----
-
-## ✅ SHOULD TRIGGER (мора да се активира)
-
-1. Тужба за наплату 450.000 дин
-2. Одговор на тужбу — примили из суда
-3. Жалба на пресуду у парници
-4. Ревизија — ВСП изнад 40k EUR
-5. Приговор на платни налог
-6. Противтужба
-7. Тужба за накнаду нематеријалне штете
-8. Предлог за привремену меру
+**Upotreba:** Mesečno — kopiraj primere u nov čat. Proveri: da li se skill tačno aktivirao (ili ne aktivirao)?
 
 ---
 
-## ❌ SHOULD NOT TRIGGER (не сме да се активира)
+## ✅ SHOULD TRIGGER (mora da se aktivira)
 
-1. Кривична жалба (krivica)
-2. Предлог за извршење (pravna-analiza + script)
-3. Прекршајна жалба (pravna-analiza)
-4. Управна тужба (pravna-analiza)
-5. Уставна жалба без парничне подлоге (pravna-analiza)
+1. Tužba za naplatu 450.000 din
+2. Odgovor na tužbu — primili iz suda
+3. Žalba na presudu u parnici
+4. Revizija — VSP iznad 40k EUR
+5. Prigovor na platni nalog
+6. Protivtužba
+7. Tužba za naknadu nematerijalne štete
+8. Predlog za privremenu meru
+
+---
+
+## ❌ SHOULD NOT TRIGGER (ne sme da se aktivira)
+
+1. Krivična žalba (krivica)
+2. Predlog za izvršenje (pravna-analiza + script)
+3. Prekršajna žalba (pravna-analiza)
+4. Upravna tužba (pravna-analiza)
+5. Ustavna žalba bez parnične podloge (pravna-analiza)
 6. Knjižica, Instagram
 7. Cowork debugging
-8. Casual поздрав
+8. Casual pozdrav
 
 ---
 
-## 🟡 ГРАНИЧНИ (питам корисника)
+## 🟡 GRANIČNI (pitam korisnika)
 
-1. Ако контекст није јасан → питам пре активирања
-2. Ако тригер лично може бити погрешно протумачен → тражим потврду
-3. Ако фајл није учитан а корисник помиње документ → тражим upload
+1. Ako kontekst nije jasan → pitam pre aktiviranja
+2. Ako triger lično može biti pogrešno protumačen → tražim potvrdu
+3. Ako fajl nije učitan a korisnik pominje dokument → tražim upload
 
 ---
 
-## МЕТРИКА (циљ: 90%+)
+## METRIKA (cilj: 90%+)
 
-- SHOULD TRIGGER: активирати се у бар 7/8
-- SHOULD NOT: НЕ активирати се у ниједном — 0/8
-- Ако ниже → коригуј `description` поље
+- SHOULD TRIGGER: aktivirati se u bar 7/8
+- SHOULD NOT: NE aktivirati se u nijednom — 0/8
+- Ako niže → koriguj `description` polje

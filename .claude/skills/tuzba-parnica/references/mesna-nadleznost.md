@@ -1,55 +1,55 @@
-# Месна надлежност у парничном поступку — по ЗПП
+# Mesna nadležnost u parničnom postupku — po ZPP
 
-## Опша месна надлежност (чл. 39 ЗПП)
-Суд пребивалишта / боравишта туженог (физичко лице), односно суд седишта туженог (правно лице).
+## Opša mesna nadležnost (čl. 39 ZPP)
+Sud prebivališta / boravišta tuženog (fizičko lice), odnosno sud sedišta tuženog (pravno lice).
 
-## Посебна месна надлежност
+## Posebna mesna nadležnost
 
-| Члан ЗПП | Врста спора | Алтернативна надлежност |
+| Član ZPP | Vrsta spora | Alternativna nadležnost |
 |---|---|---|
-| Чл. 40 | Тужба против лица са непознатим пребивалиштем | Суд на чијем подручју тужени борави |
-| Чл. 44 | Уговорне обавезе | Суд места извршења уговора (алтернативно) |
-| Чл. 45 | Накнада штете | Суд места где је штетна радња извршена ИЛИ где је последица наступила |
-| Чл. 46 | Законско издржавање | Суд пребивалишта тужиоца |
-| Чл. 47 | Спорови из радних односа | Суд места рада запосленог |
-| Чл. 48 | Менична и чековна тужба | Суд места плаћања |
-| Чл. 50 | Непокретности | **Искључива** надлежност суда места непокретности |
-| Чл. 51 | Ауторска права | Суд пребивалишта тужиоца (алтернативно) |
-| Чл. 52 | Наследни спорови | Суд последњег пребивалишта оставиоца |
+| Čl. 40 | Tužba protiv lica sa nepoznatim prebivalištem | Sud na čijem području tuženi boravi |
+| Čl. 44 | Ugovorne obaveze | Sud mesta izvršenja ugovora (alternativno) |
+| Čl. 45 | Naknada štete | Sud mesta gde je štetna radnja izvršena ILI gde je posledica nastupila |
+| Čl. 46 | Zakonsko izdržavanje | Sud prebivališta tužioca |
+| Čl. 47 | Sporovi iz radnih odnosa | Sud mesta rada zaposlenog |
+| Čl. 48 | Menična i čekovna tužba | Sud mesta plaćanja |
+| Čl. 50 | Nepokretnosti | **Isključiva** nadležnost suda mesta nepokretnosti |
+| Čl. 51 | Autorska prava | Sud prebivališta tužioca (alternativno) |
+| Čl. 52 | Nasledni sporovi | Sud poslednjeg prebivališta ostavioca |
 
-## Уговорена надлежност (чл. 65 ЗПП)
-Странке могу уговорити месну надлежност ако је барем једна странка трговац или правно лице. Уговорена надлежност је **ПРИОРИТЕТНА** над законском.
+## Ugovorena nadležnost (čl. 65 ZPP)
+Stranke mogu ugovoriti mesnu nadležnost ako je barem jedna stranka trgovac ili pravno lice. Ugovorena nadležnost je **PRIORITETNA** nad zakonskom.
 
-## Привредни судови у Србији
+## Privredni sudovi u Srbiji
 
-| Суд | Подручје |
+| Sud | Područje |
 |---|---|
-| Привредни суд у Новом Саду | АП Војводина |
-| Привредни суд у Београду | Београд |
-| Привредни суд у Нишу | Нишавски, Топлички, Пиротски, Јабланички, Пчињски округ |
-| Привредни суд у Крагујевцу | Шумадијски, Поморавски, Рашки, Рашки, Златиборски округ |
-| Привредни суд у Зрењанину | Среднобанатски округ |
-| Привредни суд у Суботици | Севернобачки округ |
-| Привредни суд у Панчеву | Јужнобанатски округ |
-| Привредни суд у Сомбору | Западнобачки округ |
-| Привредни суд у Сремској Митровици | Сремски округ |
+| Privredni sud u Novom Sadu | AP Vojvodina |
+| Privredni sud u Beogradu | Beograd |
+| Privredni sud u Nišu | Nišavski, Toplički, Pirotski, Jablanički, Pčinjski okrug |
+| Privredni sud u Kragujevcu | Šumadijski, Pomoravski, Raški, Raški, Zlatiborski okrug |
+| Privredni sud u Zrenjaninu | Srednobanatski okrug |
+| Privredni sud u Subotici | Severnobački okrug |
+| Privredni sud u Pančevu | Južnobanatski okrug |
+| Privredni sud u Somboru | Zapadnobački okrug |
+| Privredni sud u Sremskoj Mitrovici | Sremski okrug |
 
-## Стварна надлежност
+## Stvarna nadležnost
 
-### Основни суд — чл. 22 ЗУС / чл. 23 ЗПП:
-- Имовинскоправни спорови до 500.000,00 дин. ВСП
-- Спорови из радних односа (без обзира на вредност)
-- Спорови због сметања поседа
-- Заједница станара, закуп непокретности
+### Osnovni sud — čl. 22 ZUS / čl. 23 ZPP:
+- Imovinskopravni sporovi do 500.000,00 din. VSP
+- Sporovi iz radnih odnosa (bez obzira na vrednost)
+- Sporovi zbog smetanja poseda
+- Zajednica stanara, zakup nepokretnosti
 
-### Виши суд — чл. 24 ЗПП:
-- Имовинскоправни спорови преко 500.000,00 дин.
-- Спорови о ауторским и сродним правима
-- Накнада штете по чл. 180 ЗОО (одговорност државе)
-- Спорови о заштити права на приватност и личности
+### Viši sud — čl. 24 ZPP:
+- Imovinskopravni sporovi preko 500.000,00 din.
+- Sporovi o autorskim i srodnim pravima
+- Naknada štete po čl. 180 ZOO (odgovornost države)
+- Sporovi o zaštiti prava na privatnost i ličnosti
 
-### Привредни суд:
-- Спорови међу привредним субјектима (правним лицима, предузетницима)
-- Стечај и ликвидација
-- Права интелектуалне својине у привредним споровима
-- Инвестициони спорови
+### Privredni sud:
+- Sporovi među privrednim subjektima (pravnim licima, preduzetnicima)
+- Stečaj i likvidacija
+- Prava intelektualne svojine u privrednim sporovima
+- Investicioni sporovi

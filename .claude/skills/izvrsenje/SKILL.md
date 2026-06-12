@@ -2,18 +2,16 @@
 name: izvrsenje
 version: 1.0
 description: >
-  Извршни поступак и сви акти у њему — предлог за извршење (на основу извршне исправе
-  или вероdoстојне исправе), приговор на решење о извршењу, жалба на закључак извршитеља,
-  проти­вizvršенjе, подне­сак јавном извршитељу, обустав­а извршења. Тригери: извршни
-  поступак, извршни поверилац, извршни дужник, предлог за извршење, верoдостojна
-  исправа, ИИ-, ИИв-, ПИ-, јавни извршитељ, блокада рачуна, запле­на, попис, процена,
-  продаја непокретности, забрана располагања, пориз на додатну вредност доделјена
-  имовина, намирење. Генерише .docx у стилу адв. Милана Мишића, са перспективе
-  ИЗВРШНОГ ПОВЕРИОЦА или ИЗВРШНОГ ДУЖНИКА зависно од акта. OBAVEZNO prima handoff
-  од pravna-analiza, OBAVEZNO delegira претраgu sudske prakse u istrazivanje-prakse,
-  и OBAVEZNO predaje izlaz verifikatoru пре dostavljanja korisniku. NE aktivirati
-  za: парничне спорове (tuzba-parnica), кривичне поступке (krivica), прекршajne
-  посту­паnje, управне спорове, knjižice, Instagram, технички debugging.
+  Izvršni postupak i svi akti u njemu — predlog za izvršenje (na osnovu izvršne isprave
+  ili verodostojne isprave), prigovor na rešenje o izvršenju, žalba na zaključak izvršitelja,
+  protivizvršenje, podnesak javnom izvršitelju, obustava izvršenja. Trigeri: izvršni
+  postupak, izvršni poverilac, izvršni dužnik, predlog za izvršenje, verodostojna
+  isprava, II-, IIv-, PI-, javni izvršitelj, blokada računa, zaplena, popis, procena,
+  prodaja nepokretnosti, zabrana raspolaganja, poriz na dodatnu vrednost dodeljena
+  imovina, namirenje. Generiše .docx u stilu adv. Milana Mišića, sa perspektive
+  IZVRŠNOG POVERIOCA ili IZVRŠNOG DUŽNIKA zavisno od akta. Lanac: pravna-analiza → ovaj skill → istrazivanje-prakse → verifikator. NE aktivirati
+  za: parnične sporove (tuzba-parnica), krivične postupke (krivica), prekršajne
+  postupanje, upravne sporove, knjižice, Instagram, tehnički debugging.
 metadata:
   author: "Milan Mišić, advokat"
   version: "1.0.0 (komplet 7 šablona — završen u Sesiji 5b)"
@@ -24,37 +22,39 @@ metadata:
   last-updated: "2026-04-22"
 ---
 
-# Извршни поступак — Skill v1.0
+# Izvršni postupak — Skill v1.0
 
-> ✅ **СКИЛ ЈЕ ОПЕРАТИВAН.** Завршен у Сесији 5b (22.04.2026). Садржи **7 комplетних композиционих шаблона** — предлог за извршeнje, приговор на решeнje, жалба на закључак извршитеља, проти­визвршeнje, подне­сак извршитељу, опомена пред извршeнje, вансудско поравнање. Сви шаблони имају мock-up, матрицу терминологије, тарифу, и checklist. 
+> **Pismo:** instrukcije ovog skila su latinica (token-ekonomija, vidi `_policy/politika-pisma.md`); izlazni pravni akt je uvek ćirilica — kontroliše `stil-pisanja`.
+
+> ✅ **SKIL JE OPERATIVAN.** Završen u Sesiji 5b (22.04.2026). Sadrži **7 kompletnih kompozicionih šablona** — predlog za izvršenje, prigovor na rešenje, žalba na zaključak izvršitelja, protivizvršenje, podnesak izvršitelju, opomena pred izvršenje, vansudsko poravnanje. Svi šabloni imaju mock-up, matricu terminologije, tarifu, i checklist. 
 >
-> До тада — за акте који нису покривени овим skill-ом, кориснику се препоручује да:
-> 1. Отвори `tuzba-parnica` за припремне акте (опомена пред тужбу)
-> 2. Отвори `pravna-analiza` за анализу извршне материје
-> 3. Ручно адаптира постoјеće шаблоне уз консултацију са `stil-pisanja` 
+> Do tada — za akte koji nisu pokriveni ovim skill-om, korisniku se preporučuje da:
+> 1. Otvori `tuzba-parnica` za pripremne akte (opomena pred tužbu)
+> 2. Otvori `pravna-analiza` za analizu izvršne materije
+> 3. Ručno adaptira postojeće šablone uz konsultaciju sa `stil-pisanja` 
 
-## ⚠️ NEGATIVE TRIGGERS — НЕ АКТИВИРАЈ ЗА:
+## ⚠️ NEGATIVE TRIGGERS — NE AKTIVIRAJ ZA:
 
-| Контекст | Правилан skill |
+| Kontekst | Pravilan skill |
 |---|---|
-| Парнични поступак (тужба, одговор, жалба на пресуду) | `tuzba-parnica` |
-| Кривични поступак | `krivica` |
-| Припремне фазе пре парнице (опомена пред тужбу) | `tuzba-parnica/sabloni/08` |
-| Управни спор, прекршajnoм, уставна жалба | `pravna-analiza` |
+| Parnični postupak (tužba, odgovor, žalba na presudu) | `tuzba-parnica` |
+| Krivični postupak | `krivica` |
+| Pripremne faze pre parnice (opomena pred tužbu) | `tuzba-parnica/sabloni/08` |
+| Upravni spor, prekršajnom, ustavna žalba | `pravna-analiza` |
 
 ---
 
-## Сврха
+## Svrha
 
-Аутоматски израђује потпуне и суду/извршитељу подношене акте у извршном поступку, у стилу и реторичком маниру адвокатске канцеларије Милана Мишића, према Закону о извршenju и обезбeđ­enju (ЗИО), са интеграцијом верификоване судске праксе и референтних тарифа из корпуса.
+Automatski izrađuje potpune i sudu/izvršitelju podnošene akte u izvršnom postupku, u stilu i retoričkom maniru advokatske kancelarije Milana Mišića, prema Zakonu o izvršenju i obezbeđenju (ZIO), sa integracijom verifikovane sudske prakse i referentnih tarifa iz korpusa.
 
-**ОСНОВНО ПРАВИЛО:** Акт се пише са перспективе СТРАНКЕ коју Милан заступа — **ИЗВРШНИ ПОВЕРИЛАЦ** (покреће извршење) или **ИЗВРШНИ ДУЖНИК** (брани се од извршења).
+**OSNOVNO PRAVILO:** Akt se piše sa perspektive STRANKE koju Milan zastupa — **IZVRŠNI POVERILAC** (pokreće izvršenje) ili **IZVRŠNI DUŽNIK** (brani se od izvršenja).
 
-**КРИТИЧНО за терминологију:** У извршном поступку **НИКАД** се не пише "тужилац/тужени" — увек **ИЗВРШНИ ПОВЕРИЛАЦ / ИЗВРШНИ ДУЖНИК**. То је прва провера коју треба урадити пре писања било ког извршног акта.
+**KRITIČNO za terminologiju:** U izvršnom postupku **NIKAD** se ne piše "tužilac/tuženi" — uvek **IZVRŠNI POVERILAC / IZVRŠNI DUŽNIK**. To je prva provera koju treba uraditi pre pisanja bilo kog izvršnog akta.
 
 ---
 
-## МЕСТО У STACK-У
+## MESTO U STACK-U
 
 ```
                     ┌───────────────────────────┐
@@ -62,14 +62,14 @@ metadata:
                     └─────────────┬─────────────┘
                                   │
                     ┌─────────────▼─────────────┐
-                    │      pravna-analiza       │ Ф0–Ф5 → handoff
+                    │      pravna-analiza       │ F0–F5 → handoff
                     └─────────────┬─────────────┘
                                   │
                   ┌───────────────┴───────────────┐
                   │                               │
       ┌───────────▼───────────┐       ┌──────────▼──────────┐
       │  istrazivanje-prakse  │◄──────┤      IZVRSENJE      │
-      │     v6 (делегат)      │       │       v0.1          │
+      │     v6 (delegat)      │       │       v0.1          │
       └───────────┬───────────┘       └──────────┬──────────┘
                   │                              │
                   └──────────────┬───────────────┘
@@ -79,125 +79,125 @@ metadata:
                      └───────────┬───────────┘
                                  │
                                  ▼
-                          КОРИСНИК (Милан)
+                          KORISNIK (Milan)
 ```
 
 ---
 
-## Шаблони — КОМПЛЕТНИ (v1.0)
+## Šabloni — KOMPLETNI (v1.0)
 
-| # | Шаблон | Статус | Изворни акт из корпуса / База |
+| # | Šablon | Status | Izvorni akt iz korpusa / Baza |
 |---|---|---|---|
-| 01 | `sabloni/01_predlog_izvrsenje.md` | ✅ Готов | Armex PREDLOG ZA IZVRŠENJE 3 рачуна |
-| 02 | `sabloni/02_prigovor_na_resenje_izvrsenju.md` | ✅ Готов | Чл. 58-65 ЗИО — одбрана ИД |
-| 03 | `sabloni/03_zalba_na_zakljucak_izvrsitelja.md` | ✅ Готов | Чл. 81-87 ЗИО |
-| 04 | `sabloni/04_protivizvrsenje.md` | ✅ Готов | Чл. 180-190 ЗИО — реституционо |
-| 05 | `sabloni/05_podnesak_izvrsitelju.md` | ✅ Готов | Процесни подне­сак — све сврхе |
-| 06 | `sabloni/06_opomena_pred_izvrsenje.md` | ✅ Готов | Вансудски акт — припрема за извршeнje |
-| 07 | `sabloni/07_vansudsko_poravnanje.md` ⭐ | ✅ Готов | **Armex/Duming VANSUDSKO PORAVNANJE (25.09.2024)** |
+| 01 | `sabloni/01_predlog_izvrsenje.md` | ✅ Gotov | Armex PREDLOG ZA IZVRŠENJE 3 računa |
+| 02 | `sabloni/02_prigovor_na_resenje_izvrsenju.md` | ✅ Gotov | Čl. 58-65 ZIO — odbrana ID |
+| 03 | `sabloni/03_zalba_na_zakljucak_izvrsitelja.md` | ✅ Gotov | Čl. 81-87 ZIO |
+| 04 | `sabloni/04_protivizvrsenje.md` | ✅ Gotov | Čl. 180-190 ZIO — restituciono |
+| 05 | `sabloni/05_podnesak_izvrsitelju.md` | ✅ Gotov | Procesni podnesak — sve svrhe |
+| 06 | `sabloni/06_opomena_pred_izvrsenje.md` | ✅ Gotov | Vansudski akt — priprema za izvršenje |
+| 07 | `sabloni/07_vansudsko_poravnanje.md` ⭐ | ✅ Gotov | **Armex/Duming VANSUDSKO PORAVNANJE (25.09.2024)** |
 
-**Укупно:** 7 шаблона, ~3.000 линија пravнoг знања, базираних на **стварном корпусу** адв. Милана Мишића 2022-2026.
+**Ukupno:** 7 šablona, ~3.000 linija pravnog znanja, baziranih na **stvarnom korpusu** adv. Milana Mišića 2022-2026.
 
-Планирани наредни корaцi (**будућe сесије**):
-- Сесија 6: валидација кроз реалан тест (писaњe новог извршног акта)
-- Сесија 7: додати помоћне референце (рокови, матрица надлежности, листа извршитеља)
-- Сесија 8: специфичнe ситуације (извршeнje на зараду, пензију, непокретност)
+Planirani naredni koraci (**buduće sesije**):
+- Sesija 6: validacija kroz realan test (pisanje novog izvršnog akta)
+- Sesija 7: dodati pomoćne reference (rokovi, matrica nadležnosti, lista izvršitelja)
+- Sesija 8: specifične situacije (izvršenje na zaradu, penziju, nepokretnost)
 
 ---
 
-## Ваzne референце за писање извршних аката
+## Vazne reference za pisanje izvršnih akata
 
-### Терминологија стра­нака
+### Terminologija stranaka
 
-У извршном поступку **обавезно**:
-- **ИЗВРШНИ ПОВЕРИЛАЦ** — ko тражи извршење (раније тужилац у парници)
-- **ИЗВРШНИ ДУЖНИК** — ko дугује (раније тужени у парници)
-- **ЈАВНИ ИЗВРШИТЕЉ** — ko спроводи извршење
+U izvršnom postupku **obavezno**:
+- **IZVRŠNI POVERILAC** — ko traži izvršenje (ranije tužilac u parnici)
+- **IZVRŠNI DUŽNIK** — ko duguje (ranije tuženi u parnici)
+- **JAVNI IZVRŠITELj** — ko sprovodi izvršenje
 
-### Матрица надлежности
+### Matrica nadležnosti
 
-| Врста извршне исправе | Надлежни суд |
+| Vrsta izvršne isprave | Nadležni sud |
 |---|---|
-| Пресуда или решење суда | **Основни / Виши / Привредни суд** који је донео — по надлежности странака |
-| Верoдостojна исправа (фактура) у привреди | **Привредни суд** |
-| Верoдостojна исправа код физичких лица | **Основни суд** (место пребивалишта дужника) |
-| Јавно бележничка исправа | **Основни суд** |
-| Арбитрaжна одлука | **Виши суд** |
+| Presuda ili rešenje suda | **Osnovni / Viši / Privredni sud** koji je doneo — po nadležnosti stranaka |
+| Verodostojna isprava (faktura) u privredi | **Privredni sud** |
+| Verodostojna isprava kod fizičkih lica | **Osnovni sud** (mesto prebivališta dužnika) |
+| Javno beležnička isprava | **Osnovni sud** |
+| Arbitražna odluka | **Viši sud** |
 
-### Надлежни јавни извршитељ
+### Nadležni javni izvršitelj
 
-За подручје корисника **(Зrenjанин, Виши и Привредни суд у Зrenjанину)**:
-- **Жељко Кесић** (из меморije)
-  - Седиште: Зrenjанин, Краља Александра Kараđорђевића 15/III (23101)
-  - Тел: 023/600-529; 064/141-8719
+Za područje korisnika **(Zrenjanin, Viši i Privredni sud u Zrenjaninu)**:
+- **Željko Kesić** (iz memorije)
+  - Sedište: Zrenjanin, Kralja Aleksandra Karađorđevića 15/III (23101)
+  - Tel: 023/600-529; 064/141-8719
   - Email: izvrsitelj.kesic@gmail.com
-  - Број решења о именовању: 740-08-1768/2014-22 од 27.06.2014
-  - Подручje: Вишег суда у Зrenjанину и Привредног суда у Зrenjанину
-  - ⚠️ **Спеловање: "Кесић" — НИКАД "Кешић"**
+  - Broj rešenja o imenovanju: 740-08-1768/2014-22 od 27.06.2014
+  - Područje: Višeg suda u Zrenjaninu i Privrednog suda u Zrenjaninu
+  - ⚠️ **Spelovanje: "Kesić" — NIKAD "Kešić"**
 
-### Матрица тарифа (из корпуса)
+### Matrica tarifa (iz korpusa)
 
-| Акт | Тарифа |
+| Akt | Tarifa |
 |---|---|
-| Предлог за извршење (1 фактура) | **13.500 РСД** |
-| Предлог за извршење (3 фактуре) | **27.000 РСД** (13.500 + 50% + 50%) |
-| Подне­сак извршитељу | 13.500–20.000 |
-| Приговор на решење о извршењу | 20.000–40.000 |
-| Вансудско поравнање | **45.000 РСД** (Armex/Duming модел) |
+| Predlog za izvršenje (1 faktura) | **13.500 RSD** |
+| Predlog za izvršenje (3 fakture) | **27.000 RSD** (13.500 + 50% + 50%) |
+| Podnesak izvršitelju | 13.500–20.000 |
+| Prigovor na rešenje o izvršenju | 20.000–40.000 |
+| Vansudsko poravnanje | **45.000 RSD** (Armex/Duming model) |
 
-### Слojевите камате у петиту (из `reference_vizuelno.md` §26)
+### Slojevite kamate u petitu (iz `reference_vizuelno.md` §26)
 
-Када извршни дужник парцijалnо уплати кроз време, камата се **разбија по интервалима**:
+Kada izvršni dužnik parcijalno uplati kroz vreme, kamata se **razbija po intervalima**:
 
 ```
-- на износ X почев од DATUM1, па до DATUM2
-- затим на износ Y почев од DATUM2, па до DATUM3
-- и на износ Z почев од DATUM3, па до коначне исплате
+- na iznos X počev od DATUM1, pa do DATUM2
+- zatim na iznos Y počev od DATUM2, pa do DATUM3
+- i na iznos Z počev od DATUM3, pa do konačne isplate
 ```
 
-Сви датуми се беležе конкретно — свака парцијална уплата помера интервал.
+Svi datumi se beleže konkretno — svaka parcijalna uplata pomera interval.
 
 ---
 
-## РЕФЕРЕНТНИ ФАЈЛОВИ
+## REFERENTNI FAJLOVI
 
-| Фајл | Садржај | Статус |
+| Fajl | Sadržaj | Status |
 |---|---|---|
-| `references/sabloni/01_predlog_izvrsenje.md` | Предлог за извршење (Armex 3 рачуна модел) | ✅ Готов |
-| `references/sabloni/02_prigovor_na_resenje_izvrsenju.md` | Приговор на решeнje о извршeнju (чл. 58-65 ЗИО) | ✅ Готов |
-| `references/sabloni/03_zalba_na_zakljucak_izvrsitelja.md` | Жалба на закључак извршитеља (чл. 81-87 ЗИО) | ✅ Готов |
-| `references/sabloni/04_protivizvrsenje.md` | Проти­визвршeнje — реституционо (чл. 180-190 ЗИО) | ✅ Готов |
-| `references/sabloni/05_podnesak_izvrsitelju.md` | Подне­сак јавном извршитељу (све сврхе) | ✅ Готов |
-| `references/sabloni/06_opomena_pred_izvrsenje.md` | Опомена пред извршeнje (вансудски) | ✅ Готов |
-| `references/sabloni/07_vansudsko_poravnanje.md` ⭐ | **Вансудско поравнaнje (Armex/Duming модел)** | ✅ Готов |
-| `references/rokovi-izvrsenje.md` | Табела рокова | ⏳ TODO v1.2 |
-| `references/matrica-nadleznosti-izvrsenje.md` | Надлежност по врсти исправе | ⏳ TODO v1.2 |
-| `references/javni-izvrsitelji-vojvodina.md` | Листа јавних извршитеља | ⏳ TODO v1.2 |
+| `references/sabloni/01_predlog_izvrsenje.md` | Predlog za izvršenje (Armex 3 računa model) | ✅ Gotov |
+| `references/sabloni/02_prigovor_na_resenje_izvrsenju.md` | Prigovor na rešenje o izvršenju (čl. 58-65 ZIO) | ✅ Gotov |
+| `references/sabloni/03_zalba_na_zakljucak_izvrsitelja.md` | Žalba na zaključak izvršitelja (čl. 81-87 ZIO) | ✅ Gotov |
+| `references/sabloni/04_protivizvrsenje.md` | Protivizvršenje — restituciono (čl. 180-190 ZIO) | ✅ Gotov |
+| `references/sabloni/05_podnesak_izvrsitelju.md` | Podnesak javnom izvršitelju (sve svrhe) | ✅ Gotov |
+| `references/sabloni/06_opomena_pred_izvrsenje.md` | Opomena pred izvršenje (vansudski) | ✅ Gotov |
+| `references/sabloni/07_vansudsko_poravnanje.md` ⭐ | **Vansudsko poravnanje (Armex/Duming model)** | ✅ Gotov |
+| `references/rokovi-izvrsenje.md` | Tabela rokova | ⏳ TODO v1.2 |
+| `references/matrica-nadleznosti-izvrsenje.md` | Nadležnost po vrsti isprave | ⏳ TODO v1.2 |
+| `references/javni-izvrsitelji-vojvodina.md` | Lista javnih izvršitelja | ⏳ TODO v1.2 |
 
 ---
 
-## ПЛАН ЗА БУДУЋЕ ВЕРЗИЈЕ
+## PLAN ZA BUDUĆE VERZIJE
 
-**v1.1 (планирано Сесија 6):** Валидaција кроз реалан акт
+**v1.1 (planirano Sesija 6):** Validacija kroz realan akt
 
-**v1.2 (планирано Сесија 7):** Помоћне референце
-- `references/rokovi-izvrsenje.md` — Табела рокова (3 дана приговор, 15 дана жалба на закључак)
-- `references/matrica-nadleznosti-izvrsenje.md` — Надлежност по врсти исправе
-- `references/javni-izvrsitelji-vojvodina.md` — Листa јавних извршитеља по подручју
+**v1.2 (planirano Sesija 7):** Pomoćne reference
+- `references/rokovi-izvrsenje.md` — Tabela rokova (3 dana prigovor, 15 dana žalba na zaključak)
+- `references/matrica-nadleznosti-izvrsenje.md` — Nadležnost po vrsti isprave
+- `references/javni-izvrsitelji-vojvodina.md` — Lista javnih izvršitelja po području
 
-**v2.0 (будуće):** Специфичнe ситуације
-- Извршeнje на зараду дужника
-- Извршeнje на пензију
-- Извршeнje на непокретност (ди­замоноp­rодaja, досуђeнje)
-- Извршeнje на mootorno возило
-- Специјалне мере — забрана располагања, полицajно осигуравање
+**v2.0 (buduće):** Specifične situacije
+- Izvršenje na zaradu dužnika
+- Izvršenje na penziju
+- Izvršenje na nepokretnost (dizamonoprodaja, dosuđenje)
+- Izvršenje na mootorno vozilo
+- Specijalne mere — zabrana raspolaganja, policajno osiguravanje
 
 ---
 
-## ЗАБРАЊЕНО (апсолутно)
+## ZABRANJENO (apsolutno)
 
-1. **Писати извршни акт са "тужилац/тужени"** — уvek "извршни поверилац / извршни дужник"
-2. **Заобилazи­ти ЈАВНОГ ИЗВРШИТЕЉА** — ak се спрoвodi преко извршитеља, обавезно именовати конкретног
-3. **Пa­ушалне камате** — увек слojevito, са датумима
-4. **Погрешан надлежан суд** — увек проверити по врсти исправе
-5. **Копирати шаблоне из `tuzba-parnica`** — извршни поступак има другу терминологију
+1. **Pisati izvršni akt sa "tužilac/tuženi"** — uvek "izvršni poverilac / izvršni dužnik"
+2. **Zaobilaziti JAVNOG IZVRŠITELJA** — ak se sprovodi preko izvršitelja, obavezno imenovati konkretnog
+3. **Paušalne kamate** — uvek slojevito, sa datumima
+4. **Pogrešan nadležan sud** — uvek proveriti po vrsti isprave
+5. **Kopirati šablone iz `tuzba-parnica`** — izvršni postupak ima drugu terminologiju

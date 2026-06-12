@@ -1,186 +1,186 @@
-# Квалитет и верификација — Комплетан систем контроле
+# Kvalitet i verifikacija — Kompletan sistem kontrole
 
-## СИСТЕМ ПОУЗДАНОСТИ ✅П1/🟡П2/🔴П3/⛔П4
+## SISTEM POUZDANOSTI ✅P1/🟡P2/🔴P3/⛔P4
 
-### Дефиниције
+### Definicije
 
-**✅П1 — ПОТВРЂЕНО:** Дословно прочитано на конкретној страници документа,
-или верификовано претрагом (PropisSoft, ВКС сајт).
-- Пример: „Окривљени осуђен на 2 године" (стр. 24) ← ✅П1
-- Пример: „Чл. 438 ст. 1 тач. 11 ЗКП" ← ✅П1 (проверен на PropisSoft)
+**✅P1 — POTVRĐENO:** Doslovno pročitano na konkretnoj stranici dokumenta,
+ili verifikovano pretragom (PropisSoft, VKS sajt).
+- Primer: „Okrivljeni osuđen na 2 godine" (str. 24) ← ✅P1
+- Primer: „Čl. 438 st. 1 tač. 11 ZKP" ← ✅P1 (proveren na PropisSoft)
 
-**🟡П2 — ВИСОКО ВЕРОВАТНО:** Произилази из документа али није дословно.
-- Пример: „Рок за жалбу истиче 15.04.2023." (израчунато: пресуда достављена
-  31.03. + 15 дана) ← 🟡П2
-- Пример: „Укупно потраживање: 500.000 дин." (збир 3 фактуре) ← 🟡П2
+**🟡P2 — VISOKO VEROVATNO:** Proizilazi iz dokumenta ali nije doslovno.
+- Primer: „Rok za žalbu ističe 15.04.2023." (izračunato: presuda dostavljena
+  31.03. + 15 dana) ← 🟡P2
+- Primer: „Ukupno potraživanje: 500.000 din." (zbir 3 fakture) ← 🟡P2
 
-**🔴П3 — РЕКОНСТРУКЦИЈА:** Логички закључак који НЕ ПРОИЗИЛАЗИ директно.
-- Пример: „Суд вероватно није размотрио олакшавајуће" (зато што их
-  детаљно не помиње) ← 🔴П3
-- Пример: „Окривљени је вероватно деловао у афекту" (на основу описа
-  догађаја, али суд то не каже) ← 🔴П3
+**🔴P3 — REKONSTRUKCIJA:** Logički zaključak koji NE PROIZILAZI direktno.
+- Primer: „Sud verovatno nije razmotrio olakšavajuće" (zato što ih
+  detaljno ne pominje) ← 🔴P3
+- Primer: „Okrivljeni je verovatno delovao u afektu" (na osnovu opisa
+  događaja, ali sud to ne kaže) ← 🔴P3
 
-**⛔П4 — НЕПОЗНАТО/ИЗМИШЉЕНО:** Информација НЕ ПОСТОЈИ у документу.
-- Пример: „ВКС Kzz 742/2023 — правни став" (није нађено претрагом) ← ⛔П4
-- Пример: „Суд није отворио претрес" (а заправо 7 претреса наведено) ← ⛔П4
-- **⛔П4 информације се НИКАД не уносе у документ.**
+**⛔P4 — NEPOZNATO/IZMIŠLJENO:** Informacija NE POSTOJI u dokumentu.
+- Primer: „VKS Kzz 742/2023 — pravni stav" (nije nađeno pretragom) ← ⛔P4
+- Primer: „Sud nije otvorio pretres" (a zapravo 7 pretresa navedeno) ← ⛔P4
+- **⛔P4 informacije se NIKAD ne unose u dokument.**
 
-### Правила класификације
+### Pravila klasifikacije
 
-1. У сумњи → класификуј НИЖЕ (🟡 уместо ✅, 🔴 уместо 🟡)
-2. Ако тврдња може бити и ✅П1 и 🟡П2 — провери поново и одлучи
-3. 🔴П3 тврдње МОРАЈУ бити означене за корисника
-4. ⛔П4 ЗАБРАЊЕНО у документу — чак и са ознаком
+1. U sumnji → klasifikuj NIŽE (🟡 umesto ✅, 🔴 umesto 🟡)
+2. Ako tvrdnja može biti i ✅P1 i 🟡P2 — proveri ponovo i odluči
+3. 🔴P3 tvrdnje MORAJU biti označene za korisnika
+4. ⛔P4 ZABRANJENO u dokumentu — čak i sa oznakom
 
 ---
 
-## ВЕРИФИКАЦИОНИ ИЗВЕШТАЈ
+## VERIFIKACIONI IZVEŠTAJ
 
-После СВАКОГ генерисаног документа:
+Posle SVAKOG generisanog dokumenta:
 
 ```
 ╔══════════════════════════════════════════════════╗
-║ ВЕРИФИКАЦИОНИ ИЗВЕШТАЈ                            ║
-║ Документ: [назив]                                 ║
-║ Датум: [данашњи]                                  ║
+║ VERIFIKACIONI IZVEŠTAJ                            ║
+║ Dokument: [naziv]                                 ║
+║ Datum: [današnji]                                  ║
 ╠══════════════════════════════════════════════════╣
-║ УКУПНО ТВРДЊИ: [N]                               ║
+║ UKUPNO TVRDNJI: [N]                               ║
 ║                                                    ║
-║ ✅П1 ПОТВРЂЕНО:       [n] тврдњи ([X]%)          ║
-║ 🟡П2 ВИСОКО ВЕРОВ.:   [n] тврдњи ([X]%)          ║
-║ 🔴П3 РЕКОНСТРУКЦИЈА:  [n] тврдњи ([X]%)          ║
-║ ⛔П4 НЕПОЗНАТО:       [n] тврдњи ([X]%)          ║
+║ ✅P1 POTVRĐENO:       [n] tvrdnji ([X]%)          ║
+║ 🟡P2 VISOKO VEROV.:   [n] tvrdnji ([X]%)          ║
+║ 🔴P3 REKONSTRUKCIJA:  [n] tvrdnji ([X]%)          ║
+║ ⛔P4 NEPOZNATO:       [n] tvrdnji ([X]%)          ║
 ╠══════════════════════════════════════════════════╣
-║ УКУПНА ОЦЕНА:                                     ║
-║  >85% ✅ → 🟢 ВИСОК КВАЛИТЕТ                      ║
-║  70-85% ✅ → 🟡 СРЕДЊИ (препорука провере)        ║
-║  <70% ✅ → 🔴 НИЗАК (обавезна провера)             ║
+║ UKUPNA OCENA:                                     ║
+║  >85% ✅ → 🟢 VISOK KVALITET                      ║
+║  70-85% ✅ → 🟡 SREDNJI (preporuka provere)        ║
+║  <70% ✅ → 🔴 NIZAK (obavezna provera)             ║
 ╠══════════════════════════════════════════════════╣
-║ „ЈЕДНА СТВАР": [да ли је у документу? на којој    ║
-║  позицији?]                                        ║
-║ ГРАФ: [независних аргумената: X од Y укупно]      ║
-║ КРИТИЧНА ТАЧКА: [чињеница од које зависи највише  ║
-║  аргумената, ако постоји]                          ║
+║ „JEDNA STVAR": [da li je u dokumentu? na kojoj    ║
+║  poziciji?]                                        ║
+║ GRAF: [nezavisnih argumenata: X od Y ukupno]      ║
+║ KRITIČNA TAČKA: [činjenica od koje zavisi najviše  ║
+║  argumenata, ako postoji]                          ║
 ╠══════════════════════════════════════════════════╣
-║ МАТРИЦА РИЗИКА (из Ф3.6):                         ║
-║  Правни: [X/10] Чињенични: [Y/10] Процесни: [Z/10]║
-║  УКУПНО: [W/10] → [НИЗАК/СРЕДЊИ/ВИСОК]            ║
-║  ROI: [вредност/трошкови] → [вреди/условно/не]     ║
+║ MATRICA RIZIKA (iz F3.6):                         ║
+║  Pravni: [X/10] Činjenični: [Y/10] Procesni: [Z/10]║
+║  UKUPNO: [W/10] → [NIZAK/SREDNJI/VISOK]            ║
+║  ROI: [vrednost/troškovi] → [vredi/uslovno/ne]     ║
 ╠══════════════════════════════════════════════════╣
-║ ⚠️ ТВРДЊЕ ЗА ПРОВЕРУ:                            ║
-║  1. [тврдња] → проверити [извор]                   ║
-║  2. [тврдња] → проверити [извор]                   ║
+║ ⚠️ TVRDNJE ZA PROVERU:                            ║
+║  1. [tvrdnja] → proveriti [izvor]                   ║
+║  2. [tvrdnja] → proveriti [izvor]                   ║
 ║  ...                                               ║
 ╠══════════════════════════════════════════════════╣
-║ ПРОВЕРА ОБРАЗАЦА:                                  ║
-║  Г-[XX] препознат? [да/не]                         ║
-║  З-[XX] избегнут? [да/не]                          ║
-║  Рок проверен? [да/не]                             ║
-║  Надлежност проверена? [да/не]                     ║
-║  Застарелост проверена? [да/не]                    ║
+║ PROVERA OBRAZACA:                                  ║
+║  G-[XX] prepoznat? [da/ne]                         ║
+║  Z-[XX] izbegnut? [da/ne]                          ║
+║  Rok proveren? [da/ne]                             ║
+║  Nadležnost proverena? [da/ne]                     ║
+║  Zastarelost proverena? [da/ne]                    ║
 ╚══════════════════════════════════════════════════╝
 ```
 
 ---
 
-## РЕКУРЗИВНА ВЕРИФИКАЦИЈА
+## REKURZIVNA VERIFIKACIJA
 
-### Шта значи „рекурзивна"
+### Šta znači „rekurzivna"
 
-После писања документа, прочитај га КАО ДА ГА НИКАД НИСИ ВИДЕО.
-Замисли да си колега адвокат који први пут чита овај поднесак.
+Posle pisanja dokumenta, pročitaj ga KAO DA GA NIKAD NISI VIDEO.
+Zamisli da si kolega advokat koji prvi put čita ovaj podnesak.
 
-**Три питања „свежим очима":**
-1. Да ли образложење има смисла без познавања списа?
-2. Да ли бих као судија знао шта се тражи после прва 2 пасуса?
-3. Да ли би ме нешто збунило или изненадило?
+**Tri pitanja „svežim očima":**
+1. Da li obrazloženje ima smisla bez poznavanja spisa?
+2. Da li bih kao sudija znao šta se traži posle prva 2 pasusa?
+3. Da li bi me nešto zbunilo ili iznenadilo?
 
-### Провера конзистентности
-- Да ли петит ОДГОВАРА образложењу?
-  (Нпр. образложење говори о чл. 438 али петит тражи преиначење
-  уместо укидање → ГРЕШКА)
-- Да ли се износи из петита СЛАЖУ са износима из образложења?
-- Да ли се имена странака ТАЧНО понављају кроз цео документ?
-  (Честа грешка: на почетку „Марковић" а касније „Маринковић")
-- Да ли су бројеви предмета ТАЧНИ свуда?
+### Provera konzistentnosti
+- Da li petit ODGOVARA obrazloženju?
+  (Npr. obrazloženje govori o čl. 438 ali petit traži preinačenje
+  umesto ukidanje → GREŠKA)
+- Da li se iznosi iz petita SLAŽU sa iznosima iz obrazloženja?
+- Da li se imena stranaka TAČNO ponavljaju kroz ceo dokument?
+  (Česta greška: na početku „Marković" a kasnije „Marinković")
+- Da li su brojevi predmeta TAČNI svuda?
 
 ---
 
-## БАТЦХ КОНТРОЛА — 10 ДОКУМЕНАТА
+## BATCH KONTROLA — 10 DOKUMENATA
 
 ### Dashboard
 
 ```
 ╔═══════════════════════════════════════════════════╗
-║ БАТЦХ КОНТРОЛА — [датум]                          ║
+║ BATCH KONTROLA — [datum]                          ║
 ╠═══════════════════════════════════════════════════╣
-║ #  │ Тип           │ Странка        │ Оцена       ║
+║ #  │ Tip           │ Stranka        │ Ocena       ║
 ║────┼────────────────┼────────────────┼─────────────║
-║ 1  │ Тужба наплата  │ Петровић д.о.о.│ 🟢 92% ✅  ║
-║ 2  │ Тужба наплата  │ Марковић д.о.о.│ 🟢 88% ✅  ║
-║ 3  │ Предлог извр.  │ Јовановић Н.   │ 🟢 95% ✅  ║
-║ 4  │ Жалба кривица  │ Богнић В.      │ 🟡 74% ⚠️  ║
-║ 5  │ Уговор закуп   │ Антика д.о.о.  │ 🟢 90% ✅  ║
-║ 6  │ Катастар упис  │ Стевикић       │ 🟢 86% ✅  ║
+║ 1  │ Tužba naplata  │ Petrović d.o.o.│ 🟢 92% ✅  ║
+║ 2  │ Tužba naplata  │ Marković d.o.o.│ 🟢 88% ✅  ║
+║ 3  │ Predlog izvr.  │ Jovanović N.   │ 🟢 95% ✅  ║
+║ 4  │ Žalba krivica  │ Bognić V.      │ 🟡 74% ⚠️  ║
+║ 5  │ Ugovor zakup   │ Antika d.o.o.  │ 🟢 90% ✅  ║
+║ 6  │ Katastar upis  │ Stevikić       │ 🟢 86% ✅  ║
 ║ ...│                │                │             ║
 ╠═══════════════════════════════════════════════════╣
-║ ПРОСЕК: [X]%                                       ║
-║ ⚠️ Предмет #4 испод прага → додатна провера       ║
+║ PROSEK: [X]%                                       ║
+║ ⚠️ Predmet #4 ispod praga → dodatna provera       ║
 ╚═══════════════════════════════════════════════════╝
 ```
 
-### Правила за батцх
+### Pravila za batch
 
-1. **Први предмет:** Пуне фазе 0-6. Приказати кориснику.
-2. **Исте природе:** Скраћена Ф1 + Ф6. АЛИ: бројеви, имена,
-   датуми → УВЕК појединачно проверити. НИКАД copy-paste чињеница.
-3. **Различите природе:** Пуне фазе за сваки.
-4. **Dashboard:** Ажурирати после сваког документа.
-5. **Испод 80%:** Заустави се. Обавести корисника. Провери пре наставка.
+1. **Prvi predmet:** Pune faze 0-6. Prikazati korisniku.
+2. **Iste prirode:** Skraćena F1 + F6. ALI: brojevi, imena,
+   datumi → UVEK pojedinačno proveriti. NIKAD copy-paste činjenica.
+3. **Različite prirode:** Pune faze za svaki.
+4. **Dashboard:** Ažurirati posle svakog dokumenta.
+5. **Ispod 80%:** Zaustavi se. Obavesti korisnika. Proveri pre nastavka.
 
-### Типичне батцх грешке (избегавати)
+### Tipične batch greške (izbegavati)
 
-- Замена имена странака из претходног предмета
-- Copy-paste износа/датума из претходног предмета
-- Заборављен трошковник (различит за сваки ВСП)
-- Погрешан суд (различита надлежност за различите тужене)
-- Погрешан извршитељ (ако су у различитим подручјима)
-
----
-
-## ПРАВИЛО „ДА ЛИ СИ СИГУРАН?"
-
-Ако корисник пита „Да ли си сигуран?":
-
-**ЗАБРАЊЕНО:** „Да, сигуран сам" / „100%" / „Апсолутно"
-
-**ОБАВЕЗНО:**
-```
-ШТА: [конкретна тврдња о којој се пита]
-ПРОВЕРЕНО: [да/не]
-  Ако ДА → ГДЕ: [страница/извор/линк]
-  Ако НЕ → „Нисам проверио. Базирам на [X]. Да претражим?"
-НИВО: [✅П1 / 🟡П2 / 🔴П3]
-МОГУЋЕ ГРЕШКЕ: [шта може бити нетачно]
-```
+- Zamena imena stranaka iz prethodnog predmeta
+- Copy-paste iznosa/datuma iz prethodnog predmeta
+- Zaboravljen troškovnik (različit za svaki VSP)
+- Pogrešan sud (različita nadležnost za različite tužene)
+- Pogrešan izvršitelj (ako su u različitim područjima)
 
 ---
 
-## ФИНАЛНА ПРОВЕРА — 10 ПИТАЊА
+## PRAVILO „DA LI SI SIGURAN?"
 
-Пре достављања БИЛО КОГ документа кориснику:
+Ako korisnik pita „Da li si siguran?":
+
+**ZABRANJENO:** „Da, siguran sam" / „100%" / „Apsolutno"
+
+**OBAVEZNO:**
+```
+ŠTA: [konkretna tvrdnja o kojoj se pita]
+PROVERENO: [da/ne]
+  Ako DA → GDE: [stranica/izvor/link]
+  Ako NE → „Nisam proverio. Baziram na [X]. Da pretražim?"
+NIVO: [✅P1 / 🟡P2 / 🔴P3]
+MOGUĆE GREŠKE: [šta može biti netačno]
+```
+
+---
+
+## FINALNA PROVERA — 10 PITANJA
+
+Pre dostavljanja BILO KOG dokumenta korisniku:
 
 ```
-1. Да ли бих могао да одбраним СВАКУ реченицу показујући извор?
-2. Да ли сам прочитао ЦЕЛИ документ (укључујући средину)?
-3. Да ли сам проверио чланове закона на PropisSoft-у?
-4. Да ли сам повезао УДАЉЕНЕ чињенице (стр. 5 ↔ стр. 34)?
-5. Да ли сам симулирао СУДИЈУ, ПРОТИВНИКА и АПЕЛАЦИЈУ?
-6. Да ли знам шта је „ЈЕДНА СТВАР" и да ли је ПРВА у документу?
-7. Да ли сам проверио РОКОВЕ, НАДЛЕЖНОСТ и ЗАСТАРЕЛОСТ?
-8. Да ли постоји нешто ЛОШЕ за клијента што НИСАМ рекао?
-9. Да ли је граф аргумената здрав (довољно независних)?
-10. Да ли би адвокат Мишић стао иза овог документа?
+1. Da li bih mogao da odbranim SVAKU rečenicu pokazujući izvor?
+2. Da li sam pročitao CELI dokument (uključujući sredinu)?
+3. Da li sam proverio članove zakona na PropisSoft-u?
+4. Da li sam povezao UDALJENE činjenice (str. 5 ↔ str. 34)?
+5. Da li sam simulirao SUDIJU, PROTIVNIKA i APELACIJU?
+6. Da li znam šta je „JEDNA STVAR" i da li je PRVA u dokumentu?
+7. Da li sam proverio ROKOVE, NADLEŽNOST i ZASTARELOST?
+8. Da li postoji nešto LOŠE za klijenta što NISAM rekao?
+9. Da li je graf argumenata zdrav (dovoljno nezavisnih)?
+10. Da li bi advokat Mišić stao iza ovog dokumenta?
 
-Ако БИЛО КОЈИ одговор упозорава → ИСПРАВИ пре достављања.
+Ako BILO KOJI odgovor upozorava → ISPRAVI pre dostavljanja.
 ```

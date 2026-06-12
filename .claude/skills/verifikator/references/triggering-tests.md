@@ -1,49 +1,49 @@
 # Triggering Tests — verifikator
 
-**Филозофија:** Пост-процес. Активира се после других скилова или на експлицитну сумњу.
+**Filozofija:** Post-proces. Aktivira se posle drugih skilova ili na eksplicitnu sumnju.
 
-**Anthropic Skills Guide (стр. 14-15):** *"Triggering tests ensure your skill loads at the right times."*
+**Anthropic Skills Guide (str. 14-15):** *"Triggering tests ensure your skill loads at the right times."*
 
-**Употреба:** Месечно — копирај примере у нов чат. Провери: да ли се skill тачно активирао (или не активирао)?
-
----
-
-## ✅ SHOULD TRIGGER (мора да се активира)
-
-1. Да ли си сигуран у ову тврдњу?
-2. Провери још једном овај одговор
-3. Верификуј цитате закона
-4. Нешто ми не штима — провери
-5. Тачно ли је ово што си рекао
-6. Provera поново молим те
-7. [Након god-skill анализе] — аутоматски
-8. [Након pravna-analiza Ф6] — аутоматски
+**Upotreba:** Mesečno — kopiraj primere u nov čat. Proveri: da li se skill tačno aktivirao (ili ne aktivirao)?
 
 ---
 
-## ❌ SHOULD NOT TRIGGER (не сме да се активира)
+## ✅ SHOULD TRIGGER (mora da se aktivira)
 
-1. Здраво
-2. Напиши песму
-3. Који је твој омиљени филм
-4. Shta je tvoje mišljenje о X
-5. Помоћи ми са knjižicom
+1. Da li si siguran u ovu tvrdnju?
+2. Proveri još jednom ovaj odgovor
+3. Verifikuj citate zakona
+4. Nešto mi ne štima — proveri
+5. Tačno li je ovo što si rekao
+6. Provera ponovo molim te
+7. [Nakon god-skill analize] — automatski
+8. [Nakon pravna-analiza F6] — automatski
+
+---
+
+## ❌ SHOULD NOT TRIGGER (ne sme da se aktivira)
+
+1. Zdravo
+2. Napiši pesmu
+3. Koji je tvoj omiljeni film
+4. Shta je tvoje mišljenje o X
+5. Pomoći mi sa knjižicom
 6. Cowork debugging
-7. Email тета Мари
-8. Прости поздрав
+7. Email teta Mari
+8. Prosti pozdrav
 
 ---
 
-## 🟡 ГРАНИЧНИ (питам корисника)
+## 🟡 GRANIČNI (pitam korisnika)
 
-1. Ако контекст није јасан → питам пре активирања
-2. Ако тригер лично може бити погрешно протумачен → тражим потврду
-3. Ако фајл није учитан а корисник помиње документ → тражим upload
+1. Ako kontekst nije jasan → pitam pre aktiviranja
+2. Ako triger lično može biti pogrešno protumačen → tražim potvrdu
+3. Ako fajl nije učitan a korisnik pominje dokument → tražim upload
 
 ---
 
-## МЕТРИКА (циљ: 90%+)
+## METRIKA (cilj: 90%+)
 
-- SHOULD TRIGGER: активирати се у бар 7/8
-- SHOULD NOT: НЕ активирати се у ниједном — 0/8
-- Ако ниже → коригуј `description` поље
+- SHOULD TRIGGER: aktivirati se u bar 7/8
+- SHOULD NOT: NE aktivirati se u nijednom — 0/8
+- Ako niže → koriguj `description` polje

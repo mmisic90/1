@@ -1,235 +1,235 @@
-# Области — Чеклисте, матрице и протоколи
+# Oblasti — Čekliste, matrice i protokoli
 
-## 1. КРИВИЦА
+## 1. KRIVICA
 
-### Матрица доказа
+### Matrica dokaza
 ```
-                  | Окр. исказ | Свед. 1  | Свед. 2  | Вештак   | Докум.   |
+                  | Okr. iskaz | Sved. 1  | Sved. 2  | Veštak   | Dokum.   |
 ------------------+------------+----------+----------+----------+----------|
-Радња (ко/шта)   | стр:„..."  | стр:„..."| стр:„..."| —        | —        |
-Време             | стр:„..."  | стр:„..."| стр:„..."| —        | стр      |
-Место             | стр:„..."  | стр:„..."| —        | —        | стр      |
-Последица         | —          | —        | —        | стр:„..."| стр      |
-Мотив             | стр:„..."  | стр:„..."| стр:„..."| —        | —        |
-Умишљај/нехат     | стр:„..."  | стр:„..."| —        | —        | —        |
+Radnja (ko/šta)   | str:„..."  | str:„..."| str:„..."| —        | —        |
+Vreme             | str:„..."  | str:„..."| str:„..."| —        | str      |
+Mesto             | str:„..."  | str:„..."| —        | —        | str      |
+Posledica         | —          | —        | —        | str:„..."| str      |
+Motiv             | str:„..."  | str:„..."| str:„..."| —        | —        |
+Umišljaj/nehat     | str:„..."  | str:„..."| —        | —        | —        |
 ```
 
-### Обавезне провере
+### Obavezne provere
 
-**Облици учешћа (чл. 33-36 КЗ):**
-- Сaizvršilaštvo (33), подстрекавање (34), помагање (35)
-- Посредно извршилаштво (33/2)
+**Oblici učešća (čl. 33-36 KZ):**
+- Saizvršilaštvo (33), podstrekavanje (34), pomaganje (35)
+- Posredno izvršilaštvo (33/2)
 
-**Стицај и квалификација (чл. 60-61):**
-- Идеални/реални стицај. Продужено дело (61): временски
-  континуитет + исти оштећени + исти умишљај?
+**Sticaj i kvalifikacija (čl. 60-61):**
+- Idealni/realni sticaj. Produženo delo (61): vremenski
+  kontinuitet + isti oštećeni + isti umišljaj?
 
-**Последична кривична дела:**
-- 121/2 (тешка телесна→смрт), 205/3 (разбојништво→смрт),
-  178/4 (силовање→смрт), 246/6 (дрога→смрт)
-- УВЕК: да ли последица мења квалификацију?
+**Posledična krivična dela:**
+- 121/2 (teška telesna→smrt), 205/3 (razbojništvo→smrt),
+  178/4 (silovanje→smrt), 246/6 (droga→smrt)
+- UVEK: da li posledica menja kvalifikaciju?
 
-**Основи искључења (чл. 19-23):**
-- Нужна одбрана (19), крајња нужда (20), сила/претња (21),
-  неурачунљивост (23), дело малог значаја (18)
+**Osnovi isključenja (čl. 19-23):**
+- Nužna odbrana (19), krajnja nužda (20), sila/pretnja (21),
+  neuračunljivost (23), delo malog značaja (18)
 
-**Процесне провере ЗКП:**
-- чл. 16 — in dubio pro reo
-- чл. 84 — незаконити докази
-- чл. 438 — битне повреде (апсолутне: тач. 1-12)
-- чл. 439 — повреда кривичног закона
-- чл. 440-441 — чињенично стање
+**Procesne provere ZKP:**
+- čl. 16 — in dubio pro reo
+- čl. 84 — nezakoniti dokazi
+- čl. 438 — bitne povrede (apsolutne: tač. 1-12)
+- čl. 439 — povreda krivičnog zakona
+- čl. 440-441 — činjenično stanje
 
-**Рокови:**
-- Жалба: 15 дана (8 скраћени). Притвор: 3 дана. Задржавање: 4 сата.
-- ЗЗЗ: 30 дана. Застарелост: УВЕК рачуницу (чл. 103-104 КЗ)
+**Rokovi:**
+- Žalba: 15 dana (8 skraćeni). Pritvor: 3 dana. Zadržavanje: 4 sata.
+- ZZZ: 30 dana. Zastarelost: UVEK računicu (čl. 103-104 KZ)
 
 ---
 
-## 2. ПАРНИЦА
+## 2. PARNICA
 
-### Матрица потраживања
+### Matrica potraživanja
 ```
-                    | Тужба    | Одговор  | Вештак   | Суд      |
+                    | Tužba    | Odgovor  | Veštak   | Sud      |
 --------------------+----------+----------+----------+----------|
-Основ               | стр:     | стр:     | —        | стр:     |
-Износ главног       | [цифра]  | [оспора] | [цифра]  | [цифра]  |
-Доспеће             | [датум]  | [оспора] | —        | [датум]  |
-Камата од           | [датум]  | [оспора] | —        | [датум]  |
-Штета               | [износ]  | [оспора] | [износ]  | [износ]  |
+Osnov               | str:     | str:     | —        | str:     |
+Iznos glavnog       | [cifra]  | [ospora] | [cifra]  | [cifra]  |
+Dospeće             | [datum]  | [ospora] | —        | [datum]  |
+Kamata od           | [datum]  | [ospora] | —        | [datum]  |
+Šteta               | [iznos]  | [ospora] | [iznos]  | [iznos]  |
 ```
 
-### Обавезне провере
-- **Надлежност:** Стварна (Основни<500к/Виши>500к/Привредни) +
-  месна (пребивалиште туженог/место извршења/место штете/
-  место непокретности=ИСКЉУЧИВА)
-- **Странке:** Легитимација, пословна способност, заступање
-- **Петит:** Суд ВЕЗАН захтевом (чл.2 ЗПП). Клаузула извршења ОБАВЕЗНА.
-- **Терет доказивања:** Ко шта доказује (чл. 228 ЗПП)
-- **Застарелост:** Општа 10г, уговорна 5г, штета 3г, комунална 1г
-- **Трошковник:** Тарифа × ВСП. Претражити важећу тарифу.
-- **Камата:** ПОСЕБНО за сваку ставку од доспећа ТЕ ставке
+### Obavezne provere
+- **Nadležnost:** Stvarna (Osnovni<500k/Viši>500k/Privredni) +
+  mesna (prebivalište tuženog/mesto izvršenja/mesto štete/
+  mesto nepokretnosti=ISKLJUČIVA)
+- **Stranke:** Legitimacija, poslovna sposobnost, zastupanje
+- **Petit:** Sud VEZAN zahtevom (čl.2 ZPP). Klauzula izvršenja OBAVEZNA.
+- **Teret dokazivanja:** Ko šta dokazuje (čl. 228 ZPP)
+- **Zastarelost:** Opšta 10g, ugovorna 5g, šteta 3g, komunalna 1g
+- **Troškovnik:** Tarifa × VSP. Pretražiti važeću tarifu.
+- **Kamata:** POSEBNO za svaku stavku od dospeća TE stavke
 
 ---
 
-## 3. ПРИВРЕДНИ СПОРОВИ
+## 3. PRIVREDNI SPOROVI
 
-Све из Парнице + додатно:
-- **АПР:** Пословно име ТАЧНО. МБ + ПИБ обавезни.
-- **Надлежност:** Привредни суд по седишту туженог.
-  Војводина → Привредни суд у Новом Саду.
-- **Институти:** Пробој правне личности (чл.18 ЗПД), ликвидација
-  (350 ЗПД), стечај, факторинг, цесија, компензација.
-- **Одговорно лице:** Ако исте чињенице = привредни преступ → размотри
-  кривичну одговорност одговорног лица.
+Sve iz Parnice + dodatno:
+- **APR:** Poslovno ime TAČNO. MB + PIB obavezni.
+- **Nadležnost:** Privredni sud po sedištu tuženog.
+  Vojvodina → Privredni sud u Novom Sadu.
+- **Instituti:** Proboj pravne ličnosti (čl.18 ZPD), likvidacija
+  (350 ZPD), stečaj, faktoring, cesija, kompenzacija.
+- **Odgovorno lice:** Ako iste činjenice = privredni prestup → razmotri
+  krivičnu odgovornost odgovornog lica.
 
 ---
 
-## 4. ИЗВРШЕЊЕ
+## 4. IZVRŠENJE
 
-### Матрица извршне исправе
+### Matrica izvršne isprave
 ```
-                      | Извршна исправа | Предлог       | Приговор      |
+                      | Izvršna isprava | Predlog       | Prigovor      |
 ----------------------+-----------------+---------------+---------------|
-Главни дуг            | [износ]         | [износ]       | [оспорава?]   |
-Камата                | [од датума]     | [од датума]   | [оспорава?]   |
-Трошкови              | [износ]         | [износ]       | —             |
-Клаузула извршности   | [ДА/НЕ]        | —             | [оспорава?]   |
-Правноснажност        | [датум]         | —             | [оспорава?]   |
-Средство извршења     | —               | [које?]       | [неправилно?] |
+Glavni dug            | [iznos]         | [iznos]       | [osporava?]   |
+Kamata                | [od datuma]     | [od datuma]   | [osporava?]   |
+Troškovi              | [iznos]         | [iznos]       | —             |
+Klauzula izvršnosti   | [DA/NE]        | —             | [osporava?]   |
+Pravnosnažnost        | [datum]         | —             | [osporava?]   |
+Sredstvo izvršenja     | —               | [koje?]       | [nepravilno?] |
 ```
 
-### Обавезне провере
-- **Извршна исправа (чл.41 ЗИО):** Клаузула? Правноснажност? Износ тачан?
-- **Предлог:** СУДУ (не извршитељу). ЈМБГ дужника. Извршење на
-  ЦЕЛОКУПНОЈ имовини. Извршитељ на крају (подразумевано: Жељко Кешић, Зрењанин).
-- **Средства (чл.72 ЗИО):** Покретне, непокретности, потраживања, зарада.
-- **Приговори:** Компензација (336 ЗОО), исплата, застарелост, правноснажност.
-- **Рокови:** Приговор: 8 дана (чл.82 ЗИО).
+### Obavezne provere
+- **Izvršna isprava (čl.41 ZIO):** Klauzula? Pravnosnažnost? Iznos tačan?
+- **Predlog:** SUDU (ne izvršitelju). JMBG dužnika. Izvršenje na
+  CELOKUPNOJ imovini. Izvršitelj na kraju (podrazumevano: Željko Kešić, Zrenjanin).
+- **Sredstva (čl.72 ZIO):** Pokretne, nepokretnosti, potraživanja, zarada.
+- **Prigovori:** Kompenzacija (336 ZOO), isplata, zastarelost, pravnosnažnost.
+- **Rokovi:** Prigovor: 8 dana (čl.82 ZIO).
 
 ---
 
-## 5. НЕКРЕТНИНЕ И КАТАСТАР
+## 5. NEKRETNINE I KATASTAR
 
-### Матрица власништва
+### Matrica vlasništva
 ```
-                    | Лист непокр. | Уговор     | Катастар   |
+                    | List nepokr. | Ugovor     | Katastar   |
 --------------------+--------------+------------+------------|
-Парцела бр.         | [број]       | [број]     | [број]     |
-КО                  | [назив]      | [назив]    | [назив]    |
-Површина            | [м²]        | [м²]      | [м²]      |
-Власник             | [ко]         | [продавац] | [уписан?]  |
-Терети              | [хипотека?]  | [помиње?]  | [уписан?]  |
+Parcela br.         | [broj]       | [broj]     | [broj]     |
+KO                  | [naziv]      | [naziv]    | [naziv]    |
+Površina            | [m²]        | [m²]      | [m²]      |
+Vlasnik             | [ko]         | [prodavac] | [upisan?]  |
+Tereti              | [hipoteka?]  | [pominje?]  | [upisan?]  |
 ```
 
-### Обавезне провере
-- **Ланац власништва:** Да ли је продавац уписан?
-- **Солемнизација:** ЗоСП захтева нотарску оверу за непокретности.
-- **Порез:** Плаћен порез на пренос?
-- **Катастар:** Број парцеле ТАЧАН (нпр. 1234/1 КО Нови Сад II).
-  Површина ТАЧНА. Терети проверени.
-- **Надлежност:** ИСКЉУЧИВА — суд места непокретности (чл.50 ЗПП).
-- **Закони:** ЗДК, ЗоСП, Закон о промету непокретности, Закон о хипотеци.
+### Obavezne provere
+- **Lanac vlasništva:** Da li je prodavac upisan?
+- **Solemnizacija:** ZoSP zahteva notarsku overu za nepokretnosti.
+- **Porez:** Plaćen porez na prenos?
+- **Katastar:** Broj parcele TAČAN (npr. 1234/1 KO Novi Sad II).
+  Površina TAČNA. Tereti provereni.
+- **Nadležnost:** ISKLJUČIVA — sud mesta nepokretnosti (čl.50 ZPP).
+- **Zakoni:** ZDK, ZoSP, Zakon o prometu nepokretnosti, Zakon o hipoteci.
 
 ---
 
-## 6. УГОВОРИ
+## 6. UGOVORI
 
-### Матрица уговорних елемената
+### Matrica ugovornih elemenata
 ```
-                      | Уговорено | Испуњено | Кршено  |
+                      | Ugovoreno | Ispunjeno | Kršeno  |
 ----------------------+-----------+----------+---------|
-Предмет               | [шта]     | [да/не]  | [како]  |
-Рок                    | [датум]   | [датум]  | [дана]  |
-Цена                   | [износ]   | [плаћено]| [дугује]|
-Раскидна клаузула      | [услов]   | —        | [испуњ.]|
-Уговорна казна         | [износ]   | —        | [потраж.]|
+Predmet               | [šta]     | [da/ne]  | [kako]  |
+Rok                    | [datum]   | [datum]  | [dana]  |
+Cena                   | [iznos]   | [plaćeno]| [duguje]|
+Raskidna klauzula      | [uslov]   | —        | [ispunj.]|
+Ugovorna kazna         | [iznos]   | —        | [potraž.]|
 ```
 
-### Обавезне провере
-- **Пуноважност (ЗОО):** Способност (56), сагласност (26-28), основ (51-53),
-  форма. Мане воље: заблуда (61), превара (65), принуда (60).
-- **Ништавост (103) vs рушљивост (111).**
-- **Неиспуњење:** Раскид (124-132), штета (266), уговорна казна (270-276).
-- **Камата:** Од доспећа (277 ЗОО).
-- **Типови:** Купопродаја (предмет+цена), закуп (предмет+закупнина+трајање),
-  дело (предмет+рок+цена), зајам (износ+камата+рок), цесија (436-445),
-  компензација (336: узајамност+доспелост+истоврсност).
+### Obavezne provere
+- **Punovažnost (ZOO):** Sposobnost (56), saglasnost (26-28), osnov (51-53),
+  forma. Mane volje: zabluda (61), prevara (65), prinuda (60).
+- **Ništavost (103) vs rušljivost (111).**
+- **Neispunjenje:** Raskid (124-132), šteta (266), ugovorna kazna (270-276).
+- **Kamata:** Od dospeća (277 ZOO).
+- **Tipovi:** Kupoprodaja (predmet+cena), zakup (predmet+zakupnina+trajanje),
+  delo (predmet+rok+cena), zajam (iznos+kamata+rok), cesija (436-445),
+  kompenzacija (336: uzajamnost+dospelost+istovrsnost).
 
 ---
 
-## УНИВЕРЗАЛНО (СВАКА ОБЛАСТ)
+## UNIVERZALNO (SVAKA OBLAST)
 
-### Увек проверити прво:
-1. **РОКОВЕ** — да ли је истекао? (З-01)
-2. **НАДЛЕЖНОСТ** — прав суд? (З-02)
-3. **СТРАНКЕ** — правилно означене? (З-04)
-4. **ЗАСТАРЕЛОСТ** — рачуницу (З-05)
-5. **ИЗНОСЕ** — слажу ли се кроз целу документацију? (Г-06)
-6. **ПРОЦЕСНЕ ПРЕТПОСТАВКЕ** — испуњене?
+### Uvek proveriti prvo:
+1. **ROKOVE** — da li je istekao? (Z-01)
+2. **NADLEŽNOST** — prav sud? (Z-02)
+3. **STRANKE** — pravilno označene? (Z-04)
+4. **ZASTARELOST** — računicu (Z-05)
+5. **IZNOSE** — slažu li se kroz celu dokumentaciju? (G-06)
+6. **PROCESNE PRETPOSTAVKE** — ispunjene?
 
 ---
 
-## 7. УПРАВНО ПРАВО
+## 7. UPRAVNO PRAVO
 
-### Матрица управног спора
+### Matrica upravnog spora
 ```
-                      | Решење органа | Жалба       | Тужба (упр.спор)|
+                      | Rešenje organa | Žalba       | Tužba (upr.spor)|
 ----------------------+---------------+-------------+-----------------|
-Правни основ          | [чл. закона]  | [чл. закона]| [чл. ЗУС]      |
-Странка               | [ко]          | [ко]        | [ко]            |
-Датум решења          | [датум]       | —           | —               |
-Изрека                | [текст]       | [оспорава]  | [тражи]        |
-Образложење           | [адекватно?]  | [зашто не?] | [чл.430 ЗУП]   |
-Правна поука          | [тачна?]      | —           | —               |
+Pravni osnov          | [čl. zakona]  | [čl. zakona]| [čl. ZUS]      |
+Stranka               | [ko]          | [ko]        | [ko]            |
+Datum rešenja          | [datum]       | —           | —               |
+Izreka                | [tekst]       | [osporava]  | [traži]        |
+Obrazloženje           | [adekvatno?]  | [zašto ne?] | [čl.430 ZUP]   |
+Pravna pouka          | [tačna?]      | —           | —               |
 ```
 
-### Обавезне провере
-- **Надлежност:** Управни суд у Београду (чл. 6 ЗУС). Или Виши
-  управни суд (нпр. локалне таксе, порески спорови одређеног износа).
-- **Жалба пре тужбе:** Да ли је искоришћена жалба? (чл.18 ЗУС)
-  АКО НИЈЕ → тужба НЕДОПУШТЕНА (осим ако нема другостепеног органа)
-- **Рок за тужбу:** 30 дана од достављања (чл.18 ЗУС)
-- **Ћутање управе:** Ако орган НЕ ОДЛУЧИ у року (60 дана +
-  ургенција → +7 дана) → тужба због ћутања (чл.19 ЗУС)
-- **ЗУП процесне повреде:** Саслушање странке (чл.105 ЗУП),
-  образложење (чл.141 ЗУП), достављање (чл.74-82 ЗУП)
-- **Дискреционо овлашћење:** Да ли је орган ЗЛОУПОТРЕБИО дискрецију
-  или одлучио ПРОТИВНО циљу закона? (чл.4 ЗУП)
+### Obavezne provere
+- **Nadležnost:** Upravni sud u Beogradu (čl. 6 ZUS). Ili Viši
+  upravni sud (npr. lokalne takse, poreski sporovi određenog iznosa).
+- **Žalba pre tužbe:** Da li je iskorišćena žalba? (čl.18 ZUS)
+  AKO NIJE → tužba NEDOPUŠTENA (osim ako nema drugostepenog organa)
+- **Rok za tužbu:** 30 dana od dostavljanja (čl.18 ZUS)
+- **Ćutanje uprave:** Ako organ NE ODLUČI u roku (60 dana +
+  urgencija → +7 dana) → tužba zbog ćutanja (čl.19 ZUS)
+- **ZUP procesne povrede:** Saslušanje stranke (čl.105 ZUP),
+  obrazloženje (čl.141 ZUP), dostavljanje (čl.74-82 ZUP)
+- **Diskreciono ovlašćenje:** Da li je organ ZLOUPOTREBIO diskreciju
+  ili odlučio PROTIVNO cilju zakona? (čl.4 ZUP)
 
-### Типични предмети Милана:
-- Грађевинске дозволе, урбанистичке сагласности
-- Пореска решења (ЛПА)
-- Инспекцијске мере
+### Tipični predmeti Milana:
+- Građevinske dozvole, urbanističke saglasnosti
+- Poreska rešenja (LPA)
+- Inspekcijske mere
 
 ---
 
-## 8. РАДНО ПРАВО
+## 8. RADNO PRAVO
 
-### Матрица радног спора
+### Matrica radnog spora
 ```
-                      | Уговор/Решење| Тужба раднику| Одбрана посл.|
+                      | Ugovor/Rešenje| Tužba radniku| Odbrana posl.|
 ----------------------+--------------+--------------+-------------- |
-Тип раскида           | [отказ/спор.]| [оспорава]   | [оправдава]  |
-Основ (чл.179 ЗР)    | [који став]  | [побија]      | [доказује]   |
-Процедура             | [поштована?] | [повреде?]    | [доказ]      |
-Отказни рок           | [дат/испошт] | [оспорава?]   | —            |
-Потраживања           | [износ]      | [износ]       | [оспорава]   |
+Tip raskida           | [otkaz/spor.]| [osporava]   | [opravdava]  |
+Osnov (čl.179 ZR)    | [koji stav]  | [pobija]      | [dokazuje]   |
+Procedura             | [poštovana?] | [povrede?]    | [dokaz]      |
+Otkazni rok           | [dat/ispošt] | [osporava?]   | —            |
+Potraživanja           | [iznos]      | [iznos]       | [osporava]   |
 ```
 
-### Обавезне провере
-- **Надлежност:** Виши суд (радни спорови). Месна: пребивалиште
-  тужиоца или седиште послодавца (чл.9 Зо реш.рад.спорова).
-- **Рок за тужбу:** 60 дана од достављања решења о отказу (чл.195 ЗР)
-  → АКО ИСТЕКАО = крај. Проверити ПРВО.
-- **Претходно упозорење:** За „понашање" отказе (179/1/1-3) —
-  послодавац МОРА претходно упозорење (180). Ако нема → незаконит.
-- **Минимум обавеза послодавца:**
-  1. Решење у писаној форми (185)
-  2. Образложење (185)
-  3. Достављање (185)
-  4. Отказни рок (189): мин 8 дана, макс 30
-  5. Отпремнина ако вишак (158): 1/3 зараде × године стажа
-- **Застарелост потраживања из радног односа:** 3 године (196 ЗР)
-- **Привремена мера:** Вишак радника → привремена мера
-  враћања на рад (чл.283 ЗИО)
+### Obavezne provere
+- **Nadležnost:** Viši sud (radni sporovi). Mesna: prebivalište
+  tužioca ili sedište poslodavca (čl.9 Zo reš.rad.sporova).
+- **Rok za tužbu:** 60 dana od dostavljanja rešenja o otkazu (čl.195 ZR)
+  → AKO ISTEKAO = kraj. Proveriti PRVO.
+- **Prethodno upozorenje:** Za „ponašanje" otkaze (179/1/1-3) —
+  poslodavac MORA prethodno upozorenje (180). Ako nema → nezakonit.
+- **Minimum obaveza poslodavca:**
+  1. Rešenje u pisanoj formi (185)
+  2. Obrazloženje (185)
+  3. Dostavljanje (185)
+  4. Otkazni rok (189): min 8 dana, maks 30
+  5. Otpremnina ako višak (158): 1/3 zarade × godine staža
+- **Zastarelost potraživanja iz radnog odnosa:** 3 godine (196 ZR)
+- **Privremena mera:** Višak radnika → privremena mera
+  vraćanja na rad (čl.283 ZIO)

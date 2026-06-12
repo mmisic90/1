@@ -1,108 +1,108 @@
-# Типови грешака у првостепеној пресуди → основ жалбе
+# Tipovi grešaka u prvostepenoj presudi → osnov žalbe
 
-> Матрица за reverse-engineering пресуде из Корака 2 SKILL.md. Идентификуј тип грешке, пронађи одговарајући основ жалбе и члан ЗКП.
+> Matrica za reverse-engineering presude iz Koraka 2 SKILL.md. Identifikuj tip greške, pronađi odgovarajući osnov žalbe i član ZKP.
 
-## I. БИТНЕ ПОВРЕДЕ ОДРЕДАБА КРИВИЧНОГ ПОСТУПКА (чл. 438 ЗКП)
+## I. BITNE POVREDE ODREDABA KRIVIČNOG POSTUPKA (čl. 438 ZKP)
 
-### 1. АПСОЛУТНО БИТНЕ ПОВРЕДЕ (чл. 438 ст. 1)
+### 1. APSOLUTNO BITNE POVREDE (čl. 438 st. 1)
 
-Ове повреде су апсолутне — другостепени суд их узима у обзир **по службеној дужности**, без обзира да ли их жалба наводи (чл. 451 ст. 2 ЗКП).
+Ove povrede su apsolutne — drugostepeni sud ih uzima u obzir **po službenoj dužnosti**, bez obzira da li ih žalba navodi (čl. 451 st. 2 ZKP).
 
-| Тач. | Повреда | Како препознати |
+| Tač. | Povreda | Kako prepoznati |
 |---|---|---|
-| 1 | Суд није био саставом прописаним законом | Пресуда донета у несавезном саставу, већа без председника, итд. |
-| 2 | На главном претресу учествовао судија који се морао изузети | Изузета судија потписује пресуду или учествује у већу |
-| 3 | Главни претрес одржан без лица чије је присуство било обавезно | Без браниоца кад је одбрана обавезна (чл. 74 ЗКП), без тужиоца, итд. |
-| 4 | Повређено право одбране на главном претресу | Одбрана није имала реч, није јој дат довољан рок за припрему, итд. |
-| 5 | Главни претрес одржан без јавности иако није искључена | Сала била затворена без судског решења о искључењу јавности |
-| 6 | Оштећени, приватни тужилац или тужилац одбијени у свом захтеву | Процесне одлуке не стоје у образложењу |
-| 7 | Пресуда заснована на доказу на коме не може бити (недозвољен доказ) | Доказ прибављен повредом основних права, без судског налога, итд. |
-| 8 | Пресуда делимично или у целости заснована на исказима из фаза кад одбрана није имала могућност ефективног унакрсног испитивања | Све док сведок није испитан на главном претресу у присуству одбране |
-| 9 | Пресуда прекорачује оптужбу | Суд осудио за друго дело, другачију радњу или другу правну квалификацију без претходног упозорења (чл. 420 ЗКП) |
-| 10 | Повреда одредаба о скраћеном поступку | Примена неодговарајућег процесног режима |
-| 11 | Изрека пресуде је неразумљива, противречна сама себи или разлозима пресуде; у пресуди нема разлога о одлучним чињеницама; разлози о одлучним чињеницама су противречни изводима из списа | **НАЈЧЕШЋИ основ жалбе у пракси.** |
+| 1 | Sud nije bio sastavom propisanim zakonom | Presuda doneta u nesaveznom sastavu, veća bez predsednika, itd. |
+| 2 | Na glavnom pretresu učestvovao sudija koji se morao izuzeti | Izuzeta sudija potpisuje presudu ili učestvuje u veću |
+| 3 | Glavni pretres održan bez lica čije je prisustvo bilo obavezno | Bez branioca kad je odbrana obavezna (čl. 74 ZKP), bez tužioca, itd. |
+| 4 | Povređeno pravo odbrane na glavnom pretresu | Odbrana nije imala reč, nije joj dat dovoljan rok za pripremu, itd. |
+| 5 | Glavni pretres održan bez javnosti iako nije isključena | Sala bila zatvorena bez sudskog rešenja o isključenju javnosti |
+| 6 | Oštećeni, privatni tužilac ili tužilac odbijeni u svom zahtevu | Procesne odluke ne stoje u obrazloženju |
+| 7 | Presuda zasnovana na dokazu na kome ne može biti (nedozvoljen dokaz) | Dokaz pribavljen povredom osnovnih prava, bez sudskog naloga, itd. |
+| 8 | Presuda delimično ili u celosti zasnovana na iskazima iz faza kad odbrana nije imala mogućnost efektivnog unakrsnog ispitivanja | Sve dok svedok nije ispitan na glavnom pretresu u prisustvu odbrane |
+| 9 | Presuda prekoračuje optužbu | Sud osudio za drugo delo, drugačiju radnju ili drugu pravnu kvalifikaciju bez prethodnog upozorenja (čl. 420 ZKP) |
+| 10 | Povreda odredaba o skraćenom postupku | Primena neodgovarajućeg procesnog režima |
+| 11 | Izreka presude je nerazumljiva, protivrečna sama sebi ili razlozima presude; u presudi nema razloga o odlučnim činjenicama; razlozi o odlučnim činjenicama su protivrečni izvodima iz spisa | **NAJČEŠĆI osnov žalbe u praksi.** |
 
-### 2. РЕЛАТИВНО БИТНЕ ПОВРЕДЕ (чл. 438 ст. 2)
+### 2. RELATIVNO BITNE POVREDE (čl. 438 st. 2)
 
-Ове повреде узимају се у обзир само ако их жалба изричито наведе и само ако су могле утицати на законитост пресуде.
+Ove povrede uzimaju se u obzir samo ako ih žalba izričito navede i samo ako su mogle uticati na zakonitost presude.
 
-| Тач. | Повреда | Како препознати |
+| Tač. | Povreda | Kako prepoznati |
 |---|---|---|
-| 1 | Пресуда заснована на доказима који се нису могли изводити по одредбама ЗКП | Недозвољен доказ (плодови отровног дрвета) |
-| 2 | Изрека пресуде је противречна разлозима пресуде или су разлози противречни изводима из списа | **Најчешћи концептуални основ.** |
-| 3 | Пресуда не садржи разлоге о одлучним чињеницама или су ти разлози нејасни или у знатној мери противречни | Образложење „скаче" преко корака, закључак без аргумента |
+| 1 | Presuda zasnovana na dokazima koji se nisu mogli izvoditi po odredbama ZKP | Nedozvoljen dokaz (plodovi otrovnog drveta) |
+| 2 | Izreka presude je protivrečna razlozima presude ili su razlozi protivrečni izvodima iz spisa | **Najčešći konceptualni osnov.** |
+| 3 | Presuda ne sadrži razloge o odlučnim činjenicama ili su ti razlozi nejasni ili u znatnoj meri protivrečni | Obrazloženje „skače" preko koraka, zaključak bez argumenta |
 
-## II. ПОВРЕДА КРИВИЧНОГ ЗАКОНА (чл. 439 ЗКП)
+## II. POVREDA KRIVIČNOG ZAKONA (čl. 439 ZKP)
 
-| Тач. | Повреда | Како препознати |
+| Tač. | Povreda | Kako prepoznati |
 |---|---|---|
-| 1 | Дело за које се окривљени гони није кривично дело | Описана радња није обухваћена бићем кривичног дела; нема свих елемената (радња, последица, узрочна веза, умишљај/нехат, противправност) |
-| 2 | У погледу кривичног дела које је предмет оптужбе, примењен је закон који се не може применити | Погрешна правна квалификација; примена неважеће норме; примена строжег закона уназад; застарелост не узета у обзир |
-| 3 | Одлуком о кривичној санкцији, одлуком о одузимању имовинске користи, одлуком о трошковима итд. прекорачено је овлашћење које суд има по закону | Казна ван законских оквира; мера безбедности коју закон не познаје |
-| 4 | Постојала је околност која искључује кривично гоњење | Застарелост, помиловање, res iudicata, пресуђена ствар |
+| 1 | Delo za koje se okrivljeni goni nije krivično delo | Opisana radnja nije obuhvaćena bićem krivičnog dela; nema svih elemenata (radnja, posledica, uzročna veza, umišljaj/nehat, protivpravnost) |
+| 2 | U pogledu krivičnog dela koje je predmet optužbe, primenjen je zakon koji se ne može primeniti | Pogrešna pravna kvalifikacija; primena nevažeće norme; primena strožeg zakona unazad; zastarelost ne uzeta u obzir |
+| 3 | Odlukom o krivičnoj sankciji, odlukom o oduzimanju imovinske koristi, odlukom o troškovima itd. prekoračeno je ovlašćenje koje sud ima po zakonu | Kazna van zakonskih okvira; mera bezbednosti koju zakon ne poznaje |
+| 4 | Postojala je okolnost koja isključuje krivično gonjenje | Zastarelost, pomilovanje, res iudicata, presuđena stvar |
 
-## III. ПОГРЕШНО ИЛИ НЕПОТПУНО УТВРЂЕНО ЧИЊЕНИЧНО СТАЊЕ (чл. 440 и 441 ЗКП)
+## III. POGREŠNO ILI NEPOTPUNO UTVRĐENO ČINJENIČNO STANJE (čl. 440 i 441 ZKP)
 
-### 1. Погрешно утврђено (чл. 440)
+### 1. Pogrešno utvrđeno (čl. 440)
 
-| Подтип | Како препознати |
+| Podtip | Kako prepoznati |
 |---|---|
-| Погрешно оцењени докази | Суд није узео у обзир противречне исказе, није применио in dubio pro reo |
-| Суд дао превелики значај неким доказима | Нпр. једностран исказ оштећеног без других доказа |
-| Суд погрешно интерпретирао вештачење | Налаз вештака цитиран селективно или погрешно |
-| Чињенично стање не одговара оном што из доказа произилази | Класична грешка — неусклађеност доказа и закључка |
+| Pogrešno ocenjeni dokazi | Sud nije uzeo u obzir protivrečne iskaze, nije primenio in dubio pro reo |
+| Sud dao preveliki značaj nekim dokazima | Npr. jednostran iskaz oštećenog bez drugih dokaza |
+| Sud pogrešno interpretirao veštačenje | Nalaz veštaka citiran selektivno ili pogrešno |
+| Činjenično stanje ne odgovara onom što iz dokaza proizilazi | Klasična greška — neusklađenost dokaza i zaključka |
 
-### 2. Непотпуно утврђено (чл. 441)
+### 2. Nepotpuno utvrđeno (čl. 441)
 
-| Подтип | Како препознати |
+| Podtip | Kako prepoznati |
 |---|---|
-| Нису изведени сви релевантни докази | Предложени сведоци нису саслушани |
-| Одбијени доказни предлози одбране | Решење о одбијању без образлагања (чл. 395 ст. 4) |
-| Није обављено неопходно вештачење | Нпр. вештак за психичко стање, за телесне повреде |
-| Није упоређен физички доказ са изјавама | Противречности нису решене |
+| Nisu izvedeni svi relevantni dokazi | Predloženi svedoci nisu saslušani |
+| Odbijeni dokazni predlozi odbrane | Rešenje o odbijanju bez obrazlaganja (čl. 395 st. 4) |
+| Nije obavljeno neophodno veštačenje | Npr. veštak za psihičko stanje, za telesne povrede |
+| Nije upoređen fizički dokaz sa izjavama | Protivrečnosti nisu rešene |
 
-## IV. ОДЛУКА О КРИВИЧНОЈ САНКЦИЈИ И ДРУГИМ ОДЛУКАМА (чл. 437 ст. 1 тач. 4)
+## IV. ODLUKA O KRIVIČNOJ SANKCIJI I DRUGIM ODLUKAMA (čl. 437 st. 1 tač. 4)
 
-| Подтип | Како препознати |
+| Podtip | Kako prepoznati |
 |---|---|
-| Казна превисока | Суд није узео у обзир олакшавајуће околности; није применио чл. 56 КЗ (умањење казне) |
-| Казна прениска | (Ово ни кад је у жалби тужиоца, у одбрани никад) |
-| Погрешно изречена мера безбедности | Мера не одговара околностима или је дуготрајнија него што закон дозвољава |
-| Погрешно одлучено о имовинскоправном захтеву | Суд досудио ИПЗ иако је требало упутити на парницу |
-| Погрешно одлучено о трошковима поступка | Трошкови оптерећују окривљеног иако је ослобођен |
+| Kazna previsoka | Sud nije uzeo u obzir olakšavajuće okolnosti; nije primenio čl. 56 KZ (umanjenje kazne) |
+| Kazna preniska | (Ovo ni kad je u žalbi tužioca, u odbrani nikad) |
+| Pogrešno izrečena mera bezbednosti | Mera ne odgovara okolnostima ili je dugotrajnija nego što zakon dozvoljava |
+| Pogrešno odlučeno o imovinskopravnom zahtevu | Sud dosudio IPZ iako je trebalo uputiti na parnicu |
+| Pogrešno odlučeno o troškovima postupka | Troškovi opterećuju okrivljenog iako je oslobođen |
 
-## V. МАТРИЦА — МАПА ГРЕШКА → ОСНОВ
+## V. MATRICA — MAPA GREŠKA → OSNOV
 
-| Ако у пресуди видиш... | Основ жалбе | Члан ЗКП |
+| Ako u presudi vidiš... | Osnov žalbe | Član ZKP |
 |---|---|---|
-| Изрека која сама себи противречи | Битна повреда (апс.) | 438/1/11 |
-| Разлози противречe изводима из списа | Битна повреда (апс.) | 438/1/11 |
-| Нема разлога о одлучним чињеницама | Битна повреда (апс.) | 438/1/11 |
-| Нејасни или противречни разлози | Битна повреда (рел.) | 438/2/3 |
-| Пресуда на основу недозвољеног доказа | Битна повреда (рел.) | 438/2/1 |
-| Суд није био саставом прописаним | Битна повреда (апс.) | 438/1/1 |
-| Судија морао бити изузет | Битна повреда (апс.) | 438/1/2 |
-| Без браниоца кад је обавезна одбрана | Битна повреда (апс.) | 438/1/3 |
-| Одбрана није имала реч | Битна повреда (апс.) | 438/1/4 |
-| Пресуда прекорачује оптужбу | Битна повреда (апс.) | 438/1/9 |
-| Описана радња није кривично дело | Повреда КЗ | 439/1 |
-| Погрешна правна квалификација | Повреда КЗ | 439/2 |
-| Казна ван законских оквира | Повреда КЗ | 439/3 |
-| Не узета застарелост | Повреда КЗ | 439/4 |
-| Докази селективно оцењени | Погрешно УЧС | 440 |
-| Одбијени докази одбране без образложења | Битна повреда + Непотпуно УЧС | 438/2/3 + 441 |
-| Није саслушан кључни сведок | Непотпуно УЧС | 441 |
+| Izreka koja sama sebi protivreči | Bitna povreda (aps.) | 438/1/11 |
+| Razlozi protivreče izvodima iz spisa | Bitna povreda (aps.) | 438/1/11 |
+| Nema razloga o odlučnim činjenicama | Bitna povreda (aps.) | 438/1/11 |
+| Nejasni ili protivrečni razlozi | Bitna povreda (rel.) | 438/2/3 |
+| Presuda na osnovu nedozvoljenog dokaza | Bitna povreda (rel.) | 438/2/1 |
+| Sud nije bio sastavom propisanim | Bitna povreda (aps.) | 438/1/1 |
+| Sudija morao biti izuzet | Bitna povreda (aps.) | 438/1/2 |
+| Bez branioca kad je obavezna odbrana | Bitna povreda (aps.) | 438/1/3 |
+| Odbrana nije imala reč | Bitna povreda (aps.) | 438/1/4 |
+| Presuda prekoračuje optužbu | Bitna povreda (aps.) | 438/1/9 |
+| Opisana radnja nije krivično delo | Povreda KZ | 439/1 |
+| Pogrešna pravna kvalifikacija | Povreda KZ | 439/2 |
+| Kazna van zakonskih okvira | Povreda KZ | 439/3 |
+| Ne uzeta zastarelost | Povreda KZ | 439/4 |
+| Dokazi selektivno ocenjeni | Pogrešno UČS | 440 |
+| Odbijeni dokazi odbrane bez obrazloženja | Bitna povreda + Nepotpuno UČS | 438/2/3 + 441 |
+| Nije saslušan ključni svedok | Nepotpuno UČS | 441 |
 
-## VI. REDOSLED У ЖАЛБИ
+## VI. REDOSLED U ŽALBI
 
-Традиционални распоред жалбе (у стилу Мишић/Недељков):
+Tradicionalni raspored žalbe (u stilu Mišić/Nedeljkov):
 
-1. **„Једна ствар"** — најјачи аргумент одмах, у првих 3 пасуса
-2. **Битне повреде поступка** — прво апсолутне, затим релативне
-3. **Повреда кривичног закона** — по редоследу тач. 1–4
-4. **Погрешно утврђено чињенично стање** — класично
-5. **Непотпуно утврђено чињенично стање** — доказни предлози одбране
-6. **Одлука о санкцији** — ако је изречена
-7. **Резиме и предлог суду**
+1. **„Jedna stvar"** — najjači argument odmah, u prvih 3 pasusa
+2. **Bitne povrede postupka** — prvo apsolutne, zatim relativne
+3. **Povreda krivičnog zakona** — po redosledu tač. 1–4
+4. **Pogrešno utvrđeno činjenično stanje** — klasično
+5. **Nepotpuno utvrđeno činjenično stanje** — dokazni predlozi odbrane
+6. **Odluka o sankciji** — ako je izrečena
+7. **Rezime i predlog sudu**
 
-**Правило:** Никад не трошити први аргумент на формалне повреде. Први аргумент је увек онај који највише погађа.
+**Pravilo:** Nikad ne trošiti prvi argument na formalne povrede. Prvi argument je uvek onaj koji najviše pogađa.

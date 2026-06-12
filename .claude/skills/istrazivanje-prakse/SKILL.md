@@ -1,16 +1,16 @@
 ---
 name: istrazivanje-prakse
 description: >
-  Четврти skill у стеку адвокатске праксе — оперативни протокол за
-  истраживање судске праксе и правних извора. Активирај чим правни
-  задатак захтева претрагу одлука, верификацију норми, или проналажење
-  ЕСЉП праксе. Тригери: „нађи праксу за чл. X", „има ли одлука о…",
-  „провери да ли постоји пракса", „верификуј члан", „нађи ми одлуку",
-  или кад pravna-analiza Ф3 / krivica / tuzba-parnica треба правне
-  изворе. Верификатор се активира ПОСЛЕ овог skill-а ако резултат
-  улази у правни документ. НЕ активирати за: општа правна питања где
-  је одговор директно у закону, академска правна теорија, knjižice,
-  Instagram, технички debugging.
+  Četvrti skill u steku advokatske prakse — operativni protokol za
+  istraživanje sudske prakse i pravnih izvora. Aktiviraj čim pravni
+  zadatak zahteva pretragu odluka, verifikaciju normi, ili pronalaženje
+  ESLJP prakse. Trigeri: „nađi praksu za čl. X", „ima li odluka o…",
+  „proveri da li postoji praksa", „verifikuj član", „nađi mi odluku",
+  ili kad pravna-analiza F3 / krivica / tuzba-parnica treba pravne
+  izvore. Verifikator se aktivira POSLE ovog skill-a ako rezultat
+  ulazi u pravni dokument. NE aktivirati za: opšta pravna pitanja gde
+  je odgovor direktno u zakonu, akademska pravna teorija, knjižice,
+  Instagram, tehnički debugging.
 metadata:
   author: "Milan Mišić, advokat"
   version: "6.2.0"
@@ -19,1104 +19,1106 @@ metadata:
   category: "legal-research"
   last-updated: "2026-05-31"
   changelog-v6.2: >
-    Уградња 3 додатка из истраживања deep-research механизама (anti-misgrounding):
-    (1) Механизам М-Д — верификација постојања цитата (HARD STOP): постојање +
-    поклапање (anti-misgrounding) + применљивост; број предмета/члана не излази
-    без потврде из отворене базе, иначе 🔴П3/⛔П4. (2) Темпорална важећост
-    проширена ван ОПС-а на сваку норму и одлуку (analog Shepard's/KeyCite).
-    (3) Анти-сикофантија на улазу (СЛОЈ 1): провера премисе, неутрализација
-    „нађи праксу која подржава X", М-Б Reverse Claim постаје обавезан.
-    Compliance извештај проширен редовима С1/С7. Свих 8 слојева нетакнуто.
+    Ugradnja 3 dodatka iz istraživanja deep-research mehanizama (anti-misgrounding):
+    (1) Mehanizam M-D — verifikacija postojanja citata (HARD STOP): postojanje +
+    poklapanje (anti-misgrounding) + primenljivost; broj predmeta/člana ne izlazi
+    bez potvrde iz otvorene baze, inače 🔴P3/⛔P4. (2) Temporalna važećost
+    proširena van OPS-a na svaku normu i odluku (analog Shepard's/KeyCite).
+    (3) Anti-sikofantija na ulazu (SLOJ 1): provera premise, neutralizacija
+    „nađi praksu koja podržava X", M-B Reverse Claim postaje obavezan.
+    Compliance izveštaj proširen redovima S1/S7. Svih 8 slojeva netaknuto.
 ---
 
-# Истраживање Праксе — Оперативни Протокол v6
+# Istraživanje Prakse — Operativni Protokol v6
 
-## ⚠️ NEGATIVE TRIGGERS — НЕ АКТИВИРАЈ ЗА:
+> **Pismo:** instrukcije ovog skila su latinica (token-ekonomija, vidi `_policy/politika-pisma.md`); izlazni pravni akt je uvek ćirilica — kontroliše `stil-pisanja`.
 
-| Контекст | Зашто не |
+## ⚠️ NEGATIVE TRIGGERS — NE AKTIVIRAJ ZA:
+
+| Kontekst | Zašto ne |
 |---|---|
-| Општа правна питања где је одговор директно у закону (нпр. „који је рок за жалбу на пресуду") | `pravna-analiza` довољна — закон је директан извор |
-| Академска правна теорија („историја института узуфрукта") | Skill је оперативан, не теоријски |
-| Корисник директно цитира одлуку и тражи мишљење | `pravna-analiza` + `god-skill` за анализу одлуке |
-| Knjižice за Релју, Instagram, Cowork debugging | Без правног контекста |
-| Превод страног правног текста | Превод није истраживање |
+| Opšta pravna pitanja gde je odgovor direktno u zakonu (npr. „koji je rok za žalbu na presudu") | `pravna-analiza` dovoljna — zakon je direktan izvor |
+| Akademska pravna teorija („istorija instituta uzufrukta") | Skill je operativan, ne teorijski |
+| Korisnik direktno citira odluku i traži mišljenje | `pravna-analiza` + `god-skill` za analizu odluke |
+| Knjižice za Relju, Instagram, Cowork debugging | Bez pravnog konteksta |
+| Prevod stranog pravnog teksta | Prevod nije istraživanje |
 
-**Композабилност:** Skill се активира **из** `pravna-analiza` Ф3 (или директно од корисника), позива се за сваку правну тврдњу која мора бити верификована, и предаје налазе `verifikator`-у који проверава тачност цитата и валидност извора.
-
----
-
-## ФИЛОЗОФИЈА
-
-Правно истраживање није претрага — то је **филтрирање**.
-
-Систем враћа десетине одлука. Употребљивих је 1-3. Посао
-истраживача није да прочита све — него да зна **шта да одбаци
-без читања**, шта да брзо скенира, и шта да дубоко анализира.
-
-Пет принципа:
-
-1. **Тип поступка одређује хијерархију** — Кривични, парнични,
-   привредни и прекршајни поступак имају различите судске
-   хијерархије. Пре претраге — утврди тип поступка.
-
-2. **Сентенца је карта, не одредиште** — Paragraf и PropisSoft
-   дају сентенце свих судова. Пуни текст доступан само за
-   Врховни суд и ПрАС. За све остале — сентенца је максимум.
-   Не цитираш сентенцу — цитираш ratio из пуне пресуде.
-
-3. **HUDOC је крајња линија, не стартна** — ЕСЉП пракса постоји
-   на Параграфу, PropisSoft-у, у домаћим одлукама. HUDOC тек кад
-   домаћи извори не дају ничег употребљивог.
-
-4. **Свака одлука је осумњичена до доказа супротног** — Добра
-   сентенца не значи добра одлука. Повољан ratio не значи да
-   одлука не садржи реченицу која флипује аргумент. Нађена
-   пракса не значи да нема супротне праксе коју мораш да
-   пријавиш. Истраживач који скрива непогодно наноси штету
-   клијенту.
-
-5. **Пракса без извора не постоји** — Свака одлука коју цитираш
-   мора имати или директан линк до извора или copy-paste
-   комплетног текста са навођењем одакле је. Без тога — одлука
-   се НЕ цитира у документу. Никад.
+**Kompozabilnost:** Skill se aktivira **iz** `pravna-analiza` F3 (ili direktno od korisnika), poziva se za svaku pravnu tvrdnju koja mora biti verifikovana, i predaje nalaze `verifikator`-u koji proverava tačnost citata i validnost izvora.
 
 ---
 
-## ИДЕНТИТЕТ НАЈВИШЕГ СУДА — ОБАВЕЗНО ЗНАЊЕ
+## FILOZOFIJA
 
-```
-ВСС = ВКС = ВС = исти суд, три имена:
-  Врховни суд Србије (ВСС)         → до 1.1.2010.
-  Врховни касациони суд (ВКС)      → 1.1.2010 — 2024.
-  Врховни суд (ВС)                 → од 2024.
+Pravno istraživanje nije pretraga — to je **filtriranje**.
 
-АКТИВАН САЈТ:  https://www.vrh.sud.rs/
-Стари домен:   vk.sud.rs (може редиректовати)
+Sistem vraća desetine odluka. Upotrebljivih je 1-3. Posao
+istraživača nije da pročita sve — nego da zna **šta da odbaci
+bez čitanja**, šta da brzo skenira, i šta da duboko analizira.
 
-ПОСЛЕДИЦЕ ЗА ПРЕТРАГУ:
-  Query мора да покрије СВА ТРИ имена.
-  Претрага само по „ВКС" → промашујеш ВСС одлуке.
-  Претрага само по „Врховни суд" → промашујеш ВКС одлуке.
+Pet principa:
 
-ПОСЛЕДИЦЕ ЗА ЦИТИРАЊЕ:
-  Цитираш именом суда У ВРЕМЕ ДОНОШЕЊА ОДЛУКЕ:
-    Одлука из 2008. → „Врховни суд Србије"
-    Одлука из 2018. → „Врховни касациони суд"
-    Одлука из 2025. → „Врховни суд"
-  Никад: „ВКС" за одлуку из 2008.
-  Никад: „Врховни суд" за одлуку из 2015.
+1. **Tip postupka određuje hijerarhiju** — Krivični, parnični,
+   privredni i prekršajni postupak imaju različite sudske
+   hijerarhije. Pre pretrage — utvrdi tip postupka.
 
-ПОСЛЕДИЦЕ ЗА ХИЈЕРАРХИЈУ:
-  Све три инстанце = ✅П1 (исти ниво, исти ауторитет).
-  Lex posterior: ако ВСС 2007. каже Х а ВКС 2019. каже Y
-  на исто питање → ВКС 2019. важи (новији, исти ниво).
-```
+2. **Sentenca je karta, ne odredište** — Paragraf i PropisSoft
+   daju sentence svih sudova. Puni tekst dostupan samo za
+   Vrhovni sud i PrAS. Za sve ostale — sentenca je maksimum.
+   Ne citiraš sentencu — citiraš ratio iz pune presude.
+
+3. **HUDOC je krajnja linija, ne startna** — ESLJP praksa postoji
+   na Paragrafu, PropisSoft-u, u domaćim odlukama. HUDOC tek kad
+   domaći izvori ne daju ničeg upotrebljivog.
+
+4. **Svaka odluka je osumnjičena do dokaza suprotnog** — Dobra
+   sentenca ne znači dobra odluka. Povoljan ratio ne znači da
+   odluka ne sadrži rečenicu koja flipuje argument. Nađena
+   praksa ne znači da nema suprotne prakse koju moraš da
+   prijaviš. Istraživač koji skriva nepogodno nanosi štetu
+   klijentu.
+
+5. **Praksa bez izvora ne postoji** — Svaka odluka koju citiraš
+   mora imati ili direktan link do izvora ili copy-paste
+   kompletnog teksta sa navođenjem odakle je. Bez toga — odluka
+   se NE citira u dokumentu. Nikad.
 
 ---
 
-## АРХИТЕКТУРА: 8 СЛОЈЕВА + 4 МЕХАНИЗМА + ИСПОРУКА
+## IDENTITET NAJVIŠEG SUDA — OBAVEZNO ZNANJE
 
 ```
-СЛОЈ 1: ДЕКОНСТРУКЦИЈА        → тип поступка + шта тражимо
-СЛОЈ 2: РЕЖИМ                 → Discovery или Verification
-СЛОЈ 3: ХИЈЕРАРХИЈА ИЗВОРА    → зависи од типа поступка
-СЛОЈ 4: ПРЕТРАГА              → две методе, двострука база
-СЛОЈ 5: FILTER СЕНТЕНЦИ       → правни идентитет — hard stop
-СЛОЈ 6: ЧИТАЊЕ                → зависи од доступности пуног текста
-СЛОЈ 7: СИНТЕЗА НАЛАЗА        → тежина + reverse claim + poison pill
-СЛОЈ 8: FALLBACK CHAIN        → само ако Слој 7 = Г, max 4 корака
+VSS = VKS = VS = isti sud, tri imena:
+  Vrhovni sud Srbije (VSS)         → do 1.1.2010.
+  Vrhovni kasacioni sud (VKS)      → 1.1.2010 — 2024.
+  Vrhovni sud (VS)                 → od 2024.
 
-УГРАЂЕНИ МЕХАНИЗМИ:
-  М-А: Hard Stop читање сентенце (Слој 5)
-  М-Б: Reverse Claim тест (Слој 7 — за ✅П1 И 🟡П2)
-  М-В: Poison Pill скен (Слој 6 Ниво 2)
-  М-Г: Adverse Findings + Контра-претрага (Слој 7)
+AKTIVAN SAJT:  https://www.vrh.sud.rs/
+Stari domen:   vk.sud.rs (može redirektovati)
 
-ИСПОРУКА: Линк или copy-paste — без извора нема цитата
+POSLEDICE ZA PRETRAGU:
+  Query mora da pokrije SVA TRI imena.
+  Pretraga samo po „VKS" → promašuješ VSS odluke.
+  Pretraga samo po „Vrhovni sud" → promašuješ VKS odluke.
+
+POSLEDICE ZA CITIRANJE:
+  Citiraš imenom suda U VREME DONOŠENJA ODLUKE:
+    Odluka iz 2008. → „Vrhovni sud Srbije"
+    Odluka iz 2018. → „Vrhovni kasacioni sud"
+    Odluka iz 2025. → „Vrhovni sud"
+  Nikad: „VKS" za odluku iz 2008.
+  Nikad: „Vrhovni sud" za odluku iz 2015.
+
+POSLEDICE ZA HIJERARHIJU:
+  Sve tri instance = ✅P1 (isti nivo, isti autoritet).
+  Lex posterior: ako VSS 2007. kaže H a VKS 2019. kaže Y
+  na isto pitanje → VKS 2019. važi (noviji, isti nivo).
 ```
 
 ---
 
-## СЛОЈ 1 — ДЕКОНСТРУКЦИЈА ПИТАЊА
+## ARHITEKTURA: 8 SLOJEVA + 4 MEHANIZMA + ISPORUKA
 
-**Прва ствар: утврди тип поступка.** То одређује све остало.
+```
+SLOJ 1: DEKONSTRUKCIJA        → tip postupka + šta tražimo
+SLOJ 2: REŽIM                 → Discovery ili Verification
+SLOJ 3: HIJERARHIJA IZVORA    → zavisi od tipa postupka
+SLOJ 4: PRETRAGA              → dve metode, dvostruka baza
+SLOJ 5: FILTER SENTENCI       → pravni identitet — hard stop
+SLOJ 6: ČITANJE                → zavisi od dostupnosti punog teksta
+SLOJ 7: SINTEZA NALAZA        → težina + reverse claim + poison pill
+SLOJ 8: FALLBACK CHAIN        → samo ako Sloj 7 = G, max 4 koraka
+
+UGRAĐENI MEHANIZMI:
+  M-A: Hard Stop čitanje sentence (Sloj 5)
+  M-B: Reverse Claim test (Sloj 7 — za ✅P1 I 🟡P2)
+  M-V: Poison Pill sken (Sloj 6 Nivo 2)
+  M-G: Adverse Findings + Kontra-pretraga (Sloj 7)
+
+ISPORUKA: Link ili copy-paste — bez izvora nema citata
+```
+
+---
+
+## SLOJ 1 — DEKONSTRUKCIJA PITANJA
+
+**Prva stvar: utvrdi tip postupka.** To određuje sve ostalo.
 
 ```
 ╔══════════════════════════════════════════════════════════════╗
-║  ДЕКОНСТРУКЦИЈА: [правно питање у једној реченици]          ║
+║  DEKONSTRUKCIJA: [pravno pitanje u jednoj rečenici]          ║
 ╠══════════════════════════════════════════════════════════════╣
-║  ТИП ПОСТУПКА (одабери ЈЕДАН):                              ║
-║    □ Кривични          → хијерархија А                      ║
-║    □ Парнични          → хијерархија А                      ║
-║    □ Извршни           → хијерархија А                      ║
-║    □ Привредни         → хијерархија Б                      ║
-║    □ Прекршајни        → хијерархија В                      ║
-║    □ Управни           → хијерархија Г                      ║
-║  Хијерархије → видети Слој 3                                ║
+║  TIP POSTUPKA (odaberi JEDAN):                              ║
+║    □ Krivični          → hijerarhija A                      ║
+║    □ Parnični          → hijerarhija A                      ║
+║    □ Izvršni           → hijerarhija A                      ║
+║    □ Privredni         → hijerarhija B                      ║
+║    □ Prekršajni        → hijerarhija V                      ║
+║    □ Upravni           → hijerarhija G                      ║
+║  Hijerarhije → videti Sloj 3                                ║
 ╠══════════════════════════════════════════════════════════════╣
-║  V1 — ДИРЕКТНИ:   [члан + кључни термин из диспозиције]    ║
-║  V2 — ЕЛЕМЕНТИ:   [конститутивни елементи без броја члана]  ║
-║  V3 — АНАЛОГНИ:   [сродна норма / исти правни принцип]      ║
-║  V4 — ПРОЦЕСНИ:   [специфичност поступка]                   ║
-║  V5 — УСТАВНИ:    [уставно право / ЕКЉП — само ако важи]   ║
+║  V1 — DIREKTNI:   [član + ključni termin iz dispozicije]    ║
+║  V2 — ELEMENTI:   [konstitutivni elementi bez broja člana]  ║
+║  V3 — ANALOGNI:   [srodna norma / isti pravni princip]      ║
+║  V4 — PROCESNI:   [specifičnost postupka]                   ║
+║  V5 — USTAVNI:    [ustavno pravo / EKLJP — samo ako važi]   ║
 ╠══════════════════════════════════════════════════════════════╣
-║  ПРИОРИТЕТ: V1 → нашао употребљиво → СТАНИ                 ║
-║             V2 → V1 дао мало → комбинуј V1+V2              ║
-║             V3 → тек ако V1+V2 нису довољни                ║
-║             V4/V5 → само за специфична подпитања           ║
+║  PRIORITET: V1 → našao upotrebljivo → STANI                 ║
+║             V2 → V1 dao malo → kombinuj V1+V2              ║
+║             V3 → tek ako V1+V2 nisu dovoljni                ║
+║             V4/V5 → samo za specifična podpitanja           ║
 ╚══════════════════════════════════════════════════════════════╝
 ```
 
-### Вектори по типу поступка
+### Vektori po tipu postupka
 
-| Вектор | Кривични | Парнични | Привредни | Прекршајни |
+| Vektor | Krivični | Parnični | Privredni | Prekršajni |
 |--------|----------|----------|-----------|------------|
-| V1 | члан КЗ + елемент бића | члан ЗОО/ЗПП + захтев | члан ЗТД/ЗОО + захтев | члан прописа + елемент |
-| V2 | елементи бића без члана | правна чињеница / последица | тип привредног спора | елемент прекршаја без члана |
-| V3 | сродно дело / исти mens rea | сродан грађански захтев | сродан привредни институт | сродан прекршај |
-| V4 | тип поступка | редовни/хитни/ванпарнични | хитни/обезбеђење/ликвидација | тип прекршајног поступка |
-| V5 | ЕКЉП чл. 6/7/8/10 | ЕКЉП чл. 6/чл. 1 Прот. 1 | ЕКЉП чл. 6/чл. 1 Прот. 1 | ЕКЉП чл. 6/чл. 7 |
+| V1 | član KZ + element bića | član ZOO/ZPP + zahtev | član ZTD/ZOO + zahtev | član propisa + element |
+| V2 | elementi bića bez člana | pravna činjenica / posledica | tip privrednog spora | element prekršaja bez člana |
+| V3 | srodno delo / isti mens rea | srodan građanski zahtev | srodan privredni institut | srodan prekršaj |
+| V4 | tip postupka | redovni/hitni/vanparnični | hitni/obezbeđenje/likvidacija | tip prekršajnog postupka |
+| V5 | EKLJP čl. 6/7/8/10 | EKLJP čl. 6/čl. 1 Prot. 1 | EKLJP čl. 6/čl. 1 Prot. 1 | EKLJP čl. 6/čl. 7 |
 
-**V5 није подразумеван** — само кад правно питање директно
-дира у заштићено конвенцијско право.
+**V5 nije podrazumevan** — samo kad pravno pitanje direktno
+dira u zaštićeno konvencijsko pravo.
 
-### Провера премисе — АНТИ-СИКОФАНТИЈА (пре претраге)
+### Provera premise — ANTI-SIKOFANTIJA (pre pretrage)
 
-> Емпиријски је доказан окидач грешке: захтев формулисан као
-> „нађи праксу која подржава X\". Тада модел склизне у тражење
-> ПОТВРДЕ уместо ИСТИНЕ и лакше прихвати слаб или непостојећи извор.
-> Истраживање служи предмету тако што утврђује шта пракса СТВАРНО
-> каже — не што наручује унапред жељени исход.
+> Empirijski je dokazan okidač greške: zahtev formulisan kao
+> „nađi praksu koja podržava X\". Tada model sklizne u traženje
+> POTVRDE umesto ISTINE i lakše prihvati slab ili nepostojeći izvor.
+> Istraživanje služi predmetu tako što utvrđuje šta praksa STVARNO
+> kaže — ne što naručuje unapred željeni ishod.
 
 ```
-1. Да ли захтев садржи унапред задат закључак који треба „потврдити\"?
-   („нађи да X\", „докажи да Y\", „потврди да суд увек…\")
-   → ДА: преформулиши интерно у НЕУТРАЛНО питање —
-     „шта пракса каже о X?\" → тражи И за и ПРОТИВ (М-Б Reverse Claim
-     постаје обавезан, не опциони).
+1. Da li zahtev sadrži unapred zadat zaključak koji treba „potvrditi\"?
+   („nađi da X\", „dokaži da Y\", „potvrdi da sud uvek…\")
+   → DA: preformuliši interno u NEUTRALNO pitanje —
+     „šta praksa kaže o X?\" → traži I za i PROTIV (M-B Reverse Claim
+     postaje obavezan, ne opcioni).
 
-2. Да ли премиса захтева можда нетачна? (нпр. „пракса о чл. X\"
-   а члан X не регулише ту материју / не постоји)
-   → Провери постојање и садржину члана (PropisSoft) ПРЕ претраге
-     праксе. Нетачна премиса → обавести корисника, не претражуј даље
-     по погрешној премиси (правило: не решавај тихо).
+2. Da li premisa zahteva možda netačna? (npr. „praksa o čl. X\"
+   a član X ne reguliše tu materiju / ne postoji)
+   → Proveri postojanje i sadržinu člana (PropisSoft) PRE pretrage
+     prakse. Netačna premisa → obavesti korisnika, ne pretražuj dalje
+     po pogrešnoj premisi (pravilo: ne rešavaj tiho).
 
-3. Дозвољени излаз: „Не постоји пракса у поузданом извору која
-   потврђује X\" ИЛИ „пракса је супротна\" су ВАЛИДНИ налази,
-   једнако вредни као потврдан. Празнина означена > измишљена потпора.
+3. Dozvoljeni izlaz: „Ne postoji praksa u pouzdanom izvoru koja
+   potvrđuje X\" ILI „praksa je suprotna\" su VALIDNI nalazi,
+   jednako vredni kao potvrdan. Praznina označena > izmišljena potpora.
 ```
 
 ---
 
-## СЛОЈ 2 — РЕЖИМ
+## SLOJ 2 — REŽIM
 
 
-### Режим претраге (Discovery / Verification)
+### Režim pretrage (Discovery / Verification)
 
 ```
-РЕЖИМ А — DISCOVERY              РЕЖИМ Б — VERIFICATION
+REŽIM A — DISCOVERY              REŽIM B — VERIFICATION
 ─────────────────────────────    ──────────────────────────────
-Не знам шта постоји              Знам тачан број одлуке
-Почињем са Слојем 4              Идем директно на извор
-Пролазим кроз FILTER             Минимална провера (видети доле)
-Сентенце → бројеви → читање      Читање директно
-                                 Ако не нађем → ОДМАХ Слој 8 К1
+Ne znam šta postoji              Znam tačan broj odluke
+Počinjem sa Slojem 4              Idem direktno na izvor
+Prolazim kroz FILTER             Minimalna provera (videti dole)
+Sentence → brojevi → čitanje      Čitanje direktno
+                                 Ako ne nađem → ODMAH Sloj 8 K1
 ```
 
-**Режим Б — минимална провера (обавезна):**
-Чак и кад знаш тачан број — пре читања потврди да одлука
-решава твоје правно питање. Критеријум (бинаран): Да ли наслов
-и прва реченица образложења помињу исти правни проблем?
-ДА → Ниво 2. НЕ → ⛔ + Слој 8 К1.
+**Režim B — minimalna provera (obavezna):**
+Čak i kad znaš tačan broj — pre čitanja potvrdi da odluka
+rešava tvoje pravno pitanje. Kriterijum (binaran): Da li naslov
+i prva rečenica obrazloženja pominju isti pravni problem?
+DA → Nivo 2. NE → ⛔ + Sloj 8 K1.
 
-### Усклађивање са pravna-analiza Ф0.1 (FULL / СТАНДАРД)
+### Usklađivanje sa pravna-analiza F0.1 (FULL / STANDARD)
 
 ```
-АКО ЈЕ pravna-analiza У РЕЖИМУ FULL:
-  → Истраживање ради КОМПЛЕТНО (Слој 1-8, сви механизми)
-  → Discovery: двострука претрага, Poison Pill, Reverse Claim,
-    контра-претрага, Fallback до К4
-  → God-skill IQ 200 компоненте АКТИВНЕ (абдукција, емергенција)
+AKO JE pravna-analiza U REŽIMU FULL:
+  → Istraživanje radi KOMPLETNO (Sloj 1-8, svi mehanizmi)
+  → Discovery: dvostruka pretraga, Poison Pill, Reverse Claim,
+    kontra-pretraga, Fallback do K4
+  → God-skill IQ 200 komponente AKTIVNE (abdukcija, emergencija)
 
-АКО ЈЕ pravna-analiza У РЕЖИМУ СТАНДАРД:
-  → Истраживање ради СКРАЋЕНО:
-    Слој 1 → деконструкција (увек)
-    Слој 2 → Verification ако знаш број, Discovery ако не
-    Слој 3-4 → претрага (једна база довољна, не обавезно двострука)
-    Слој 5 → filter (исти — не скраћуј)
-    Слој 6 → Ниво 1 довољан (без Poison Pill и Reverse Claim)
-    Слој 7 → синтеза без контра-претраге
-    Слој 8 → Fallback максимум К2 (не К3/К4)
-  → God-skill IQ 200 компоненте НЕАКТИВНЕ
-  → Compliance извештај ОБАВЕЗАН и у СТАНДАРД режиму
+AKO JE pravna-analiza U REŽIMU STANDARD:
+  → Istraživanje radi SKRAĆENO:
+    Sloj 1 → dekonstrukcija (uvek)
+    Sloj 2 → Verification ako znaš broj, Discovery ako ne
+    Sloj 3-4 → pretraga (jedna baza dovoljna, ne obavezno dvostruka)
+    Sloj 5 → filter (isti — ne skraćuj)
+    Sloj 6 → Nivo 1 dovoljan (bez Poison Pill i Reverse Claim)
+    Sloj 7 → sinteza bez kontra-pretrage
+    Sloj 8 → Fallback maksimum K2 (ne K3/K4)
+  → God-skill IQ 200 komponente NEAKTIVNE
+  → Compliance izveštaj OBAVEZAN i u STANDARD režimu
 
-АКО КОРИСНИК ДИРЕКТНО ТРАЖИ ПРАКСУ (без pravna-analiza):
-  → Подразумевано FULL. Ако каже „брзо нађи" → СТАНДАРД.
+AKO KORISNIK DIREKTNO TRAŽI PRAKSU (bez pravna-analiza):
+  → Podrazumevano FULL. Ako kaže „brzo nađi" → STANDARD.
 ```
 
 ---
 
-## СЛОЈ 3 — ХИЈЕРАРХИЈА ИЗВОРА
+## SLOJ 3 — HIJERARHIJA IZVORA
 
-### Тачно стање доступности пуних одлука
+### Tačno stanje dostupnosti punih odluka
 
 ```
-ИЗВОР                          СЕНТЕНЦЕ    ПУН ТЕКСТ
+IZVOR                          SENTENCE    PUN TEKST
 ──────────────────────────────────────────────────────
-Paragraf.rs                    ✅ сви       ❌
-PropisSoft                     ✅ сви       ❌
-Врховни суд (vrh.sud.rs)       ✅           ✅
-ПрАС (prekrsajni.sud.rs)       ✅           ✅
-Сви остали судови              само преко   ❌
+Paragraf.rs                    ✅ svi       ❌
+PropisSoft                     ✅ svi       ❌
+Vrhovni sud (vrh.sud.rs)       ✅           ✅
+PrAS (prekrsajni.sud.rs)       ✅           ✅
+Svi ostali sudovi              samo preko   ❌
                                Paragraf/
                                PropisSoft
 ```
 
-**Последица:** За све судове осим Врховног суда и ПрАС —
-максимум класификације је 🟡П2, без обзира на квалитет
-сентенце. Не зато што је одлука лошија — него зато што
-ratio decidendi није верификован из пуног текста.
+**Posledica:** Za sve sudove osim Vrhovnog suda i PrAS —
+maksimum klasifikacije je 🟡P2, bez obzira na kvalitet
+sentence. Ne zato što je odluka lošija — nego zato što
+ratio decidendi nije verifikovan iz punog teksta.
 
-### Хијерархија А — Кривични, парнични, извршни
-
-```
-Основни суд
-    ↓
-Виши суд
-    ↓
-Апелациони суд  ← сентенца само (🟡П2 максимум)
-    ↓
-Врховни суд     ← пун текст доступан (✅П1 могуће)
-(ВСС/ВКС/ВС — видети ИДЕНТИТЕТ НАЈВИШЕГ СУДА)
-```
-
-### Хијерархија Б — Привредни
+### Hijerarhija A — Krivični, parnični, izvršni
 
 ```
-Привредни суд   ← сентенца само (🟡П2 максимум)
+Osnovni sud
     ↓
-ПАС             ← сентенца само (🟡П2 максимум)
+Viši sud
     ↓
-Врховни суд     ← пун текст доступан (✅П1 могуће)
+Apelacioni sud  ← sentenca samo (🟡P2 maksimum)
+    ↓
+Vrhovni sud     ← pun tekst dostupan (✅P1 moguće)
+(VSS/VKS/VS — videti IDENTITET NAJVIŠEG SUDA)
 ```
 
-### Хијерархија В — Прекршајни
+### Hijerarhija B — Privredni
 
 ```
-Прекршајни суд  ← сентенца само (🟡П2 максимум)
+Privredni sud   ← sentenca samo (🟡P2 maksimum)
     ↓
-ПрАС            ← сентенце + пун текст (✅П1 могуће)
+PAS             ← sentenca samo (🟡P2 maksimum)
     ↓
-Врховни суд     ← пун текст доступан (✅П1 могуће)
-(ЗЗЗ)
+Vrhovni sud     ← pun tekst dostupan (✅P1 moguće)
 ```
 
-### Редослед претраге (заједничко за све хијерархије)
+### Hijerarhija V — Prekršajni
 
 ```
-1. PropisSoft → актуелан текст норме + историјат измена
-2. Провери ОПС на vrh.sud.rs → ако постоји: темп. валидност
-3. Paragraf.rs + PropisSoft → сентенце (ОБАВЕЗНО ОБЕ БАЗЕ)
-4. vrh.sud.rs → пуне одлуке (за хијерархију А, Б, В)
-5. ПрАС сајт → сентенце + пуне одлуке (само хијерархија В)
-6. HUDOC → САМО ако домаћи извори не дају ЕСЉП
+Prekršajni sud  ← sentenca samo (🟡P2 maksimum)
+    ↓
+PrAS            ← sentence + pun tekst (✅P1 moguće)
+    ↓
+Vrhovni sud     ← pun tekst dostupan (✅P1 moguće)
+(ZZZ)
+```
+
+### Redosled pretrage (zajedničko za sve hijerarhije)
+
+```
+1. PropisSoft → aktuelan tekst norme + istorijat izmena
+2. Proveri OPS na vrh.sud.rs → ako postoji: temp. validnost
+3. Paragraf.rs + PropisSoft → sentence (OBAVEZNO OBE BAZE)
+4. vrh.sud.rs → pune odluke (za hijerarhiju A, B, V)
+5. PrAS sajt → sentence + pune odluke (samo hijerarhija V)
+6. HUDOC → SAMO ako domaći izvori ne daju ESLJP
 ```
 
 ---
 
-## СЛОЈ 4 — ПРЕТРАГА
+## SLOJ 4 — PRETRAGA
 
-### Метода 2 — Навигација кроз члан (ПРВА ако знаш члан)
-
-```
-КОРАК 1: Отвори Paragraf.rs или PropisSoft
-КОРАК 2: Нађи закон → нађи члан
-КОРАК 3: Опција „Судска пракса" за тај члан
-КОРАК 4: Листа сентенци → Слој 5
-```
-
-### Метода 1 — Type-in претрага (ако М2 да мало / не знаш члан)
+### Metoda 2 — Navigacija kroz član (PRVA ako znaš član)
 
 ```
-КОРАК 1: Поље за претрагу
-КОРАК 2: Query из V1
-КОРАК 3: Велики резултат → додај V2 кључну реч
-КОРАК 4: Мали резултат → пробај V2 самостално
-КОРАК 5: → Слој 5
+KORAK 1: Otvori Paragraf.rs ili PropisSoft
+KORAK 2: Nađi zakon → nađi član
+KORAK 3: Opcija „Sudska praksa" za taj član
+KORAK 4: Lista sentenci → Sloj 5
 ```
 
-**Редослед:** Знаш члан → М2 прво → мало → М1.
-Не знаш члан → М1 → идентификуј члан → М2.
-
-### ⚠️ ДВОСТРУКА ПРЕТРАГА — ОБАВЕЗНА
+### Metoda 1 — Type-in pretraga (ako M2 da malo / ne znaš član)
 
 ```
-Исти query мора да прође кроз ОБЕ базе:
-  1. PropisSoft → резултати А
-  2. Paragraf.rs → резултати Б
-  3. УНИЈА: А ∪ Б → Слој 5
-
-Базе имају различите сентенце — једна може имати
-одлуку коју друга нема. Претрага само кроз једну базу
-= Compliance грешка.
-
-Документуј ОБА резултата.
+KORAK 1: Polje za pretragu
+KORAK 2: Query iz V1
+KORAK 3: Veliki rezultat → dodaj V2 ključnu reč
+KORAK 4: Mali rezultat → probaj V2 samostalno
+KORAK 5: → Sloj 5
 ```
 
-### Документација query-ја — ОБАВЕЗНИ ФОРМАТ
+**Redosled:** Znaš član → M2 prvo → malo → M1.
+Ne znaš član → M1 → identifikuj član → M2.
+
+### ⚠️ DVOSTRUKA PRETRAGA — OBAVEZNA
 
 ```
-[База] → „[тачан string]" → [N] резултата → [N] прошло filter
-Пример: PropisSoft → „239 КЗ умишљај" → 18 рез. → 3 прошло
-         Paragraf → „239 КЗ умишљај" → 12 рез. → 2 прошло (1 нова)
+Isti query mora da prođe kroz OBE baze:
+  1. PropisSoft → rezultati A
+  2. Paragraf.rs → rezultati B
+  3. UNIJA: A ∪ B → Sloj 5
+
+Baze imaju različite sentence — jedna može imati
+odluku koju druga nema. Pretraga samo kroz jednu bazu
+= Compliance greška.
+
+Dokumentuj OBA rezultata.
 ```
 
-Без овог формата — претрага се у Compliance-у означава ⛔.
+### Dokumentacija query-ja — OBAVEZNI FORMAT
+
+```
+[Baza] → „[tačan string]" → [N] rezultata → [N] prošlo filter
+Primer: PropisSoft → „239 KZ umišljaj" → 18 rez. → 3 prošlo
+         Paragraf → „239 KZ umišljaj" → 12 rez. → 2 prošlo (1 nova)
+```
+
+Bez ovog formata — pretraga se u Compliance-u označava ⛔.
 
 ---
 
-## СЛОЈ 5 — FILTER СЕНТЕНЦИ
+## SLOJ 5 — FILTER SENTENCI
 
-### Механизам М-А: Hard Stop читање сентенце
-
-```
-⚠️ HARD STOP ПРАВИЛО — АПСОЛУТНО:
-  Читаш САМО оно што физички пише у сентенци.
-  НЕ допуњујеш из меморије.
-  НЕ претпостављаш контекст одлуке.
-  НЕ интерпретираш шта би суд „вероватно рекао".
-
-  Ако сентенца није довољно јасна да одговориш
-  на питање „да ли решава мој проблем?" →
-  аутоматска класификација: БОЧНО.
-  Никад: ДА на основу нејасне сентенце.
-```
-
-### Ниво 0 — Правни идентитет
+### Mehanizam M-A: Hard Stop čitanje sentence
 
 ```
-ЗА СВАКУ СЕНТЕНЦУ (примени М-А — hard stop):
-  → Правно схватање / headnote
-  → Прва реченица образложења сентенце
-  → СТАНИ — не читај даље
+⚠️ HARD STOP PRAVILO — APSOLUTNO:
+  Čitaš SAMO ono što fizički piše u sentenci.
+  NE dopunjuješ iz memorije.
+  NE pretpostavljaš kontekst odluke.
+  NE interpretiraš šta bi sud „verovatno rekao".
 
-КРИТЕРИЈУМ (бинаран — нема „можда"):
-  ДА: сентенца описује исти правни проблем, исти елемент,
-      исту правну ситуацију коју истражујем
-  НЕ: сентенца помиње члан или термин у другом контексту
-  НЕЈАСНО: → аутоматски БОЧНО
-
-РЕЗУЛТАТ:
-  → ДА     → бележи: број + суд + хијерархија → Слој 6
-  → БОЧНО  → бележи: број + суд + зашто бочно → посебна листа
-  → НЕ     → одбацуј
-
-ДАТУМ, БРОЈ ПРЕДМЕТА — не читаш у Нивоу 0.
+  Ako sentenca nije dovoljno jasna da odgovoriš
+  na pitanje „da li rešava moj problem?" →
+  automatska klasifikacija: BOČNO.
+  Nikad: DA na osnovu nejasne sentence.
 ```
 
-### Протокол за „бочно релевантне"
+### Nivo 0 — Pravni identitet
 
 ```
-Бочно = принцип применљив аналогно, али не решава директно.
+ZA SVAKU SENTENCU (primeni M-A — hard stop):
+  → Pravno shvatanje / headnote
+  → Prva rečenica obrazloženja sentence
+  → STANI — ne čitaj dalje
 
-УСЛОВ ЗА УПОТРЕБУ: Слој 7 = Случај В или Г
-КРИТЕРИЈУМ (бинаран):
-  Да ли је правни принцип из сентенце применљив на мој
-  случај без мењања правне суштине принципа?
-  ДА → употреби са напоменом (АНАЛОГНО)
-  НЕ → одбаци
+KRITERIJUM (binaran — nema „možda"):
+  DA: sentenca opisuje isti pravni problem, isti element,
+      istu pravnu situaciju koju istražujem
+  NE: sentenca pominje član ili termin u drugom kontekstu
+  NEJASNO: → automatski BOČNO
+
+REZULTAT:
+  → DA     → beleži: broj + sud + hijerarhija → Sloj 6
+  → BOČNO  → beleži: broj + sud + zašto bočno → posebna lista
+  → NE     → odbacuj
+
+DATUM, BROJ PREDMETA — ne čitaš u Nivou 0.
 ```
 
-### EXIT из FILTER-а
+### Protokol za „bočno relevantne"
 
 ```
-Нашао директно релевантне → Слој 6
-0 директно релевантних →
-  → провери бочне
-  → промени вектор (V2/V3) → нова претрага
-  → ако и даље 0 → Слој 8
+Bočno = princip primenljiv analogno, ali ne rešava direktno.
+
+USLOV ZA UPOTREBU: Sloj 7 = Slučaj V ili G
+KRITERIJUM (binaran):
+  Da li je pravni princip iz sentence primenljiv na moj
+  slučaj bez menjanja pravne suštine principa?
+  DA → upotrebi sa napomenom (ANALOGNO)
+  NE → odbaci
 ```
 
-### Детекција емергенције у сентенцама (god-skill IQ 200)
-
-**Само у FULL режиму.** Примени после основног filter-а:
+### EXIT iz FILTER-a
 
 ```
-Ако је Слој 5 вратио 3+ сентенце:
-  → Комбинуј их у ПАРОВЕ
-  → За сваки пар: „Ове две ЗАЈЕДНО — да ли говоре нешто
-    што ниједна појединачно не говори?"
-  → Ако ДА → емергентни увид → означи и пренеси у
-    pravna-analiza Ф3 као додатни аргумент
+Našao direktno relevantne → Sloj 6
+0 direktno relevantnih →
+  → proveri bočne
+  → promeni vektor (V2/V3) → nova pretraga
+  → ako i dalje 0 → Sloj 8
+```
 
-Пример:
-  Сентенца А: „Суд мора да оцени сваки доказ"
-  Сентенца Б: „Изостављање доказа одбране = битна повреда"
-  Појединачно: опште. Заједно: суд МОРА да се изјасни о
-  КОНКРЕТНОМ доказу одбране — чл. 438 ст. 1 тач. 11 ЗКП.
+### Detekcija emergencije u sentencama (god-skill IQ 200)
+
+**Samo u FULL režimu.** Primeni posle osnovnog filter-a:
+
+```
+Ako je Sloj 5 vratio 3+ sentence:
+  → Kombinuj ih u PAROVE
+  → Za svaki par: „Ove dve ZAJEDNO — da li govore nešto
+    što nijedna pojedinačno ne govori?"
+  → Ako DA → emergentni uvid → označi i prenesi u
+    pravna-analiza F3 kao dodatni argument
+
+Primer:
+  Sentenca A: „Sud mora da oceni svaki dokaz"
+  Sentenca B: „Izostavljanje dokaza odbrane = bitna povreda"
+  Pojedinačno: opšte. Zajedno: sud MORA da se izjasni o
+  KONKRETNOM dokazu odbrane — čl. 438 st. 1 tač. 11 ZKP.
 ```
 
 ---
 
-## СЛОЈ 6 — ЧИТАЊЕ
+## SLOJ 6 — ČITANJE
 
-### Случај А — Пун текст доступан (Врховни суд или ПрАС)
+### Slučaj A — Pun tekst dostupan (Vrhovni sud ili PrAS)
 
-**Ниво 1 — Брзо читање**
-
-```
-ШТА ЧИТАШ:
-  → Правно питање у образложењу (почетак)
-  → Закључак суда
-  → Чланови које суд примењује
-
-КРИТЕРИЈУМ (бинаран):
-  Да ли ratio директно помаже мом аргументу?
-  ДА → Ниво 2
-  НЕ → одбацуј
-
-⚠️ АКО ПУНА ОДЛУКА ≠ СЕНТЕНЦА:
-  Забележи несклад. Употреби пуну одлуку.
-  У Compliance: „Сентенца≠одлука: ДА — [број]"
-```
-
-**Ниво 2 — Дубоко читање**
+**Nivo 1 — Brzo čitanje**
 
 ```
-① ПРАВНО ПИТАЊЕ: [једна реченица]
+ŠTA ČITAŠ:
+  → Pravno pitanje u obrazloženju (početak)
+  → Zaključak suda
+  → Članovi koje sud primenjuje
 
-② ТЕЖИНА ОДЛУКЕ:
-   Хијерархија А:
-     ✅П1 [ОПС] → Врховни суд обавезно правно схватање
-     ✅П1 [ПС]  → Врховни суд проширени/општи састав
-     ✅П1       → Врховни суд редован састав
-   Хијерархија В:
-     ✅П1 [ОПС] → Врховни суд/ПрАС обавезно правно схватање
-     ✅П1       → Врховни суд редован / ПрАС пуна одлука
+KRITERIJUM (binaran):
+  Da li ratio direktno pomaže mom argumentu?
+  DA → Nivo 2
+  NE → odbacuj
+
+⚠️ AKO PUNA ODLUKA ≠ SENTENCA:
+  Zabeleži nesklad. Upotrebi punu odluku.
+  U Compliance: „Sentenca≠odluka: DA — [broj]"
+```
+
+**Nivo 2 — Duboko čitanje**
+
+```
+① PRAVNO PITANJE: [jedna rečenica]
+
+② TEŽINA ODLUKE:
+   Hijerarhija A:
+     ✅P1 [OPS] → Vrhovni sud obavezno pravno shvatanje
+     ✅P1 [PS]  → Vrhovni sud prošireni/opšti sastav
+     ✅P1       → Vrhovni sud redovan sastav
+   Hijerarhija V:
+     ✅P1 [OPS] → Vrhovni sud/PrAS obavezno pravno shvatanje
+     ✅P1       → Vrhovni sud redovan / PrAS puna odluka
 
 ③ RATIO DECIDENDI:
-   [Дословни цитат + страна / параграф]
-   Класификација: по тежини из ②
+   [Doslovni citat + strana / paragraf]
+   Klasifikacija: po težini iz ②
 
-④ МЕХАНИЗАМ М-В: POISON PILL СКЕН — ОБАВЕЗАН:
-   Прочитај образложење тражећи:
+④ MEHANIZAM M-V: POISON PILL SKEN — OBAVEZAN:
+   Pročitaj obrazloženje tražeći:
 
-   НЕГАТИВНИ КВАЛИФИКАТОРИ:
-   → „осим", „изузев", „под условом да", „у случају кад"
-   → „међутим", „насупрот", „с тим да"
+   NEGATIVNI KVALIFIKATORI:
+   → „osim", „izuzev", „pod uslovom da", „u slučaju kad"
+   → „međutim", „nasuprot", „s tim da"
 
-   ПОЗИТИВНИ КВАЛИФИКАТОРИ (такође сужавају ratio):
-   → „нарочито", „пре свега", „у случајевима као што је овај"
-   → „посебно имајући у виду", „у околностима где"
+   POZITIVNI KVALIFIKATORI (takođe sužavaju ratio):
+   → „naročito", „pre svega", „u slučajevima kao što je ovaj"
+   → „posebno imajući u vidu", „u okolnostima gde"
 
-   → Сваки услов, изузетак или квалификатор везан за ratio
+   → Svaki uslov, izuzetak ili kvalifikator vezan za ratio
 
-   ЗА СВАКИ НАЂЕНИ УСЛОВ/КВАЛИФИКАТОР:
-     Да ли се тај услов примењује на мој случај?
-     ДА → ratio је условљен → забележи → упозори корисника
-     НЕ → ratio стоји неусловљено
+   ZA SVAKI NAĐENI USLOV/KVALIFIKATOR:
+     Da li se taj uslov primenjuje na moj slučaj?
+     DA → ratio je uslovljen → zabeleži → upozori korisnika
+     NE → ratio stoji neuslovljeno
 
-⑤ ТЕМПОРАЛНА ПРОВЕРА — ПРАВИЛНА:
+⑤ TEMPORALNA PROVERA — PRAVILNA:
 
-   ПИТАЊЕ НИЈЕ: „Колико је стара одлука?"
-   ПИТАЊЕ ЈЕСТЕ: „Да ли се у МОЈЕМ предмету примењује
-   исти закон/члан који суд у одлуци тумачи?"
+   PITANJE NIJE: „Koliko je stara odluka?"
+   PITANJE JESTE: „Da li se u MOJEM predmetu primenjuje
+   isti zakon/član koji sud u odluci tumači?"
 
-   КОРАК А: Утврди меродавни закон за ТВОЈ предмет:
-     Кривични:    закон у време извршења дела
-                  (+ lex mitior ако је блажи)
-     Уговорни:    закон у време закључења уговора
-     Облигациони: закон у време настанка обавезе
-     Процесни:    закон у време предузимања радње
-     Деликтни:    закон у време штетне радње
+   KORAK A: Utvrdi merodavni zakon za TVOJ predmet:
+     Krivični:    zakon u vreme izvršenja dela
+                  (+ lex mitior ako je blaži)
+     Ugovorni:    zakon u vreme zaključenja ugovora
+     Obligacioni: zakon u vreme nastanka obaveze
+     Procesni:    zakon u vreme preduzimanja radnje
+     Deliktni:    zakon u vreme štetne radnje
 
-   КОРАК Б: Провери да ли је члан који суд тумачи:
-     а) Исти текст тада и сада → одлука важи без ограничења
-     б) Измењен али суштина иста → одлука важи + напомена
-     в) Суштински измењен → одлука важи САМО ако се на
-        твој предмет примењује стари текст (по правилима
-        из Корака А)
-     г) Укинут / замењен новим законом → исто као в)
+   KORAK B: Proveri da li je član koji sud tumači:
+     a) Isti tekst tada i sada → odluka važi bez ograničenja
+     b) Izmenjen ali suština ista → odluka važi + napomena
+     v) Suštinski izmenjen → odluka važi SAMO ako se na
+        tvoj predmet primenjuje stari tekst (po pravilima
+        iz Koraka A)
+     g) Ukinut / zamenjen novim zakonom → isto kao v)
 
-   КОРАК В: Закључак:
-     Важи за мој предмет: ДА/НЕ + образложење зашто
+   KORAK V: Zaključak:
+     Važi za moj predmet: DA/NE + obrazloženje zašto
 
 ⑥ DISTINGUISHING FACTORS:
-   Чиме се чињенична основа разликује?
-   Суштинска разлика → само аналогно (🟡П2)
+   Čime se činjenična osnova razlikuje?
+   Suštinska razlika → samo analogno (🟡P2)
 
-⑦ ЦИТАТИ У ОДЛУЦИ:
-   Коју другу праксу / ЕСЉП суд сам цитира?
-   → Иди за тим одлукама
+⑦ CITATI U ODLUCI:
+   Koju drugu praksu / ESLJP sud sam citira?
+   → Idi za tim odlukama
 ```
 
-### Случај Б — Само сентенца (сви остали судови)
+### Slučaj B — Samo sentenca (svi ostali sudovi)
 
 ```
-Максимум: 🟡П2 — без изузетка
+Maksimum: 🟡P2 — bez izuzetka
 
-Из сентенце извлачиш:
-  → Правни принцип (парафраз — не дословни цитат)
-  → Ниво суда
-  → Број одлуке
+Iz sentence izvlačiš:
+  → Pravni princip (parafraz — ne doslovni citat)
+  → Nivo suda
+  → Broj odluke
 
-⚠️ POISON PILL ЗА СЕНТЕНЦЕ:
-  Да ли сентенца садржи кондиционалне реченице?
-  Ако да → парафразирај принцип СА условом, не без њега.
+⚠️ POISON PILL ZA SENTENCE:
+  Da li sentenca sadrži kondicionalne rečenice?
+  Ako da → parafraziraj princip SA uslovom, ne bez njega.
 
-⚠️ CHAIN OF CUSTODY — ОБАВЕЗАН:
-  Чувај дословни текст сентенце у радним белешкама
-  поред парафраза:
-    СЕНТЕНЦА [број]: „[дословни текст из базе]"
-    ПАРАФРАЗ: [твоја формулација]
-    ИЗВОР: [Paragraf / PropisSoft / оба]
-    ВАЛИДАЦИЈА: парафраз верно представља сентенцу: ДА/НЕ
+⚠️ CHAIN OF CUSTODY — OBAVEZAN:
+  Čuvaj doslovni tekst sentence u radnim beleškama
+  pored parafraza:
+    SENTENCA [broj]: „[doslovni tekst iz baze]"
+    PARAFRAZ: [tvoja formulacija]
+    IZVOR: [Paragraf / PropisSoft / oba]
+    VALIDACIJA: parafraz verno predstavlja sentencu: DA/NE
 
-Употреба у документу:
-  „[Суд] у предмету [број] заузео је становиште
-  да [парафраз принципа]."
-  НЕ: дословни цитат у наводницима.
+Upotreba u dokumentu:
+  „[Sud] u predmetu [broj] zauzeo je stanovište
+  da [parafraz principa]."
+  NE: doslovni citat u navodnicima.
 ```
 
 ---
 
-## СЛОЈ 7 — СИНТЕЗА НАЛАЗА
+## SLOJ 7 — SINTEZA NALAZA
 
-### Корак 0 — Провера ОПС (ПРВО)
-
-```
-Постоји ли обавезно правно схватање [ОПС]?
-Где: vrh.sud.rs → рубрика правних схватања / ПрАС за прекршаје
-
-ДА → ОБАВЕЗНА ТЕМПОРАЛНА ПРОВЕРА ОПС-А:
-  Да ли је члан кога ОПС тумачи мењан после ОПС-а?
-  → PropisSoft историјат
-  → АКО МЕЊАН: да ли измена дира у суштину ОПС-а?
-    ДА → ОПС постаје 🟡П2 + упозори корисника
-    НЕ → ОПС ✅П1 остаје
-  → ОПС са важећим чланом → Случај А директно
-
-НЕ → настави на процену скупа одлука
-```
-
-### Механизам М-Д: Верификација постојања цитата (HARD STOP)
-
-> Најопаснија грешка у правном истраживању НИЈЕ измишљен предмет —
-> него **стваран извор погрешно протумачен** („misgrounding"): тачан
-> број предмета, али сентенца НЕ каже оно што му се приписује, или
-> се одлука позива на неприменљив члан. Емпиријски (Stanford/JELS 2025)
-> то се дешава чешће и теже се хвата од чисте фабрикације. Зато свака
-> нумеричка чињеница пролази механичку проверу ПРЕ уласка у синтезу.
-
-**Окидач:** било који број предмета, број представке ЕСЉП, или
-број члана/става који улази у налаз.
-
-**Корак по корак (за СВАКИ цитат):**
-```
-1. ПОСТОЈАЊЕ — да ли тачан број предмета/члана СТВАРНО постоји
-   у извору који сам отворио (vrh.sud.rs / Paragraf / PropisSoft /
-   HUDOC)? НЕ из памћења — из отворене базе у овој сесији.
-   → НЕ могу да потврдим → цитат је 🔴П3, НЕ улази као носив;
-     ако сам га сам „реконструисао\" → ⛔П4 = БРИСАЊЕ.
-
-2. ПОКЛАПАЊЕ (anti-misgrounding) — да ли дословни текст који
-   приписујем том броју ЗАИСТА стоји у тој сентенци/пресуди?
-   → Упореди вербатим. Ако парафразирам, да ли парафраза остаје
-     верна ratio-у, без додавања онога чега нема?
-   → Приписан текст се НЕ налази у извору → 🔴П3 + не користи.
-
-3. ПРИМЕНЉИВОСТ — да ли се одлука позива на члан/институт који
-   је релевантан за наш предмет, или је само семантички сличан?
-   → Семантичка сличност БЕЗ правне применљивости = 🟡П2 аналогно
-     (М-Б Reverse Claim), НЕ ✅П1 директно.
-
-4. ТЕМПОРАЛНА ВАЖЕЋОСТ (analog Shepard's/KeyCite — за СВАКУ норму
-   и одлуку, не само ОПС из Корака 0):
-   → НОРМА: да ли је члан на снази у важећој верзији? PropisSoft
-     историјат измена. Ако је члан мењан после одлуке коју цитирам →
-     провери да ли измена дира у ratio. Дира → одлука 🟡П2 + упозорење;
-     не дира → класа остаје.
-   → ОДЛУКА: да ли је становиште касније напуштено/измењено новијом
-     праксом вишег суда или новим ОПС-ом? (колико је видљиво из базе)
-     → Напуштено → НЕ користи као носиво, означи као превазиђено.
-   → Када се не може утврдити важећост из доступног извора →
-     означи „временска важећост непотврђена\" (не глуми сигурност).
+### Korak 0 — Provera OPS (PRVO)
 
 ```
+Postoji li obavezno pravno shvatanje [OPS]?
+Gde: vrh.sud.rs → rubrika pravnih shvatanja / PrAS za prekršaje
 
-**Правило fail-stop:** ако цитат падне на кораку 1 или 2 → НЕ улази
-у налаз ни као 🟡П2. Боље празнина означена него misgrounded тврдња.
-Ниједан број предмета/члана не сме изаћи из овог скила без потврде
-из отворене базе у текућој сесији.
+DA → OBAVEZNA TEMPORALNA PROVERA OPS-A:
+  Da li je član koga OPS tumači menjan posle OPS-a?
+  → PropisSoft istorijat
+  → AKO MENJAN: da li izmena dira u suštinu OPS-a?
+    DA → OPS postaje 🟡P2 + upozori korisnika
+    NE → OPS ✅P1 ostaje
+  → OPS sa važećim članom → Slučaj A direktno
 
-### Процена скупа одлука
-
-```
-✅П1 [ОПС]  → највиша тежина
-✅П1        → Врховни суд / ПрАС пуни текст, верификован ratio
-🟡П2        → апелациони / ПАС / нижи, само сентенца
-🟡П2⁻       → нижи судови (виши, основни, привредни, прекршајни)
-```
-
-### Механизам М-Б: Reverse Claim тест
-
-```
-ОБАВЕЗАН за сваку одлуку коју планираш да уврстиш:
-
-ЗА ✅П1 (пун текст доступан):
-  ПИТАЊЕ: „Да ли би противна странка могла да употреби
-  ОВУ ИСТУ одлуку за СУПРОТНИ аргумент?"
-  Метода: Формулиши супротну тврдњу и провери да ли
-    образложење суда садржи реченице које је подржавају.
-  РЕЗУЛТАТ:
-    НЕ → ratio је чврст → ✅П1 остаје
-    ДА → одлука амбивалентна → деградирај на 🟡П2
-      + забележи у Compliance „Reverse claim: ДА — [образложење]"
-    ДЕЛИМИЧНО → ✅П1 остаје + напомена о ограничењу
-
-ЗА 🟡П2 (само сентенца — СЕНТЕНЦА REVERSE):
-  ПИТАЊЕ: „Да ли формулација сентенце дозвољава
-  тумачење у корист противне стране?"
-  РЕЗУЛТАТ:
-    НЕ → 🟡П2 остаје
-    ДА → деградирај на 🟡П2⁻ или одбаци
+NE → nastavi na procenu skupa odluka
 ```
 
-### Четири случаја синтезе
+### Mehanizam M-D: Verifikacija postojanja citata (HARD STOP)
 
-**Случај А — Конзистентна пракса са ✅П1**
+> Najopasnija greška u pravnom istraživanju NIJE izmišljen predmet —
+> nego **stvaran izvor pogrešno protumačen** („misgrounding"): tačan
+> broj predmeta, ali sentenca NE kaže ono što mu se pripisuje, ili
+> se odluka poziva na neprimenljiv član. Empirijski (Stanford/JELS 2025)
+> to se dešava češće i teže se hvata od čiste fabrikacije. Zato svaka
+> numerička činjenica prolazi mehaničku proveru PRE ulaska u sintezu.
+
+**Okidač:** bilo koji broj predmeta, broj predstavke ESLJP, ili
+broj člana/stava koji ulazi u nalaz.
+
+**Korak po korak (za SVAKI citat):**
+```
+1. POSTOJANJE — da li tačan broj predmeta/člana STVARNO postoji
+   u izvoru koji sam otvorio (vrh.sud.rs / Paragraf / PropisSoft /
+   HUDOC)? NE iz pamćenja — iz otvorene baze u ovoj sesiji.
+   → NE mogu da potvrdim → citat je 🔴P3, NE ulazi kao nosiv;
+     ako sam ga sam „rekonstruisao\" → ⛔P4 = BRISANJE.
+
+2. POKLAPANJE (anti-misgrounding) — da li doslovni tekst koji
+   pripisujem tom broju ZAISTA stoji u toj sentenci/presudi?
+   → Uporedi verbatim. Ako parafraziram, da li parafraza ostaje
+     verna ratio-u, bez dodavanja onoga čega nema?
+   → Pripisan tekst se NE nalazi u izvoru → 🔴P3 + ne koristi.
+
+3. PRIMENLJIVOST — da li se odluka poziva na član/institut koji
+   je relevantan za naš predmet, ili je samo semantički sličan?
+   → Semantička sličnost BEZ pravne primenljivosti = 🟡P2 analogno
+     (M-B Reverse Claim), NE ✅P1 direktno.
+
+4. TEMPORALNA VAŽEĆOST (analog Shepard's/KeyCite — za SVAKU normu
+   i odluku, ne samo OPS iz Koraka 0):
+   → NORMA: da li je član na snazi u važećoj verziji? PropisSoft
+     istorijat izmena. Ako je član menjan posle odluke koju citiram →
+     proveri da li izmena dira u ratio. Dira → odluka 🟡P2 + upozorenje;
+     ne dira → klasa ostaje.
+   → ODLUKA: da li je stanovište kasnije napušteno/izmenjeno novijom
+     praksom višeg suda ili novim OPS-om? (koliko je vidljivo iz baze)
+     → Napušteno → NE koristi kao nosivo, označi kao prevaziđeno.
+   → Kada se ne može utvrditi važećost iz dostupnog izvora →
+     označi „vremenska važećost nepotvrđena\" (ne glumi sigurnost).
 
 ```
-УСЛОВ: Најмање један ✅П1 конзистентно решава питање
-И прошао Reverse Claim тест.
-Провери: новија одлука мења смер? → новија победи.
 
-Формулација:
-  „Устаљена пракса Врховног [суда/касационог суда/суда Србије]
-  је да [ratio], видети одлуке [бројеви]."
-  За прекршајне: „Врховни суд / ПрАС је у поступку
-  [ЗЗЗ/другостепеном] утврдио да [ratio]."
+**Pravilo fail-stop:** ako citat padne na koraku 1 ili 2 → NE ulazi
+u nalaz ni kao 🟡P2. Bolje praznina označena nego misgrounded tvrdnja.
+Nijedan broj predmeta/člana ne sme izaći iz ovog skila bez potvrde
+iz otvorene baze u tekućoj sesiji.
 
-  ⚠️ Име суда у формулацији = име у време доношења одлуке!
-
-Класификација: ✅П1
-```
-
-**Случај Б — Конфликтне одлуке**
+### Procena skupa odluka
 
 ```
-ХИЈЕРАРХИЈА РАЗРЕШЕЊА:
-  1. Виши суд у хијерархији > нижи
-  2. Новије > старије (унутар истог нивоа)
-  3. Конфликт на истом нивоу → НЕ БИРАШ
+✅P1 [OPS]  → najviša težina
+✅P1        → Vrhovni sud / PrAS puni tekst, verifikovan ratio
+🟡P2        → apelacioni / PAS / niži, samo sentenca
+🟡P2⁻       → niži sudovi (viši, osnovni, privredni, prekršajni)
+```
 
-КОНФЛИКТ НА ИСТОМ НИВОУ:
+### Mehanizam M-B: Reverse Claim test
 
-  КРИВИЧНИ:
+```
+OBAVEZAN za svaku odluku koju planiraš da uvrstiš:
+
+ZA ✅P1 (pun tekst dostupan):
+  PITANJE: „Da li bi protivna stranka mogla da upotrebi
+  OVU ISTU odluku za SUPROTNI argument?"
+  Metoda: Formuliši suprotnu tvrdnju i proveri da li
+    obrazloženje suda sadrži rečenice koje je podržavaju.
+  REZULTAT:
+    NE → ratio je čvrst → ✅P1 ostaje
+    DA → odluka ambivalentna → degradiraj na 🟡P2
+      + zabeleži u Compliance „Reverse claim: DA — [obrazloženje]"
+    DELIMIČNO → ✅P1 ostaje + napomena o ograničenju
+
+ZA 🟡P2 (samo sentenca — SENTENCA REVERSE):
+  PITANJE: „Da li formulacija sentence dozvoljava
+  tumačenje u korist protivne strane?"
+  REZULTAT:
+    NE → 🟡P2 ostaje
+    DA → degradiraj na 🟡P2⁻ ili odbaci
+```
+
+### Četiri slučaja sinteze
+
+**Slučaj A — Konzistentna praksa sa ✅P1**
+
+```
+USLOV: Najmanje jedan ✅P1 konzistentno rešava pitanje
+I prošao Reverse Claim test.
+Proveri: novija odluka menja smer? → novija pobedi.
+
+Formulacija:
+  „Ustaljena praksa Vrhovnog [suda/kasacionog suda/suda Srbije]
+  je da [ratio], videti odluke [brojevi]."
+  Za prekršajne: „Vrhovni sud / PrAS je u postupku
+  [ZZZ/drugostepenom] utvrdio da [ratio]."
+
+  ⚠️ Ime suda u formulaciji = ime u vreme donošenja odluke!
+
+Klasifikacija: ✅P1
+```
+
+**Slučaj B — Konfliktne odluke**
+
+```
+HIJERARHIJA RAZREŠENJA:
+  1. Viši sud u hijerarhiji > niži
+  2. Novije > starije (unutar istog nivoa)
+  3. Konflikt na istom nivou → NE BIRAŠ
+
+KONFLIKT NA ISTOM NIVOU:
+
+  KRIVIČNI:
     → in dubio pro reo
-    → „Врховни суд нема јединствено схватање — in dubio
-      налаже [закључак]"
+    → „Vrhovni sud nema jedinstveno shvatanje — in dubio
+      nalaže [zaključak]"
 
-  ПАРНИЧНИ / ПРИВРЕДНИ / ИЗВРШНИ:
-    → основ за ревизију (чл. 403 ЗПП)
-    → „Несуглашеност у пракси представља основ за ревизију"
-    → НЕ користи in dubio
+  PARNIČNI / PRIVREDNI / IZVRŠNI:
+    → osnov za reviziju (čl. 403 ZPP)
+    → „Nesuglašenost u praksi predstavlja osnov za reviziju"
+    → NE koristi in dubio
 
-  ПРЕКРШАЈНИ:
-    → основ за ЗЗЗ пред Врховним судом
-    → „ПрАС нема уједначену праксу — ЗЗЗ би био оправдан"
+  PREKRŠAJNI:
+    → osnov za ZZZ pred Vrhovnim sudom
+    → „PrAS nema ujednačenu praksu — ZZZ bi bio opravdan"
 
-Класификација: 🟡П2 са напоменом о конфликту
+Klasifikacija: 🟡P2 sa napomenom o konfliktu
 ```
 
-**Случај В — Само 🟡П2 одлуке**
+**Slučaj V — Samo 🟡P2 odluke**
 
 ```
-УСЛОВ: Нема ✅П1. Постоје сентенце или аналогне одлуке.
+USLOV: Nema ✅P1. Postoje sentence ili analogne odluke.
 
-Формулација (прилагоди нивоу суда):
-  „[Назив суда] у предмету [број] заузео је становиште
-  да [парафраз из сентенце]."
-  НЕ: „Устаљена пракса Врховног суда је..."
+Formulacija (prilagodi nivou suda):
+  „[Naziv suda] u predmetu [broj] zauzeo je stanovište
+  da [parafraz iz sentence]."
+  NE: „Ustaljena praksa Vrhovnog suda je..."
 
-Класификација: 🟡П2
+Klasifikacija: 🟡P2
 ```
 
-**Случај Г — Ниједна употребљива одлука**
+**Slučaj G — Nijedna upotrebljiva odluka**
 
 ```
-→ Провери бочне (Слој 5)
-→ Ако ни бочне → Слој 8
+→ Proveri bočne (Sloj 5)
+→ Ako ni bočne → Sloj 8
 ```
 
-### Механизам М-Г: Adverse Findings + Контра-претрага
+### Mehanizam M-G: Adverse Findings + Kontra-pretraga
 
 ```
-ДЕО 1 — КОНТРА-ПРЕТРАГА (АКТИВНА, НЕ ПАСИВНА):
+DEO 1 — KONTRA-PRETRAGA (AKTIVNA, NE PASIVNA):
 
-ПОСЛЕ сваке нађене повољне одлуке (✅П1 или 🟡П2):
-  → Формулиши query ИЗ ПЕРСПЕКТИВЕ ПРОТИВНЕ СТРАНЕ
-  → Исти чланови, али инвертован аргумент
-  → Претражи обе базе
+POSLE svake nađene povoljne odluke (✅P1 ili 🟡P2):
+  → Formuliši query IZ PERSPEKTIVE PROTIVNE STRANE
+  → Isti članovi, ali invertovan argument
+  → Pretraži obe baze
 
-РАЗЛИКА ОД ADVERSE FINDINGS:
-  Adverse findings = „ако наиђеш, пријави" (пасивно)
-  Контра-претрага = „тражи против себе" (активно)
+RAZLIKA OD ADVERSE FINDINGS:
+  Adverse findings = „ako naiđeš, prijavi" (pasivno)
+  Kontra-pretraga = „traži protiv sebe" (aktivno)
 
-  Нашао контра-одлуку →
-    Забележи као Adverse Finding
-    + направи стратегију дистинкције или обарања
-  Не нашао →
-    Документуј: „Контра-претрага: [query] → 0 резултата"
+  Našao kontra-odluku →
+    Zabeleži kao Adverse Finding
+    + napravi strategiju distinkcije ili obaranja
+  Ne našao →
+    Dokumentuj: „Kontra-pretraga: [query] → 0 rezultata"
 
-ДЕО 2 — ПРИЈАВЉИВАЊЕ (ОБАВЕЗНО):
+DEO 2 — PRIJAVLJIVANJE (OBAVEZNO):
 
-ПРАВИЛО: Ако си у претрази нашао одлуке које иду ПРОТИВ
-аргумента клијента — мораш их пријавити.
-НЕ постоји опција „прескочи непогодне одлуке".
+PRAVILO: Ako si u pretrazi našao odluke koje idu PROTIV
+argumenta klijenta — moraš ih prijaviti.
+NE postoji opcija „preskoči nepogodne odluke".
 
-У Compliance извештају:
+U Compliance izveštaju:
   ADVERSE FINDINGS:
-    → [број + суд + зашто штети]
-    → Нема → „Нису нађене adverse findings у овој претрази"
-    → Контра-претрага: [query → резултат]
+    → [broj + sud + zašto šteti]
+    → Nema → „Nisu nađene adverse findings u ovoj pretrazi"
+    → Kontra-pretraga: [query → rezultat]
 
-Ако adverse findings постоје → у документу мора бити
-стратегија за дистинкцију или обарање тих одлука.
-Не игноришеш их — суочаваш се са њима.
+Ako adverse findings postoje → u dokumentu mora biti
+strategija za distinkciju ili obaranje tih odluka.
+Ne ignorišeš ih — suočavaš se sa njima.
 ```
 
 ---
 
-## СЛОЈ 8 — FALLBACK CHAIN
+## SLOJ 8 — FALLBACK CHAIN
 
-**Само ако Слој 7 = Случај Г. Максимум 4 корака — без петљи.**
-
-```
-БРОЈАЧ: [К1 → К2 → К3 → К4 → ⛔]
-После К4 — ако нема ничег — СТАНИ.
-НЕ враћаш се на К1 поново.
-```
-
-### К1 — Промени вектор
+**Samo ako Sloj 7 = Slučaj G. Maksimum 4 koraka — bez petlji.**
 
 ```
-Врати се на Слој 1. Промени вектор.
-V1→V2→V3, или М2→М1 са другачијим кључним речима.
-Документуј нови query у обавезном формату.
-→ Нашао → Слој 5 поново
-→ Није → К2
+BROJAČ: [K1 → K2 → K3 → K4 → ⛔]
+Posle K4 — ako nema ničeg — STANI.
+NE vraćaš se na K1 ponovo.
 ```
 
-### К2 — Аналогија + Абдуктивно резоновање
+### K1 — Promeni vektor
 
 ```
-СТАНДАРДНО: Сродна норма са истим правним принципом (видети V3 по типу).
-Претрага: Слој 4 са аналогном нормом.
-Употреба: „По аналогији са [норма/суд/број]..."
-Класификација: 🟡П2 — обавезно означи као аналогију.
-
-АБДУКТИВНО (god-skill IQ 200, само FULL режим):
-  Ако стандардна аналогија не даје резултат —
-  пробај абдуктивни приступ:
-
-  1. Сакупи све аномалије из предмета (из pravna-analiza Ф2)
-  2. Питај: „Који ПРАВНИ ПРИНЦИП би објаснио све аномалије?"
-  3. Претражи ТАЈ принцип — можда има праксу на коју не би
-     дошао класичном претрагом по члану
-  4. Ако нађеш → Слој 7 (Случај В)
-
-  Пример: Суд игнорише доказе + образложење не одговара
-  изреци + вештак дао алтернативу коју суд прескаче.
-  Абдукција: „Суд је имао унапред формирано уверење"
-  → претражи праксу о RIGHT TO REASONED JUDGMENT
-  → нађеш ЕСЉП Taxquet v. Belgium → применљиво
-
-→ Нашао → Слој 7 (Случај В)
-→ Није → К3
+Vrati se na Sloj 1. Promeni vektor.
+V1→V2→V3, ili M2→M1 sa drugačijim ključnim rečima.
+Dokumentuj novi query u obaveznom formatu.
+→ Našao → Sloj 5 ponovo
+→ Nije → K2
 ```
 
-### К3 — ЕСЉП принципи
+### K2 — Analogija + Abduktivno rezonovanje
 
 ```
-РЕДОСЛЕД:
-  1. Paragraf / PropisSoft — ЕСЉП сентенце
-  2. Домаће одлуке које цитирају ЕСЉП
-  3. HUDOC — само ако 1 и 2 нису дали ништа
+STANDARDNO: Srodna norma sa istim pravnim principom (videti V3 po tipu).
+Pretraga: Sloj 4 sa analognom normom.
+Upotreba: „Po analogiji sa [norma/sud/broj]..."
+Klasifikacija: 🟡P2 — obavezno označi kao analogiju.
 
-ПРИМЕНЉИВОСТ — провери пре употребе:
-  Кривични: чл. 6, 7, 8, 10 ЕКЉП
-  Парнични: чл. 6, чл. 1 Прот. 1
-  Привредни: чл. 6, чл. 1 Прот. 1
-  Прекршајни: чл. 6, 7 (казнени карактер)
-  Чисто имовински без конвенцијске компоненте → прескочи К3
+ABDUKTIVNO (god-skill IQ 200, samo FULL režim):
+  Ako standardna analogija ne daje rezultat —
+  probaj abduktivni pristup:
 
-НА HUDOC-У:
-  Велико веће → општи принципи
-  Chamber против Србије → конкретна примена
-  Комбинација: принцип (ВВ) + примена (против Србије) = идеално
+  1. Sakupi sve anomalije iz predmeta (iz pravna-analiza F2)
+  2. Pitaj: „Koji PRAVNI PRINCIP bi objasnio sve anomalije?"
+  3. Pretraži TAJ princip — možda ima praksu na koju ne bi
+     došao klasičnom pretragom po članu
+  4. Ako nađeš → Sloj 7 (Slučaj V)
 
-ЕСЉП КОНФЛИКТ ПРОТОКОЛ:
-  Велико веће > Chamber → увек
-  Новија > старија → на истом нивоу
-  Против Србије > против друге државе → за домаћу примену
-  Ако остаје конфликт → цитирај ОБЕ одлуке + анализу тренда
+  Primer: Sud ignoriše dokaze + obrazloženje ne odgovara
+  izreci + veštak dao alternativu koju sud preskače.
+  Abdukcija: „Sud je imao unapred formirano uverenje"
+  → pretraži praksu o RIGHT TO REASONED JUDGMENT
+  → nađeš ESLJP Taxquet v. Belgium → primenljivo
 
-Класификација:
-  Превод са Параграфа: 🟡П2
-  Цитат домаћег суда: ✅П1
-  HUDOC пун текст: ✅П1
-
-→ Нашао → Слој 7 (Случај В)
-→ Није → К4
+→ Našao → Sloj 7 (Slučaj V)
+→ Nije → K3
 ```
 
-### К4 — Доктрина
+### K3 — ESLJP principi
 
 ```
-Paragraf коментари уз члан + правна начела.
-Класификација: 🟡П2
-→ Нашао → Слој 7 (Случај В)
+REDOSLED:
+  1. Paragraf / PropisSoft — ESLJP sentence
+  2. Domaće odluke koje citiraju ESLJP
+  3. HUDOC — samo ako 1 i 2 nisu dali ništa
+
+PRIMENLJIVOST — proveri pre upotrebe:
+  Krivični: čl. 6, 7, 8, 10 EKLJP
+  Parnični: čl. 6, čl. 1 Prot. 1
+  Privredni: čl. 6, čl. 1 Prot. 1
+  Prekršajni: čl. 6, 7 (kazneni karakter)
+  Čisto imovinski bez konvencijske komponente → preskoči K3
+
+NA HUDOC-U:
+  Veliko veće → opšti principi
+  Chamber protiv Srbije → konkretna primena
+  Kombinacija: princip (VV) + primena (protiv Srbije) = idealno
+
+ESLJP KONFLIKT PROTOKOL:
+  Veliko veće > Chamber → uvek
+  Novija > starija → na istom nivou
+  Protiv Srbije > protiv druge države → za domaću primenu
+  Ako ostaje konflikt → citiraj OBE odluke + analizu trenda
+
+Klasifikacija:
+  Prevod sa Paragrafa: 🟡P2
+  Citat domaćeg suda: ✅P1
+  HUDOC pun tekst: ✅P1
+
+→ Našao → Sloj 7 (Slučaj V)
+→ Nije → K4
 ```
 
-### ⛔ После К4 — ако нема ничег
+### K4 — Doktrina
 
 ```
-НЕ ИЗМИШЉАЈ ОДЛУКУ.
-Документуј: изворе, векторе, хијерархију, све К кораке.
-Аргументиши из принципа.
-Саопшти: „⛔ Нема праксе. Аргумент из принципа."
+Paragraf komentari uz član + pravna načela.
+Klasifikacija: 🟡P2
+→ Našao → Sloj 7 (Slučaj V)
+```
+
+### ⛔ Posle K4 — ako nema ničeg
+
+```
+NE IZMIŠLJAJ ODLUKU.
+Dokumentuj: izvore, vektore, hijerarhiju, sve K korake.
+Argumentiši iz principa.
+Saopšti: „⛔ Nema prakse. Argument iz principa."
 ```
 
 ---
 
-## ИСПОРУКА ПРАКСЕ — ОБАВЕЗНО
+## ISPORUKA PRAKSE — OBAVEZNO
 
 ```
-СВАКА ОДЛУКА КОЈА СЕ ЦИТИРА У ДОКУМЕНТУ МОРА ИМАТИ
-ЈЕДНО ОД СЛЕДЕЋЕГ:
+SVAKA ODLUKA KOJA SE CITIRA U DOKUMENTU MORA IMATI
+JEDNO OD SLEDEĆEG:
 
-А) ДИРЕКТАН ЛИНК до извора:
-   Врховни суд:  https://www.vrh.sud.rs/... (линк до одлуке)
-   ПрАС:         https://prekrsajni.sud.rs/...
+A) DIREKTAN LINK do izvora:
+   Vrhovni sud:  https://www.vrh.sud.rs/... (link do odluke)
+   PrAS:         https://prekrsajni.sud.rs/...
    HUDOC:         https://hudoc.echr.coe.int/...
-   Paragraf:      линк до сентенце (ако је доступан)
-   PropisSoft:    линк до сентенце (ако је доступан)
+   Paragraf:      link do sentence (ako je dostupan)
+   PropisSoft:    link do sentence (ako je dostupan)
 
-Б) АКО ЛИНК НИЈЕ МОГУЋ → COPY-PASTE КОМПЛЕТНОГ ТЕКСТА:
-   За пун текст (Врховни суд/ПрАС): copy-paste целог
-     образложења одлуке
-   За сентенцу: copy-paste целе сентенце
-   + ОБАВЕЗНО: „Извор: [база], приступљено [датум]"
+B) AKO LINK NIJE MOGUĆ → COPY-PASTE KOMPLETNOG TEKSTA:
+   Za pun tekst (Vrhovni sud/PrAS): copy-paste celog
+     obrazloženja odluke
+   Za sentencu: copy-paste cele sentence
+   + OBAVEZNO: „Izvor: [baza], pristupljeno [datum]"
 
-В) БЕЗ А) ИЛИ Б) → ОДЛУКА СЕ НЕ ЦИТИРА У ДОКУМЕНТУ.
-   Не постоји опција „цитирам а немам извор".
+V) BEZ A) ILI B) → ODLUKA SE NE CITIRA U DOKUMENTU.
+   Ne postoji opcija „citiram a nemam izvor".
 
-ФОРМАТ ИСПОРУКЕ:
-  Свака коришћена одлука се испоручује кориснику
-  као засебан .docx фајл (линк или пун текст унутра)
-  или збирно у анексу главног документа.
+FORMAT ISPORUKE:
+  Svaka korišćena odluka se isporučuje korisniku
+  kao zaseban .docx fajl (link ili pun tekst unutra)
+  ili zbirno u aneksu glavnog dokumenta.
 ```
 
 ---
 
-## ФИКСНИ ФОРМАТ ЦИТИРАЊА
+## FIKSNI FORMAT CITIRANJA
 
-**Свака одлука у документу мора имати тачно овај формат:**
+**Svaka odluka u dokumentu mora imati tačno ovaj format:**
 
 ```
-✅П1 — пун текст (Врховни суд / ПрАС):
-  [Назив суда у време одлуке], [број предмета], од [датум],
-  страна/пар. [X]:
-  „[дословни цитат ratio decidendi]"
-  Извор: [линк]
+✅P1 — pun tekst (Vrhovni sud / PrAS):
+  [Naziv suda u vreme odluke], [broj predmeta], od [datum],
+  strana/par. [X]:
+  „[doslovni citat ratio decidendi]"
+  Izvor: [link]
 
-🟡П2 — само сентенца:
-  [Назив суда] у предмету [број предмета] заузео је
-  становиште да [парафраз принципа из сентенце].
-  Извор: [линк / „Paragraf.rs" / „PropisSoft"]
+🟡P2 — samo sentenca:
+  [Naziv suda] u predmetu [broj predmeta] zauzeo je
+  stanovište da [parafraz principa iz sentence].
+  Izvor: [link / „Paragraf.rs" / „PropisSoft"]
 
-🟡П2 — аналогно:
-  По аналогији са [назив суда], [број], где суд утврђује
-  да [парафраз], применљиво јер [образложење аналогије].
-  Извор: [линк / база]
+🟡P2 — analogno:
+  Po analogiji sa [naziv suda], [broj], gde sud utvrđuje
+  da [parafraz], primenljivo jer [obrazloženje analogije].
+  Izvor: [link / baza]
 
-ЕСЉП — пун текст (HUDOC):
-  ЕСЉП, [назив предмета] против [државе], представка
-  бр. [X], пресуда од [датум], пар. [Y]:
-  „[ratio на енглеском/француском + превод]"
-  Извор: [HUDOC линк]
+ESLJP — pun tekst (HUDOC):
+  ESLJP, [naziv predmeta] protiv [države], predstavka
+  br. [X], presuda od [datum], par. [Y]:
+  „[ratio na engleskom/francuskom + prevod]"
+  Izvor: [HUDOC link]
 
-ЕСЉП — домаћи цитат:
-  ЕСЉП у предмету [назив] утврдио је да [парафраз],
-  како цитира [домаћи суд] у предмету [број].
-  Извор: [линк домаће одлуке]
+ESLJP — domaći citat:
+  ESLJP u predmetu [naziv] utvrdio je da [parafraz],
+  kako citira [domaći sud] u predmetu [broj].
+  Izvor: [link domaće odluke]
 ```
 
-Одступање од овог формата = Compliance грешка.
+Odstupanje od ovog formata = Compliance greška.
 
 ---
 
-## BATCH ПРОТОКОЛ
+## BATCH PROTOKOL
 
 ```
-Кад pravna-analiza тражи праксу за ВИШЕ правних питања
-у истом предмету:
+Kad pravna-analiza traži praksu za VIŠE pravnih pitanja
+u istom predmetu:
 
-  1. Свако правно питање = ЗАСЕБАН проход Слој 1-8
-  2. Засебан Compliance за свако питање
-  3. Збирни извештај на крају са cross-reference
-     (нпр. иста одлука помаже за два питања)
-  4. Adverse findings — збирно за цео предмет
-```
-
----
-
-## ИНТЕГРАЦИЈА
-
-```
-ПОЗИВАЊЕ:
-  pravna-analiza Ф3 → позива istraživanje-prakse → враћа ✅/🟡/⛔
-  pravna-analiza Ф3.3б (ЕСЉП) → позива IP Слој 8 К3 (HUDOC)
-  krivica / tuzba-parnica → исти механизам
-
-РЕЖИМ:
-  pravna-analiza Ф0.1 = FULL → IP ради комплетно
-  pravna-analiza Ф0.1 = СТАНДАРД → IP ради скраћено (видети Слој 2)
-  Директан позив корисника → подразумевано FULL
-
-GOD-SKILL IQ 200 КОМПОНЕНТЕ:
-  Емергенција → Слој 5 (комбинација сентенци) — само FULL
-  Абдукција → Слој 8 К2 (генерисање аналогије) — само FULL
-  Рекурзивна мрежа → ако Слој 6 открије нешто ново,
-    врати се на Слој 5 и провери да ли мења filter
-
-ВЕРИФИКАТОР (ПОСЛЕ, ако налаз улази у документ):
-  → Протокол А: DIFF ratio у документу ↔ пуна одлука (ВС/ПрАС)
-  → Протокол Б: web search верификација броја одлуке + суда
-  → Протокол Б.2б: провера интерпретације — да ли парафраз
-    верно преноси ratio из одлуке (chain of custody)
-  → За 🟡П2: парафраз одговара сентенци?
-  → Тачност имена суда (ВСС/ВКС/ВС по датуму одлуке)
-  → Темпорална провера (меродавни закон, не старост)
-  → Извор постоји: линк или copy-paste?
-  → Adverse findings адресиране у документу?
-
-CROSS-SKILL КОНЗИСТЕНТНОСТ (верификатор Протокол Д):
-  → IP каже „устаљена пракса ✅П1" а pravna-analiza Ф4.Е
-    каже „аргумент пада ❌ код судије" → 🔴 КОНТРАДИКЦИЈА
-    → Могући узрок: пракса постоји али чињенице предмета
-      се разликују → distinguishing
-  → IP каже „✅П1 ratio подржава" а god-skill 4Д FORK
-    грана Б показује јак контрааргумент → 🟡 ПРОВЕРИ
-    → Могући узрок: ratio је условљен (poison pill)
-  → IP каже „⛔ нема праксе" а pravna-analiza Ф3.3б
-    нашла ЕСЉП → 🟡 Можда IP треба К3 (HUDOC)
-  → IP adverse findings ПОСТОЈЕ а pravna-analiza их
-    НЕ АДРЕСИРА у документу → 🔴 ПРОПУСТ
-
-ГРАНИЦА REVERSE CLAIM ТЕСТОВА:
-  istraživanje-prakse Reverse Claim → тестира КОНКРЕТНУ ОДЛУКУ
-    (да ли противник може да користи исту одлуку)
-  pravna-analiza Reverse Claim → тестира ЦЕО АРГУМЕНТ
-    (да ли је тврдња у документу обориива)
-  Ово су РАЗЛИЧИТИ тестови. Оба су обавезна.
-
-РЕДОСЛЕД ИЗВЕШТАЈА (кад су сва 4 skill-а активна):
-  1. PA Compliance → pravna-analiza (главни ток)
-  2. IP Compliance → istraživanje-prakse (извори)
-  3. GS Compliance → god-skill (когнитивна дубина)
-  4. VR Налаз → верификатор (провера свега)
-  → Верификатор чита СВА ТРИ претходна извештаја
-    и проверава КОНЗИСТЕНТНОСТ између њих.
+  1. Svako pravno pitanje = ZASEBAN prohod Sloj 1-8
+  2. Zaseban Compliance za svako pitanje
+  3. Zbirni izveštaj na kraju sa cross-reference
+     (npr. ista odluka pomaže za dva pitanja)
+  4. Adverse findings — zbirno za ceo predmet
 ```
 
 ---
 
-## ЗАБРАЊЕНО
+## INTEGRACIJA
 
-1. Дословни цитат из сентенце у наводницима.
-2. ✅П1 без доступног пуног текста.
-3. Прескакање ОПС провере — пре сентенци, увек.
-4. HUDOC пре домаћих извора.
-5. ЕСЉП за предмете без конвенцијске компоненте.
-6. In dubio за грађанске/привредне/прекршајне предмете.
-7. „Устаљена пракса Врховног суда" без ✅П1 одлуке.
-8. Измишљање одлуке — ⛔ без изузетка.
-9. Цитирање без броја одлуке и нивоа суда.
-10. Игнорисање темпоралне провере (меродавни закон).
-11. Режим Б без минималне провере релевантности.
-12. Прескакање Слоја 1.
-13. Скривање adverse findings — ако постоје, морају у Compliance.
-14. Прескакање Poison Pill скена у Нивоу 2.
-15. Прескакање Reverse Claim теста за ✅П1 кандидате.
-16. Query без обавезног формата документације.
-17. Понављање Fallback chain после К4 — максимум је К4.
-18. ОПС без провере темпоралне валидности.
-19. Цитирање без извора (линк или copy-paste) — без извора нема цитата.
-20. Претрага само кроз једну базу — обавезна двострука (PropisSoft + Paragraf).
-21. Погрешно име суда — ВСС/ВКС/ВС мора одговарати датуму одлуке.
-22. Прескакање контра-претраге за ✅П1 одлуке.
-23. Прескакање chain of custody за 🟡П2 сентенце.
+```
+POZIVANJE:
+  pravna-analiza F3 → poziva istraživanje-prakse → vraća ✅/🟡/⛔
+  pravna-analiza F3.3b (ESLJP) → poziva IP Sloj 8 K3 (HUDOC)
+  krivica / tuzba-parnica → isti mehanizam
+
+REŽIM:
+  pravna-analiza F0.1 = FULL → IP radi kompletno
+  pravna-analiza F0.1 = STANDARD → IP radi skraćeno (videti Sloj 2)
+  Direktan poziv korisnika → podrazumevano FULL
+
+GOD-SKILL IQ 200 KOMPONENTE:
+  Emergencija → Sloj 5 (kombinacija sentenci) — samo FULL
+  Abdukcija → Sloj 8 K2 (generisanje analogije) — samo FULL
+  Rekurzivna mreža → ako Sloj 6 otkrije nešto novo,
+    vrati se na Sloj 5 i proveri da li menja filter
+
+VERIFIKATOR (POSLE, ako nalaz ulazi u dokument):
+  → Protokol A: DIFF ratio u dokumentu ↔ puna odluka (VS/PrAS)
+  → Protokol B: web search verifikacija broja odluke + suda
+  → Protokol B.2b: provera interpretacije — da li parafraz
+    verno prenosi ratio iz odluke (chain of custody)
+  → Za 🟡P2: parafraz odgovara sentenci?
+  → Tačnost imena suda (VSS/VKS/VS po datumu odluke)
+  → Temporalna provera (merodavni zakon, ne starost)
+  → Izvor postoji: link ili copy-paste?
+  → Adverse findings adresirane u dokumentu?
+
+CROSS-SKILL KONZISTENTNOST (verifikator Protokol D):
+  → IP kaže „ustaljena praksa ✅P1" a pravna-analiza F4.E
+    kaže „argument pada ❌ kod sudije" → 🔴 KONTRADIKCIJA
+    → Mogući uzrok: praksa postoji ali činjenice predmeta
+      se razlikuju → distinguishing
+  → IP kaže „✅P1 ratio podržava" a god-skill 4D FORK
+    grana B pokazuje jak kontraargument → 🟡 PROVERI
+    → Mogući uzrok: ratio je uslovljen (poison pill)
+  → IP kaže „⛔ nema prakse" a pravna-analiza F3.3b
+    našla ESLJP → 🟡 Možda IP treba K3 (HUDOC)
+  → IP adverse findings POSTOJE a pravna-analiza ih
+    NE ADRESIRA u dokumentu → 🔴 PROPUST
+
+GRANICA REVERSE CLAIM TESTOVA:
+  istraživanje-prakse Reverse Claim → testira KONKRETNU ODLUKU
+    (da li protivnik može da koristi istu odluku)
+  pravna-analiza Reverse Claim → testira CEO ARGUMENT
+    (da li je tvrdnja u dokumentu oboriiva)
+  Ovo su RAZLIČITI testovi. Oba su obavezna.
+
+REDOSLED IZVEŠTAJA (kad su sva 4 skill-a aktivna):
+  1. PA Compliance → pravna-analiza (glavni tok)
+  2. IP Compliance → istraživanje-prakse (izvori)
+  3. GS Compliance → god-skill (kognitivna dubina)
+  4. VR Nalaz → verifikator (provera svega)
+  → Verifikator čita SVA TRI prethodna izveštaja
+    i proverava KONZISTENTNOST između njih.
+```
 
 ---
 
-## ⛔ COMPLIANCE ИЗВЕШТАЈ — ОБАВЕЗАН
+## ZABRANJENO
+
+1. Doslovni citat iz sentence u navodnicima.
+2. ✅P1 bez dostupnog punog teksta.
+3. Preskakanje OPS provere — pre sentenci, uvek.
+4. HUDOC pre domaćih izvora.
+5. ESLJP za predmete bez konvencijske komponente.
+6. In dubio za građanske/privredne/prekršajne predmete.
+7. „Ustaljena praksa Vrhovnog suda" bez ✅P1 odluke.
+8. Izmišljanje odluke — ⛔ bez izuzetka.
+9. Citiranje bez broja odluke i nivoa suda.
+10. Ignorisanje temporalne provere (merodavni zakon).
+11. Režim B bez minimalne provere relevantnosti.
+12. Preskakanje Sloja 1.
+13. Skrivanje adverse findings — ako postoje, moraju u Compliance.
+14. Preskakanje Poison Pill skena u Nivou 2.
+15. Preskakanje Reverse Claim testa za ✅P1 kandidate.
+16. Query bez obaveznog formata dokumentacije.
+17. Ponavljanje Fallback chain posle K4 — maksimum je K4.
+18. OPS bez provere temporalne validnosti.
+19. Citiranje bez izvora (link ili copy-paste) — bez izvora nema citata.
+20. Pretraga samo kroz jednu bazu — obavezna dvostruka (PropisSoft + Paragraf).
+21. Pogrešno ime suda — VSS/VKS/VS mora odgovarati datumu odluke.
+22. Preskakanje kontra-pretrage za ✅P1 odluke.
+23. Preskakanje chain of custody za 🟡P2 sentence.
+
+---
+
+## ⛔ COMPLIANCE IZVEŠTAJ — OBAVEZAN
 
 ```
 ╔══════════════════════════════════════════════════════════════════╗
 ║  🔍 COMPLIANCE — ISTRAŽIVANJE-PRAKSE v6.2                         ║
 ╠══════════════════════════════════════════════════════════════════╣
-║  ПИТАЊЕ: [једна реченица]                                       ║
-║  ТИП ПОСТУПКА: [кривични/парнични/привредни/прекршајни/управни]║
-║  ХИЈЕРАРХИЈА: [А / Б / В / Г]                                  ║
-║  РЕЖИМ: [Discovery / Verification]                              ║
+║  PITANJE: [jedna rečenica]                                       ║
+║  TIP POSTUPKA: [krivični/parnični/privredni/prekršajni/upravni]║
+║  HIJERARHIJA: [A / B / V / G]                                  ║
+║  REŽIM: [Discovery / Verification]                              ║
 ╠══════════════════════════════════════════════════════════════════╣
-║  С1 │ ✅/⛔ │ Тип: [X] Вектори: [V1:... V2:...]               ║
-║     │       │ Премиса: [неутрална / преформулисана / нетачна→стоп]║
-║  С2 │ ✅/⛔ │ Режим: [А/Б] — [образложење]                    ║
-║  С3 │ ✅/⛔ │ ОПС: [нађено→темп.важећи/застарео / није]       ║
-║  С4 │ ✅/⛔ │ PropisSoft→„[query]"→[N]рез.→[N]прошло          ║
-║     │       │ Paragraf→„[query]"→[N]рез.→[N]прошло (нових:[N])║
-║     │       │ Двострука: ДА/НЕ                                ║
-║  С5 │ ✅/⛔ │ Скен: [N] │ Директне: [N] │ Бочне: [N]          ║
-║     │       │ Hard Stop: примењен да/не                        ║
-║  С6 │ ✅/⛔ │ Пун текст: [N] │ Само сентенца: [N]             ║
-║     │       │ Poison Pill скен: [N] одлука, нађено: [N]        ║
-║     │       │ Темп. провера: [N] (меродавни закон: [X])        ║
-║     │       │ Сентенца≠одлука: [да — [број] / не]              ║
-║     │       │ Chain of custody: [N] сентенци чувано             ║
-║  С7 │ ✅/⛔ │ Случај: [А/Б/В/Г] │ ОПС: [да/не]               ║
-║     │       │ М-Д провера цитата: [N] цитата → [N] потврђено   ║
-║     │       │   постојање/поклапање/применљивост → пало: [N]    ║
-║     │       │ Темп. важећост (норма+одлука): [N] провер./[N] ОК║
-║     │       │ Reverse Claim П1: [N] тестирано, пало: [N]       ║
-║     │       │ Reverse Claim П2: [N] тестирано, пало: [N]       ║
-║     │       │ Конфликт: [да → кривични/остало / не]            ║
-║  С8 │ ✅/— │ Fallback: [К1/К2/К3/К4/ниједан] [резултат]       ║
+║  S1 │ ✅/⛔ │ Tip: [X] Vektori: [V1:... V2:...]               ║
+║     │       │ Premisa: [neutralna / preformulisana / netačna→stop]║
+║  S2 │ ✅/⛔ │ Režim: [A/B] — [obrazloženje]                    ║
+║  S3 │ ✅/⛔ │ OPS: [nađeno→temp.važeći/zastareo / nije]       ║
+║  S4 │ ✅/⛔ │ PropisSoft→„[query]"→[N]rez.→[N]prošlo          ║
+║     │       │ Paragraf→„[query]"→[N]rez.→[N]prošlo (novih:[N])║
+║     │       │ Dvostruka: DA/NE                                ║
+║  S5 │ ✅/⛔ │ Sken: [N] │ Direktne: [N] │ Bočne: [N]          ║
+║     │       │ Hard Stop: primenjen da/ne                        ║
+║  S6 │ ✅/⛔ │ Pun tekst: [N] │ Samo sentenca: [N]             ║
+║     │       │ Poison Pill sken: [N] odluka, nađeno: [N]        ║
+║     │       │ Temp. provera: [N] (merodavni zakon: [X])        ║
+║     │       │ Sentenca≠odluka: [da — [broj] / ne]              ║
+║     │       │ Chain of custody: [N] sentenci čuvano             ║
+║  S7 │ ✅/⛔ │ Slučaj: [A/B/V/G] │ OPS: [da/ne]               ║
+║     │       │ M-D provera citata: [N] citata → [N] potvrđeno   ║
+║     │       │   postojanje/poklapanje/primenljivost → palo: [N]    ║
+║     │       │ Temp. važećost (norma+odluka): [N] prover./[N] OK║
+║     │       │ Reverse Claim P1: [N] testirano, palo: [N]       ║
+║     │       │ Reverse Claim P2: [N] testirano, palo: [N]       ║
+║     │       │ Konflikt: [da → krivični/ostalo / ne]            ║
+║  S8 │ ✅/— │ Fallback: [K1/K2/K3/K4/nijedan] [rezultat]       ║
 ╠══════════════════════════════════════════════════════════════════╣
-║  НАЛАЗ:                                                         ║
-║  ✅П1: [број + суд (тачно име) + тежина + ratio + извор]       ║
-║  🟡П2: [број + суд — парафраз + извор (база)]                  ║
-║  ⛔:   [шта и зашто]                                           ║
+║  NALAZ:                                                         ║
+║  ✅P1: [broj + sud (tačno ime) + težina + ratio + izvor]       ║
+║  🟡P2: [broj + sud — parafraz + izvor (baza)]                  ║
+║  ⛔:   [šta i zašto]                                           ║
 ╠══════════════════════════════════════════════════════════════════╣
-║  ADVERSE FINDINGS (обавезно поље):                              ║
-║    [број + суд + зашто штети аргументу]                         ║
-║    или: „Нису нађене adverse findings у овој претрази"          ║
-║  КОНТРА-ПРЕТРАГА:                                               ║
-║    [query → резултат]                                           ║
-║    или: „Контра-претрага спроведена, 0 резултата"               ║
+║  ADVERSE FINDINGS (obavezno polje):                              ║
+║    [broj + sud + zašto šteti argumentu]                         ║
+║    ili: „Nisu nađene adverse findings u ovoj pretrazi"          ║
+║  KONTRA-PRETRAGA:                                               ║
+║    [query → rezultat]                                           ║
+║    ili: „Kontra-pretraga sprovedena, 0 rezultata"               ║
 ╠══════════════════════════════════════════════════════════════════╣
-║  ИСПОРУКА:                                                      ║
-║    ✅П1: [линк / copy-paste — да/не]                            ║
-║    🟡П2: [линк / copy-paste — да/не]                            ║
-║    Без извора: [N] одлука                                       ║
+║  ISPORUKA:                                                      ║
+║    ✅P1: [link / copy-paste — da/ne]                            ║
+║    🟡P2: [link / copy-paste — da/ne]                            ║
+║    Bez izvora: [N] odluka                                       ║
 ╠══════════════════════════════════════════════════════════════════╣
-║  Синтеза: [А/Б/В/Г] — [формулација за документ]                ║
-║  HUDOC: [да — зашто / не]                                      ║
-║  Вектор мењан: [да V?→V? / не]                                 ║
-║  ⚠️ ВЕРИФИКАТОР: [потребан да / не]                            ║
+║  Sinteza: [A/B/V/G] — [formulacija za dokument]                ║
+║  HUDOC: [da — zašto / ne]                                      ║
+║  Vektor menjan: [da V?→V? / ne]                                 ║
+║  ⚠️ VERIFIKATOR: [potreban da / ne]                            ║
 ╚══════════════════════════════════════════════════════════════════╝
 ```
 
-**АКО НЕ ПРИКАЖЕШ ОВАЈ ИЗВЕШТАЈ — SKILL НИЈЕ ПРИМЕЊЕН.**
+**AKO NE PRIKAŽEŠ OVAJ IZVEŠTAJ — SKILL NIJE PRIMENJEN.**

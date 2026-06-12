@@ -1,87 +1,87 @@
-# Режим FULL / СТАНДАРД + Ескалација и Деескалација (релоцирано из SKILL.md v4.1 — ВЕРБАТИМ, ништа обрисано)
+# Režim FULL / STANDARD + Eskalacija i Deeskalacija (relocirano iz SKILL.md v4.1 — VERBATIM, ništa obrisano)
 
-Ово је пун, оригинални текст Фазе 0.1 из v4.1. Тело SKILL.md v5 садржи сажетак;
-овај фајл је МЕРОДАВАН за граничне процене.
+Ovo je pun, originalni tekst Faze 0.1 iz v4.1. Telo SKILL.md v5 sadrži sažetak;
+ovaj fajl je MERODAVAN za granične procene.
 
 ---
 
-### ФАЗА 0.1 — ОДЛУКА О РЕЖИМУ (FULL или СТАНДАРД)
+### FAZA 0.1 — ODLUKA O REŽIMU (FULL ili STANDARD)
 
-Одмах после Ф0, ПРОЦЕНИ НАМЕРУ корисника и одлучи:
-- **FULL** = god-skill активан + сви подслојеви + верификатор
-- **СТАНДАРД** = pravna-analiza сама + верификатор на крају
+Odmah posle F0, PROCENI NAMERU korisnika i odluči:
+- **FULL** = god-skill aktivan + svi podslojevi + verifikator
+- **STANDARD** = pravna-analiza sama + verifikator na kraju
 
-**НЕ ТРАЖИ ТАЧНЕ РЕЧИ. ПРОЦЕНИ НАМЕРУ.**
+**NE TRAŽI TAČNE REČI. PROCENI NAMERU.**
 
-Ако БИЛО ШТА у поруци, контексту, тону, или историји предмета
-указује да корисник сматра задатак важним, сложеним, ризичним,
-хитним, или захтева дубину — то је FULL. Писмо, правопис, стил
-писања НИСУ релевантни — тумачи НАМЕРУ, не слова.
+Ako BILO ŠTA u poruci, kontekstu, tonu, ili istoriji predmeta
+ukazuje da korisnik smatra zadatak važnim, složenim, rizičnim,
+hitnim, ili zahteva dubinu — to je FULL. Pismo, pravopis, stil
+pisanja NISU relevantni — tumači NAMERU, ne slova.
 
-#### 🟢 FULL — без питања:
+#### 🟢 FULL — bez pitanja:
 
-**Намера корисника:** Било шта што имплицира важност, озбиљност,
-дубину, ризик, хитност, или незадовољство претходним радом.
+**Namera korisnika:** Bilo šta što implicira važnost, ozbiljnost,
+dubinu, rizik, hitnost, ili nezadovoljstvo prethodnim radom.
 
-**Материја:** Кривична (УВЕК — слобода човека). Уставна жалба.
-ЕСЉП. Било који правни лек (жалба, ванредни правни лек).
+**Materija:** Krivična (UVEK — sloboda čoveka). Ustavna žalba.
+ESLJP. Bilo koji pravni lek (žalba, vanredni pravni lek).
 
-**Документи:** Корисник учитао документ за анализу (ако даје да
-читам — значи да хоће дубину). Више докумената у предмету.
-Пресуда, решење, оптужница, вештачење, записник.
+**Dokumenti:** Korisnik učitao dokument za analizu (ako daje da
+čitam — znači da hoće dubinu). Više dokumenata u predmetu.
+Presuda, rešenje, optužnica, veštačenje, zapisnik.
 
-**Контекст:** Нов предмет (први пут радимо). Помиње противничког
-адвоката. Помиње рочиште, рок, или стратешку одлуку. Помиње
-вредност спора. Тражи анализу, мишљење, процену, стратегију.
+**Kontekst:** Nov predmet (prvi put radimo). Pominje protivničkog
+advokata. Pominje ročište, rok, ili stratešku odluku. Pominje
+vrednost spora. Traži analizu, mišljenje, procenu, strategiju.
 
-#### 🔴 СТАНДАРД — без питања:
+#### 🔴 STANDARD — bez pitanja:
 
-**Намера корисника:** Експлицитно каже да је рутина, да жели
-брзо, по шаблону, као прошли пут, или диктира текст.
+**Namera korisnika:** Eksplicitno kaže da je rutina, da želi
+brzo, po šablonu, kao prošli put, ili diktira tekst.
 
-**Задатак:** Попуњавање готовог шаблона са подацима. Форматирање
-постојећег текста. Корисник ДИКТИРА — Claude КУЦА.
+**Zadatak:** Popunjavanje gotovog šablona sa podacima. Formatiranje
+postojećeg teksta. Korisnik DIKTIRA — Claude KUCA.
 
-#### 🟡 ПИТАМ — кратко, 1 питање:
+#### 🟡 PITAM — kratko, 1 pitanje:
 
-Све што НЕ СПАДА јасно у зелену или црвену. Формат:
-
-```
-Предмет: [шта сам разумео]
-🟢 FULL или 🔴 СТАНДАРД?
-```
-
-За батцх — ЈЕДНОМ на почетку:
-```
-Батцх: [N] предмета
-Предлажем: [режим за сваки или за групу]
-Потврди или промени.
-```
-
-#### ⚠️ ЕСКАЛАЦИЈА (СТАНДАРД → FULL):
-
-Ако кренем СТАНДАРД, а током Ф1-Ф2 наиђем на неочекивану
-сложеност — контрадикцију, процесну замку, застарелост, сложен
-приговор, нешто што нисам предвидео — СТАЈЕМ и кажем:
+Sve što NE SPADA jasno u zelenu ili crvenu. Format:
 
 ```
-⚠️ Кренуо сам СТАНДАРД, али Ф2 открила [шта].
-Препоручујем ескалацију на FULL. Наставити?
+Predmet: [šta sam razumeo]
+🟢 FULL ili 🔴 STANDARD?
 ```
 
-Не настављам без потврде. Ако погрешно проценим да је рутина
-а заправо није — ескалација ме зауставља.
-
-#### ⬇️ ДЕЕСКАЛАЦИЈА (FULL → СТАНДАРД):
-
-Ако кренем FULL, а документ је стварно једноставан и јасан:
-
+Za batch — JEDNOM na početku:
 ```
-Ово је прилично јасно — да пређем на СТАНДАРД
-да уштедимо време?
+Batch: [N] predmeta
+Predlažem: [režim za svaki ili za grupu]
+Potvrdi ili promeni.
 ```
 
-Чекам одговор. Ако корисник каже да — прелазим.
-Ако не одговори или каже не — остајем на FULL.
+#### ⚠️ ESKALACIJA (STANDARD → FULL):
+
+Ako krenem STANDARD, a tokom F1-F2 naiđem na neočekivanu
+složenost — kontradikciju, procesnu zamku, zastarelost, složen
+prigovor, nešto što nisam predvideo — STAJEM i kažem:
+
+```
+⚠️ Krenuo sam STANDARD, ali F2 otkrila [šta].
+Preporučujem eskalaciju na FULL. Nastaviti?
+```
+
+Ne nastavljam bez potvrde. Ako pogrešno procenim da je rutina
+a zapravo nije — eskalacija me zaustavlja.
+
+#### ⬇️ DEESKALACIJA (FULL → STANDARD):
+
+Ako krenem FULL, a dokument je stvarno jednostavan i jasan:
+
+```
+Ovo je prilično jasno — da pređem na STANDARD
+da uštedimo vreme?
+```
+
+Čekam odgovor. Ako korisnik kaže da — prelazim.
+Ako ne odgovori ili kaže ne — ostajem na FULL.
 
 ---

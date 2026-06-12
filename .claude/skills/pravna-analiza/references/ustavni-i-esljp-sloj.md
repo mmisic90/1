@@ -1,160 +1,160 @@
-# Уставни и ЕСЉП слој — Надуставна и уставна заштита права
+# Ustavni i ESLJP sloj — Nadustavna i ustavna zaštita prava
 
-## КАДА СЕ АКТИВИРА
+## KADA SE AKTIVIRA
 
-ОБАВЕЗНО провери овај фајл у Фази 3 за СВАКИ предмет где постоји:
-- Ограничење права (слобода изражавања, приватност, имовина, кретање)
-- Кривични поступак (УВЕК — чл. 6 ЕКЉП + чл. 32 Устава)
-- Управни спор (дискреционо овлашћење, ћутање управе)
-- Радни спор (забрана дискриминације)
-- Извршење (непропорционалност мере)
-- Приватна тужба за увреду/клевету (слобода изражавања vs. част)
-
----
-
-## УСТАВ РЕПУБЛИКЕ СРБИЈЕ — КЉУЧНЕ ОДРЕДБЕ
-
-### За кривицу
-- **чл. 27** — Право на слободу и безбедност (притвор, задржавање)
-- **чл. 28** — Поступање с лицем лишеним слободе
-- **чл. 29** — Права окривљеног (претпоставка невиности, чл. 34 ст. 3)
-- **чл. 32** — Право на правично суђење (разуман рок, независан суд)
-- **чл. 33** — Правна сигурност у казненом праву (nulla poena sine lege)
-- **чл. 34** — Право на правну извесност
-- **чл. 46** — Слобода мишљења и изражавања → КЉУЧНО за чл. 170/171/
-  239 КЗ (увреда, клевета, угрожавање угледа)
-
-### За парницу / извршење
-- **чл. 32** — Правично суђење (важи и за парницу)
-- **чл. 58** — Право на имовину (извршење на имовини → пропорционалност)
-- **чл. 60** — Право на рад (радни спорови)
-- **чл. 21** — Забрана дискриминације
-
-### За управно право
-- **чл. 36** — Право на једнаку заштиту права
-- **чл. 198** — Законитост управе
-- **чл. 22** — Заштита права пред судом (управни спор)
-- **чл. 170** — Уставна жалба (кад су исцрпљена друга средства)
+OBAVEZNO proveri ovaj fajl u Fazi 3 za SVAKI predmet gde postoji:
+- Ograničenje prava (sloboda izražavanja, privatnost, imovina, kretanje)
+- Krivični postupak (UVEK — čl. 6 EKLJP + čl. 32 Ustava)
+- Upravni spor (diskreciono ovlašćenje, ćutanje uprave)
+- Radni spor (zabrana diskriminacije)
+- Izvršenje (neproporcionalnost mere)
+- Privatna tužba za uvredu/klevetu (sloboda izražavanja vs. čast)
 
 ---
 
-## ЕВРОПСКА КОНВЕНЦИЈА О ЉУДСКИМ ПРАВИМА — ПО ЧЛАНОВИМА
+## USTAV REPUBLIKE SRBIJE — KLJUČNE ODREDBE
 
-### чл. 6 — Право на правично суђење (ПРИМЕЊУЈ УВЕК у кривици)
-**Елементи:**
-1. Разуман рок поступка
-2. Независан и непристрасан суд
-3. Јавност расправе
-4. Претпоставка невиности (ст. 2)
-5. Минимална права одбране (ст. 3): обавештење о оптужби,
-   довољно времена за припрему, бранилац, испитивање сведока,
-   тумач
+### Za krivicu
+- **čl. 27** — Pravo na slobodu i bezbednost (pritvor, zadržavanje)
+- **čl. 28** — Postupanje s licem lišenim slobode
+- **čl. 29** — Prava okrivljenog (pretpostavka nevinosti, čl. 34 st. 3)
+- **čl. 32** — Pravo na pravično suđenje (razuman rok, nezavisan sud)
+- **čl. 33** — Pravna sigurnost u kaznenom pravu (nulla poena sine lege)
+- **čl. 34** — Pravo na pravnu izvesnost
+- **čl. 46** — Sloboda mišljenja i izražavanja → KLJUČNO za čl. 170/171/
+  239 KZ (uvreda, kleveta, ugrožavanje ugleda)
 
-**Кључне пресуде:**
-- **Salduz v. Turkey** (2008) — право на браниоца од почетка
-- **Taxquet v. Belgium** (2010) — образложење пресуде
-- **Ibrahim v. UK** (2016) — ограничење права на браниоца
-- **Schatschaschwili v. Germany** (2015) — испитивање сведока
+### Za parnicu / izvršenje
+- **čl. 32** — Pravično suđenje (važi i za parnicu)
+- **čl. 58** — Pravo na imovinu (izvršenje na imovini → proporcionalnost)
+- **čl. 60** — Pravo na rad (radni sporovi)
+- **čl. 21** — Zabrana diskriminacije
 
-**ТЕСТ ЗА СВАКИ КРИВИЧНИ ПРЕДМЕТ:**
-```
-□ Да ли је поступак трајао РАЗУМНО? (>3 године = проблем)
-□ Да ли је окривљени имао БРАНИОЦА кад треба?
-□ Да ли су СВЕДОЦИ испитани контрадикторно?
-□ Да ли је пресуда ОБРАЗЛОЖЕНА?
-□ Да ли је поштована ПРЕТПОСТАВКА НЕВИНОСТИ?
-```
-
-### чл. 10 — Слобода изражавања (КЉУЧНО за увреду/клевету/угледе)
-**Тростепени тест ограничења:**
-1. Да ли је ограничење ПРОПИСАНО ЗАКОНОМ?
-2. Да ли има ЛЕГИТИМАН ЦИЉ? (заштита угледа других, итд.)
-3. Да ли је НЕОПХОДНО У ДЕМОКРАТСКОМ ДРУШТВУ?
-   → Пропорционалност, маргина процене, pressing social need
-
-**Кључне пресуде:**
-- **Lingens v. Austria** (1986) — вредносни судови vs чињеничне тврдње.
-  Вредносни судови НЕ ПОДЛЕЖУ доказу истинитости.
-- **Feldek v. Slovakia** (2001) — исто, појачано
-- **Castells v. Spain** (1992) — критика јавних институција/предузећа
-  заслужује ВИШИ ниво заштите
-- **Bladet Tromsø v. Norway** (1999) — јавни интерес
-- **Jersild v. Denmark** (1994) — новинарска слобода
-- **Dalban v. Romania** (1999) — критика јавних функционера
-
-**ПРАВИЛО ЗА ЧЛ. 170/171/239 КЗ:**
-```
-АКО окривљени критикује ЈАВНО ПРЕДУЗЕЋЕ или ФУНКЦИОНЕРА:
-  → ЕСЉП стандард: ВИША заштита слободе изражавања
-  → Castells + Lingens = готово немогуће осудити за вредносни суд
-  → Feldek = чак и оштра критика може бити заштићена
-
-АКО је у питању ВРЕДНОСНИ СУД (а не чињенична тврдња):
-  → Lingens: „вредносни суд се не може доказивати"
-  → Тужилац МОРА доказати да је тврдња ЧИЊЕНИЧНА, не вредносна
-  → Ако је вредносна → чл. 10 штити → ослобођење
-```
-
-### чл. 8 — Право на приватност
-- Претрес стана без налога
-- Прислушкивање
-- Видео надзор
-- **Bărbulescu v. Romania** (2017) — надзор комуникација на послу
-- **Von Hannover v. Germany** (2004, 2012) — приватност јавних лица
-
-### чл. 1 Протокола 1 — Право на имовину
-- Извршење на имовини → да ли је ПРОПОРЦИОНАЛНО?
-- **Sporrong v. Sweden** (1982) — тест пропорционалности
-- Примена у извршном поступку: да ли се заплењује ВИШЕ него дуг?
-
-### чл. 13 — Право на делотворан правни лек
-- Ако домаћи суд не пружи заштиту → чл. 13 повређен
-- Важно за уставну жалбу: Уставни суд = последњи домаћи лек
-
-### чл. 3 — Забрана мучења (апсолутна)
-- Полицијско насиље при саслушању
-- Услови у притвору/затвору
-- **АПСОЛУТНА забрана** — нема балансирања, нема изузетка
+### Za upravno pravo
+- **čl. 36** — Pravo na jednaku zaštitu prava
+- **čl. 198** — Zakonitost uprave
+- **čl. 22** — Zaštita prava pred sudom (upravni spor)
+- **čl. 170** — Ustavna žalba (kad su iscrpljena druga sredstva)
 
 ---
 
-## УСТАВНА ЖАЛБА — ПРОТОКОЛ
+## EVROPSKA KONVENCIJA O LJUDSKIM PRAVIMA — PO ČLANOVIMA
 
-### Претпоставке допуштености (чл. 170 Устава, чл. 82-89 ЗУС)
+### čl. 6 — Pravo na pravično suđenje (PRIMENJUJ UVEK u krivici)
+**Elementi:**
+1. Razuman rok postupka
+2. Nezavisan i nepristrasan sud
+3. Javnost rasprave
+4. Pretpostavka nevinosti (st. 2)
+5. Minimalna prava odbrane (st. 3): obaveštenje o optužbi,
+   dovoljno vremena za pripremu, branilac, ispitivanje svedoka,
+   tumač
+
+**Ključne presude:**
+- **Salduz v. Turkey** (2008) — pravo na branioca od početka
+- **Taxquet v. Belgium** (2010) — obrazloženje presude
+- **Ibrahim v. UK** (2016) — ograničenje prava na branioca
+- **Schatschaschwili v. Germany** (2015) — ispitivanje svedoka
+
+**TEST ZA SVAKI KRIVIČNI PREDMET:**
 ```
-1. ИСЦРПЉЕНА сва правна средства? [да/не]
-   → Ако НЕ → уставна жалба НЕДОПУШТЕНА (осим чл. 83 ст. 2)
-2. Рок: 30 дана од достављања КОНАЧНОГ акта
-3. Повређено УСТАВОМ ГАРАНТОВАНО право?
-   → Не може апстрактно — мора конкретна повреда конкретног права
-4. ИНДИВИДУАЛНИ акт или радња (не општи акт)
+□ Da li je postupak trajao RAZUMNO? (>3 godine = problem)
+□ Da li je okrivljeni imao BRANIOCA kad treba?
+□ Da li su SVEDOCI ispitani kontradiktorno?
+□ Da li je presuda OBRAZLOŽENA?
+□ Da li je poštovana PRETPOSTAVKA NEVINOSTI?
 ```
 
-### Садржај уставне жалбе
+### čl. 10 — Sloboda izražavanja (KLJUČNO za uvredu/klevetu/uglede)
+**Trostepeni test ograničenja:**
+1. Da li je ograničenje PROPISANO ZAKONOM?
+2. Da li ima LEGITIMAN CILj? (zaštita ugleda drugih, itd.)
+3. Da li je NEOPHODNO U DEMOKRATSKOM DRUŠTVU?
+   → Proporcionalnost, margina procene, pressing social need
+
+**Ključne presude:**
+- **Lingens v. Austria** (1986) — vrednosni sudovi vs činjenične tvrdnje.
+  Vrednosni sudovi NE PODLEŽU dokazu istinitosti.
+- **Feldek v. Slovakia** (2001) — isto, pojačano
+- **Castells v. Spain** (1992) — kritika javnih institucija/preduzeća
+  zaslužuje VIŠI nivo zaštite
+- **Bladet Tromsø v. Norway** (1999) — javni interes
+- **Jersild v. Denmark** (1994) — novinarska sloboda
+- **Dalban v. Romania** (1999) — kritika javnih funkcionera
+
+**PRAVILO ZA ČL. 170/171/239 KZ:**
 ```
-1. Подносилац (лични подаци)
-2. Оспорени акт (решење/пресуда — тачан број и датум)
-3. Право које је повређено (конкретан члан Устава)
-4. Образложење повреде (ЧИЊЕНИЦЕ + ПРАВО)
-5. ЕСЉП пракса (појачава аргумент)
-6. Захтев (утврђивање повреде + укидање/поништај)
-7. Привремена мера (ако постоји неотклоњива штета)
+AKO okrivljeni kritikuje JAVNO PREDUZEĆE ili FUNKCIONERA:
+  → ESLJP standard: VIŠA zaštita slobode izražavanja
+  → Castells + Lingens = gotovo nemoguće osuditi za vrednosni sud
+  → Feldek = čak i oštra kritika može biti zaštićena
+
+AKO je u pitanju VREDNOSNI SUD (a ne činjenična tvrdnja):
+  → Lingens: „vrednosni sud se ne može dokazivati"
+  → Tužilac MORA dokazati da je tvrdnja ČINJENIČNA, ne vrednosna
+  → Ako je vrednosna → čl. 10 štiti → oslobođenje
+```
+
+### čl. 8 — Pravo na privatnost
+- Pretres stana bez naloga
+- Prisluškivanje
+- Video nadzor
+- **Bărbulescu v. Romania** (2017) — nadzor komunikacija na poslu
+- **Von Hannover v. Germany** (2004, 2012) — privatnost javnih lica
+
+### čl. 1 Protokola 1 — Pravo na imovinu
+- Izvršenje na imovini → da li je PROPORCIONALNO?
+- **Sporrong v. Sweden** (1982) — test proporcionalnosti
+- Primena u izvršnom postupku: da li se zaplenjuje VIŠE nego dug?
+
+### čl. 13 — Pravo na delotvoran pravni lek
+- Ako domaći sud ne pruži zaštitu → čl. 13 povređen
+- Važno za ustavnu žalbu: Ustavni sud = poslednji domaći lek
+
+### čl. 3 — Zabrana mučenja (apsolutna)
+- Policijsko nasilje pri saslušanju
+- Uslovi u pritvoru/zatvoru
+- **APSOLUTNA zabrana** — nema balansiranja, nema izuzetka
+
+---
+
+## USTAVNA ŽALBA — PROTOKOL
+
+### Pretpostavke dopuštenosti (čl. 170 Ustava, čl. 82-89 ZUS)
+```
+1. ISCRPLJENA sva pravna sredstva? [da/ne]
+   → Ako NE → ustavna žalba NEDOPUŠTENA (osim čl. 83 st. 2)
+2. Rok: 30 dana od dostavljanja KONAČNOG akta
+3. Povređeno USTAVOM GARANTOVANO pravo?
+   → Ne može apstraktno — mora konkretna povreda konkretnog prava
+4. INDIVIDUALNI akt ili radnja (ne opšti akt)
+```
+
+### Sadržaj ustavne žalbe
+```
+1. Podnosilac (lični podaci)
+2. Osporeni akt (rešenje/presuda — tačan broj i datum)
+3. Pravo koje je povređeno (konkretan član Ustava)
+4. Obrazloženje povrede (ČINJENICE + PRAVO)
+5. ESLJP praksa (pojačava argument)
+6. Zahtev (utvrđivanje povrede + ukidanje/poništaj)
+7. Privremena mera (ako postoji neotklonjiva šteta)
 ```
 
 ---
 
-## ИНТЕГРАЦИЈА СА GOD-SKILL
+## INTEGRACIJA SA GOD-SKILL
 
-**У Фази 3 (правна анализа):**
-- За сваки аргумент из картице → провери: да ли постоји
-  УСТАВНА/ЕСЉП димензија?
-- Ако ДА → додај у картицу: `УСТАВ: чл. [X] | ЕСЉП: чл. [Y]`
-- god-skill 5Е (Верификациони pipeline): web search за
-  "ЕСЉП + кључне речи предмета" → потврди да пракса постоји
-- god-skill 4Д (FORK): Грана В = „Ако суд игнорише ЕСЉП стандард,
-  да ли се отвара пут за уставну жалбу / представку ЕСЉП?"
+**U Fazi 3 (pravna analiza):**
+- Za svaki argument iz kartice → proveri: da li postoji
+  USTAVNA/ESLJP dimenzija?
+- Ako DA → dodaj u karticu: `USTAV: čl. [X] | ESLJP: čl. [Y]`
+- god-skill 5E (Verifikacioni pipeline): web search za
+  "ESLJP + ključne reči predmeta" → potvrdi da praksa postoji
+- god-skill 4D (FORK): Grana V = „Ako sud ignoriše ESLJP standard,
+  da li se otvara put za ustavnu žalbu / predstavku ESLJP?"
 
-**У Фази 4 (Adversarial):**
-- Перспектива В (Апелациони суд) → ПРОШИРИТИ:
-  „Да ли би Уставни суд одржао ову одлуку?"
-  „Да ли би ЕСЉП нашао повреду?"
+**U Fazi 4 (Adversarial):**
+- Perspektiva V (Apelacioni sud) → PROŠIRITI:
+  „Da li bi Ustavni sud održao ovu odluku?"
+  „Da li bi ESLJP našao povredu?"

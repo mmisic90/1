@@ -1,150 +1,150 @@
-# Когнитивни мотор — Дубоко правно мишљење
+# Kognitivni motor — Duboko pravno mišljenje
 
-## ТРИ ПАРАЛЕЛНА КАНАЛА
+## TRI PARALELNA KANALA
 
-Током целе анализе, мозак ради на три нивоа истовремено.
-Никад не читај документ САМО за чињенице. Никад не размишљај
-САМО о праву. Увек сва три канала.
+Tokom cele analize, mozak radi na tri nivoa istovremeno.
+Nikad ne čitaj dokument SAMO za činjenice. Nikad ne razmišljaj
+SAMO o pravu. Uvek sva tri kanala.
 
-### КАНАЛ Ч — ЧИЊЕНИЦЕ
+### KANAL Č — ČINJENICE
 ```
-Шта се ЗАИСТА десило?
-├── Шта документ КАЖЕ да се десило?
-├── Шта документ НЕ КАЖЕ (тишина)?
-├── Да ли су чињенице КОНЗИСТЕНТНЕ између собом?
-├── Да ли ХРОНОЛОГИЈА штима?
-├── Да ли ФИЗИКА штима? (да ли је физички могуће?)
-└── Шта би ОБЈЕКТИВАН ПОСМАТРАЧ видео?
-```
-
-**Кључно питање Канала Ч:** „Да ли бих ово тврдио пред судијом
-под претњом казне за лажно сведочење?"
-
-### КАНАЛ П — ПРАВО
-```
-Шта ЗАКОН каже о овим чињеницама?
-├── Која НОРМА се примењује?
-├── Да ли суд ПРАВИЛНО примењује ту норму?
-├── Постоји ли ДРУГА норма коју нико не помиње?
-├── Шта каже СУДСКА ПРАКСА (верификована)?
-├── Да ли има ПРОЦЕСНА повреда?
-└── Да ли је КВАЛИФИКАЦИЈА тачна?
+Šta se ZAISTA desilo?
+├── Šta dokument KAŽE da se desilo?
+├── Šta dokument NE KAŽE (tišina)?
+├── Da li su činjenice KONZISTENTNE između sobom?
+├── Da li HRONOLOGIJA štima?
+├── Da li FIZIKA štima? (da li je fizički moguće?)
+└── Šta bi OBJEKTIVAN POSMATRAČ video?
 ```
 
-**Кључно питање Канала П:** „Да ли бих могао да напишем правно
-мишљење базирано САМО на ономе што пише у закону и овим чињеницама?"
+**Ključno pitanje Kanala Č:** „Da li bih ovo tvrdio pred sudijom
+pod pretnjom kazne za lažno svedočenje?"
 
-### КАНАЛ С — СТРАТЕГИЈА
+### KANAL P — PRAVO
 ```
-Шта ПОМАЖЕ клијенту?
-├── Који ИСХОД желимо?
-├── Који аргументи ВОДЕ ка том исходу?
-├── Шта ШТЕТИ клијенту (и мора се адресирати)?
-├── Који је АЛТЕРНАТИВАН пут (поравнање, споразум)?
-├── Шта ПРОТИВНА СТРАНА жели и чега се плаши?
-└── Шта би МУДАР адвокат урадио?
+Šta ZAKON kaže o ovim činjenicama?
+├── Koja NORMA se primenjuje?
+├── Da li sud PRAVILNO primenjuje tu normu?
+├── Postoji li DRUGA norma koju niko ne pominje?
+├── Šta kaže SUDSKA PRAKSA (verifikovana)?
+├── Da li ima PROCESNA povreda?
+└── Da li je KVALIFIKACIJA tačna?
 ```
 
-**Кључно питање Канала С:** „Да ли ово максимализује шансе мог
-клијента, или само звучи паметно?"
+**Ključno pitanje Kanala P:** „Da li bih mogao da napišem pravno
+mišljenje bazirano SAMO na onome što piše u zakonu i ovim činjenicama?"
+
+### KANAL S — STRATEGIJA
+```
+Šta POMAŽE klijentu?
+├── Koji ISHOD želimo?
+├── Koji argumenti VODE ka tom ishodu?
+├── Šta ŠTETI klijentu (i mora se adresirati)?
+├── Koji je ALTERNATIVAN put (poravnanje, sporazum)?
+├── Šta PROTIVNA STRANA želi i čega se plaši?
+└── Šta bi MUDAR advokat uradio?
+```
+
+**Ključno pitanje Kanala S:** „Da li ovo maksimalizuje šanse mog
+klijenta, ili samo zvuči pametno?"
 
 ---
 
-## ТРИ ТИПА ПРАВНОГ РЕЗОНОВАЊА
+## TRI TIPA PRAVNOG REZONOVANJA
 
-Сваки аргумент користи један (или комбинацију) типова резоновања.
-Разумевање ТИПА помаже да процениш снагу аргумента.
+Svaki argument koristi jedan (ili kombinaciju) tipova rezonovanja.
+Razumevanje TIPA pomaže da proceniš snagu argumenta.
 
-### 1. ДЕДУКТИВНО — Закон → Чињенице → Закључак
+### 1. DEDUKTIVNO — Zakon → Činjenice → Zaključak
 ```
-ПРЕМИСА 1 (закон): Чл. 438 ст. 1 тач. 11 ЗКП — ако суд не
-   наведе разлоге за одлуку о одлучним чињеницама, постоји
-   битна повреда поступка.
-ПРЕМИСА 2 (чињеница): Суд није помeнуо исказ сведока Ј. (стр.6)
-   у образложењу (стр. 20-35), иако је сведок саслушан.
-ЗАКЉУЧАК: Постоји битна повреда из чл. 438 ст. 1 тач. 11 ЗКП.
+PREMISA 1 (zakon): Čl. 438 st. 1 tač. 11 ZKP — ako sud ne
+   navede razloge za odluku o odlučnim činjenicama, postoji
+   bitna povreda postupka.
+PREMISA 2 (činjenica): Sud nije pomenuo iskaz svedoka J. (str.6)
+   u obrazloženju (str. 20-35), iako je svedok saslušan.
+ZAKLJUČAK: Postoji bitna povreda iz čl. 438 st. 1 tač. 11 ZKP.
 ```
-**Снага:** Најјачи тип. Ако су обе премисе тачне, закључак је
-неизбежан. Нападати га можеш само нападом на премисе.
+**Snaga:** Najjači tip. Ako su obe premise tačne, zaključak je
+neizbežan. Napadati ga možeš samo napadom na premise.
 
-### 2. ИНДУКТИВНО — Чињенице → Образац → Принцип
+### 2. INDUKTIVNO — Činjenice → Obrazac → Princip
 ```
-ЧИЊЕНИЦА А: Сведок 1 не зна ко је ударио (стр. 12)
-ЧИЊЕНИЦА Б: Сведок 2 није био присутан (стр. 14)
-ЧИЊЕНИЦА В: Вештак каже „могуће и од пада" (стр. 20)
-ОБРАЗАЦ: Ниједан доказ не потврђује директно да је окривљени ударио
-ПРИНЦИП: In dubio pro reo (чл. 16 ЗКП)
+ČINJENICA A: Svedok 1 ne zna ko je udario (str. 12)
+ČINJENICA B: Svedok 2 nije bio prisutan (str. 14)
+ČINJENICA V: Veštak kaže „moguće i od pada" (str. 20)
+OBRAZAC: Nijedan dokaz ne potvrđuje direktno da je okrivljeni udario
+PRINCIP: In dubio pro reo (čl. 16 ZKP)
 ```
-**Снага:** Средњи. Противник може додати нову чињеницу (нпр. снимак)
-која разбија образац. Ипак, ако имаш довољно чињеница — јак.
+**Snaga:** Srednji. Protivnik može dodati novu činjenicu (npr. snimak)
+koja razbija obrazac. Ipak, ako imaš dovoljno činjenica — jak.
 
-### 3. АНАЛОГНО — Овај случај ≈ Случај из праксе
+### 3. ANALOGNO — Ovaj slučaj ≈ Slučaj iz prakse
 ```
-НАШ СЛУЧАЈ: Суд осуђује на основу једног сведока чији исказ
-   контрадиктира физичким доказима.
-АНАЛОГНИ СЛУЧАЈ: ВКС Kzz 1420/2022 — „суд се не може ослонити
-   искључиво на исказ једног сведока ако је тај исказ у
-   контрадикцији са налазом вештака"
-ЗАКЉУЧАК: По аналогији, и у нашем случају осуда не може да стоји.
+NAŠ SLUČAJ: Sud osuđuje na osnovu jednog svedoka čiji iskaz
+   kontradiktira fizičkim dokazima.
+ANALOGNI SLUČAJ: VKS Kzz 1420/2022 — „sud se ne može osloniti
+   isključivo na iskaz jednog svedoka ako je taj iskaz u
+   kontradikciji sa nalazom veštaka"
+ZAKLJUČAK: Po analogiji, i u našem slučaju osuda ne može da stoji.
 ```
-**Снага:** Зависи од сличности случајева. Што је аналогија ближа,
-то је аргумент јачи. Противник ће увек тврдити да случајеви „нису
-исти" — припреми одговор ЗАШТО су суштински исти.
+**Snaga:** Zavisi od sličnosti slučajeva. Što je analogija bliža,
+to je argument jači. Protivnik će uvek tvrditi da slučajevi „nisu
+isti" — pripremi odgovor ZAŠTO su suštinski isti.
 
 ---
 
-## ДУБОКО МИШЉЕЊЕ — ШЕСТ НИВОА
+## DUBOKO MIŠLJENJE — ŠEST NIVOA
 
-За сваку важну чињеницу или аргумент, прођи кроз нивое:
+Za svaku važnu činjenicu ili argument, prođi kroz nivoe:
 
-### Ниво 1: ПОВРШИНА — Шта пише?
-„Суд је утврдио да је окривљени крив" (стр. 24)
+### Nivo 1: POVRŠINA — Šta piše?
+„Sud je utvrdio da je okrivljeni kriv" (str. 24)
 
-### Ниво 2: СТРУКТУРА — Зашто суд тако каже?
-„Суд се ослања на исказ сведока П. и налаз вештака" (стр. 24-25)
+### Nivo 2: STRUKTURA — Zašto sud tako kaže?
+„Sud se oslanja na iskaz svedoka P. i nalaz veštaka" (str. 24-25)
 
-### Ниво 3: ЛОГИКА — Да ли закључак следи из образложења?
-Сведок каже „нисам видео ко је ударио" (стр. 12) — КОНТРАДИКЦИЈА
-са закључком суда. Вештак каже „могуће и од пада" (стр. 20) —
-суд то НЕ ПОМИЊЕ. Закључак НЕ СЛЕДИ из образложења.
+### Nivo 3: LOGIKA — Da li zaključak sledi iz obrazloženja?
+Svedok kaže „nisam video ko je udario" (str. 12) — KONTRADIKCIJA
+sa zaključkom suda. Veštak kaže „moguće i od pada" (str. 20) —
+sud to NE POMINJE. Zaključak NE SLEDI iz obrazloženja.
 
-### Ниво 4: КОНТЕКСТ — Шта је иза?
-Зашто суд игнорише алтернативу вештака? Могуће: суд je имао
-унапред формирано уверење. Ово указује на чл. 16 ЗКП проблем.
+### Nivo 4: KONTEKST — Šta je iza?
+Zašto sud ignoriše alternativu veštaka? Moguće: sud je imao
+unapred formirano uverenje. Ovo ukazuje na čl. 16 ZKP problem.
 
-### Ниво 5: ИМПЛИКАЦИЈЕ — Шта ово значи шире?
-Ако суд осуђује без директног доказа, ослањајући се на
-контрадикторне исказе — ово је СИСТЕМСКИ проблем. ЕСЉП чл. 6.
+### Nivo 5: IMPLIKACIJE — Šta ovo znači šire?
+Ako sud osuđuje bez direktnog dokaza, oslanjajući se na
+kontradiktorne iskaze — ovo je SISTEMSKI problem. ESLJP čl. 6.
 
-### Ниво 6: АКЦИЈА — Шта урадити?
-Жалба по чл. 438, 440 ЗКП. Инсистирати на in dubio pro reo.
-„Једна ствар": вештак дао алтернативу коју суд потпуно игнорише.
+### Nivo 6: AKCIJA — Šta uraditi?
+Žalba po čl. 438, 440 ZKP. Insistirati na in dubio pro reo.
+„Jedna stvar": veštak dao alternativu koju sud potpuno ignoriše.
 
 ---
 
-## КОГНИТИВНЕ ЗАМКЕ — ПРЕПОЗНАЈ И ИЗБЕГНИ
+## KOGNITIVNE ZAMKE — PREPOZNAJ I IZBEGNI
 
-### 1. Confirmation bias — Тражиш само оно што потврђује
-твоју хипотезу из Фазе 0.
-**Лек:** После Фазе 2, питај: „Шта у документу ОСПОРАВА
-моју хипотезу?" Ако не нађеш ништа — нешто пропушташ.
+### 1. Confirmation bias — Tražiš samo ono što potvrđuje
+tvoju hipotezu iz Faze 0.
+**Lek:** Posle Faze 2, pitaj: „Šta u dokumentu OSPORAVA
+moju hipotezu?" Ako ne nađeš ništa — nešto propuštaš.
 
-### 2. Anchoring — Прва информација коју прочиташ преурано
-одређује целу анализу.
-**Лек:** Прочитај ЦЕЛИ документ пре формирања закључака.
-Немој после 5 страна већ да знаш „шта ће бити".
+### 2. Anchoring — Prva informacija koju pročitaš preurano
+određuje celu analizu.
+**Lek:** Pročitaj CELI dokument pre formiranja zaključaka.
+Nemoj posle 5 strana već da znaš „šta će biti".
 
-### 3. Availability bias — Користиш правне институте који
-су ти „при руци" (чл. 438 ЗКП — увек) уместо правог.
-**Лек:** Провери `references/oblasti-checkliste.md` за
-КОМПЛЕТНУ листу могућих основа за ту област.
+### 3. Availability bias — Koristiš pravne institute koji
+su ti „pri ruci" (čl. 438 ZKP — uvek) umesto pravog.
+**Lek:** Proveri `references/oblasti-checkliste.md` za
+KOMPLETNU listu mogućih osnova za tu oblast.
 
-### 4. Hallucination bias — Попуњаваш рупе у документу
-„логичним" закључцима уместо да признаш да не знаш.
-**Лек:** Ако не можеш да покажеш страницу → НЕ ЗНАШ.
-Обележи ⛔П4 и настави.
+### 4. Hallucination bias — Popunjavaš rupe u dokumentu
+„logičnim" zaključcima umesto da priznaš da ne znaš.
+**Lek:** Ako ne možeš da pokažeš stranicu → NE ZNAŠ.
+Obeleži ⛔P4 i nastavi.
 
-### 5. Recency bias — Последњи прочитани део документа
-утиче више него све остало.
-**Лек:** ВЕРИФИКАЦИЈА СРЕДИНЕ — врати се на средину после
-завршетка читања. Тестирај да ли си пропустио нешто.
+### 5. Recency bias — Poslednji pročitani deo dokumenta
+utiče više nego sve ostalo.
+**Lek:** VERIFIKACIJA SREDINE — vrati se na sredinu posle
+završetka čitanja. Testiraj da li si propustio nešto.

@@ -1,87 +1,87 @@
-# Форензичко читање — Протоколи
+# Forenzičko čitanje — Protokoli
 
-## ПРОТОКОЛ А: ЛИНЕАРНО + ПОВРАТНО ЧИТАЊЕ (стандард)
+## PROTOKOL A: LINEARNO + POVRATNO ČITANJE (standard)
 
-За документе до 30 страна:
-1. Прочитај од почетка до краја. Бележи чињенице.
-2. После завршетка: врати се на 3 насумичне стране из средине.
-   Провери да ли су СВЕ чињенице са тих страна забележене.
-3. Ако си пропустио нешто → прочитај поново стране 10-20 (средина).
+Za dokumente do 30 strana:
+1. Pročitaj od početka do kraja. Beleži činjenice.
+2. Posle završetka: vrati se na 3 nasumične strane iz sredine.
+   Proveri da li su SVE činjenice sa tih strana zabeležene.
+3. Ako si propustio nešto → pročitaj ponovo strane 10-20 (sredina).
 
-## ПРОТОКОЛ Б: БЛОКОВСКО ЧИТАЊЕ (дуги документи 30+)
+## PROTOKOL B: BLOKOVSKO ČITANJE (dugi dokumenti 30+)
 
-1. Блок 1 (стр. 1-10): Читај + бележи.
-2. Блок 2 (стр. 11-20): Читај + бележи + ПОВЕЖИ са Блоком 1.
-   Питање после сваког новог блока: „Да ли нешто из овог блока
-   МЕЊА значење нечега из претходног?"
-3. Блок 3 (стр. 21-30): Исто + повежи са Блоком 1 И 2.
-4. Наставити до краја.
-5. После свих блокова: верификација средине (Протокол А, корак 2).
+1. Blok 1 (str. 1-10): Čitaj + beleži.
+2. Blok 2 (str. 11-20): Čitaj + beleži + POVEŽI sa Blokom 1.
+   Pitanje posle svakog novog bloka: „Da li nešto iz ovog bloka
+   MENJA značenje nečega iz prethodnog?"
+3. Blok 3 (str. 21-30): Isto + poveži sa Blokom 1 I 2.
+4. Nastaviti do kraja.
+5. Posle svih blokova: verifikacija sredine (Protokol A, korak 2).
 
-## ПРОТОКОЛ В: СТРУКТУРНО ЧИТАЊЕ (пресуде)
+## PROTOKOL V: STRUKTURNO ČITANJE (presude)
 
-Пресуде имају предвидљиву структуру. Читај овим редом:
+Presude imaju predvidljivu strukturu. Čitaj ovim redom:
 
-1. **ИЗРЕКА** (прва страна) — Шта је суд ОДЛУЧИО? Ово је исход.
-   Забележи: дело, санкцију, трошкове, имовинскоправни захтев.
+1. **IZREKA** (prva strana) — Šta je sud ODLUČIO? Ovo je ishod.
+   Zabeleži: delo, sankciju, troškove, imovinskopravni zahtev.
 
-2. **ДИСПОЗИТИВ** (последња страна) — Правна поука, рокови.
+2. **DISPOZITIV** (poslednja strana) — Pravna pouka, rokovi.
 
-3. **ЧИЊЕНИЧНИ ОПИС** (стр. 2-5 обично) — Шта суд тврди да се десило.
+3. **ČINJENIČNI OPIS** (str. 2-5 obično) — Šta sud tvrdi da se desilo.
 
-4. **ИЗВЕДЕНИ ДОКАЗИ** (средина — НЕ ПРЕСКАКАТИ!) — Ко је саслушан,
-   шта је рекао, који документи су изведени. ОВО ЈЕ КЉУЧНО.
-   Управо овде AI систематски губи прецизност.
+4. **IZVEDENI DOKAZI** (sredina — NE PRESKAKATI!) — Ko je saslušan,
+   šta je rekao, koji dokumenti su izvedeni. OVO JE KLJUČNO.
+   Upravo ovde AI sistematski gubi preciznost.
 
-5. **ОБРАЗЛОЖЕЊЕ** (последње стране) — Зашто суд одлучује тако.
+5. **OBRAZLOŽENJE** (poslednje strane) — Zašto sud odlučuje tako.
 
-6. **CROSS-CHECK:** Да ли образложење помиње СВЕ изведене доказе?
-   Ако не — 🟡 ТИШИНА → чл. 438 ст. 1 тач. 11 ЗКП.
+6. **CROSS-CHECK:** Da li obrazloženje pominje SVE izvedene dokaze?
+   Ako ne — 🟡 TIŠINA → čl. 438 st. 1 tač. 11 ZKP.
 
-## ПРОТОКОЛ Г: УГОВОРНО ЧИТАЊЕ
+## PROTOKOL G: UGOVORNO ČITANJE
 
-1. **СТРАНКЕ** — Ко су? Тачни подаци.
-2. **ПРЕДМЕТ** — Шта је уговорено?
-3. **ОБАВЕЗЕ** — Ко шта мора да уради и КАД?
-4. **ЦЕНА/НАКНАДА** — Колико, када, како?
-5. **РАСКИДНЕ КЛАУЗУЛЕ** — Под којим условима?
-6. **УГОВОРНА КАЗНА** — Постоји ли?
-7. **НАДЛЕЖНОСТ** — Који суд?
-8. **ПОТПИСИ** — Да ли је потписан од овлашћених лица?
-9. **ФОРМА** — Да ли је потребна солемнизација? Оверa?
+1. **STRANKE** — Ko su? Tačni podaci.
+2. **PREDMET** — Šta je ugovoreno?
+3. **OBAVEZE** — Ko šta mora da uradi i KAD?
+4. **CENA/NAKNADA** — Koliko, kada, kako?
+5. **RASKIDNE KLAUZULE** — Pod kojim uslovima?
+6. **UGOVORNA KAZNA** — Postoji li?
+7. **NADLEŽNOST** — Koji sud?
+8. **POTPISI** — Da li je potpisan od ovlašćenih lica?
+9. **FORMA** — Da li je potrebna solemnizacija? Overa?
 
-## ТЕСТ ГОРИЛА
+## TEST GORILA
 
-По „невидљивом горили" експерименту — када тражиш нешто конкретно,
-можеш пропустити нешто очигледно.
+Po „nevidljivom gorili" eksperimentu — kada tražiš nešto konkretno,
+možeš propustiti nešto očigledno.
 
-**После читања, питај се:**
-1. „Да ли је рок за жалбу/тужбу истекао?" (УВЕК проверити — чак
-   и ако то НИЈЕ оно што тражиш)
-2. „Да ли странке уопште имају легитимацију?"
-3. „Да ли је суд уопште надлежан?"
-4. „Да ли има нешто ОЧИГЛЕДНО проблематично што сам прескочио?"
+**Posle čitanja, pitaj se:**
+1. „Da li je rok za žalbu/tužbu istekao?" (UVEK proveriti — čak
+   i ako to NIJE ono što tražiš)
+2. „Da li stranke uopšte imaju legitimaciju?"
+3. „Da li je sud uopšte nadležan?"
+4. „Da li ima nešto OČIGLEDNO problematično što sam preskočio?"
 
-Ове 4 провере раде се УВЕК, без обзира на задатак. Одузимају
-10 секунди а могу спасити цео предмет.
+Ove 4 provere rade se UVEK, bez obzira na zadatak. Oduzimaju
+10 sekundi a mogu spasiti ceo predmet.
 
-## ТЕХНИКА ТРОСТРУКЕ ВЕРИФИКАЦИЈЕ БРОЈЕВА
+## TEHNIKA TROSTRUKE VERIFIKACIJE BROJEVA
 
-За сваки број (износ, датум, члан закона):
-1. **Прочитај** — забележи како си прочитао
-2. **Врати се** — погледај поново на ту страницу
-3. **Укрсти** — да ли се исти број помиње негде другде у документу?
-   Ако да — да ли се слажу?
+Za svaki broj (iznos, datum, član zakona):
+1. **Pročitaj** — zabeleži kako si pročitao
+2. **Vrati se** — pogledaj ponovo na tu stranicu
+3. **Ukrsti** — da li se isti broj pominje negde drugde u dokumentu?
+   Ako da — da li se slažu?
 
-Зашто: Најчешћа AI грешка није у аргументацији — него у БРОЈЕВИМА.
-Погрешан датум доспећа, погрешан износ, погрешан број парцеле.
-Ово се исправља само троструком верификацијом.
+Zašto: Najčešća AI greška nije u argumentaciji — nego u BROJEVIMA.
+Pogrešan datum dospeća, pogrešan iznos, pogrešan broj parcele.
+Ovo se ispravlja samo trostrukom verifikacijom.
 
-## ИЗВЛАЧЕЊЕ ДОСЛОВНИХ ЦИТАТА
+## IZVLAČENJE DOSLOVNIH CITATA
 
-Кад је цитат важан (изјава сведока, образложење суда):
-- Преписати ДОСЛОВНО, у „наводницима"
-- Навести страницу
-- Ако ниси 100% сигуран у тачност цитата — напиши „приближно:"
-  и означи 🟡П2 уместо ✅П1
-- НИКАД не „парафразирај" цитат и представљај га као дослован
+Kad je citat važan (izjava svedoka, obrazloženje suda):
+- Prepisati DOSLOVNO, u „navodnicima"
+- Navesti stranicu
+- Ako nisi 100% siguran u tačnost citata — napiši „približno:"
+  i označi 🟡P2 umesto ✅P1
+- NIKAD ne „parafraziraj" citat i predstavljaj ga kao doslovan

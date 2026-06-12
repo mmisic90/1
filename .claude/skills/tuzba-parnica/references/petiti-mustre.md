@@ -1,87 +1,87 @@
-# Мустре петита — Тужба у парничном поступку
+# Mustre petita — Tužba u parničnom postupku
 
-## 1. Новчана обавеза (накнада штете, исплата дуга)
-
-```
-ПРЕСУДУ
-
-I     ОБАВЕЗУЈЕ СЕ тужени да тужиоцу исплати износ од ________,00 динара са законском затезном каматом почев од ________. године, па до коначне исплате, у року од 15 дана од правноснажности пресуде, под претњом принудног извршења.
-
-II    ОБАВЕЗУЈЕ СЕ тужени да тужиоцу надокнади све трошкове овог поступка у року од 15 дана од правноснажности пресуде, са законском затезном каматом почев од дана извршности пресуде, па до коначне исплате, под претњом принудног извршења.
-```
-
-## 2. Предаја ствари / документације
+## 1. Novčana obaveza (naknada štete, isplata duga)
 
 ```
-ПРЕСУДУ
+PRESUDU
 
-I     ОБАВЕЗУЈЕ СЕ тужени да тужиоцу преда [опис ствари / документације], у року од 15 дана од правноснажности пресуде, под претњом принудног извршења.
+I     OBAVEZUJE SE tuženi da tužiocu isplati iznos od ________,00 dinara sa zakonskom zateznom kamatom počev od ________. godine, pa do konačne isplate, u roku od 15 dana od pravnosnažnosti presude, pod pretnjom prinudnog izvršenja.
 
-      Тужени се може ослободити обавезе из става I петита уколико тужиоцу у истом року исплати износ од ________,00 динара (facultas alternativa).
-
-II    ОБАВЕЗУЈЕ СЕ тужени да тужиоцу надокнади све трошкове овог поступка...
+II    OBAVEZUJE SE tuženi da tužiocu nadoknadi sve troškove ovog postupka u roku od 15 dana od pravnosnažnosti presude, sa zakonskom zateznom kamatom počev od dana izvršnosti presude, pa do konačne isplate, pod pretnjom prinudnog izvršenja.
 ```
 
-## 3. Утврђење (деклараторна тужба)
+## 2. Predaja stvari / dokumentacije
 
 ```
-ПРЕСУДУ
+PRESUDU
 
-I     УТВРЂУЈЕ СЕ да је [чињеница / правни однос / ништавост].
+I     OBAVEZUJE SE tuženi da tužiocu preda [opis stvari / dokumentacije], u roku od 15 dana od pravnosnažnosti presude, pod pretnjom prinudnog izvršenja.
 
-II    ОБАВЕЗУЈЕ СЕ тужени да тужиоцу надокнади све трошкове овог поступка...
+      Tuženi se može osloboditi obaveze iz stava I petita ukoliko tužiocu u istom roku isplati iznos od ________,00 dinara (facultas alternativa).
+
+II    OBAVEZUJE SE tuženi da tužiocu nadoknadi sve troškove ovog postupka...
 ```
 
-## 4. Поништај уговора (ништавост)
+## 3. Utvrđenje (deklaratorna tužba)
 
 ```
-ПРЕСУДУ
+PRESUDU
 
-I     УТВРЂУЈЕ СЕ да је апсолутно ништав Уговор о _________ закључен дана ________. године између тужиоца и туженог.
+I     UTVRĐUJE SE da je [činjenica / pravni odnos / ništavost].
 
-II    ОБАВЕЗУЈЕ СЕ тужени да тужиоцу врати [предмет уговора / износ], у року од 15 дана...
-
-III   ОБАВЕЗУЈЕ СЕ тужени да тужиоцу надокнади све трошкове овог поступка...
+II    OBAVEZUJE SE tuženi da tužiocu nadoknadi sve troškove ovog postupka...
 ```
 
-## 5. Пробој правне личности
+## 4. Poništaj ugovora (ništavost)
 
 ```
-ПРЕСУДУ
+PRESUDU
 
-ОБАВЕЗУЈЕ СЕ тужени [физичко лице — члан/директор] да тужиоцу исплати износ од ________,00 динара са законском затезном каматом почев од ________. године, па до коначне исплате, у року од 15 дана од правноснажности пресуде, под претњом принудног извршења.
+I     UTVRĐUJE SE da je apsolutno ništav Ugovor o _________ zaključen dana ________. godine između tužioca i tuženog.
 
-ОБАВЕЗУЈЕ СЕ тужени да тужиоцу надокнади све трошкове овог поступка...
+II    OBAVEZUJE SE tuženi da tužiocu vrati [predmet ugovora / iznos], u roku od 15 dana...
+
+III   OBAVEZUJE SE tuženi da tužiocu nadoknadi sve troškove ovog postupka...
 ```
 
-## 6. Солидарна одговорност (више тужених)
+## 5. Proboj pravne ličnosti
 
 ```
-ПРЕСУДУ
+PRESUDU
 
-I     ОБАВЕЗУЈУ СЕ тужени 1. реда и тужени 2. реда да тужиоцу солидарно исплате износ од ________,00 динара са законском затезном каматом...
+OBAVEZUJE SE tuženi [fizičko lice — član/direktor] da tužiocu isplati iznos od ________,00 dinara sa zakonskom zateznom kamatom počev od ________. godine, pa do konačne isplate, u roku od 15 dana od pravnosnažnosti presude, pod pretnjom prinudnog izvršenja.
 
-II    ОБАВЕЗУЈУ СЕ тужени 1. реда и тужени 2. реда да тужиоцу солидарно надокнаде све трошкове...
+OBAVEZUJE SE tuženi da tužiocu nadoknadi sve troškove ovog postupka...
 ```
 
-## 7. Трошкови поступка — стандардна формулација
+## 6. Solidarna odgovornost (više tuženih)
 
 ```
-ОБАВЕЗУЈЕ СЕ тужени да тужиоцу надокнади све трошкове овог поступка у року од 15 дана од правноснажности пресуде, са законском затезном каматом почев од дана извршности пресуде, па до коначне исплате, под претњом принудног извршења.
+PRESUDU
+
+I     OBAVEZUJU SE tuženi 1. reda i tuženi 2. reda da tužiocu solidarno isplate iznos od ________,00 dinara sa zakonskom zateznom kamatom...
+
+II    OBAVEZUJU SE tuženi 1. reda i tuženi 2. reda da tužiocu solidarno nadoknade sve troškove...
+```
+
+## 7. Troškovi postupka — standardna formulacija
+
+```
+OBAVEZUJE SE tuženi da tužiocu nadoknadi sve troškove ovog postupka u roku od 15 dana od pravnosnažnosti presude, sa zakonskom zateznom kamatom počev od dana izvršnosti presude, pa do konačne isplate, pod pretnjom prinudnog izvršenja.
 ```
 
 ---
 
-## Правни основ — најчешћи законски чланови
+## Pravni osnov — najčešći zakonski članovi
 
-| Врста захтева | Законски основ |
+| Vrsta zahteva | Zakonski osnov |
 |---|---|
-| Накнада штете (општи) | Чл. 154, 155, 185 ЗОО |
-| Законска затезна камата | Чл. 3 ЗОСЗК |
-| Ништавост уговора | Чл. 103, 104, 105 ЗОО |
-| Рушљивост уговора | Чл. 111–130 ЗОО |
-| Пробој правне личности | Чл. 18 ЗПД |
-| Паулијанска тужба | Чл. 280–281 ЗОО |
-| Испуњење уговора | Чл. 262 ЗОО |
-| Раскид уговора | Чл. 125–130, 131 ЗОО |
-| Привремена мера | Чл. 302–326 ЗИО |
+| Naknada štete (opšti) | Čl. 154, 155, 185 ZOO |
+| Zakonska zatezna kamata | Čl. 3 ZOSZK |
+| Ništavost ugovora | Čl. 103, 104, 105 ZOO |
+| Rušljivost ugovora | Čl. 111–130 ZOO |
+| Proboj pravne ličnosti | Čl. 18 ZPD |
+| Paulijanska tužba | Čl. 280–281 ZOO |
+| Ispunjenje ugovora | Čl. 262 ZOO |
+| Raskid ugovora | Čl. 125–130, 131 ZOO |
+| Privremena mera | Čl. 302–326 ZIO |

@@ -1,117 +1,117 @@
-# Рокови у кривичном поступку — комплетна табела
+# Rokovi u krivičnom postupku — kompletna tabela
 
-> ⚠️ **Закон о кривичном поступку** („Сл. гласник РС", бр. 72/2011 и измене). Увек верификовати актуелни текст на `propissoft.profisistem.rs` пре примене у конкретном предмету.
+> ⚠️ **Zakon o krivičnom postupku** („Sl. glasnik RS", br. 72/2011 i izmene). Uvek verifikovati aktuelni tekst na `propissoft.profisistem.rs` pre primene u konkretnom predmetu.
 
-## 1. РОКОВИ ЗА РЕДОВНЕ ПРАВНЕ ЛЕКОВЕ
+## 1. ROKOVI ZA REDOVNE PRAVNE LEKOVE
 
-| Акт | Рок | Почетак рока | Извор |
+| Akt | Rok | Početak roka | Izvor |
 |---|---|---|---|
-| Жалба на пресуду (општи поступак) | **15 дана** | Од достављања пресуде | чл. 432 ЗКП |
-| Жалба на пресуду (скраћени поступак) | **8 дана** | Од достављања пресуде | чл. 506 ст. 1 ЗКП |
-| Жалба на пресуду — малолетници | **8 дана** | Од достављања | чл. 81 ЗМП |
-| Одговор на жалбу противника | **8 дана** | Од достављања жалбе | чл. 449 ст. 1 ЗКП |
-| Жалба на решење (у истрази/КВ) | **3 дана** | Од достављања | чл. 467 ст. 1 ЗКП |
-| Жалба на решење (ван истраге) | **8 дана** | Од достављања | чл. 467 ст. 2 ЗКП |
+| Žalba na presudu (opšti postupak) | **15 dana** | Od dostavljanja presude | čl. 432 ZKP |
+| Žalba na presudu (skraćeni postupak) | **8 dana** | Od dostavljanja presude | čl. 506 st. 1 ZKP |
+| Žalba na presudu — maloletnici | **8 dana** | Od dostavljanja | čl. 81 ZMP |
+| Odgovor na žalbu protivnika | **8 dana** | Od dostavljanja žalbe | čl. 449 st. 1 ZKP |
+| Žalba na rešenje (u istrazi/KV) | **3 dana** | Od dostavljanja | čl. 467 st. 1 ZKP |
+| Žalba na rešenje (van istrage) | **8 dana** | Od dostavljanja | čl. 467 st. 2 ZKP |
 
-## 2. РОКОВИ ЗА ВАНРЕДНЕ ПРАВНЕ ЛЕКОВЕ
+## 2. ROKOVI ZA VANREDNE PRAVNE LEKOVE
 
-| Акт | Рок | Почетак рока | Извор |
+| Akt | Rok | Početak roka | Izvor |
 |---|---|---|---|
-| Захтев за заштиту законитости | **30 дана** | Од правноснажности | чл. 485 ст. 4 ЗКП |
-| Захтев за понављање поступка | **Нема рок** | До наступања застарелости извршења | чл. 470 ст. 3 ЗКП |
-| Молба за ванредно ублажавање казне | **Нема рок** | — | чл. 555 ЗКП |
+| Zahtev za zaštitu zakonitosti | **30 dana** | Od pravnosnažnosti | čl. 485 st. 4 ZKP |
+| Zahtev za ponavljanje postupka | **Nema rok** | Do nastupanja zastarelosti izvršenja | čl. 470 st. 3 ZKP |
+| Molba za vanredno ublažavanje kazne | **Nema rok** | — | čl. 555 ZKP |
 
-## 3. РОКОВИ ЗА ПРИТВОР И МЕРЕ
+## 3. ROKOVI ZA PRITVOR I MERE
 
-| Акт | Рок | Почетак рока | Извор |
+| Akt | Rok | Početak roka | Izvor |
 |---|---|---|---|
-| Жалба на решење о притвору | **3 дана** | Од достављања | чл. 214 ст. 4 ЗКП |
-| Жалба на решење о задржавању | **4 сата** | Од усменог саопштења | чл. 294 ст. 3 ЗКП |
-| Жалба на решење о мерама | **3 дана** | Од достављања | чл. 214 ЗКП |
+| Žalba na rešenje o pritvoru | **3 dana** | Od dostavljanja | čl. 214 st. 4 ZKP |
+| Žalba na rešenje o zadržavanju | **4 sata** | Od usmenog saopštenja | čl. 294 st. 3 ZKP |
+| Žalba na rešenje o merama | **3 dana** | Od dostavljanja | čl. 214 ZKP |
 
-## 4. РОКОВИ ЗА ОДГОВОРЕ И ПРИГОВОРЕ
+## 4. ROKOVI ZA ODGOVORE I PRIGOVORE
 
-| Акт | Рок | Почетак рока | Извор |
+| Akt | Rok | Početak roka | Izvor |
 |---|---|---|---|
-| Одговор на оптужницу | **8 дана** | Од достављања | чл. 336 ст. 3 ЗКП |
-| Приговор на оптужни предлог (скраћени пост.) | **8 дана** | Од достављања | чл. 500 ст. 3 ЗКП |
-| Приговор на одбачај крив. пријаве (ОЈТ) | **8 дана** | Од обавештења | чл. 51 ст. 2 ЗКП |
-| Приговор на одбачај (ВЈТ) | **8 дана** | Од обавештења | чл. 51 ст. 2 ЗКП |
-| Захтев оштећеног за преузимање гоњења | **8 дана** | Од обавештења | чл. 52 ЗКП |
+| Odgovor na optužnicu | **8 dana** | Od dostavljanja | čl. 336 st. 3 ZKP |
+| Prigovor na optužni predlog (skraćeni post.) | **8 dana** | Od dostavljanja | čl. 500 st. 3 ZKP |
+| Prigovor na odbačaj kriv. prijave (OJT) | **8 dana** | Od obaveštenja | čl. 51 st. 2 ZKP |
+| Prigovor na odbačaj (VJT) | **8 dana** | Od obaveštenja | čl. 51 st. 2 ZKP |
+| Zahtev oštećenog za preuzimanje gonjenja | **8 dana** | Od obaveštenja | čl. 52 ZKP |
 
-## 5. РОКОВИ ЗА ПРИВАТНИ ТУЖИЛАЦ
+## 5. ROKOVI ZA PRIVATNI TUŽILAC
 
-| Акт | Рок | Почетак рока | Извор |
+| Akt | Rok | Početak roka | Izvor |
 |---|---|---|---|
-| Приватна тужба (подношење) | **3 месеца** | Од сазнања за дело и учиниоца | чл. 65 ст. 2 ЗКП |
-| Одустанак од приватне тужбе | — | До завршетка главног претреса | чл. 66 ЗКП |
+| Privatna tužba (podnošenje) | **3 meseca** | Od saznanja za delo i učinioca | čl. 65 st. 2 ZKP |
+| Odustanak od privatne tužbe | — | Do završetka glavnog pretresa | čl. 66 ZKP |
 
-## 6. РОКОВИ ЗА УСТАВНИ И МЕЂУНАРОДНИ НИВО
+## 6. ROKOVI ZA USTAVNI I MEĐUNARODNI NIVO
 
-| Акт | Рок | Почетак рока | Извор |
+| Akt | Rok | Početak roka | Izvor |
 |---|---|---|---|
-| Уставна жалба | **30 дана** | Од пријема правноснажне одлуке | чл. 84 ЗУС |
-| Представка ЕСЉП (нови случајеви) | **4 месеца** | Од финалне одлуке | чл. 35 § 1 ЕКЉП (од 1.2.2022) |
-| Представка ЕСЉП (случајеви пре 1.2.2022) | **6 месеци** | Од финалне одлуке | чл. 35 § 1 ЕКЉП (стара верзија) |
+| Ustavna žalba | **30 dana** | Od prijema pravnosnažne odluke | čl. 84 ZUS |
+| Predstavka ESLJP (novi slučajevi) | **4 meseca** | Od finalne odluke | čl. 35 § 1 EKLJP (od 1.2.2022) |
+| Predstavka ESLJP (slučajevi pre 1.2.2022) | **6 meseci** | Od finalne odluke | čl. 35 § 1 EKLJP (stara verzija) |
 
-## 7. ПРАВИЛА РАЧУНАЊА РОКОВА (чл. 225 ЗКП)
+## 7. PRAVILA RAČUNANJA ROKOVA (čl. 225 ZKP)
 
-### Општа правила
+### Opšta pravila
 
-1. **Рок тече од дана ПОСЛЕ достављања.** Дан достављања се не рачуна.
-2. Ако последњи дан рока пада на нерадни дан (субота, недеља, државни празник) → рок се **продужава на први радни дан**.
-3. Подношење **до 24:00** задњег дана рока је благовремено.
-4. Подношење препорученом поштом — релевантан је **датум жига на пошти**, не датум пријема у суду (чл. 228 ст. 1 ЗКП).
-5. Подношење електронски (где је дозвољено) — тренутак пријема у електронском систему суда.
+1. **Rok teče od dana POSLE dostavljanja.** Dan dostavljanja se ne računa.
+2. Ako poslednji dan roka pada na neradni dan (subota, nedelja, državni praznik) → rok se **produžava na prvi radni dan**.
+3. Podnošenje **do 24:00** zadnjeg dana roka je blagovremeno.
+4. Podnošenje preporučenom poštom — relevantan je **datum žiga na pošti**, ne datum prijema u sudu (čl. 228 st. 1 ZKP).
+5. Podnošenje elektronski (gde je dozvoljeno) — trenutak prijema u elektronskom sistemu suda.
 
-### Посебна правила за притвор
+### Posebna pravila za pritvor
 
-- Рок за жалбу на притвор (3 дана) **тече и преко нерадних дана** — због хитности.
-- Рок за жалбу на задржавање (4 сата) тече у минутима од усменог саопштења. Крајњи моменат се обавезно уписује у записник.
+- Rok za žalbu na pritvor (3 dana) **teče i preko neradnih dana** — zbog hitnosti.
+- Rok za žalbu na zadržavanje (4 sata) teče u minutima od usmenog saopštenja. Krajnji momenat se obavezno upisuje u zapisnik.
 
-### Компјутација примера
+### Kompjutacija primera
 
-**Пример 1:** Пресуда достављена браниоцу у петак, 10. априла 2026.
-- Рок 15 дана за жалбу: почиње тећи у суботу 11.4.2026.
-- Задњи дан: петак, 24.4.2026. до 24:00.
+**Primer 1:** Presuda dostavljena braniocu u petak, 10. aprila 2026.
+- Rok 15 dana za žalbu: počinje teći u subotu 11.4.2026.
+- Zadnji dan: petak, 24.4.2026. do 24:00.
 
-**Пример 2:** Решење о притвору достављено у четвртак у 14:00.
-- Рок 3 дана.
-- Задњи дан: недеља — али не помера се јер тече преко нерадних дана.
-- Крајњи моменат: недеља до 24:00.
+**Primer 2:** Rešenje o pritvoru dostavljeno u četvrtak u 14:00.
+- Rok 3 dana.
+- Zadnji dan: nedelja — ali ne pomera se jer teče preko neradnih dana.
+- Krajnji momenat: nedelja do 24:00.
 
-**Пример 3:** Пресуда Уставног суда примљена 1.3.2026.
-- Рок 4 месеца за ЕСЉП.
-- Задњи дан: 1.7.2026. до 24:00 (по локалном времену подносиоца).
+**Primer 3:** Presuda Ustavnog suda primljena 1.3.2026.
+- Rok 4 meseca za ESLJP.
+- Zadnji dan: 1.7.2026. do 24:00 (po lokalnom vremenu podnosioca).
 
-## 8. Рок-аларм формат
+## 8. Rok-alarm format
 
-За Compliance извештај у `krivica` SKILL.md Корак 10:
+Za Compliance izveštaj u `krivica` SKILL.md Korak 10:
 
 ```
 ╔════════════════════════════════════════════════╗
-║ ⏰ РОК-АЛАРМ                                    ║
+║ ⏰ ROK-ALARM                                    ║
 ╠════════════════════════════════════════════════╣
-║ Тип акта: Жалба на пресуду                     ║
-║ Достављено: 10.04.2026.                        ║
-║ Рок: 15 дана                                   ║
-║ КРАЈЊИ ДАТУМ: 25.04.2026. до 24:00            ║
-║ Данас: 11.04.2026.                             ║
-║ ОСТАЛО: 14 дана                                ║
-║ СТАТУС: 🟢 нормално                            ║
+║ Tip akta: Žalba na presudu                     ║
+║ Dostavljeno: 10.04.2026.                        ║
+║ Rok: 15 dana                                   ║
+║ KRAJNJI DATUM: 25.04.2026. do 24:00            ║
+║ Danas: 11.04.2026.                             ║
+║ OSTALO: 14 dana                                ║
+║ STATUS: 🟢 normalno                            ║
 ╚════════════════════════════════════════════════╝
 ```
 
-**Праг аларма:**
-- 🟢 > 7 дана
-- 🟡 3–7 дана (приоритет)
-- 🔴 1–2 дана (ХИТНО)
-- ⛔ < 24 сата (КРИТИЧНО — обавестити Милана одмах, пре било чега другог)
+**Prag alarma:**
+- 🟢 > 7 dana
+- 🟡 3–7 dana (prioritet)
+- 🔴 1–2 dana (HITNO)
+- ⛔ < 24 sata (KRITIČNO — obavestiti Milana odmah, pre bilo čega drugog)
 
-## 9. ЧЕСТЕ ГРЕШКЕ
+## 9. ČESTE GREŠKE
 
-- ❌ Рачунање рока од дана доношења одлуке уместо од дана достављања
-- ❌ Игнорисање правила да нерадни дан помера задњи дан напред (осим код притвора)
-- ❌ Мешање рокова за општи и скраћени поступак (15 vs 8 дана)
-- ❌ Пропуштање рока за приговор оштећеног (8 дана) у случају одбачаја пријаве
-- ❌ Рачунање 6 месеци уместо 4 месеца за нове ЕСЉП представке (после 1.2.2022)
+- ❌ Računanje roka od dana donošenja odluke umesto od dana dostavljanja
+- ❌ Ignorisanje pravila da neradni dan pomera zadnji dan napred (osim kod pritvora)
+- ❌ Mešanje rokova za opšti i skraćeni postupak (15 vs 8 dana)
+- ❌ Propuštanje roka za prigovor oštećenog (8 dana) u slučaju odbačaja prijave
+- ❌ Računanje 6 meseci umesto 4 meseca za nove ESLJP predstavke (posle 1.2.2022)

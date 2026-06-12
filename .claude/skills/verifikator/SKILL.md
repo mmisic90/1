@@ -1,16 +1,16 @@
 ---
 name: verifikator
 description: >
-  Независни верификациони слој — активирај АУТОМАТСКИ чим се заврши анализа у
-  којој су коришћени god-skill-deep-reader И/ИЛИ pravna-analiza. НИКАД се не
-  активира самостално — УВЕК после завршетка другог skill-а, пре достављања
-  финалног одговора кориснику. Овај skill не анализира документ — он анализира
-  ТВОЈ ОДГОВОР и проверава да ли је тачан. Активирај и ако корисник каже:
-  "провери", "да ли си сигуран", "верификуј", "тачно ли је ово", "нешто ми не
-  штима", "провери поново", или изрази сумњу у тачност. Такође активирај кад
-  год Compliance извештај показује 🔴П3 тврдње или ⛔ непроверене ставке.
-  НЕ активирати за: одговоре без правних/чињеничних тврдњи, casual ћаскање,
-  креативни рад, knjižice, Instagram, debugging.
+  Nezavisni verifikacioni sloj — aktiviraj AUTOMATSKI čim se završi analiza u
+  kojoj su korišćeni god-skill-deep-reader I/ILI pravna-analiza. NIKAD se ne
+  aktivira samostalno — UVEK posle završetka drugog skill-a, pre dostavljanja
+  finalnog odgovora korisniku. Ovaj skill ne analizira dokument — on analizira
+  TVOJ ODGOVOR i proverava da li je tačan. Aktiviraj i ako korisnik kaže:
+  "proveri", "da li si siguran", "verifikuj", "tačno li je ovo", "nešto mi ne
+  štima", "proveri ponovo", ili izrazi sumnju u tačnost. Takođe aktiviraj kad
+  god Compliance izveštaj pokazuje 🔴P3 tvrdnje ili ⛔ neproverene stavke.
+  NE aktivirati za: odgovore bez pravnih/činjeničnih tvrdnji, casual ćaskanje,
+  kreativni rad, knjižice, Instagram, debugging.
 metadata:
   author: "Milan Mišić, advokat"
   version: "2.1.0"
@@ -20,536 +20,538 @@ metadata:
   last-updated: "2026-04-08"
 ---
 
-# Верификатор — Механичка независна провера
+# Verifikator — Mehanička nezavisna provera
 
-## ⚠️ NEGATIVE TRIGGERS — НЕ АКТИВИРАЈ ЗА:
+> **Pismo:** instrukcije ovog skila su latinica (token-ekonomija, vidi `_policy/politika-pisma.md`); izlazni pravni akt je uvek ćirilica — kontroliše `stil-pisanja`.
 
-| Контекст | Зашто не |
+## ⚠️ NEGATIVE TRIGGERS — NE AKTIVIRAJ ZA:
+
+| Kontekst | Zašto ne |
 |---|---|
-| Casual ћаскање без чињеничних тврдњи | Нема шта да верификује |
-| Креативни рад (knjižice, постови, приче) | Креативно нема „тачно/нетачно" |
-| Питања типа „шта мислиш о Х" где је Х субјективно | Мишљење није чињеница |
-| Технички debugging без правног документа | Нема извора за DIFF |
-| Превод текста (без аналитичког елемента) | Превод не цитира изворе |
-| Корисник изричито каже „без верификације" | Поштуј намеру — али упозори на ризик |
+| Casual ćaskanje bez činjeničnih tvrdnji | Nema šta da verifikuje |
+| Kreativni rad (knjižice, postovi, priče) | Kreativno nema „tačno/netačno" |
+| Pitanja tipa „šta misliš o H" gde je H subjektivno | Mišljenje nije činjenica |
+| Tehnički debugging bez pravnog dokumenta | Nema izvora za DIFF |
+| Prevod teksta (bez analitičkog elementa) | Prevod ne citira izvore |
+| Korisnik izričito kaže „bez verifikacije" | Poštuj nameru — ali upozori na rizik |
 
-**Кључна разлика:** Verifikator се активира **аутоматски** као пост-процес после правних/аналитичких skill-ова. Не активира се самостално од корисничког инпута (осим експлицитне сумње).
+**Ključna razlika:** Verifikator se aktivira **automatski** kao post-proces posle pravnih/analitičkih skill-ova. Ne aktivira se samostalno od korisničkog inputa (osim eksplicitne sumnje).
 
 ## 🛑 ANTI-LOOP THRESHOLD (know when to stop)
 
 ```
-МАКСИМАЛНО 3 ПРОЛАЗА верификације по одговору.
+MAKSIMALNO 3 PROLAZA verifikacije po odgovoru.
 
-Пролаз 1: Иницијална провера + аутоматске исправке
-Пролаз 2 (само ако Пролаз 1 нашао грешке): Поновна провера после исправки
-Пролаз 3 (само ако Пролаз 2 још нашао): Финална провера + ESCALATION
+Prolaz 1: Inicijalna provera + automatske ispravke
+Prolaz 2 (samo ako Prolaz 1 našao greške): Ponovna provera posle ispravki
+Prolaz 3 (samo ako Prolaz 2 još našao): Finalna provera + ESCALATION
 
-ПОСЛЕ ПРОЛАЗА 3 — БЕЗ ИЗУЗЕТАКА:
-  → СТОП. Не покрени Пролаз 4.
-  → Саопшти кориснику:
-    „⚠️ Достигнут лимит верификације (3 пролаза).
-     Још увек постоје нерешене ставке: [листа].
-     Потребна је ручна интервенција — отвори нов чат
-     и налепи одговор + ове ставке."
-  → Skill се АКТИВНО ПОВЛАЧИ. Не петља даље.
+POSLE PROLAZA 3 — BEZ IZUZETAKA:
+  → STOP. Ne pokreni Prolaz 4.
+  → Saopšti korisniku:
+    „⚠️ Dostignut limit verifikacije (3 prolaza).
+     Još uvek postoje nerešene stavke: [lista].
+     Potrebna je ručna intervencija — otvori nov čat
+     i nalepi odgovor + ove stavke."
+  → Skill se AKTIVNO POVLAČI. Ne petlja dalje.
 ```
 
-**Зашто threshold:** Anthropic Skills Guide Pattern 3 (Iterative refinement) изричито захтева: *„Know when to stop iterating."*
+**Zašto threshold:** Anthropic Skills Guide Pattern 3 (Iterative refinement) izričito zahteva: *„Know when to stop iterating."*
 
 ---
 
-## ФИЛОЗОФИЈА
+## FILOZOFIJA
 
-Проблем: Исти AI који анализира — проверава себе. То је као да
-судија проверава сопствену пресуду. Когнитивна самопровера
-("да ли сам у праву?") НЕ РАДИ — исти bias који је створио
-грешку спречава и њену детекцију.
+Problem: Isti AI koji analizira — proverava sebe. To je kao da
+sudija proverava sopstvenu presudu. Kognitivna samoprovera
+("da li sam u pravu?") NE RADI — isti bias koji je stvorio
+grešku sprečava i njenu detekciju.
 
-Решење: Не когнитивна, него **МЕХАНИЧКА** верификација.
-Не "размисли да ли си у праву" — него "ВРАТИ СЕ на тачну
-страницу, ПРЕПИШИ дословно шта пише, УПОРЕДИ реч по реч."
+Rešenje: Ne kognitivna, nego **MEHANIČKA** verifikacija.
+Ne "razmisli da li si u pravu" — nego "VRATI SE na tačnu
+stranicu, PREPIŠI doslovno šta piše, UPOREDI reč po reč."
 
-Механички кораци се не могу прескочити "зато што сам сигуран."
-Механички кораци хватају грешке које уверен мозак прескаче.
-
----
-
-## КАДА СЕ АКТИВИРА
-
-```
-АУТОМАТСКИ после:
-  ├── god-skill FULL/ADVERSARIAL анализе → УВЕК
-  ├── pravna-analiza Ф6 (генерисан документ) → УВЕК
-  ├── Батцх режим → за СВАКИ документ
-  └── Корисник пита "да ли си сигуран?" → УВЕК
-
-УСЛОВНО после:
-  ├── god-skill FOCUSED → само ако има 🔴П3 тврдњи
-  ├── pravna-analiza скраћена → само ако Ф3.6 ризик > 5/10
-  └── Било који одговор где се цитира закон/пракса → УВЕК
-```
+Mehanički koraci se ne mogu preskočiti "zato što sam siguran."
+Mehanički koraci hvataju greške koje uveren mozak preskače.
 
 ---
 
-## ТРИ ПРОТОКОЛА ВЕРИФИКАЦИЈЕ
-
-### ПРОТОКОЛ А — МЕХАНИЧКА ВЕРИФИКАЦИЈА ЧИЊЕНИЦА
-
-За СВАКУ чињеничну тврдњу у одговору/документу:
+## KADA SE AKTIVIRA
 
 ```
-КОРАК 1: ИДЕНТИФИКУЈ — набрај све чињеничне тврдње у одговору
-  [тврдња 1]: „..."
-  [тврдња 2]: „..."
+AUTOMATSKI posle:
+  ├── god-skill FULL/ADVERSARIAL analize → UVEK
+  ├── pravna-analiza F6 (generisan dokument) → UVEK
+  ├── Batch režim → za SVAKI dokument
+  └── Korisnik pita "da li si siguran?" → UVEK
+
+USLOVNO posle:
+  ├── god-skill FOCUSED → samo ako ima 🔴P3 tvrdnji
+  ├── pravna-analiza skraćena → samo ako F3.6 rizik > 5/10
+  └── Bilo koji odgovor gde se citira zakon/praksa → UVEK
+```
+
+---
+
+## TRI PROTOKOLA VERIFIKACIJE
+
+### PROTOKOL A — MEHANIČKA VERIFIKACIJA ČINJENICA
+
+Za SVAKU činjeničnu tvrdnju u odgovoru/dokumentu:
+
+```
+KORAK 1: IDENTIFIKUJ — nabraj sve činjenične tvrdnje u odgovoru
+  [tvrdnja 1]: „..."
+  [tvrdnja 2]: „..."
   ...
 
-КОРАК 2: ЗА СВАКУ ТВРДЊУ — ВРАТИ СЕ НА ИЗВОР + DIFF
+KORAK 2: ZA SVAKU TVRDNJU — VRATI SE NA IZVOR + DIFF
   ┌─────────────────────────────────────────────────┐
-  │ ТВРДЊА: [шта сам написао]                       │
-  │ ИЗВОР: стр. [X] документа                       │
-  │ ДОСЛОВНО НА ТОЈ СТРАНИЦИ: „[препиши дословно]" │
+  │ TVRDNJA: [šta sam napisao]                       │
+  │ IZVOR: str. [X] dokumenta                       │
+  │ DOSLOVNO NA TOJ STRANICI: „[prepiši doslovno]" │
   │                                                 │
-  │ DIFF (реч по реч):                              │
-  │  МОЈ ТЕКСТ:  „Окривљени је дана 03.01. ударио" │
-  │  ОРИГИНАЛ:   „Окривљени је дана 03.02. ударио" │
-  │  РАЗЛИКА:    ^^^^^^^^^ 01 ≠ 02 ← ГРЕШКА        │
+  │ DIFF (reč po reč):                              │
+  │  MOJ TEKST:  „Okrivljeni je dana 03.01. udario" │
+  │  ORIGINAL:   „Okrivljeni je dana 03.02. udario" │
+  │  RAZLIKA:    ^^^^^^^^^ 01 ≠ 02 ← GREŠKA        │
   │                                                 │
-  │ ПОКЛАПАЊЕ: [да/не/делимично]                    │
-  │ АКО НЕ: Шта сам погрешио? [опис]               │
-  │ → ИСПРАВИ ОДМАХ ако је грешка                   │
+  │ POKLAPANJE: [da/ne/delimično]                    │
+  │ AKO NE: Šta sam pogrešio? [opis]               │
+  │ → ISPRAVI ODMAH ako je greška                   │
   └─────────────────────────────────────────────────┘
 
-  **DIFF ЈЕ ОБАВЕЗАН** за: датуме, износе, имена странака,
-  бројеве предмета, цитате из образложења суда. За ове ставке
-  УВЕК приказати МОЈ ТЕКСТ vs ОРИГИНАЛ — да корисник ВИДИ.
+  **DIFF JE OBAVEZAN** za: datume, iznose, imena stranaka,
+  brojeve predmeta, citate iz obrazloženja suda. Za ove stavke
+  UVEK prikazati MOJ TEKST vs ORIGINAL — da korisnik VIDI.
 
-КОРАК 3: БРОЈЕВИ — ТРОСТРУКО
-  За СВАКИ број (износ, датум, члан закона, број предмета):
+KORAK 3: BROJEVI — TROSTRUKO
+  Za SVAKI broj (iznos, datum, član zakona, broj predmeta):
   ┌─────────────────────────────────────────────────┐
-  │ БРОЈ У МОМ ОДГОВОРУ: [X]                        │
-  │ БРОЈ НА ИЗВОРУ (стр. Y): [Z]                   │
-  │ X = Z? [да/не]                                  │
-  │ АКО НЕ: ИСПРАВИ ОДМАХ                          │
+  │ BROJ U MOM ODGOVORU: [X]                        │
+  │ BROJ NA IZVORU (str. Y): [Z]                   │
+  │ X = Z? [da/ne]                                  │
+  │ AKO NE: ISPRAVI ODMAH                          │
   └─────────────────────────────────────────────────┘
 
-КОРАК 4: USER SPOT-CHECK ЛИСТА (ново)
-  Од свих проверених тврдњи, изабери ТРИ које су:
-  - Најважније за исход предмета
-  - Или најмање сигурне (🟡/🔴)
-  - Или садрже бројеве/датуме
+KORAK 4: USER SPOT-CHECK LISTA (novo)
+  Od svih proverenih tvrdnji, izaberi TRI koje su:
+  - Najvažnije za ishod predmeta
+  - Ili najmanje sigurne (🟡/🔴)
+  - Ili sadrže brojeve/datume
 
   ┌─────────────────────────────────────────────────┐
-  │ 👁️ SPOT-CHECK ЗА КОРИСНИКА (2 минута):         │
+  │ 👁️ SPOT-CHECK ZA KORISNIKA (2 minuta):         │
   │                                                 │
-  │ ① Отвори стр. [X], пасус [Y] — провери да ли   │
-  │   пише „[кратак цитат]". Ако се слаже →         │
-  │   остатак анализе је ВЕРОВАТНО тачан.            │
+  │ ① Otvori str. [X], pasus [Y] — proveri da li   │
+  │   piše „[kratak citat]". Ako se slaže →         │
+  │   ostatak analize je VEROVATNO tačan.            │
   │                                                 │
-  │ ② Провери износ [X дин] на стр. [Y].            │
-  │   Мој одговор каже [Z дин].                     │
+  │ ② Proveri iznos [X din] na str. [Y].            │
+  │   Moj odgovor kaže [Z din].                     │
   │                                                 │
-  │ ③ Провери датум [X] на стр. [Y].                │
-  │   Мој одговор каже [Z].                         │
+  │ ③ Proveri datum [X] na str. [Y].                │
+  │   Moj odgovor kaže [Z].                         │
   │                                                 │
-  │ АКО БИЛО КОЈА НЕ ШТИМА → реци ми, поново       │
-  │ ћу проверити ЦЕО одговор.                       │
+  │ AKO BILO KOJA NE ŠTIMA → reci mi, ponovo       │
+  │ ću proveriti CEO odgovor.                       │
   └─────────────────────────────────────────────────┘
 
-  **СВРХА:** Корисник не може да провери 12 тврдњи.
-  Али МОЖЕ да провери 3 ствари за 2 минута. Ако се
-  ТОП 3 слажу — поверење у остатак расте. Ако се
-  бар 1 не слаже — АЛАРМ за цео одговор.
+  **SVRHA:** Korisnik ne može da proveri 12 tvrdnji.
+  Ali MOŽE da proveri 3 stvari za 2 minuta. Ako se
+  TOP 3 slažu — poverenje u ostatak raste. Ako se
+  bar 1 ne slaže — ALARM za ceo odgovor.
 ```
 
-**ПРАВИЛО:** Ако не могу да се ВРАТИМ на извор (нпр. документ
-није у контексту) — тврдња постаје 🟡П2 максимум. Не смем
-тврдити ✅П1 ако не могу механички да проверим.
+**PRAVILO:** Ako ne mogu da se VRATIM na izvor (npr. dokument
+nije u kontekstu) — tvrdnja postaje 🟡P2 maksimum. Ne smem
+tvrditi ✅P1 ako ne mogu mehanički da proverim.
 
 ---
 
-### ПРОТОКОЛ Б — ЕКСТЕРНА ВЕРИФИКАЦИЈА (WEB SEARCH)
+### PROTOKOL B — EKSTERNA VERIFIKACIJA (WEB SEARCH)
 
-За СВАКИ члан закона, судску одлуку, или ЕСЉП пресуду у одговору:
+Za SVAKI član zakona, sudsku odluku, ili ESLJP presudu u odgovoru:
 
 ```
-КОРАК 1: ЛИСТА — набрај све правне изворе које цитирам
-  чл. [X] ст. [Y] [Закон]
-  [Одлука суда: број]
-  [ЕСЉП: назив]
+KORAK 1: LISTA — nabraj sve pravne izvore koje citiram
+  čl. [X] st. [Y] [Zakon]
+  [Odluka suda: broj]
+  [ESLJP: naziv]
   ...
 
-КОРАК 2: ЗА СВАКИ — ОБАВЕЗАН WEB SEARCH
+KORAK 2: ZA SVAKI — OBAVEZAN WEB SEARCH
   ┌─────────────────────────────────────────────────┐
-  │ ИЗВОР: чл. 239 ст. 1 КЗ                        │
-  │ ПРЕТРАГА: [тачан query који сам користио]       │
-  │ РЕЗУЛТАТ: [нађено/није]                         │
-  │ АКО НАЂЕНО: Да ли се СЛАЖЕ са мојим цитатом?   │
-  │   [да/не/делимично]                             │
-  │ АКО НИЈЕ НАЂЕНО: → ⛔ УКЛОНИ ИЗ ОДГОВОРА       │
+  │ IZVOR: čl. 239 st. 1 KZ                        │
+  │ PRETRAGA: [tačan query koji sam koristio]       │
+  │ REZULTAT: [nađeno/nije]                         │
+  │ AKO NAĐENO: Da li se SLAŽE sa mojim citatom?   │
+  │   [da/ne/delimično]                             │
+  │ AKO NIJE NAĐENO: → ⛔ UKLONI IZ ODGOVORA       │
   └─────────────────────────────────────────────────┘
 
-КОРАК 2б: ПРОВЕРА ИНТЕРПРЕТАЦИЈЕ (ново)
-  За сваки извор који ЈЕ нађен, додатно провери:
+KORAK 2b: PROVERA INTERPRETACIJE (novo)
+  Za svaki izvor koji JE nađen, dodatno proveri:
   ┌─────────────────────────────────────────────────┐
-  │ ШТА ИЗВОР КАЖЕ: „[дословно из search резултата]"│
-  │ КАКО САМ ЈА ПРОТУМАЧИО: „[мој парафраз]"       │
-  │ ДА ЛИ МОЈ ПАРАФРАЗ ТАЧНО ПРЕНОСИ СМИСАО?      │
-  │   [да/не/делимично]                             │
-  │ АКО НЕ: У чему је разлика? [опис]              │
-  │ ДА ЛИ САМ ИЗОСТАВИО БИТАН ДЕО? [да/не]        │
-  │ ДА ЛИ САМ ДОДАО НЕШТО ШТО НЕ ПИШЕ? [да/не]    │
+  │ ŠTA IZVOR KAŽE: „[doslovno iz search rezultata]"│
+  │ KAKO SAM JA PROTUMAČIO: „[moj parafraz]"       │
+  │ DA LI MOJ PARAFRAZ TAČNO PRENOSI SMISAO?      │
+  │   [da/ne/delimično]                             │
+  │ AKO NE: U čemu je razlika? [opis]              │
+  │ DA LI SAM IZOSTAVIO BITAN DEO? [da/ne]        │
+  │ DA LI SAM DODAO NEŠTO ŠTO NE PIŠE? [da/ne]    │
   └─────────────────────────────────────────────────┘
 
-  **СВРХА:** Хвата ситуацију где претражим, нађем, али
-  погрешно протумачим или селективно цитирам. Нпр. члан
-  каже „може" а ја напишем „мора" — КРИТИЧНА разлика.
+  **SVRHA:** Hvata situaciju gde pretražim, nađem, ali
+  pogrešno protumačim ili selektivno citiram. Npr. član
+  kaže „može" a ja napišem „mora" — KRITIČNA razlika.
 
-КОРАК 3: СУСЕДНИ ЧЛАНОВИ
-  За сваки члан закона — провери и суседне:
-  □ Да ли чл. [X-1] или чл. [X+1] мења значење?
-  □ Да ли постоји СТАВ који нисам видео?
-  □ Да ли је члан МЕЊАН од датума документа?
+KORAK 3: SUSEDNI ČLANOVI
+  Za svaki član zakona — proveri i susedne:
+  □ Da li čl. [X-1] ili čl. [X+1] menja značenje?
+  □ Da li postoji STAV koji nisam video?
+  □ Da li je član MENJAN od datuma dokumenta?
 ```
 
-**ПРАВИЛО:** Ако web search НИЈЕ урађен за неки извор — тај
-извор МОРА бити означен ⛔ у compliance извештају. Не смем
-писати ✅PropisSoft ако нисам стварно претражио.
+**PRAVILO:** Ako web search NIJE urađen za neki izvor — taj
+izvor MORA biti označen ⛔ u compliance izveštaju. Ne smem
+pisati ✅PropisSoft ako nisam stvarno pretražio.
 
 ---
 
-### ПРОТОКОЛ В — ЛОГИЧКА ВЕРИФИКАЦИЈА (СТРЕС ТЕСТ ОДГОВОРА)
+### PROTOKOL V — LOGIČKA VERIFIKACIJA (STRES TEST ODGOVORA)
 
-Ово НИЈЕ "размисли да ли си у праву" — ово су МЕХАНИЧКИ тестови:
+Ovo NIJE "razmisli da li si u pravu" — ovo su MEHANIČKI testovi:
 
 ```
-ТЕСТ 1: КОНТРАДИКЦИЈА УНУТАР ОДГОВОРА
-  Прочитај свој одговор од краја ка почетку (ОБРНУТИМ редом).
-  Да ли последња реченица контрадиктира првој?
-  Да ли закључак контрадиктира нечему из средине?
-  □ Нађена контрадикција: [да/не → ако да, ГДЕ]
+TEST 1: KONTRADIKCIJA UNUTAR ODGOVORA
+  Pročitaj svoj odgovor od kraja ka početku (OBRNUTIM redom).
+  Da li poslednja rečenica kontradiktira prvoj?
+  Da li zaključak kontradiktira nečemu iz sredine?
+  □ Nađena kontradikcija: [da/ne → ako da, GDE]
 
-ТЕСТ 2: ПЕТИТ ↔ ОБРАЗЛОЖЕЊЕ (за правне документе)
-  Препиши ПЕТИТ дословно: „..."
-  Препиши ЗАКЉУЧАК образложења дословно: „..."
-  Да ли се слажу? [да/не]
-  □ Износ у петиту = износ у образложењу? [провери сваки]
-  □ Чланови у петиту = чланови у образложењу? [провери сваки]
+TEST 2: PETIT ↔ OBRAZLOŽENJE (za pravne dokumente)
+  Prepiši PETIT doslovno: „..."
+  Prepiši ZAKLJUČAK obrazloženja doslovno: „..."
+  Da li se slažu? [da/ne]
+  □ Iznos u petitu = iznos u obrazloženju? [proveri svaki]
+  □ Članovi u petitu = članovi u obrazloženju? [proveri svaki]
 
-ТЕСТ 3: ИМЕНА И БРОЈЕВИ КРОЗ ДОКУМЕНТ
-  Препиши име странке са ПОЧЕТКА: „..."
-  Препиши име странке са КРАЈА: „..."
-  Исто? [да/не]
-  □ Број предмета на почетку = број предмета у телу? [да/не]
+TEST 3: IMENA I BROJEVI KROZ DOKUMENT
+  Prepiši ime stranke sa POČETKA: „..."
+  Prepiši ime stranke sa KRAJA: „..."
+  Isto? [da/ne]
+  □ Broj predmeta na početku = broj predmeta u telu? [da/ne]
 
-ТЕСТ 4: "ОДАКЛЕ МИ ОВО?"
-  За СВАКУ тврдњу означену 🟡П2 или 🔴П3:
-  „Ову тврдњу сам извео из [конкретно шта]."
-  Ако не могу да објасним ОДАКЛЕ → УКЛОНИ.
+TEST 4: "ODAKLE MI OVO?"
+  Za SVAKU tvrdnju označenu 🟡P2 ili 🔴P3:
+  „Ovu tvrdnju sam izveo iz [konkretno šta]."
+  Ako ne mogu da objasnim ODAKLE → UKLONI.
 
-ТЕСТ 5: НЕГАТИВНИ ТЕСТ
-  Замисли да си противнички адвокат који чита мој поднесак.
-  Нађи ТРИ ствари које би напао.
+TEST 5: NEGATIVNI TEST
+  Zamisli da si protivnički advokat koji čita moj podnesak.
+  Nađi TRI stvari koje bi napao.
   1. [...]
   2. [...]
   3. [...]
-  → Да ли су ових 3 адресиране у мом одговору? [да/не за сваку]
-  → Ако НЕ → ДОДАЈ или УПОЗОРИ корисника.
+  → Da li su ovih 3 adresirane u mom odgovoru? [da/ne za svaku]
+  → Ako NE → DODAJ ili UPOZORI korisnika.
 ```
 
 ---
 
-### ПРОТОКОЛ Г — HONEYPOT ТЕСТ (Замка за халуцинацију)
+### PROTOKOL G — HONEYPOT TEST (Zamka za halucinaciju)
 
-Ово је НАЈИНОВАТИВНИЈА заштита. Принцип: намерно се питам за
-детаљ који ЗНАМ да не постоји — и проверавам да ли "одговорим."
+Ovo je NAJINOVATIVNIJA zaštita. Princip: namerno se pitam za
+detalj koji ZNAM da ne postoji — i proveravam da li "odgovorim."
 
 ```
-КОРАК 1: ГЕНЕРИШИ 2 HONEYPOT ПИТАЊА
-  Питање мора бити о документу који сам анализирао, АЛИ
-  о детаљу који СИГУРНО НЕ ПОСТОЈИ.
+KORAK 1: GENERIŠI 2 HONEYPOT PITANJA
+  Pitanje mora biti o dokumentu koji sam analizirao, ALI
+  o detalju koji SIGURNO NE POSTOJI.
 
-  Примери:
-  - „Шта пише у фусноти на стр. 18?" (ако документ НЕМА фусноте)
-  - „Колики је износ из табеле 3?" (ако документ НЕМА табелу 3)
-  - „Шта је сведок Ракић изјавио?" (ако НЕМА сведока Ракић)
+  Primeri:
+  - „Šta piše u fusnoti na str. 18?" (ako dokument NEMA fusnote)
+  - „Koliki je iznos iz tabele 3?" (ako dokument NEMA tabelu 3)
+  - „Šta je svedok Rakić izjavio?" (ako NEMA svedoka Rakić)
 
-КОРАК 2: ОДГОВОРИ НА HONEYPOT — ИСКРЕНО
+KORAK 2: ODGOVORI NA HONEYPOT — ISKRENO
   ┌─────────────────────────────────────────────────┐
-  │ HONEYPOT 1: „Шта пише у фусноти на стр. 18?"  │
-  │ МОЈ ОДГОВОР: [шта год одговорим]                │
-  │ СТВАРНОСТ: Документ НЕМА фусноте.               │
+  │ HONEYPOT 1: „Šta piše u fusnoti na str. 18?"  │
+  │ MOJ ODGOVOR: [šta god odgovorim]                │
+  │ STVARNOST: Dokument NEMA fusnote.               │
   │                                                 │
-  │ РЕЗУЛТАТ:                                       │
-  │  „Не знам / нема фусноте" → ✅ ПРОШАО           │
-  │  „У фусноти пише..." → 🔴 ХАЛУЦИНИРАМ           │
+  │ REZULTAT:                                       │
+  │  „Ne znam / nema fusnote" → ✅ PROŠAO           │
+  │  „U fusnoti piše..." → 🔴 HALUCINIRAM           │
   └─────────────────────────────────────────────────┘
 
   ┌─────────────────────────────────────────────────┐
-  │ HONEYPOT 2: „Колики је износ из табеле 3?"      │
-  │ МОЈ ОДГОВОР: [шта год одговорим]                │
-  │ СТВАРНОСТ: Документ НЕМА табелу 3.              │
+  │ HONEYPOT 2: „Koliki je iznos iz tabele 3?"      │
+  │ MOJ ODGOVOR: [šta god odgovorim]                │
+  │ STVARNOST: Dokument NEMA tabelu 3.              │
   │                                                 │
-  │ РЕЗУЛТАТ:                                       │
-  │  „Не постоји табела 3" → ✅ ПРОШАО               │
-  │  „Износ је 150.000 дин" → 🔴 ХАЛУЦИНИРАМ        │
+  │ REZULTAT:                                       │
+  │  „Ne postoji tabela 3" → ✅ PROŠAO               │
+  │  „Iznos je 150.000 din" → 🔴 HALUCINIRAM        │
   └─────────────────────────────────────────────────┘
 
-КОРАК 3: АКО ПАДНЕ HONEYPOT
-  → 🔴🔴🔴 КРИТИЧАН АЛАРМ
-  → Ако сам „одговорио" на непостојећи детаљ =
-    ДОКАЗ да халуцинирам у овој сесији
-  → ОБАВЕЗНО САОПШТИТИ КОРИСНИКУ:
-    „⚠️ Honeypot тест показао склоност ка халуцинацији.
-    Препоручујем НЕЗАВИСНУ ПРОВЕРУ целог одговора
-    у новом чату."
-  → Све ✅П1 у одговору → деградирај на 🟡П2
-  → Поузданост целог одговора: НИСКА
+KORAK 3: AKO PADNE HONEYPOT
+  → 🔴🔴🔴 KRITIČAN ALARM
+  → Ako sam „odgovorio" na nepostojeći detalj =
+    DOKAZ da haluciniram u ovoj sesiji
+  → OBAVEZNO SAOPŠTITI KORISNIKU:
+    „⚠️ Honeypot test pokazao sklonost ka halucinaciji.
+    Preporučujem NEZAVISNU PROVERU celog odgovora
+    u novom čatu."
+  → Sve ✅P1 u odgovoru → degradiraj na 🟡P2
+  → Pouzdanost celog odgovora: NISKA
 ```
 
-**ЗАШТО ОВО РАДИ:** Ако модел халуцинира, он то ради
-СИСТЕМСКИ — не за једну тврдњу, него за целу сесију.
-Honeypot хвата системску склоност. Ако пролази honeypot
-= одговор је ВЕРОВАТНО тачан. Ако пада = СВЕ је сумњиво.
+**ZAŠTO OVO RADI:** Ako model halucinira, on to radi
+SISTEMSKI — ne za jednu tvrdnju, nego za celu sesiju.
+Honeypot hvata sistemsku sklonost. Ako prolazi honeypot
+= odgovor je VEROVATNO tačan. Ako pada = SVE je sumnjivo.
 
 ---
 
-### ПРОТОКОЛ Д — CROSS-SKILL КОНЗИСТЕНТНОСТ
+### PROTOKOL D — CROSS-SKILL KONZISTENTNOST
 
-Када су god-skill И pravna-analiza ОБА активна, провери
-да ли се СЛАЖУ:
+Kada su god-skill I pravna-analiza OBA aktivna, proveri
+da li se SLAŽU:
 
 ```
-КОРАК 1: ИЗВУЦИ КЉУЧНЕ ОЦЕНЕ ИЗ ОБА SKILL-А
+KORAK 1: IZVUCI KLJUČNE OCENE IZ OBA SKILL-A
 
   GOD-SKILL:
-    Бајесовска оцена (4З): [X%]
-    Стрес тест (С5): [N]/[N] преживело
-    Контрафактуална крхкост (5Ђ): [висока/средња/ниска]
+    Bajesovska ocena (4Z): [X%]
+    Stres test (S5): [N]/[N] preživelo
+    Kontrafaktualna krhkost (5Đ): [visoka/srednja/niska]
 
   PRAVNA-ANALIZA:
-    Матрица отпорности (Ф4.Е): [N]/[N] преживело
-    Ризик (Ф3.6): [W/10]
-    „Једна ствар" (Ф5): [аргумент X]
-    Граф зависности: [N] независних од [N]
+    Matrica otpornosti (F4.E): [N]/[N] preživelo
+    Rizik (F3.6): [W/10]
+    „Jedna stvar" (F5): [argument X]
+    Graf zavisnosti: [N] nezavisnih od [N]
 
-КОРАК 2: ПРОВЕРА КОНЗИСТЕНТНОСТИ
+KORAK 2: PROVERA KONZISTENTNOSTI
   ┌─────────────────────────────────────────────────┐
-  │ ТЕСТ 1: Бајесовска оцена ↔ Матрица отпорности │
-  │  4З каже [X%], Ф4.Е каже [N/N] преживело      │
-  │  Конзистентно? [да/не]                          │
-  │  Ако 4З>75% али Ф4.Е<50% преживело → 🔴        │
-  │  КОНТРАДИКЦИЈА — једна оцена МОРА бити погрешна│
+  │ TEST 1: Bajesovska ocena ↔ Matrica otpornosti │
+  │  4Z kaže [X%], F4.E kaže [N/N] preživelo      │
+  │  Konzistentno? [da/ne]                          │
+  │  Ako 4Z>75% ali F4.E<50% preživelo → 🔴        │
+  │  KONTRADIKCIJA — jedna ocena MORA biti pogrešna│
   │                                                 │
-  │ ТЕСТ 2: „Једна ствар" ↔ Граф зависности       │
-  │  „Једна ствар" је аргумент #[X]                 │
-  │  У графу: независан или зависан?                │
-  │  Ако ЗАВИСАН → 🟡 РИЗИК (ако падне, нема „једну │
-  │  ствар" — а то је наш најјачи аргумент)         │
+  │ TEST 2: „Jedna stvar" ↔ Graf zavisnosti       │
+  │  „Jedna stvar" je argument #[X]                 │
+  │  U grafu: nezavisan ili zavisan?                │
+  │  Ako ZAVISAN → 🟡 RIZIK (ako padne, nema „jednu │
+  │  stvar" — a to je naš najjači argument)         │
   │                                                 │
-  │ ТЕСТ 3: Контрафактуална ↔ Стрес тест           │
-  │  5Ђ каже крхкост [X], С5 каже [N/N] преживело  │
-  │  Ако 5Ђ каже „ниска крхкост" али С5 каже       │
-  │  само 1/5 преживело → 🔴 КОНТРАДИКЦИЈА          │
+  │ TEST 3: Kontrafaktualna ↔ Stres test           │
+  │  5Đ kaže krhkost [X], S5 kaže [N/N] preživelo  │
+  │  Ako 5Đ kaže „niska krhkost" ali S5 kaže       │
+  │  samo 1/5 preživelo → 🔴 KONTRADIKCIJA          │
   │                                                 │
-  │ ТЕСТ 4: Ризик (Ф3.6) ↔ Бајесовска (4З)        │
-  │  Ф3.6 каже [W/10], 4З каже [X%]                │
-  │  Ако Ф3.6=8/10 (низак ризик) а 4З=40% → 🔴     │
-  │  Ако Ф3.6=3/10 (висок ризик) а 4З=85% → 🔴     │
+  │ TEST 4: Rizik (F3.6) ↔ Bajesovska (4Z)        │
+  │  F3.6 kaže [W/10], 4Z kaže [X%]                │
+  │  Ako F3.6=8/10 (nizak rizik) a 4Z=40% → 🔴     │
+  │  Ako F3.6=3/10 (visok rizik) a 4Z=85% → 🔴     │
   │                                                 │
-  │ ТЕСТ 5: IP налаз ↔ PA Ф4 матрица отпорности    │
-  │  IP каже „устаљена пракса ✅П1" а Ф4.Е каже    │
-  │  аргумент пада ❌ код судије → 🔴                │
-  │  Могуће: пракса постоји али чињенице се разликују│
+  │ TEST 5: IP nalaz ↔ PA F4 matrica otpornosti    │
+  │  IP kaže „ustaljena praksa ✅P1" a F4.E kaže    │
+  │  argument pada ❌ kod sudije → 🔴                │
+  │  Moguće: praksa postoji ali činjenice se razlikuju│
   │                                                 │
-  │ ТЕСТ 6: IP adverse findings ↔ документ          │
-  │  IP пронашао adverse findings а документ их      │
-  │  НЕ АДРЕСИРА → 🔴 ПРОПУСТ                      │
-  │  Противник ЋЕ их наћи — боље ми прво            │
+  │ TEST 6: IP adverse findings ↔ dokument          │
+  │  IP pronašao adverse findings a dokument ih      │
+  │  NE ADRESIRA → 🔴 PROPUST                      │
+  │  Protivnik ĆE ih naći — bolje mi prvo            │
   │                                                 │
-  │ ТЕСТ 7: IP класификација ↔ god-skill FORK       │
-  │  IP каже „✅П1 ratio подржава" а 4Д FORK        │
-  │  грана Б показује јак контрааргумент → 🟡        │
-  │  Могуће: ratio условљен (poison pill) или       │
-  │  distinguishing фактор који IP није детектовао   │
+  │ TEST 7: IP klasifikacija ↔ god-skill FORK       │
+  │  IP kaže „✅P1 ratio podržava" a 4D FORK        │
+  │  grana B pokazuje jak kontraargument → 🟡        │
+  │  Moguće: ratio uslovljen (poison pill) ili       │
+  │  distinguishing faktor koji IP nije detektovao   │
   └─────────────────────────────────────────────────┘
 
-КОРАК 3: АКО НАЂЕНА КОНТРАДИКЦИЈА
-  → СТАНИ. Не достављај одговор.
-  → Идентификуј: КОЈИ skill је вероватно погрешио?
-  → Врати се на конкретан слој/фазу и провери ПОНОВО
-  → Ако не можеш да разрешиш → саопшти кориснику:
-    „Два skill-а дају контрадикторне оцене:
-    god-skill каже [X], pravna-analiza каже [Y].
-    Разлог: [покушај објашњења]. Препоручујем: [акција]."
+KORAK 3: AKO NAĐENA KONTRADIKCIJA
+  → STANI. Ne dostavljaj odgovor.
+  → Identifikuj: KOJI skill je verovatno pogrešio?
+  → Vrati se na konkretan sloj/fazu i proveri PONOVO
+  → Ako ne možeš da razrešiš → saopšti korisniku:
+    „Dva skill-a daju kontradiktorne ocene:
+    god-skill kaže [X], pravna-analiza kaže [Y].
+    Razlog: [pokušaj objašnjenja]. Preporučujem: [akcija]."
 ```
 
-**ЗАШТО ОВО РАДИ:** God-skill и pravna-analiza имају
-РАЗЛИЧИТЕ методологије. Ако обе дају ИСТИ закључак =
-висока поузданост. Ако се НЕ СЛАЖУ = нешто није у реду.
-Ово је најближе НЕЗАВИСНОЈ верификацији — два система
-са различитим приступом проверавају исту ствар.
+**ZAŠTO OVO RADI:** God-skill i pravna-analiza imaju
+RAZLIČITE metodologije. Ako obe daju ISTI zaključak =
+visoka pouzdanost. Ako se NE SLAŽU = nešto nije u redu.
+Ovo je najbliže NEZAVISNOJ verifikaciji — dva sistema
+sa različitim pristupom proveravaju istu stvar.
 
 ---
 
-## ВЕРИФИКАЦИОНИ НАЛАЗ
+## VERIFIKACIONI NALAZ
 
-После свих протокола (А + Б + В + Г + Д), генериши НАЛАЗ:
+Posle svih protokola (A + B + V + G + D), generiši NALAZ:
 
 ```
 ╔═══════════════════════════════════════════════════════════════╗
-║ 🔎 ВЕРИФИКАЦИОНИ НАЛАЗ                                       ║
+║ 🔎 VERIFIKACIONI NALAZ                                       ║
 ╠═══════════════════════════════════════════════════════════════╣
 ║                                                               ║
-║ ПРОТОКОЛ А (Чињенице):                                       ║
-║  Проверено тврдњи: [N]                                       ║
-║  Поклапање: [N] ✅ │ Делимично: [N] 🟡 │ Грешка: [N] 🔴    ║
-║  Бројеви проверени: [N] од [N] — грешака: [N]               ║
+║ PROTOKOL A (Činjenice):                                       ║
+║  Provereno tvrdnji: [N]                                       ║
+║  Poklapanje: [N] ✅ │ Delimično: [N] 🟡 │ Greška: [N] 🔴    ║
+║  Brojevi provereni: [N] od [N] — grešaka: [N]               ║
 ║                                                               ║
-║ ПРОТОКОЛ Б (Екстерно):                                       ║
-║  Правних извора у одговору: [N]                              ║
-║  Web search урађен за: [N] од [N]                            ║
-║  Потврђено: [N] ✅ │ Није нађено: [N] ⛔ │ Нетачно: [N] 🔴 ║
-║  ⛔ НИСАМ ПРЕТРАЖИО: [листа, ако има]                       ║
+║ PROTOKOL B (Eksterno):                                       ║
+║  Pravnih izvora u odgovoru: [N]                              ║
+║  Web search urađen za: [N] od [N]                            ║
+║  Potvrđeno: [N] ✅ │ Nije nađeno: [N] ⛔ │ Netačno: [N] 🔴 ║
+║  ⛔ NISAM PRETRAŽIO: [lista, ako ima]                       ║
 ║                                                               ║
-║ ПРОТОКОЛ В (Логика):                                         ║
-║  Контрадикција у одговору: [да/не]                           ║
-║  Петит ↔ образложење: [слаже се/не]                         ║
-║  Имена конзистентна: [да/не]                                 ║
-║  "Одакле ми ово" — уклоњено тврдњи: [N]                    ║
-║  Негативни тест — неадресираних слабости: [N]               ║
+║ PROTOKOL V (Logika):                                         ║
+║  Kontradikcija u odgovoru: [da/ne]                           ║
+║  Petit ↔ obrazloženje: [slaže se/ne]                         ║
+║  Imena konzistentna: [da/ne]                                 ║
+║  "Odakle mi ovo" — uklonjeno tvrdnji: [N]                    ║
+║  Negativni test — neadresiranih slabosti: [N]               ║
 ║                                                               ║
-║ ПРОТОКОЛ Г (Honeypot):                                       ║
-║  Honeypot 1: [питање] → [одговор] → [✅ прошао / 🔴 пао]   ║
-║  Honeypot 2: [питање] → [одговор] → [✅ прошао / 🔴 пао]   ║
-║  СКЛОНОСТ КА ХАЛУЦИНАЦИЈИ: [не / ⚠️ ДЕТЕКТОВАНА]            ║
+║ PROTOKOL G (Honeypot):                                       ║
+║  Honeypot 1: [pitanje] → [odgovor] → [✅ prošao / 🔴 pao]   ║
+║  Honeypot 2: [pitanje] → [odgovor] → [✅ prošao / 🔴 pao]   ║
+║  SKLONOST KA HALUCINACIJI: [ne / ⚠️ DETEKTOVANA]            ║
 ║                                                               ║
-║ ПРОТОКОЛ Д (Cross-skill):                                    ║
-║  4З ↔ Ф4.Е: [конзистентно / 🔴 контрадикција]              ║
-║  „Једна ствар" ↔ граф: [независна / 🟡 зависна]            ║
-║  5Ђ ↔ С5: [конзистентно / 🔴 контрадикција]                ║
-║  Ф3.6 ↔ 4З: [конзистентно / 🔴 контрадикција]              ║
-║  IP ✅П1 ↔ Ф4.Е: [конзистентно / 🔴 контрадикција]         ║
-║  IP adverse ↔ документ: [адресиране / 🔴 пропуст]          ║
-║  IP ratio ↔ 4Д FORK: [конзистентно / 🟡 провери]           ║
+║ PROTOKOL D (Cross-skill):                                    ║
+║  4Z ↔ F4.E: [konzistentno / 🔴 kontradikcija]              ║
+║  „Jedna stvar" ↔ graf: [nezavisna / 🟡 zavisna]            ║
+║  5Đ ↔ S5: [konzistentno / 🔴 kontradikcija]                ║
+║  F3.6 ↔ 4Z: [konzistentno / 🔴 kontradikcija]              ║
+║  IP ✅P1 ↔ F4.E: [konzistentno / 🔴 kontradikcija]         ║
+║  IP adverse ↔ dokument: [adresirane / 🔴 propust]          ║
+║  IP ratio ↔ 4D FORK: [konzistentno / 🟡 proveri]           ║
 ║                                                               ║
 ╠═══════════════════════════════════════════════════════════════╣
-║ УКУПНА ОЦЕНА ВЕРИФИКАЦИЈЕ:                                   ║
+║ UKUPNA OCENA VERIFIKACIJE:                                   ║
 ║                                                               ║
-║  🟢 ЧИСТО — 0 грешака, све верификовано                      ║
-║  🟡 УСЛОВНО — мање неусаглашености, исправљено              ║
-║  🔴 ПРОБЛЕМ — нађене грешке, САОПШТИТИ кориснику:           ║
-║     [листа грешака]                                          ║
+║  🟢 ČISTO — 0 grešaka, sve verifikovano                      ║
+║  🟡 USLOVNO — manje neusaglašenosti, ispravljeno              ║
+║  🔴 PROBLEM — nađene greške, SAOPŠTITI korisniku:           ║
+║     [lista grešaka]                                          ║
 ║                                                               ║
-║ ИСПРАВКЕ ИЗВРШЕНЕ ПРЕ ДОСТАВЉАЊА:                           ║
-║  1. [шта исправљено]                                         ║
-║  2. [шта исправљено]                                         ║
+║ ISPRAVKE IZVRŠENE PRE DOSTAVLJANJA:                           ║
+║  1. [šta ispravljeno]                                         ║
+║  2. [šta ispravljeno]                                         ║
 ║                                                               ║
-║ ⚠️ ПРЕПОРУКА ЗА КОРИСНИКА:                                  ║
-║  □ Провери стр. [X] — нисам 100% сигуран у [тврдњу]        ║
-║  □ [друга препорука ако има]                                 ║
+║ ⚠️ PREPORUKA ZA KORISNIKA:                                  ║
+║  □ Proveri str. [X] — nisam 100% siguran u [tvrdnju]        ║
+║  □ [druga preporuka ako ima]                                 ║
 ║                                                               ║
-║ 👁️ SPOT-CHECK (провери за 2 минута):                        ║
-║  ① стр. [X]: [шта да провери]                                ║
-║  ② стр. [Y]: [шта да провери]                                ║
-║  ③ стр. [Z]: [шта да провери]                                ║
-║  → Ако се слаже = поверење у остатак. Ако НЕ = аларм.       ║
+║ 👁️ SPOT-CHECK (proveri za 2 minuta):                        ║
+║  ① str. [X]: [šta da proveri]                                ║
+║  ② str. [Y]: [šta da proveri]                                ║
+║  ③ str. [Z]: [šta da proveri]                                ║
+║  → Ako se slaže = poverenje u ostatak. Ako NE = alarm.       ║
 ╚═══════════════════════════════════════════════════════════════╝
 ```
 
 ---
 
-## КАДА ПРЕПОРУЧИТИ НЕЗАВИСНУ ПРОВЕРУ (НОВ ЧАТ)
+## KADA PREPORUČITI NEZAVISNU PROVERU (NOV ČAT)
 
-Верификатор МОРА препоручити кориснику да отвори НОВ ЧАТ и
-провери одговор ако:
+Verifikator MORA preporučiti korisniku da otvori NOV ČAT i
+proveri odgovor ako:
 
-1. **Протокол А нашао 2+ грешке** → „Препоручујем да овај одговор
-   проверите у новом чату — налепите одговор и реците
-   'Провери тачност овога, нађи грешке.'"
+1. **Protokol A našao 2+ greške** → „Preporučujem da ovaj odgovor
+   proverite u novom čatu — nalepite odgovor i recite
+   'Proveri tačnost ovoga, nađi greške.'"
 
-2. **Протокол Б нашао ⛔ за кључни извор** → „Нисам успео да
-   верификујем [извор]. Препоручујем ручну проверу на PropisSoft."
+2. **Protokol B našao ⛔ za ključni izvor** → „Nisam uspeo da
+   verifikujem [izvor]. Preporučujem ručnu proveru na PropisSoft."
 
-3. **Протокол В нашао контрадикцију** → „Постоји неусаглашеност
-   у мом одговору. Препоручујем нов чат за независну проверу."
+3. **Protokol V našao kontradikciju** → „Postoji neusaglašenost
+   u mom odgovoru. Preporučujem nov čat za nezavisnu proveru."
 
-4. **Ф3.6 ризик > 7/10 И документ иде на суд** → „Ово је
-   високоризичан документ. Препоручујем колегијалну проверу
-   (нов чат или колега адвокат)."
+4. **F3.6 rizik > 7/10 I dokument ide na sud** → „Ovo je
+   visokorizičan dokument. Preporučujem kolegijalnu proveru
+   (nov čat ili kolega advokat)."
 
-5. **Бајесовска оцена осцилирала >20%** → „Предмет је
-   амбивалентан. Препоручујем додатно мишљење."
+5. **Bajesovska ocena oscilirala >20%** → „Predmet je
+   ambivalentan. Preporučujem dodatno mišljenje."
 
-6. **Honeypot тест ПАО** → „⚠️ КРИТИЧНО: Детектована склоност
-   ка халуцинацији у овој сесији. ОБАВЕЗНА независна провера
-   целог одговора у новом чату. Све ✅П1 деградиране на 🟡П2."
+6. **Honeypot test PAO** → „⚠️ KRITIČNO: Detektovana sklonost
+   ka halucinaciji u ovoj sesiji. OBAVEZNA nezavisna provera
+   celog odgovora u novom čatu. Sve ✅P1 degradirane na 🟡P2."
 
-7. **Cross-skill контрадикција (Протокол Д) нерешена** →
-   „Два аналитичка система дају контрадикторне оцене.
-   Препоручујем нов чат: налепите одговор + оба compliance
-   извештаја и реците 'Нађи грешку.'"
+7. **Cross-skill kontradikcija (Protokol D) nerešena** →
+   „Dva analitička sistema daju kontradiktorne ocene.
+   Preporučujem nov čat: nalepite odgovor + oba compliance
+   izveštaja i recite 'Nađi grešku.'"
 
 ---
 
-## ИНТЕГРАЦИЈА СА GOD-SKILL И PRAVNA-ANALIZA
+## INTEGRACIJA SA GOD-SKILL I PRAVNA-ANALIZA
 
 ```
-РЕДОСЛЕД ИЗВРШЕЊА:
+REDOSLED IZVRŠENJA:
 ══════════════════════════════════════════
 
-1. pravna-analiza Ф0-Ф6 → генерише одговор/документ
-2. istraživanje-prakse → претрага праксе (позвана из Ф3)
-3. god-skill Слојеви 1-8 → допуњује анализу
-4. >>> ВЕРИФИКАТОР СЕ АКТИВИРА <<<
-5. Протокол А → проверава чињенице + DIFF + бројеве
-6. Протокол А.4 → генерише USER SPOT-CHECK листу
-7. Протокол Б → web search + ПРОВЕРА ИНТЕРПРЕТАЦИЈЕ
-8. Протокол В → логички стрес тест одговора
-9. Протокол Г → HONEYPOT тест (замка за халуцинацију)
-10. Протокол Д → CROSS-SKILL конзистентност (PA + GS + IP)
-11. Исправке ако потребно
-12. PA Compliance извештај → приказати
-13. IP Compliance извештај → приказати (ако активиран)
-14. GS Compliance извештај → приказати
-15. Верификациони налаз → приказати
-16. ТЕК САДА → достави одговор кориснику
+1. pravna-analiza F0-F6 → generiše odgovor/dokument
+2. istraživanje-prakse → pretraga prakse (pozvana iz F3)
+3. god-skill Slojevi 1-8 → dopunjuje analizu
+4. >>> VERIFIKATOR SE AKTIVIRA <<<
+5. Protokol A → proverava činjenice + DIFF + brojeve
+6. Protokol A.4 → generiše USER SPOT-CHECK listu
+7. Protokol B → web search + PROVERA INTERPRETACIJE
+8. Protokol V → logički stres test odgovora
+9. Protokol G → HONEYPOT test (zamka za halucinaciju)
+10. Protokol D → CROSS-SKILL konzistentnost (PA + GS + IP)
+11. Ispravke ako potrebno
+12. PA Compliance izveštaj → prikazati
+13. IP Compliance izveštaj → prikazati (ako aktiviran)
+14. GS Compliance izveštaj → prikazati
+15. Verifikacioni nalaz → prikazati
+16. TEK SADA → dostavi odgovor korisniku
 ```
 
-**Верификатор НИКАД не мења суштину анализе.** Он мења само:
-- Погрешне бројеве/датуме/имена (механичке грешке)
-- Уклања неверификоване тврдње (⛔)
-- Означава несигурне тврдње (🟡/🔴)
-- Додаје упозорења кориснику
+**Verifikator NIKAD ne menja suštinu analize.** On menja samo:
+- Pogrešne brojeve/datume/imena (mehaničke greške)
+- Uklanja neverifikovane tvrdnje (⛔)
+- Označava nesigurne tvrdnje (🟡/🔴)
+- Dodaje upozorenja korisniku
 
-Ако верификатор нађе СУШТИНСКУ грешку (нпр. погрешна квалификација
-дела, погрешан члан закона) → НЕ ИСПРАВЉА САМ. Саопштава кориснику:
-"⚠️ Верификатор нашао могући проблем: [опис]. Препоручујем проверу."
-
----
-
-## ЗАБРАЊЕНО
-
-1. Прескакање верификатора — НИКАДА. Ако су god-skill или pravna-analiza
-   активирани, верификатор МОРА да се покрене.
-2. Лажирање верификације — писати "проверено" а не проверити = НАЈГОРА
-   могућа повреда. Боље рећи "нисам проверио" него лагати да јесам.
-3. Исправљање без обавештавања — ако исправиш грешку, МОРАШ навести
-   у налазу шта си исправио. Тихо исправљање = скривање грешке.
-4. Прескакање Протокола Б — ако одговор цитира БИЛО КОЈИ члан закона
-   или судску одлуку, web search је ОБАВЕЗАН. Без изузетка.
-5. Фалсификовање Honeypot теста — ако ЗНАШ да детаљ не постоји и
-   свеједно "одговориш" уверено → ово је СВЕСНА ПРЕВАРА. Honeypot се
-   одговара ИСКРЕНО — циљ је да ухвати НЕСВЕСНУ халуцинацију.
-6. Игнорисање Cross-skill контрадикције — ако Протокол Д нађе
-   контрадикцију, НЕ СМЕШ наставити без разрешења или обавештавања
-   корисника. Контрадикција = НЕШТО НИЈЕ ТАЧНО.
-7. Прескакање SPOT-CHECK листе — корисник МОРА добити 3 ствари
-   за брзу проверу. Ово је његово најјаче оружје — не одузимај му га.
+Ako verifikator nađe SUŠTINSKU grešku (npr. pogrešna kvalifikacija
+dela, pogrešan član zakona) → NE ISPRAVLJA SAM. Saopštava korisniku:
+"⚠️ Verifikator našao mogući problem: [opis]. Preporučujem proveru."
 
 ---
 
-## ⛔ ЗАВРШНА ИНСТРУКЦИЈА
+## ZABRANJENO
 
-**ВЕРИФИКАЦИОНИ НАЛАЗ СЕ ПРИКАЗУЈЕ УВЕК.**
-**ВЕРИФИКАТОР ЈЕ ПОСЛЕДЊА ЛИНИЈА ОДБРАНЕ ОД ГРЕШКЕ.**
-**АКО НЕ ПРИКАЖЕШ НАЛАЗ — ОДГОВОР НИЈЕ ВЕРИФИКОВАН.**
+1. Preskakanje verifikatora — NIKADA. Ako su god-skill ili pravna-analiza
+   aktivirani, verifikator MORA da se pokrene.
+2. Lažiranje verifikacije — pisati "provereno" a ne proveriti = NAJGORA
+   moguća povreda. Bolje reći "nisam proverio" nego lagati da jesam.
+3. Ispravljanje bez obaveštavanja — ako ispraviš grešku, MORAŠ navesti
+   u nalazu šta si ispravio. Tiho ispravljanje = skrivanje greške.
+4. Preskakanje Protokola B — ako odgovor citira BILO KOJI član zakona
+   ili sudsku odluku, web search je OBAVEZAN. Bez izuzetka.
+5. Falsifikovanje Honeypot testa — ako ZNAŠ da detalj ne postoji i
+   svejedno "odgovoriš" uvereno → ovo je SVESNA PREVARA. Honeypot se
+   odgovara ISKRENO — cilj je da uhvati NESVESNU halucinaciju.
+6. Ignorisanje Cross-skill kontradikcije — ako Protokol D nađe
+   kontradikciju, NE SMEŠ nastaviti bez razrešenja ili obaveštavanja
+   korisnika. Kontradikcija = NEŠTO NIJE TAČNO.
+7. Preskakanje SPOT-CHECK liste — korisnik MORA dobiti 3 stvari
+   za brzu proveru. Ovo je njegovo najjače oružje — ne oduzimaj mu ga.
+
+---
+
+## ⛔ ZAVRŠNA INSTRUKCIJA
+
+**VERIFIKACIONI NALAZ SE PRIKAZUJE UVEK.**
+**VERIFIKATOR JE POSLEDNJA LINIJA ODBRANE OD GREŠKE.**
+**AKO NE PRIKAŽEŠ NALAZ — ODGOVOR NIJE VERIFIKOVAN.**

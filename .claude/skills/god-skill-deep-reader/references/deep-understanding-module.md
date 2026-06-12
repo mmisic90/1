@@ -1,28 +1,28 @@
-# Модул за дубоко разумевање и повезивање чињеница: Пропис ↔ Пракса
+# Modul za duboko razumevanje i povezivanje činjenica: Propis ↔ Praksa
 
-**Архитектурни додатак за аутономног правног истраживачког агента**
-
------
-
-## Зашто је ово критично
-
-Основни RAG систем ради ово: корисник пита → агент тражи сличне чанкове → враћа цитате. То је правни Google — корисно, али не и интелигентно. Агент који **разуме** право мора да:
-
-1. **Парсира структуру правног аргумента** — разликује ratio decidendi од obiter dicta, нормативну одредбу од дефиниције, обавезу од овлашћења
-1. **Повезује чињенице кроз више докумената** — прати ланац: закон → подзаконски акт → судска одлука → измена → нова пракса
-1. **Премошћује јаз између прописа и праксе** — детектује када суд тумачи одредбу другачије од законодавне намере
-
-Ово захтева **три нова слоја** у постојећој архитектури, без компромиса на претходне модуле.
+**Arhitekturni dodatak za autonomnog pravnog istraživačkog agenta**
 
 -----
 
-## СЛОЈ 1: Дубоко разумевање појединачних докумената
+## Zašto je ovo kritično
 
-### 1.1 Вишенивоско парсирање правних текстова
+Osnovni RAG sistem radi ovo: korisnik pita → agent traži slične čankove → vraća citate. To je pravni Google — korisno, ali ne i inteligentno. Agent koji **razume** pravo mora da:
 
-Српски закони имају строгу хијерархију: **Закон → Део → Глава → Одељак → Члан → Став → Тачка → Подтачка**. Судске одлуке имају другу: **Изрека → Образложење → Чињенично стање → Правна оцена → Одлука о трошковима**.
+1. **Parsira strukturu pravnog argumenta** — razlikuje ratio decidendi od obiter dicta, normativnu odredbu od definicije, obavezu od ovlašćenja
+1. **Povezuje činjenice kroz više dokumenata** — prati lanac: zakon → podzakonski akt → sudska odluka → izmena → nova praksa
+1. **Premošćuje jaz između propisa i prakse** — detektuje kada sud tumači odredbu drugačije od zakonodavne namere
 
-Агент мора да парсира оба формата у **структуриране објекте**, не у равне текстуалне чанкове:
+Ovo zahteva **tri nova sloja** u postojećoj arhitekturi, bez kompromisa na prethodne module.
+
+-----
+
+## SLOJ 1: Duboko razumevanje pojedinačnih dokumenata
+
+### 1.1 Višenivosko parsiranje pravnih tekstova
+
+Srpski zakoni imaju strogu hijerarhiju: **Zakon → Deo → Glava → Odeljak → Član → Stav → Tačka → Podtačka**. Sudske odluke imaju drugu: **Izreka → Obrazloženje → Činjenično stanje → Pravna ocena → Odluka o troškovima**.
+
+Agent mora da parsira oba formata u **strukturirane objekte**, ne u ravne tekstualne čankove:
 
 ```python
 from pydantic import BaseModel
@@ -61,126 +61,126 @@ class CourtDecisionStructure(BaseModel):
     date: str
     panel: list[str]              # Sudsko veće
     
-    # Структура образложења
-    facts: str                    # Утврђено чињенично стање
-    procedural_history: str       # Ток поступка
-    legal_issues: list[str]       # Спорна правна питања
-    ratio_decidendi: str          # КЉУЧНО — обавезујуће правно правило
-    obiter_dicta: list[str]       # Успутна запажања (необавезујућа)
-    applied_provisions: list[str] # Примењени прописи
-    cited_precedents: list[str]   # Цитиране ранија пракса
-    disposition: str              # Изрека (усвајање/одбијање)
+    # Struktura obrazloženja
+    facts: str                    # Utvrđeno činjenično stanje
+    procedural_history: str       # Tok postupka
+    legal_issues: list[str]       # Sporna pravna pitanja
+    ratio_decidendi: str          # KLJUČNO — obavezujuće pravno pravilo
+    obiter_dicta: list[str]       # Usputna zapažanja (neobavezujuća)
+    applied_provisions: list[str] # Primenjeni propisi
+    cited_precedents: list[str]   # Citirane ranija praksa
+    disposition: str              # Izreka (usvajanje/odbijanje)
     
-    # Аналитички метаподаци
+    # Analitički metapodaci
     interpretation_method: str    # "gramatičko", "teleološko", "sistematsko"
-    novelty_score: float          # Колико одступа од ранијe праксе
+    novelty_score: float          # Koliko odstupa od ranije prakse
 ```
 
-### 1.2 Класификација нормативних исказа помоћу Claude-а
+### 1.2 Klasifikacija normativnih iskaza pomoću Claude-a
 
-Уместо NLP модела за класификацију (који не разуме српски правни регистар), користити Claude Haiku са структурираним излазом:
+Umesto NLP modela za klasifikaciju (koji ne razume srpski pravni registar), koristiti Claude Haiku sa strukturiranim izlazom:
 
 ```python
-NORM_CLASSIFICATION_PROMPT = """Анализирај следећу правну одредбу из српског закона.
+NORM_CLASSIFICATION_PROMPT = """Analiziraj sledeću pravnu odredbu iz srpskog zakona.
 
 <provision>
 {article_text}
 </provision>
 
-Класификуј:
-1. Тип норме (обавеза/забрана/овлашћење/дефиниција/услов/изузетак/санкција/временска/процесна)
-2. Адресат норме (ко је обавезан/овлашћен)  
-3. Објект регулисања (шта се регулише)
-4. Услови за примену (ако постоје)
-5. Изузеци (ако постоје)
-6. Упућивања на друге одредбе (идентификуј све "члан X", "закон о Y" референце)
+Klasifikuj:
+1. Tip norme (obaveza/zabrana/ovlašćenje/definicija/uslov/izuzetak/sankcija/vremenska/procesna)
+2. Adresat norme (ko je obavezan/ovlašćen)  
+3. Objekt regulisanja (šta se reguliše)
+4. Uslovi za primenu (ako postoje)
+5. Izuzeci (ako postoje)
+6. Upućivanja na druge odredbe (identifikuj sve "član X", "zakon o Y" reference)
 
-Одговори ИСКЉУЧИВО на основу текста одредбе. Не додај ништа што не пише."""
+Odgovori ISKLJUČIVO na osnovu teksta odredbe. Ne dodaj ništa što ne piše."""
 ```
 
-**Кост**: ~$0.001 по одредби са Haiku-ом. Целокупан Кривични законик (~400 чланова) = ~$0.40.
+**Kost**: ~$0.001 po odredbi sa Haiku-om. Celokupan Krivični zakonik (~400 članova) = ~$0.40.
 
-### 1.3 Екстракција ratio decidendi из судских одлука
+### 1.3 Ekstrakcija ratio decidendi iz sudskih odluka
 
-Ово је најтежи задатак. Ratio decidendi (обавезујуће правно правило из пресуде) често није експлицитно наведен — мора се извести из чињеница + примењених правила + закључка. Истраживање из августа 2025. (Hisano et al., “Capturing Legal Reasoning Paths from Facts to Law”) демонстрира технику: **knowledge graph који повезује чињенице → правне норме → примену** из стварних судских одлука, чинећи имплицитно резоновање експлицитним и машински читљивим.
+Ovo je najteži zadatak. Ratio decidendi (obavezujuće pravno pravilo iz presude) često nije eksplicitno naveden — mora se izvesti iz činjenica + primenjenih pravila + zaključka. Istraživanje iz avgusta 2025. (Hisano et al., “Capturing Legal Reasoning Paths from Facts to Law”) demonstrira tehniku: **knowledge graph koji povezuje činjenice → pravne norme → primenu** iz stvarnih sudskih odluka, čineći implicitno rezonovanje eksplicitnim i mašinski čitljivim.
 
 ```python
-RATIO_EXTRACTION_PROMPT = """Анализирај следећу судску одлуку.
+RATIO_EXTRACTION_PROMPT = """Analiziraj sledeću sudsku odluku.
 
 <decision>
 {full_decision_text}
 </decision>
 
-Извуци:
-1. RATIO DECIDENDI — обавезујуће правно правило које је суд применио на конкретне чињенице.
-   Формулиши као: "Када [чињенични услов], тада [правна последица], на основу [правни основ]."
+Izvuci:
+1. RATIO DECIDENDI — obavezujuće pravno pravilo koje je sud primenio na konkretne činjenice.
+   Formuliši kao: "Kada [činjenični uslov], tada [pravna posledica], na osnovu [pravni osnov]."
    
-2. OBITER DICTA — успутна запажања суда која НИСУ директно везана за одлуку.
+2. OBITER DICTA — usputna zapažanja suda koja NISU direktno vezana za odluku.
 
-3. МЕТОД ТУМАЧЕЊА — Како је суд тумачио спорну одредбу?
-   - Граматичко (језичко значење текста)
-   - Систематско (место одредбе у систему закона)
-   - Телеолошко (циљ и сврха норме)
-   - Историјско (намера законодавца)
+3. METOD TUMAČENJA — Kako je sud tumačio spornu odredbu?
+   - Gramatičko (jezičko značenje teksta)
+   - Sistematsko (mesto odredbe u sistemu zakona)
+   - Teleološko (cilj i svrha norme)
+   - Istorijsko (namera zakonodavca)
    
-4. ЛАНАЦ РЕЗОНОВАЊА: Чињенице → Примењена правила → Закључак
-   Формулиши као силогизам:
-   - Премиса 1 (правно правило): ...
-   - Премиса 2 (утврђене чињенице): ...
-   - Закључак: ...
+4. LANAC REZONOVANJA: Činjenice → Primenjena pravila → Zaključak
+   Formuliši kao silogizam:
+   - Premisa 1 (pravno pravilo): ...
+   - Premisa 2 (utvrđene činjenice): ...
+   - Zaključak: ...
 
-КРИТИЧНО: Ако не можеш са сигурношћу да извучеш ratio decidendi, напиши 
-"Ratio nije moguće pouzdano utvrditi iz dostupnog teksta" и објасни зашто."""
+KRITIČNO: Ako ne možeš sa sigurnošću da izvučeš ratio decidendi, napiši 
+"Ratio nije moguće pouzdano utvrditi iz dostupnog teksta" i objasni zašto."""
 ```
 
-### 1.4 Хијерархијско чанковање са контекстом (Context-Aware Hierarchical Chunking)
+### 1.4 Hijerarhijsko čankovanje sa kontekstom (Context-Aware Hierarchical Chunking)
 
-Стандардно чанковање (500 токена) уништава правну логику. Решење: **двоструко чанковање** — примарни ниво за ретривал + документ-ниво за разумевање:
+Standardno čankovanje (500 tokena) uništava pravnu logiku. Rešenje: **dvostruko čankovanje** — primarni nivo za retrival + dokument-nivo za razumevanje:
 
 ```python
 class HierarchicalLegalChunk:
-    """Двоструки чанк: детаљан за ретривал + контекстуални за разумевање"""
+    """Dvostruki čank: detaljan za retrival + kontekstualni za razumevanje"""
     
     def __init__(self, article_text, law_context):
-        self.primary_text = article_text           # За embeddings (члан)
-        self.parent_context = law_context.chapter   # Глава у којој се налази
-        self.law_summary = law_context.preamble     # Циљ закона
-        self.cross_ref_texts = []                   # Текстови референцираних чланова
+        self.primary_text = article_text           # Za embeddings (član)
+        self.parent_context = law_context.chapter   # Glava u kojoj se nalazi
+        self.law_summary = law_context.preamble     # Cilj zakona
+        self.cross_ref_texts = []                   # Tekstovi referenciranih članova
         
     def to_retrieval_text(self) -> str:
-        """За embedding — кратак, прецизан"""
+        """Za embedding — kratak, precizan"""
         return f"{self.law_context.title}, {self.primary_text}"
     
     def to_understanding_text(self) -> str:
-        """За Claude — богат контекстом"""
+        """Za Claude — bogat kontekstom"""
         parts = [
-            f"ЗАКОН: {self.law_context.title} ({self.law_context.sl_glasnik})",
-            f"ГЛАВА: {self.parent_context}",
-            f"ОДРЕДБА: {self.primary_text}",
+            f"ZAKON: {self.law_context.title} ({self.law_context.sl_glasnik})",
+            f"GLAVA: {self.parent_context}",
+            f"ODREDBA: {self.primary_text}",
         ]
         if self.cross_ref_texts:
-            parts.append(f"ПОВЕЗАНЕ ОДРЕДБЕ:\n" + "\n".join(self.cross_ref_texts))
+            parts.append(f"POVEZANE ODREDBE:\n" + "\n".join(self.cross_ref_texts))
         return "\n\n".join(parts)
 ```
 
-**Кључна разлика**: `to_retrieval_text()` иде у Embedić/ColBERT индекс (кратко, прецизно). `to_understanding_text()` иде у Claude-ов контекст прозор (богато, контекстуализовано). Ово решава проблем “lost context after chunking” без повећања ретривал шума.
+**Ključna razlika**: `to_retrieval_text()` ide u Embedić/ColBERT indeks (kratko, precizno). `to_understanding_text()` ide u Claude-ov kontekst prozor (bogato, kontekstualizovano). Ovo rešava problem “lost context after chunking” bez povećanja retrival šuma.
 
 -----
 
-## СЛОЈ 2: Повезивање чињеница кроз више докумената
+## SLOJ 2: Povezivanje činjenica kroz više dokumenata
 
-### 2.1 Multi-Hop правно резоновање
+### 2.1 Multi-Hop pravno rezonovanje
 
-Најважнија правна питања захтевају повезивање 3+ извора. Пример: “Да ли закупац може да раскине уговор ако закуподавац не одржава стан?”
+Najvažnija pravna pitanja zahtevaju povezivanje 3+ izvora. Primer: “Da li zakupac može da raskine ugovor ako zakupodavac ne održava stan?”
 
-Ланац извора:
+Lanac izvora:
 
-1. Закон о облигационим односима, чл. 567–599 (закуп)
-1. Посебан закон о становању (ако постоји)
-1. Судска пракса ВКС о раскиду закупа
-1. Општи правила о раскиду уговора (ЗОО чл. 124–132)
+1. Zakon o obligacionim odnosima, čl. 567–599 (zakup)
+1. Poseban zakon o stanovanju (ako postoji)
+1. Sudska praksa VKS o raskidu zakupa
+1. Opšti pravila o raskidu ugovora (ZOO čl. 124–132)
 
-Стандардни RAG налази **1 од 4** извора. Агентски RAG са итеративним продубљивањем налази **све 4**:
+Standardni RAG nalazi **1 od 4** izvora. Agentski RAG sa iterativnim produbljivanjem nalazi **sve 4**:
 
 ```python
 from langgraph.graph import StateGraph, END
@@ -191,22 +191,22 @@ class MultiHopState(TypedDict):
     sub_questions: list[str]
     retrieved_evidence: list[dict]
     reasoning_chain: list[dict]   # [{premise, evidence, conclusion}]
-    knowledge_gaps: list[str]     # Идентификоване празнине
+    knowledge_gaps: list[str]     # Identifikovane praznine
     iteration: int
     max_iterations: int           # Default: 5
 
 def decompose_legal_query(state: MultiHopState) -> MultiHopState:
-    """Разложи сложено правно питање на подпитања"""
+    """Razloži složeno pravno pitanje na podpitanja"""
     response = claude.messages.create(
         model="claude-sonnet-4-5",
-        system="""Разложи ово правно питање на подпитања која треба истражити.
-        За свако подпитање наведи:
-        1. Питање
-        2. Тип извора (закон/судска пракса/правна теорија)
-        3. Кључне речи за претрагу
+        system="""Razloži ovo pravno pitanje na podpitanja koja treba istražiti.
+        Za svako podpitanje navedi:
+        1. Pitanje
+        2. Tip izvora (zakon/sudska praksa/pravna teorija)
+        3. Ključne reči za pretragu
         
-        Размисли о: материјалном праву, процесним питањима, временском важењу,
-        компаративној пракси.""",
+        Razmisli o: materijalnom pravu, procesnim pitanjima, vremenskom važenju,
+        komparativnoj praksi.""",
         messages=[{"role": "user", "content": state["original_query"]}],
         thinking={"type": "enabled", "budget_tokens": 4096}
     )
@@ -214,28 +214,28 @@ def decompose_legal_query(state: MultiHopState) -> MultiHopState:
     return state
 
 def iterative_retrieve_and_reason(state: MultiHopState) -> MultiHopState:
-    """Итеративно претражуј и резонуј — свака итерација продубљује знање"""
+    """Iterativno pretražuj i rezonuj — svaka iteracija produbljuje znanje"""
     
     for sq in state["sub_questions"]:
-        # 1. Претрага у правним базама
+        # 1. Pretraga u pravnim bazama
         results = await multi_source_search(sq, sources=[
             "paragraf_lex", "profisistem", "lightrag_kg", "vector_store"
         ])
         state["retrieved_evidence"].extend(results)
         
-        # 2. Провера да ли постоје празнине
+        # 2. Provera da li postoje praznine
         gap_check = claude.messages.create(
             model="claude-haiku-4-5",
             messages=[{"role": "user", "content": f"""
-            Питање: {sq}
-            Пронађени извори: {summarize(results)}
+            Pitanje: {sq}
+            Pronađeni izvori: {summarize(results)}
             
-            Да ли постоје правне празнине — информације које НЕДОСТАЈУ за потпун одговор?
-            Ако да, формулиши нова подпитања за попуњавање празнина.
-            Ако не, одговори "ДОВОЉНО"."""}]
+            Da li postoje pravne praznine — informacije koje NEDOSTAJU za potpun odgovor?
+            Ako da, formuliši nova podpitanja za popunjavanje praznina.
+            Ako ne, odgovori "DOVOLJNO"."""}]
         )
         
-        if "ДОВОЉНО" not in gap_check.content[0].text:
+        if "DOVOLJNO" not in gap_check.content[0].text:
             new_questions = parse_gap_questions(gap_check)
             state["sub_questions"].extend(new_questions)
     
@@ -249,7 +249,7 @@ def should_continue(state: MultiHopState) -> str:
         return "synthesize"
     return "retrieve_more"
 
-# LangGraph граф
+# LangGraph graf
 graph = StateGraph(MultiHopState)
 graph.add_node("decompose", decompose_legal_query)
 graph.add_node("retrieve_reason", iterative_retrieve_and_reason)
@@ -263,99 +263,99 @@ graph.add_conditional_edges("retrieve_reason", should_continue, {
 graph.add_edge("synthesize", END)
 ```
 
-### 2.2 Цитациони граф: Ланци судске праксе
+### 2.2 Citacioni graf: Lanci sudske prakse
 
-Правна аргументација је **мрежна**, не линеарна. Суд А цитира суд Б, који тумачи закон В, који је измењен законом Г. Агент мора да прати ове ланце.
+Pravna argumentacija je **mrežna**, ne linearna. Sud A citira sud B, koji tumači zakon V, koji je izmenjen zakonom G. Agent mora da prati ove lance.
 
 ```cypher
-// Neo4j шема за цитациони граф
-// Чворови
+// Neo4j šema za citacioni graf
+// Čvorovi
 CREATE CONSTRAINT FOR (l:Law) REQUIRE l.eli_uri IS UNIQUE;
 CREATE CONSTRAINT FOR (a:Article) REQUIRE a.id IS UNIQUE;
 CREATE CONSTRAINT FOR (d:Decision) REQUIRE d.case_number IS UNIQUE;
 CREATE CONSTRAINT FOR (c:LegalConcept) REQUIRE c.name IS UNIQUE;
 
-// Односи између прописа
+// Odnosi između propisa
 CREATE (z1:Law)-[:AMENDS {gazette: "52/2021", date: "2021-05-15"}]->(z2:Law)
 CREATE (z1:Law)-[:REPEALS]->(z2:Law)
-CREATE (z1:Law)-[:IMPLEMENTS]->(d:Directive)  // EU директиве
+CREATE (z1:Law)-[:IMPLEMENTS]->(d:Directive)  // EU direktive
 CREATE (a1:Article)-[:CROSS_REFERENCES]->(a2:Article)
 CREATE (a:Article)-[:DEFINES]->(c:LegalConcept)
 
-// Односи између судских одлука
+// Odnosi između sudskih odluka
 CREATE (d1:Decision)-[:CITES_PRECEDENT]->(d2:Decision)
-CREATE (d1:Decision)-[:OVERRULES]->(d2:Decision)    // КРИТИЧНО: промена праксе
-CREATE (d1:Decision)-[:DISTINGUISHES]->(d2:Decision) // Разликује чињенице
-CREATE (d1:Decision)-[:FOLLOWS]->(d2:Decision)       // Следи раније тумачење
+CREATE (d1:Decision)-[:OVERRULES]->(d2:Decision)    // KRITIČNO: promena prakse
+CREATE (d1:Decision)-[:DISTINGUISHES]->(d2:Decision) // Razlikuje činjenice
+CREATE (d1:Decision)-[:FOLLOWS]->(d2:Decision)       // Sledi ranije tumačenje
 CREATE (d1:Decision)-[:INTERPRETS {method: "teleological"}]->(a:Article)
 
-// Односи пропис-пракса
+// Odnosi propis-praksa
 CREATE (d:Decision)-[:APPLIES]->(a:Article)
-CREATE (d:Decision)-[:EXTENDS_SCOPE]->(a:Article)    // Шири примену
-CREATE (d:Decision)-[:RESTRICTS_SCOPE]->(a:Article)  // Сужава примену
-CREATE (d:Decision)-[:CREATES_EXCEPTION]->(a:Article) // Ствара изузетак у пракси
+CREATE (d:Decision)-[:EXTENDS_SCOPE]->(a:Article)    // Širi primenu
+CREATE (d:Decision)-[:RESTRICTS_SCOPE]->(a:Article)  // Sužava primenu
+CREATE (d:Decision)-[:CREATES_EXCEPTION]->(a:Article) // Stvara izuzetak u praksi
 ```
 
-**Аналитички упити** за повезивање прописа и праксе:
+**Analitički upiti** za povezivanje propisa i prakse:
 
 ```cypher
-// 1. Најцитираније одредбе — које одредбе суд најчешће примењује?
+// 1. Najcitiranije odredbe — koje odredbe sud najčešće primenjuje?
 MATCH (d:Decision)-[:APPLIES]->(a:Article)
 RETURN a.law_name, a.number, count(d) as citation_count
 ORDER BY citation_count DESC LIMIT 20
 
-// 2. Еволуција тумачења — како се мењало тумачење чл. 154 ЗОО?
+// 2. Evolucija tumačenja — kako se menjalo tumačenje čl. 154 ZOO?
 MATCH (d:Decision)-[r:INTERPRETS]->(a:Article {number: "154", law: "ZOO"})
 RETURN d.case_number, d.date, d.ratio_decidendi, r.method
 ORDER BY d.date
 
-// 3. Ланац преседана — ко цитира кога?
+// 3. Lanac presedana — ko citira koga?
 MATCH path = (d1:Decision)-[:CITES_PRECEDENT*1..5]->(d2:Decision)
 WHERE d1.case_number = "Rev. 1234/2023"
 RETURN path
 
-// 4. Детекција конфликта — одлуке које различито тумаче исту одредбу
+// 4. Detekcija konflikta — odluke koje različito tumače istu odredbu
 MATCH (d1:Decision)-[:INTERPRETS]->(a:Article)<-[:INTERPRETS]-(d2:Decision)
 WHERE d1.ratio_decidendi <> d2.ratio_decidendi
   AND d1.court = d2.court
 RETURN d1, d2, a, 
-  "КОНФЛИКТ: Исти суд, различито тумачење" as alert
+  "KONFLIKT: Isti sud, različito tumačenje" as alert
 
-// 5. "Тихе измене" — где пракса де факто мења закон
+// 5. "Tihe izmene" — gde praksa de fakto menja zakon
 MATCH (d:Decision)-[:EXTENDS_SCOPE|RESTRICTS_SCOPE|CREATES_EXCEPTION]->(a:Article)
 RETURN a.law_name, a.number, type(r) as modification_type, 
   count(d) as frequency, collect(d.case_number) as decisions
 ORDER BY frequency DESC
 ```
 
-### 2.3 Детекција контрадикција
+### 2.3 Detekcija kontradikcija
 
-Агент мора аутоматски да детектује конфликте:
+Agent mora automatski da detektuje konflikte:
 
 ```python
 class ContradictionDetector:
-    """Детектује конфликте између правних извора"""
+    """Detektuje konflikte između pravnih izvora"""
     
     CONFLICT_TYPES = {
-        "lex_posterior": "Новији закон vs старији закон",
-        "lex_specialis": "Посебан закон vs општи закон",
-        "lex_superior": "Устав vs закон",
-        "practice_vs_text": "Судска пракса vs текст одредбе",
-        "inter_court": "Различити судови, различита тумачења",
-        "intra_court": "Исти суд, промена праксе"
+        "lex_posterior": "Noviji zakon vs stariji zakon",
+        "lex_specialis": "Poseban zakon vs opšti zakon",
+        "lex_superior": "Ustav vs zakon",
+        "practice_vs_text": "Sudska praksa vs tekst odredbe",
+        "inter_court": "Različiti sudovi, različita tumačenja",
+        "intra_court": "Isti sud, promena prakse"
     }
     
     async def detect(self, provisions: list, decisions: list) -> list:
-        # 1. Темпорална провера: важи ли одредба?
+        # 1. Temporalna provera: važi li odredba?
         for p in provisions:
             if await self.is_repealed_or_amended(p):
                 yield Contradiction(
                     type="temporal",
-                    message=f"Одредба {p.article} измењена/укинута",
+                    message=f"Odredba {p.article} izmenjena/ukinuta",
                     newer_source=await self.get_current_version(p)
                 )
         
-        # 2. NLI провера: да ли се извори слажу?
+        # 2. NLI provera: da li se izvori slažu?
         for d in decisions:
             for p in provisions:
                 if d.applies_to(p):
@@ -372,7 +372,7 @@ class ContradictionDetector:
                             explanation=await self.explain_contradiction(p, d)
                         )
         
-        # 3. Граф провера: конфликтна тумачења
+        # 3. Graf provera: konfliktna tumačenja
         conflicts = await self.kg.query("""
             MATCH (d1:Decision)-[:INTERPRETS]->(a:Article)<-[:INTERPRETS]-(d2:Decision)
             WHERE d1 <> d2 AND d1.date > d2.date
@@ -384,200 +384,200 @@ class ContradictionDetector:
 
 -----
 
-## СЛОЈ 3: Премошћавање јаза пропис ↔ пракса
+## SLOJ 3: Premošćavanje jaza propis ↔ praksa
 
-Ово је **најиновативнији** слој. Агент не само да зна шта закон каже — зна и како се **заиста примењује**.
+Ovo je **najinovativniji** sloj. Agent ne samo da zna šta zakon kaže — zna i kako se **zaista primenjuje**.
 
-### 3.1 “Карте праксе” (Practice Maps)
+### 3.1 “Karte prakse” (Practice Maps)
 
-За сваку кључну одредбу, агент гради **карту праксе** — структуирани преглед како суд примењује ту одредбу:
+Za svaku ključnu odredbu, agent gradi **kartu prakse** — struktuirani pregled kako sud primenjuje tu odredbu:
 
 ```python
 class PracticeMap(BaseModel):
-    """Карта примене конкретне правне одредбе у пракси"""
+    """Karta primene konkretne pravne odredbe u praksi"""
     
-    provision: LegalProvision      # Одредба
-    total_decisions: int           # Укупно пронађених одлука
+    provision: LegalProvision      # Odredba
+    total_decisions: int           # Ukupno pronađenih odluka
     
-    # Статистика примене
-    applied_count: int             # Колико пута примењена
-    distinguished_count: int       # Колико пута суд разликовао чињенице
-    overruled_count: int           # Промена праксе
+    # Statistika primene
+    applied_count: int             # Koliko puta primenjena
+    distinguished_count: int       # Koliko puta sud razlikovao činjenice
+    overruled_count: int           # Promena prakse
     
-    # Обрасци тумачења
+    # Obrasci tumačenja
     interpretation_patterns: list[dict]  # [{method, frequency, example_case}]
     
-    # Де факто модификације
-    judicial_extensions: list[str]    # Где је суд проширио примену
-    judicial_restrictions: list[str]  # Где је суд сузио примену  
-    judicial_exceptions: list[str]    # Изузеци створени у пракси
+    # De fakto modifikacije
+    judicial_extensions: list[str]    # Gde je sud proširio primenu
+    judicial_restrictions: list[str]  # Gde je sud suzio primenu  
+    judicial_exceptions: list[str]    # Izuzeci stvoreni u praksi
     
-    # Темпорална еволуција
+    # Temporalna evolucija
     evolution: list[dict]  # [{period, dominant_interpretation, key_case}]
     
-    # Практични показатељи
-    success_rate: float | None     # % усвајајућих за тужиоца
-    avg_damages: float | None      # Просечна накнада (ако је релевантно)
+    # Praktični pokazatelji
+    success_rate: float | None     # % usvajajućih za tužioca
+    avg_damages: float | None      # Prosečna naknada (ako je relevantno)
     
-    # Јаз пропис-пракса
-    gap_analysis: str              # Текстуална анализа јаза
+    # Jaz propis-praksa
+    gap_analysis: str              # Tekstualna analiza jaza
     gap_severity: str              # "minimal" | "moderate" | "significant"
 ```
 
-### 3.2 Изградња practice map-а кроз агентски workflow
+### 3.2 Izgradnja practice map-a kroz agentski workflow
 
 ```python
 async def build_practice_map(provision: LegalProvision) -> PracticeMap:
-    """Аутономно изгради карту праксе за одредбу"""
+    """Autonomno izgradi kartu prakse za odredbu"""
     
-    # 1. Претражи све одлуке које примењују ову одредбу
+    # 1. Pretraži sve odluke koje primenjuju ovu odredbu
     decisions = await search_all_sources(
         query=f"primena {provision.article_number} {provision.law_name}",
         sources=["paragraf_lex", "profisistem", "kg_graph"],
         min_relevance=0.7
     )
     
-    # 2. Класификуј сваку одлуку
+    # 2. Klasifikuj svaku odluku
     classified = []
     for d in decisions:
         classification = await claude.messages.create(
             model="claude-haiku-4-5",
-            system="Класификуј како суд примењује ову одредбу.",
+            system="Klasifikuj kako sud primenjuje ovu odredbu.",
             messages=[{"role": "user", "content": f"""
-            Одредба: {provision.text}
-            Одлука: {d.text}
+            Odredba: {provision.text}
+            Odluka: {d.text}
             
-            Класификуј:
-            1. Да ли суд ПРИМЕЊУЈЕ одредбу директно?
-            2. Да ли ПРОШИРУЈЕ примену изван текста?
-            3. Да ли СУЖАВА примену?
-            4. Да ли СТВАРА ИЗУЗЕТАК који не постоји у тексту?
-            5. Метод тумачења (граматичко/систематско/телеолошко/историјско)
-            6. Да ли МЕЊА ранију праксу?"""}]
+            Klasifikuj:
+            1. Da li sud PRIMENJUJE odredbu direktno?
+            2. Da li PROŠIRUJE primenu izvan teksta?
+            3. Da li SUŽAVA primenu?
+            4. Da li STVARA IZUZETAK koji ne postoji u tekstu?
+            5. Metod tumačenja (gramatičko/sistematsko/teleološko/istorijsko)
+            6. Da li MENJA raniju praksu?"""}]
         )
         classified.append(parse_classification(classification))
     
-    # 3. Анализирај темпоралну еволуцију
+    # 3. Analiziraj temporalnu evoluciju
     evolution = await analyze_temporal_evolution(classified)
     
-    # 4. Израчунај јаз пропис-пракса
+    # 4. Izračunaj jaz propis-praksa
     gap = await claude.messages.create(
         model="claude-sonnet-4-5",
         thinking={"type": "enabled", "budget_tokens": 8000},
         messages=[{"role": "user", "content": f"""
-        Закон каже: {provision.text}
+        Zakon kaže: {provision.text}
         
-        Пракса показује:
-        - Проширења: {[c for c in classified if c.type == "extends"]}
-        - Сужавања: {[c for c in classified if c.type == "restricts"]}
-        - Изузеци: {[c for c in classified if c.type == "exception"]}
+        Praksa pokazuje:
+        - Proširenja: {[c for c in classified if c.type == "extends"]}
+        - Sužavanja: {[c for c in classified if c.type == "restricts"]}
+        - Izuzeci: {[c for c in classified if c.type == "exception"]}
         
-        АНАЛИЗИРАЈ: Колики је јаз између онога што закон каже (de jure) 
-        и онога што судови раде (de facto)?
+        ANALIZIRAJ: Koliki je jaz između onoga što zakon kaže (de jure) 
+        i onoga što sudovi rade (de facto)?
         
-        Користи Јовановићев емпиријски метод:
-        1. Шта институција ФОРМАЛНО прописује?
-        2. Шта институција СТВАРНО ради?
-        3. Зашто постоји разлика?
-        4. Какве су последице те разлике за правну сигурност?"""}]
+        Koristi Jovanovićev empirijski metod:
+        1. Šta institucija FORMALNO propisuje?
+        2. Šta institucija STVARNO radi?
+        3. Zašto postoji razlika?
+        4. Kakve su posledice te razlike za pravnu sigurnost?"""}]
     )
     
     return PracticeMap(
         provision=provision,
         gap_analysis=gap.content[0].text,
-        # ... остали подаци
+        # ... ostali podaci
     )
 ```
 
-### 3.3 Детекција “тихих измена” (Silent Amendments)
+### 3.3 Detekcija “tihih izmena” (Silent Amendments)
 
-Најсофистициранија функција: агент детектује када судска пракса **де факто мења закон** без формалне измене:
+Najsofisticiranija funkcija: agent detektuje kada sudska praksa **de fakto menja zakon** bez formalne izmene:
 
 ```python
 SILENT_AMENDMENT_INDICATORS = [
-    # Суд користи телеолошко тумачење да прошири/сузи текст
-    "Иако законодавац наводи... суд сматра да се под тим подразумева и...",
-    "У духу закона... примењује се и на...",
-    "Ratio legis наведене одредбе указује на...",
+    # Sud koristi teleološko tumačenje da proširi/suzi tekst
+    "Iako zakonodavac navodi... sud smatra da se pod tim podrazumeva i...",
+    "U duhu zakona... primenjuje se i na...",
+    "Ratio legis navedene odredbe ukazuje na...",
     
-    # Суд додаје услове који не постоје у тексту
-    "За примену ове одредбе потребно је и да...",
-    "Поред услова из закона, суд налази да...",
+    # Sud dodaje uslove koji ne postoje u tekstu
+    "Za primenu ove odredbe potrebno je i da...",
+    "Pored uslova iz zakona, sud nalazi da...",
     
-    # Суд фактички не примењује одредбу
-    "Наведена одредба се у пракси ретко примењује...",
-    # Велики број одбијајућих одлука за исту одредбу
+    # Sud faktički ne primenjuje odredbu
+    "Navedena odredba se u praksi retko primenjuje...",
+    # Veliki broj odbijajućih odluka za istu odredbu
 ]
 
 async def detect_silent_amendments(provision, decisions):
-    """Детектуј где пракса де факто мења текст одредбе"""
+    """Detektuj gde praksa de fakto menja tekst odredbe"""
     
     analysis = await claude.messages.create(
         model="claude-sonnet-4-5",
         thinking={"type": "enabled", "budget_tokens": 10000},
         messages=[{"role": "user", "content": f"""
-        ЗАДАТАК: Утврди да ли судска пракса де факто мења ову одредбу.
+        ZADATAK: Utvrdi da li sudska praksa de fakto menja ovu odredbu.
 
-        ТЕКСТ ОДРЕДБЕ:
+        TEKST ODREDBE:
         {provision.text}
 
-        СУДСКЕ ОДЛУКЕ КОЈЕ ЈЕ ПРИМЕЊУЈУ:
+        SUDSKE ODLUKE KOJE JE PRIMENJUJU:
         {format_decisions(decisions)}
 
-        АНАЛИЗИРАЈ следеће обрасце:
+        ANALIZIRAJ sledeće obrasce:
         
-        1. ДОДАВАЊЕ УСЛОВА — Да ли суд захтева услове који не постоје у тексту?
-        2. ПРОШИРЕЊЕ ПОЈМОВА — Да ли суд шире тумачи кључне појмове?
-        3. СТВАРАЊЕ ИЗУЗЕТАКА — Да ли суд признаје изузетке које закон не предвиђа?
-        4. ПРЕБАЦИВАЊЕ ТЕРЕТА ДОКАЗИВАЊА — Да ли суд мења терет доказивања?
-        5. МРТВО СЛОВО НА ПАПИРУ — Да ли постоје одредбе које суд систематски не примењује?
-        6. КОНФЛИКТ ВИШЕГ И НИЖЕГ СУДА — Различита пракса по инстанцама?
+        1. DODAVANJE USLOVA — Da li sud zahteva uslove koji ne postoje u tekstu?
+        2. PROŠIRENJE POJMOVA — Da li sud šire tumači ključne pojmove?
+        3. STVARANJE IZUZETAKA — Da li sud priznaje izuzetke koje zakon ne predviđa?
+        4. PREBACIVANJE TERETA DOKAZIVANJA — Da li sud menja teret dokazivanja?
+        5. MRTVO SLOVO NA PAPIRU — Da li postoje odredbe koje sud sistematski ne primenjuje?
+        6. KONFLIKT VIŠEG I NIŽEG SUDA — Različita praksa po instancama?
         
-        За сваки пронађени образац:
-        - Цитирај конкретну одлуку
-        - Објасни одступање од текста
-        - Процени правне последице
+        Za svaki pronađeni obrazac:
+        - Citiraj konkretnu odluku
+        - Objasni odstupanje od teksta
+        - Proceni pravne posledice
         
-        НЕ ИЗМИШЉАЈ одлуке. Ако нема доказа за образац, наведи "Није утврђено."
+        NE IZMIŠLJAJ odluke. Ako nema dokaza za obrazac, navedi "Nije utvrđeno."
         """}]
     )
     return parse_silent_amendments(analysis)
 ```
 
-### 3.4 Дефизибилно резоновање (Defeasible Reasoning)
+### 3.4 Defizibilno rezonovanje (Defeasible Reasoning)
 
-Право је **дефизибилно** — свако правило може бити поражено изузетком. Агент мора да моделира ово:
+Pravo je **defizibilno** — svako pravilo može biti poraženo izuzetkom. Agent mora da modelira ovo:
 
 ```python
 class DefeasibleRule:
-    """Правило које може бити поражено изузетком"""
+    """Pravilo koje može biti poraženo izuzetkom"""
     
-    rule: str                     # "Закупац може раскинути уговор ако..."
-    source: LegalProvision        # Правни основ
-    confidence: float             # Снага правила (0.0-1.0)
+    rule: str                     # "Zakupac može raskinuti ugovor ako..."
+    source: LegalProvision        # Pravni osnov
+    confidence: float             # Snaga pravila (0.0-1.0)
     
-    exceptions: list[dict]        # Познати изузеци
-    # [{condition: "осим ако је...", source: ..., frequency: ...}]
+    exceptions: list[dict]        # Poznati izuzeci
+    # [{condition: "osim ako je...", source: ..., frequency: ...}]
     
-    defeaters: list[dict]         # Правила која побијају ово правило
-    # [{rule: "lex specialis одредба...", source: ..., priority: ...}]
+    defeaters: list[dict]         # Pravila koja pobijaju ovo pravilo
+    # [{rule: "lex specialis odredba...", source: ..., priority: ...}]
 
 async def defeasible_legal_analysis(query: str, facts: dict) -> dict:
-    """Анализирај правно питање узимајући у обзир изузетке и побијања"""
+    """Analiziraj pravno pitanje uzimajući u obzir izuzetke i pobijanja"""
     
-    # 1. Пронађи примењива правила
+    # 1. Pronađi primenjiva pravila
     applicable_rules = await find_applicable_rules(query, facts)
     
-    # 2. За свако правило провери изузетке
+    # 2. Za svako pravilo proveri izuzetke
     for rule in applicable_rules:
         rule.exceptions = await find_exceptions(rule, facts)
         rule.defeaters = await find_defeaters(rule, facts)
         
-        # Примени хијерархију:
+        # Primeni hijerarhiju:
         # lex superior > lex specialis > lex posterior
         rule.confidence = calculate_rule_strength(rule)
     
-    # 3. Синтеза — које правило "преживљава"?
+    # 3. Sinteza — koje pravilo "preživljava"?
     surviving_rules = [r for r in applicable_rules 
                        if r.confidence > 0.5 and not r.is_defeated()]
     
@@ -592,66 +592,66 @@ async def defeasible_legal_analysis(query: str, facts: dict) -> dict:
 
 -----
 
-## СЛОЈ 4: Агентско итеративно продубљивање (Agentic Iterative Deepening)
+## SLOJ 4: Agentsko iterativno produbljivanje (Agentic Iterative Deepening)
 
-### 4.1 Пет-фазни workflow за дубоку анализу
+### 4.1 Pet-fazni workflow za duboku analizu
 
-Интегрише се као **подграф** у постојећи LangGraph supervisor:
+Integriše se kao **podgraf** u postojeći LangGraph supervisor:
 
 ```
-[ПИТАЊЕ] → ДЕКОМПОЗИЦИЈА → РЕТРИВАЛ → РЕЗОНОВАЊЕ → ВЕРИФИКАЦИЈА → СИНТЕЗА
+[PITANJE] → DEKOMPOZICIJA → RETRIVAL → REZONOVANJE → VERIFIKACIJA → SINTEZA
                 ↑                                        |
-                └────────── ПРАЗНИНЕ ДЕТЕКТОВАНЕ ─────────┘
+                └────────── PRAZNINE DETEKTOVANE ─────────┘
 ```
 
 ```python
-DEEP_ANALYSIS_PROMPT = """Ти си правни аналитичар специјализован за српско право.
-Примењуј емпиријско-компаративни метод Слободана Јовановића.
+DEEP_ANALYSIS_PROMPT = """Ti si pravni analitičar specijalizovan za srpsko pravo.
+Primenjuj empirijsko-komparativni metod Slobodana Jovanovića.
 
-ФАЗА 1 — ДЕКОМПОЗИЦИЈА:
-Разложи питање на компоненте: материјалноправна, процесноправна, темпорална.
+FAZA 1 — DEKOMPOZICIJA:
+Razloži pitanje na komponente: materijalnopravna, procesnopravna, temporalna.
 
-ФАЗА 2 — ИНВЕНТИО (Проналажење):
-За сваку компоненту претражи:
-(а) Позитивноправну регулативу (закони, подзаконски акти)
-(б) Судску праксу (ВКС, апелациони судови, Уставни суд)
-(в) Правну теорију (коментари закона, уџбеници)
-(г) Компаративно право (минимум једна јурисдикција)
+FAZA 2 — INVENTIO (Pronalaženje):
+Za svaku komponentu pretraži:
+(a) Pozitivnopravnu regulativu (zakoni, podzakonski akti)
+(b) Sudsku praksu (VKS, apelacioni sudovi, Ustavni sud)
+(v) Pravnu teoriju (komentari zakona, udžbenici)
+(g) Komparativno pravo (minimum jedna jurisdikcija)
 
-ФАЗА 3 — РЕЗОНОВАЊЕ:
-Примени IRAC метод:
-- Issue (Спорно питање): Прецизно формулиши
-- Rule (Правило): Идентификуј примењиву норму + ratio decidendi из праксе
-- Application (Примена): Примени правило на конкретне чињенице
-- Conclusion (Закључак): Изведи закључак
+FAZA 3 — REZONOVANJE:
+Primeni IRAC metod:
+- Issue (Sporno pitanje): Precizno formuliši
+- Rule (Pravilo): Identifikuj primenjivu normu + ratio decidendi iz prakse
+- Application (Primena): Primeni pravilo na konkretne činjenice
+- Conclusion (Zaključak): Izvedi zaključak
 
-ФАЗА 4 — ВЕРИФИКАЦИЈА:
-- Провери да ли сви цитати постоје
-- Провери да ли ratio одговара тексту одлуке
-- Провери темпорално важење одредби
-- Идентификуј празнине у аргументацији
+FAZA 4 — VERIFIKACIJA:
+- Proveri da li svi citati postoje
+- Proveri da li ratio odgovara tekstu odluke
+- Proveri temporalno važenje odredbi
+- Identifikuj praznine u argumentaciji
 
-ФАЗА 5 — СИНТЕЗА:
-Повежи све елементе у кохерентну анализу.
-Јасно раздвоји: (а) шта закон каже, (б) шта суд ради, (в) где постоји јаз.
+FAZA 5 — SINTEZA:
+Poveži sve elemente u koherentnu analizu.
+Jasno razdvoji: (a) šta zakon kaže, (b) šta sud radi, (v) gde postoji jaz.
 
-ПРАВИЛО: Ако у било којој фази откријеш празнину — ВРАТИ СЕ на Фазу 2 и 
-претражи додатне изворе. Не настављај синтезу са непотпуним информацијама."""
+PRAVILO: Ako u bilo kojoj fazi otkriješ prazninu — VRATI SE na Fazu 2 i 
+pretraži dodatne izvore. Ne nastavljaj sintezu sa nepotpunim informacijama."""
 ```
 
-### 4.2 Think-on-Graph: Резоновање преко знања графа
+### 4.2 Think-on-Graph: Rezonovanje preko znanja grafa
 
-Директно инспирисано Think-on-Graph 2.0 (ICLR 2025) — агент **разонује преко графа знања** уместо само текстуалног ретривала:
+Direktno inspirisano Think-on-Graph 2.0 (ICLR 2025) — agent **razonuje preko grafa znanja** umesto samo tekstualnog retrivala:
 
 ```python
 async def think_on_graph(query: str, kg) -> dict:
-    """Резоновање преко правног knowledge graph-а"""
+    """Rezonovanje preko pravnog knowledge graph-a"""
     
-    # 1. Екстрахуј ентитете из питања
+    # 1. Ekstrahuj entitete iz pitanja
     entities = await extract_legal_entities(query)
-    # Пример: ["чл. 154 ЗОО", "објективна одговорност", "штета"]
+    # Primer: ["čl. 154 ZOO", "objektivna odgovornost", "šteta"]
     
-    # 2. Пронађи ентитете у графу
+    # 2. Pronađi entitete u grafu
     graph_context = []
     for entity in entities:
         neighbors = await kg.query(f"""
@@ -662,67 +662,67 @@ async def think_on_graph(query: str, kg) -> dict:
         """)
         graph_context.extend(neighbors)
     
-    # 3. Формирај reasoning chain преко графа
+    # 3. Formiraj reasoning chain preko grafa
     reasoning = await claude.messages.create(
         model="claude-sonnet-4-5",
         thinking={"type": "enabled", "budget_tokens": 8000},
         messages=[{"role": "user", "content": f"""
-        Питање: {query}
+        Pitanje: {query}
         
-        Знање из графа (ентитети и везе):
+        Znanje iz grafa (entiteti i veze):
         {format_graph_context(graph_context)}
         
-        ЗАДАТАК: Прати везе у графу да одговориш на питање.
-        За сваки корак наведи: ентитет → веза → следећи ентитет.
+        ZADATAK: Prati veze u grafu da odgovoriš na pitanje.
+        Za svaki korak navedi: entitet → veza → sledeći entitet.
         
-        Пример reasoning chain-а:
-        чл. 154 ЗОО --[ДЕФИНИШЕ]--> објективна одговорност
-        објективна одговорност --[ПРИМЕЊЕНА_У]--> Rev. 567/2022
-        Rev. 567/2022 --[ПРОШИРУЈЕ_ПРИМЕНУ]--> чл. 154 ЗОО (додаје услов...)
+        Primer reasoning chain-a:
+        čl. 154 ZOO --[DEFINIŠE]--> objektivna odgovornost
+        objektivna odgovornost --[PRIMENJENA_U]--> Rev. 567/2022
+        Rev. 567/2022 --[PROŠIRUJE_PRIMENU]--> čl. 154 ZOO (dodaje uslov...)
         
-        Ако ти недостаје веза — наведи коју информацију треба додатно претражити.
+        Ako ti nedostaje veza — navedi koju informaciju treba dodatno pretražiti.
         """}]
     )
     
-    # 4. Ако постоје празнине — додатни ретривал
+    # 4. Ako postoje praznine — dodatni retrival
     gaps = extract_knowledge_gaps(reasoning)
     if gaps:
         additional = await multi_source_search(gaps)
-        # Понови резоновање са допуњеним контекстом
+        # Ponovi rezonovanje sa dopunjenim kontekstom
     
     return {"reasoning_chain": reasoning, "graph_paths": graph_context}
 ```
 
-### 4.3 Мулти-агент правна дебата
+### 4.3 Multi-agent pravna debata
 
-За контроверзна питања — три агента дебатују:
+Za kontroverzna pitanja — tri agenta debatuju:
 
 ```python
 async def legal_debate(question: str, context: dict) -> dict:
-    """Три агента анализирају исто питање из различитих углова"""
+    """Tri agenta analiziraju isto pitanje iz različitih uglova"""
     
-    # Агент 1: "Заговорник" — аргументи ЗА
+    # Agent 1: "Zagovornik" — argumenti ZA
     advocate_for = await claude_call(
-        system="Ти си адвокат који брани позицију ДА на ово питање. "
-               "Пронађи најјаче аргументе, цитирај праксу, теорију.",
+        system="Ti si advokat koji brani poziciju DA na ovo pitanje. "
+               "Pronađi najjače argumente, citiraj praksu, teoriju.",
         query=question, context=context
     )
     
-    # Агент 2: "Противник" — аргументи ПРОТИВ
+    # Agent 2: "Protivnik" — argumenti PROTIV
     advocate_against = await claude_call(
-        system="Ти си адвокат који брани позицију НЕ. "
-               "Побиј аргументе из претходне анализе. Нађи контрааргументе.",
+        system="Ti si advokat koji brani poziciju NE. "
+               "Pobij argumente iz prethodne analize. Nađi kontraargumente.",
         query=question, context={**context, "opposing_view": advocate_for}
     )
     
-    # Агент 3: "Судија" — синтеза
+    # Agent 3: "Sudija" — sinteza
     judge = await claude_call(
-        system="""Ти си судија који оцењује оба аргумента.
-        Користи Јовановићев метод: 
-        1. Емпиријска основа — чији су аргументи боље поткрепљени?
-        2. Институционална реалност — шта суд стварно ради у пракси?
-        3. Компаративна перспектива — како друге јурисдикције решавају ово?
-        4. Закључак — која позиција је вероватнија и зашто?""",
+        system="""Ti si sudija koji ocenjuje oba argumenta.
+        Koristi Jovanovićev metod: 
+        1. Empirijska osnova — čiji su argumenti bolje potkrepljeni?
+        2. Institucionalna realnost — šta sud stvarno radi u praksi?
+        3. Komparativna perspektiva — kako druge jurisdikcije rešavaju ovo?
+        4. Zaključak — koja pozicija je verovatnija i zašto?""",
         query=question,
         context={**context, "for": advocate_for, "against": advocate_against}
     )
@@ -737,55 +737,55 @@ async def legal_debate(question: str, context: dict) -> dict:
 
 -----
 
-## Интеграција у постојећу архитектуру
+## Integracija u postojeću arhitekturu
 
-Сви нови слојеви се интегришу као **подграфови** у постојећи LangGraph supervisor — **без измене** претходних модула:
+Svi novi slojevi se integrišu kao **podgrafovi** u postojeći LangGraph supervisor — **bez izmene** prethodnih modula:
 
 ```python
-# Додај нове чворове у постојећи supervisor
+# Dodaj nove čvorove u postojeći supervisor
 builder.add_node("deep_analyzer", deep_analysis_subgraph)
 builder.add_node("practice_mapper", practice_map_builder)
 builder.add_node("contradiction_detector", contradiction_detection)
 builder.add_node("debate_engine", legal_debate_subgraph)
 
-# Supervisor рутира на основу сложености питања
+# Supervisor rutira na osnovu složenosti pitanja
 def route_by_complexity(state):
     complexity = assess_query_complexity(state["messages"][-1])
     if complexity == "simple":
-        return "legal_researcher"       # Постојећи RAG
+        return "legal_researcher"       # Postojeći RAG
     elif complexity == "multi_hop":
-        return "deep_analyzer"          # Нови слој
+        return "deep_analyzer"          # Novi sloj
     elif complexity == "practice_gap":
-        return "practice_mapper"        # Нови слој
+        return "practice_mapper"        # Novi sloj
     elif complexity == "controversial":
-        return "debate_engine"          # Нови слој
+        return "debate_engine"          # Novi sloj
 ```
 
-### Додатни трошкови
+### Dodatni troškovi
 
-|Компонента           |Модел                     |Кост по анализи|
+|Komponenta           |Model                     |Kost po analizi|
 |---------------------|--------------------------|---------------|
-|Класификација одредби|Haiku 4.5                 |~$0.001        |
-|Multi-hop итеративно |Sonnet 4.5 (3-5 итерација)|~$0.15-0.30    |
+|Klasifikacija odredbi|Haiku 4.5                 |~$0.001        |
+|Multi-hop iterativno |Sonnet 4.5 (3-5 iteracija)|~$0.15-0.30    |
 |Practice Map         |Haiku + Sonnet            |~$0.50-1.00    |
-|Дебата (3 агента)    |Sonnet × 3                |~$0.30-0.60    |
+|Debata (3 agenta)    |Sonnet × 3                |~$0.30-0.60    |
 |Think-on-Graph       |Sonnet + Extended Thinking|~$0.10-0.20    |
 
-**Укупни додатни месечни трошак**: ~$50-100 при 4-8 сати дневно.
+**Ukupni dodatni mesečni trošak**: ~$50-100 pri 4-8 sati dnevno.
 
 -----
 
-## Закључак: Шта ово мења
+## Zaključak: Šta ovo menja
 
-Без овог модула, агент је **правни претраживач** — налази текстове, копира цитате.
+Bez ovog modula, agent je **pravni pretraživač** — nalazi tekstove, kopira citate.
 
-Са овим модулом, агент постаје **правни аналитичар**:
+Sa ovim modulom, agent postaje **pravni analitičar**:
 
-1. **Разуме структуру** — разликује ratio од obiter dicta, обавезу од овлашћења
-1. **Повезује изворе** — прати ланце: закон → измена → тумачење → промена праксе
-1. **Детектује јаз** — види где закон каже једно а суд ради друго
-1. **Резонује дефизибилно** — узима у обзир изузетке и побијања
-1. **Продубљује аутономно** — открива празнине и сам тражи додатне изворе
-1. **Дебатује** — тестира аргументе из оба угла пре синтезе
+1. **Razume strukturu** — razlikuje ratio od obiter dicta, obavezu od ovlašćenja
+1. **Povezuje izvore** — prati lance: zakon → izmena → tumačenje → promena prakse
+1. **Detektuje jaz** — vidi gde zakon kaže jedno a sud radi drugo
+1. **Rezonuje defizibilno** — uzima u obzir izuzetke i pobijanja
+1. **Produbljuje autonomno** — otkriva praznine i sam traži dodatne izvore
+1. **Debatuje** — testira argumente iz oba ugla pre sinteze
 
-Ово је разлика између агента који **зна текст закона** и агента који **разуме право**.
+Ovo je razlika između agenta koji **zna tekst zakona** i agenta koji **razume pravo**.

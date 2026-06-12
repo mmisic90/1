@@ -1,270 +1,270 @@
-# Библиотека образаца — Препознавање грешака, замки и тактика
+# Biblioteka obrazaca — Prepoznavanje grešaka, zamki i taktika
 
-## СВРХА
+## SVRHA
 
-Искусан адвокат препознаје обрасце — исте судијске грешке, исте
-тужилачке тактике, исте замке. Ова библиотека учи да их препознајеш
-и одмах реагујеш.
-
----
-
-## 1. ТИПИЧНЕ ГРЕШКЕ СУДОВА
-
-### Г-01: Селективна оцена доказа
-**Образац:** Суд цитира само доказе који иду у прилог осуди/одлуци,
-а доказе одбране помиње само формално или их уопште не помиње.
-
-**Како препознати:**
-- У образложењу се детаљно анализирају докази тужиоца/тужилаштва
-- Докази одбране се помињу у једној реченици: „Суд није прихватио исказ
-  сведока одбране" — без образложења ЗАШТО
-- Вештак дао алтернативно мишљење — суд га не помиње
-
-**Правна последица:** чл. 438 ст. 1 тач. 11 ЗКП (кривица),
-чл. 374 ст. 2 ЗПП (парница)
-
-**Како експлоатисати:** Набрај СВЕ доказе одбране које суд
-игнорише. За сваки: „На стр. X изведен је доказ Y. У образложењу
-(стр. Z-W) суд овај доказ НЕ ПОМИЊЕ НИ ЈЕДНОМ РЕЧЈУ."
-
-### Г-02: Контрадикторна изрека и образложење
-**Образац:** Изрека каже једно (нпр. осуђен за чл. 121 ст. 1 КЗ)
-али образложење описује радње које одговарају другом делу
-(нпр. чл. 122 — лака телесна).
-
-**Како препознати:** Упореди ДОСЛОВНО текст изреке са образложењем.
-Да ли описано понашање ОДГОВАРА квалификацији?
-
-**Правна последица:** чл. 438 ст. 1 тач. 11 ЗКП — АПСОЛУТНА
-битна повреда. Суд МОРА да испита.
-
-### Г-03: Утврђивање чињеница без доказа
-**Образац:** Суд у образложењу тврди нешто за шта нема
-НИЈЕДНОГ доказа у спису.
-
-**Како препознати:** За сваку чињеничну тврдњу суда — провери:
-постоји ли БИЛО КОЈИ доказ у спису? Ако не → ово је Г-03.
-
-**Правна последица:** чл. 440 ЗКП (погрешно утврђено чињенично стање)
-
-### Г-04: „Copy-paste" образложење
-**Образац:** Образложење пресуде је дословно преписано из
-оптужнице или тужбе. Суд није самостално оценио доказе.
-
-**Како препознати:** Упореди ДОСЛОВНО текст образложења са
-текстом оптужнице/тужбе. Ако су исти пасуси → Г-04.
-
-**Правна последица:** чл. 438 ст. 1 тач. 11 ЗКП — суд је дужан
-да САМОСТАЛНО оцени доказе, не да копира акт тужилаштва.
-
-### Г-05: Изостављање олакшавајућих/отежавајућих
-**Образац:** Суд помиње олакшавајуће формално („цењене су олакшавајуће")
-али не каже КОЈЕ конкретно и КАКО утичу на одлуку.
-
-**Како препознати:** Провери одељак о одмеравању казне.
-Да ли су олакшавајуће/отежавајуће НАБРОЈАНЕ и ВРЕДНОВАНЕ?
-
-### Г-06: Погрешан обрачун камате
-**Образац:** У парници/извршењу, камата тече од погрешног датума
-или се рачуна на укупан износ уместо по ставкама.
-
-**Како препознати:** Провери СВАКУ фактуру/ставку посебно.
-Камата тече од ДОСПЕЋА сваке појединачне ставке.
-
-### Г-07: Повреда права на одбрану
-**Образац:** Суд одбија доказне предлоге одбране без образложења,
-или ограничава испитивање сведока.
-
-**Како препознати:** Провери процесне одлуке у записнику.
-Да ли је одбрана предлагала доказе? Да ли су одбијени? Зашто?
+Iskusan advokat prepoznaje obrasce — iste sudijske greške, iste
+tužilačke taktike, iste zamke. Ova biblioteka uči da ih prepoznaješ
+i odmah reaguješ.
 
 ---
 
-## 2. ТУЖИЛАЧКЕ/ПРОТИВНИЧКЕ ТАКТИКЕ
+## 1. TIPIČNE GREŠKE SUDOVA
 
-### Т-01: Генерички одговор
-**Тактика:** Тужилац у одговору на жалбу каже: „Жалба је неоснована.
-Суд је правилно утврдио чињенично стање и правилно применио закон."
+### G-01: Selektivna ocena dokaza
+**Obrazac:** Sud citira samo dokaze koji idu u prilog osudi/odluci,
+a dokaze odbrane pominje samo formalno ili ih uopšte ne pominje.
 
-**Контра:** Ово НИЈЕ аргумент. Инсистирај да суд тражи КОНКРЕТАН
-одговор на сваки жалбени навод.
+**Kako prepoznati:**
+- U obrazloženju se detaljno analiziraju dokazi tužioca/tužilaštva
+- Dokazi odbrane se pominju u jednoj rečenici: „Sud nije prihvatio iskaz
+  svedoka odbrane" — bez obrazloženja ZAŠTO
+- Veštak dao alternativno mišljenje — sud ga ne pominje
 
-### Т-02: Ширење предмета спора
-**Тактика:** Противна страна у парници уводи нове чињеничне наводе
-који нису у тужби, да би збунила и одуговлачила.
+**Pravna posledica:** čl. 438 st. 1 tač. 11 ZKP (krivica),
+čl. 374 st. 2 ZPP (parnica)
 
-**Контра:** Чл. 192 ЗПП — преклузија. Приговори неблаговременост.
+**Kako eksploatisati:** Nabraj SVE dokaze odbrane koje sud
+ignoriše. Za svaki: „Na str. X izveden je dokaz Y. U obrazloženju
+(str. Z-W) sud ovaj dokaz NE POMINJE NI JEDNOM REČJU."
 
-### Т-03: Застрашивање роком
-**Тактика:** „Ако не прихватите понуду, тужићемо за дупло."
+### G-02: Kontradiktorna izreka i obrazloženje
+**Obrazac:** Izreka kaže jedno (npr. osuđen za čl. 121 st. 1 KZ)
+ali obrazloženje opisuje radnje koje odgovaraju drugom delu
+(npr. čl. 122 — laka telesna).
 
-**Контра:** Анализирај да ли СТВАРНО имају основ за „дупло".
-Обично немају — то је блеф.
+**Kako prepoznati:** Uporedi DOSLOVNO tekst izreke sa obrazloženjem.
+Da li opisano ponašanje ODGOVARA kvalifikaciji?
 
-### Т-04: Признање уз „али"
-**Тактика:** Тужени признаје основ али оспорава износ до
-бесконачности (парница се развлачи годинама).
+**Pravna posledica:** čl. 438 st. 1 tač. 11 ZKP — APSOLUTNA
+bitna povreda. Sud MORA da ispita.
 
-**Контра:** Тражи ДЕЛИМИЧНУ пресуду за признати део (чл. 337 ЗПП).
+### G-03: Utvrđivanje činjenica bez dokaza
+**Obrazac:** Sud u obrazloženju tvrdi nešto za šta nema
+NIJEDNOG dokaza u spisu.
 
----
+**Kako prepoznati:** Za svaku činjeničnu tvrdnju suda — proveri:
+postoji li BILO KOJI dokaz u spisu? Ako ne → ovo je G-03.
 
-## 3. ПРОЦЕСНЕ ЗАМКЕ — УВЕК ПРОВЕРИТИ
+**Pravna posledica:** čl. 440 ZKP (pogrešno utvrđeno činjenično stanje)
 
-### З-01: Истекао рок
-УВЕК прво провери: да ли је рок за жалбу/тужбу/предлог истекао?
-Ако јесте — СВЕ остало је ирелевантно. Ово МОРА бити прва провера.
+### G-04: „Copy-paste" obrazloženje
+**Obrazac:** Obrazloženje presude je doslovno prepisano iz
+optužnice ili tužbe. Sud nije samostalno ocenio dokaze.
 
-### З-02: Погрешан суд
-Да ли подносиш правом суду? Стварна + месна надлежност.
-Ако погрешиш — одбачај. Губиш време и рокове.
+**Kako prepoznati:** Uporedi DOSLOVNO tekst obrazloženja sa
+tekstom optužnice/tužbe. Ako su isti pasusi → G-04.
 
-### З-03: Непотпун петит
-Петит без „под претњом принудног извршења" = извршење отежано.
-Петит без камате = губиш камату. УВЕК проверити.
+**Pravna posledica:** čl. 438 st. 1 tač. 11 ZKP — sud je dužan
+da SAMOSTALNO oceni dokaze, ne da kopira akt tužilaštva.
 
-### З-04: Погрешна странка
-Тужиш физичко лице а требало правно? Или обрнуто?
-Правно лице мора имати ТАЧНО пословно име по АПР.
+### G-05: Izostavljanje olakšavajućih/otežavajućih
+**Obrazac:** Sud pominje olakšavajuće formalno („cenjene su olakšavajuće")
+ali ne kaže KOJE konkretno i KAKO utiču na odluku.
 
-### З-05: Застарелост
-УВЕК рачуницу. Застарелост може бити: општа 10г, уговорна 5г,
-вануговорна штета 3г, комуналне обавезе 1г. Погрешна рачуница
-= одбачај тужбе.
+**Kako prepoznati:** Proveri odeljak o odmeravanju kazne.
+Da li su olakšavajuće/otežavajuće NABROJANE i VREDNOVANE?
 
----
+### G-06: Pogrešan obračun kamate
+**Obrazac:** U parnici/izvršenju, kamata teče od pogrešnog datuma
+ili se računa na ukupan iznos umesto po stavkama.
 
-## 4. ОБРАСЦИ УСПЕШНЕ ОДБРАНЕ (кривица)
+**Kako prepoznati:** Proveri SVAKU fakturu/stavku posebno.
+Kamata teče od DOSPEĆA svake pojedinačne stavke.
 
-### О-01: In dubio pro reo (чл. 16 ЗКП)
-Кад нема директног доказа → инсистирај на сумњи.
-„Сведок каже 'не знам', вештак каже 'могуће и друго објашњење' —
-нема доказа ВАН РАЗУМНЕ СУМЊЕ."
+### G-07: Povreda prava na odbranu
+**Obrazac:** Sud odbija dokazne predloge odbrane bez obrazloženja,
+ili ograničava ispitivanje svedoka.
 
-### О-02: Незаконити докази (чл. 84 ЗКП)
-Како је доказ прибављен? Претрес без налога? Полиграф?
-Приватни снимак без сагласности?
-„Плодови отровног дрвета" — ако је корен незаконит, све пада.
-
-### О-03: Застарелост (чл. 103-104 КЗ)
-УВЕК рачуницу. Апсолутна застарелост = НЕ МОЖЕ се гонити
-без обзира на било шта. Релативна = прекида се али има границу.
-
-### О-04: Нужна одбрана (чл. 19 КЗ)
-Ако чињенице указују да је окривљени био НАПАДНУТ →
-нужна одбрана. Чак и ако је прекорачена → блажа казна.
-
-### О-05: Дело малог значаја (чл. 18 КЗ)
-За лакша дела: „Степен кривице низак, последице незнатне или
-непостојеће, друштвена опасност минимална."
-
-### О-06: Стварна заблуда (чл. 28 КЗ)
-Окривљени није знао или је погрешно проценио неку стварну
-околност дела. Неотклоњива = искључује кривицу.
-Отклоњива = може нехат.
-
-### О-07: Добровољни одустанак (чл. 32 КЗ)
-Ако је покушај → да ли је окривљени ДОБРОВОЉНО одустао
-од довршења? Ослобађа од казне за покушај.
-
-### О-08: Споразум о признању (чл. 313-319 ЗКП)
-Кад је доказни материјал јак → предложити споразум.
-Обезбеђује: предвидљиву казну, избегавање суђења,
-могућност условне осуде. УВЕК процени шансе пре предлагања.
+**Kako prepoznati:** Proveri procesne odluke u zapisniku.
+Da li je odbrana predlagala dokaze? Da li su odbijeni? Zašto?
 
 ---
 
-## 5. ОБРАСЦИ УСПЕШНЕ ОДБРАНЕ (парница)
+## 2. TUŽILAČKE/PROTIVNIČKE TAKTIKE
 
-### ОП-01: Преклузија (чл. 192 ЗПП)
-Противник износи нове чињенице касно → приговор преклузије.
-Мора бити истакнут ОДМАХ.
+### T-01: Generički odgovor
+**Taktika:** Tužilac u odgovoru na žalbu kaže: „Žalba je neosnovana.
+Sud je pravilno utvrdio činjenično stanje i pravilno primenio zakon."
 
-### ОП-02: Активна легитимација
-Тужилац МОРА доказати да је ОН носилац права.
-Ако нема основ → одбачај тужбе.
+**Kontra:** Ovo NIJE argument. Insistiraj da sud traži KONKRETAN
+odgovor na svaki žalbeni navod.
 
-### ОП-03: Компензација (чл. 336 ЗОО)
-Три услова: узајамност, доспелост, истоврсност.
-Ако дужник има контра-потраживање → исткни компензацију.
+### T-02: Širenje predmeta spora
+**Taktika:** Protivna strana u parnici uvodi nove činjenične navode
+koji nisu u tužbi, da bi zbunila i odugovlačila.
 
-### ОП-04: Приговор литиспенденције (чл. 197 ЗПП)
-Већ тече поступак о истој ствари пред другим судом?
-→ одбачај другог. Проверити АЛК базу.
+**Kontra:** Čl. 192 ZPP — prekluzija. Prigovori neblagovremenost.
 
----
+### T-03: Zastrašivanje rokom
+**Taktika:** „Ako ne prihvatite ponudu, tužićemo za duplo."
 
-## 6. ОБРАСЦИ ЗА ИЗВРШЕЊЕ
+**Kontra:** Analiziraj da li STVARNO imaju osnov za „duplo".
+Obično nemaju — to je blef.
 
-### ОИ-01: Приговор неправилности достављања
-Решење није уредно достављено → извршење преурањено.
-Проверити повратницу.
+### T-04: Priznanje uz „ali"
+**Taktika:** Tuženi priznaje osnov ali osporava iznos do
+beskonačnosti (parnica se razvlači godinama).
 
-### ОИ-02: Приговор испуњења
-Дужник је ПЛАТИО а поверилац тражи извршење.
-Доказ: уплатница, извод из банке, признаница.
-
-### ОИ-03: Приговор застарелости потраживања
-Извршна исправа стара 10+ година? → проверити апсолутну
-застарелост. За камату: посебан рок (3 године).
+**Kontra:** Traži DELIMIČNU presudu za priznati deo (čl. 337 ZPP).
 
 ---
 
-## КАКО КОРИСТИТИ ОВУ БИБЛИОТЕКУ
+## 3. PROCESNE ZAMKE — UVEK PROVERITI
 
-Након Фазе 2 (cross-reference), прођи кроз:
-1. Да ли препознајеш неки од образаца Г-01 до Г-07?
-2. Да ли противна страна користи неку тактику Т-01 до Т-04?
-3. Да ли постоји замка З-01 до З-05 коју МОРАШ избећи?
-4. Да ли се може применити образац одбране О-01 до О-08?
-5. Ако је парница: ОП-01 до ОП-04?
-6. Ако је извршење: ОИ-01 до ОИ-03?
+### Z-01: Istekao rok
+UVEK prvo proveri: da li je rok za žalbu/tužbu/predlog istekao?
+Ako jeste — SVE ostalo je irelevantno. Ovo MORA biti prva provera.
 
-Сваки препознат образац → одмах га забележи и означи у
-картици аргумента (Фаза 3).
+### Z-02: Pogrešan sud
+Da li podnosiš pravom sudu? Stvarna + mesna nadležnost.
+Ako pogrešiš — odbačaj. Gubiš vreme i rokove.
+
+### Z-03: Nepotpun petit
+Petit bez „pod pretnjom prinudnog izvršenja" = izvršenje otežano.
+Petit bez kamate = gubiš kamatu. UVEK proveriti.
+
+### Z-04: Pogrešna stranka
+Tužiš fizičko lice a trebalo pravno? Ili obrnuto?
+Pravno lice mora imati TAČNO poslovno ime po APR.
+
+### Z-05: Zastarelost
+UVEK računicu. Zastarelost može biti: opšta 10g, ugovorna 5g,
+vanugovorna šteta 3g, komunalne obaveze 1g. Pogrešna računica
+= odbačaj tužbe.
 
 ---
 
-## МЕХАНИЗАМ УЧЕЊА (ново)
+## 4. OBRASCI USPEŠNE ODBRANE (krivica)
 
-### Детекција нових образаца
+### O-01: In dubio pro reo (čl. 16 ZKP)
+Kad nema direktnog dokaza → insistiraj na sumnji.
+„Svedok kaže 'ne znam', veštak kaže 'moguće i drugo objašnjenje' —
+nema dokaza VAN RAZUMNE SUMNJE."
 
-Током анализе, ако наиђеш на образац грешке, тактике, замке или
-одбране који НЕ ПОСТОЈИ у библиотеци:
+### O-02: Nezakoniti dokazi (čl. 84 ZKP)
+Kako je dokaz pribavljen? Pretres bez naloga? Poligraf?
+Privatni snimak bez saglasnosti?
+„Plodovi otrovnog drveta" — ako je koren nezakonit, sve pada.
+
+### O-03: Zastarelost (čl. 103-104 KZ)
+UVEK računicu. Apsolutna zastarelost = NE MOŽE se goniti
+bez obzira na bilo šta. Relativna = prekida se ali ima granicu.
+
+### O-04: Nužna odbrana (čl. 19 KZ)
+Ako činjenice ukazuju da je okrivljeni bio NAPADNUT →
+nužna odbrana. Čak i ako je prekoračena → blaža kazna.
+
+### O-05: Delo malog značaja (čl. 18 KZ)
+Za lakša dela: „Stepen krivice nizak, posledice neznatne ili
+nepostojeće, društvena opasnost minimalna."
+
+### O-06: Stvarna zabluda (čl. 28 KZ)
+Okrivljeni nije znao ili je pogrešno procenio neku stvarnu
+okolnost dela. Neotklonjiva = isključuje krivicu.
+Otklonjiva = može nehat.
+
+### O-07: Dobrovoljni odustanak (čl. 32 KZ)
+Ako je pokušaj → da li je okrivljeni DOBROVOLJNO odustao
+od dovršenja? Oslobađa od kazne za pokušaj.
+
+### O-08: Sporazum o priznanju (čl. 313-319 ZKP)
+Kad je dokazni materijal jak → predložiti sporazum.
+Obezbeđuje: predvidljivu kaznu, izbegavanje suđenja,
+mogućnost uslovne osude. UVEK proceni šanse pre predlaganja.
+
+---
+
+## 5. OBRASCI USPEŠNE ODBRANE (parnica)
+
+### OP-01: Prekluzija (čl. 192 ZPP)
+Protivnik iznosi nove činjenice kasno → prigovor prekluzije.
+Mora biti istaknut ODMAH.
+
+### OP-02: Aktivna legitimacija
+Tužilac MORA dokazati da je ON nosilac prava.
+Ako nema osnov → odbačaj tužbe.
+
+### OP-03: Kompenzacija (čl. 336 ZOO)
+Tri uslova: uzajamnost, dospelost, istovrsnost.
+Ako dužnik ima kontra-potraživanje → istkni kompenzaciju.
+
+### OP-04: Prigovor litispendencije (čl. 197 ZPP)
+Već teče postupak o istoj stvari pred drugim sudom?
+→ odbačaj drugog. Proveriti ALK bazu.
+
+---
+
+## 6. OBRASCI ZA IZVRŠENJE
+
+### OI-01: Prigovor nepravilnosti dostavljanja
+Rešenje nije uredno dostavljeno → izvršenje preuranjeno.
+Proveriti povratnicu.
+
+### OI-02: Prigovor ispunjenja
+Dužnik je PLATIO a poverilac traži izvršenje.
+Dokaz: uplatnica, izvod iz banke, priznanica.
+
+### OI-03: Prigovor zastarelosti potraživanja
+Izvršna isprava stara 10+ godina? → proveriti apsolutnu
+zastarelost. Za kamatu: poseban rok (3 godine).
+
+---
+
+## KAKO KORISTITI OVU BIBLIOTEKU
+
+Nakon Faze 2 (cross-reference), prođi kroz:
+1. Da li prepoznaješ neki od obrazaca G-01 do G-07?
+2. Da li protivna strana koristi neku taktiku T-01 do T-04?
+3. Da li postoji zamka Z-01 do Z-05 koju MORAŠ izbeći?
+4. Da li se može primeniti obrazac odbrane O-01 do O-08?
+5. Ako je parnica: OP-01 do OP-04?
+6. Ako je izvršenje: OI-01 do OI-03?
+
+Svaki prepoznat obrazac → odmah ga zabeleži i označi u
+kartici argumenta (Faza 3).
+
+---
+
+## MEHANIZAM UČENJA (novo)
+
+### Detekcija novih obrazaca
+
+Tokom analize, ako naiđeš na obrazac greške, taktike, zamke ili
+odbrane koji NE POSTOJI u biblioteci:
 
 ```
 ╔════════════════════════════════════════════════╗
-║ 🆕 ДЕТЕКТОВАН НОВ ОБРАЗАЦ                      ║
+║ 🆕 DETEKTOVAN NOV OBRAZAC                      ║
 ╠════════════════════════════════════════════════╣
-║ ТИП: [грешка суда / тактика / замка / одбрана] ║
-║ ОПИС: [шта је образац]                         ║
-║ ПРЕДМЕТ: [у ком предмету пронађен]             ║
-║ ДОКАЗ: [стр. X — шта тачно]                   ║
+║ TIP: [greška suda / taktika / zamka / odbrana] ║
+║ OPIS: [šta je obrazac]                         ║
+║ PREDMET: [u kom predmetu pronađen]             ║
+║ DOKAZ: [str. X — šta tačno]                   ║
 ╠════════════════════════════════════════════════╣
-║ ПРЕДЛОГ ЗА ДОДАВАЊЕ:                          ║
-║ Ознака: [Г-08 / Т-05 / З-06 / О-09 / итд.]   ║
-║ Наслов: [кратко]                               ║
-║ Формат: [по моделу постојећих]                 ║
+║ PREDLOG ZA DODAVANJE:                          ║
+║ Oznaka: [G-08 / T-05 / Z-06 / O-09 / itd.]   ║
+║ Naslov: [kratko]                               ║
+║ Format: [po modelu postojećih]                 ║
 ║                                                ║
-║ → ПИТАЈ КОРИСНИКА: „Додати у библиотеку?"     ║
-║   ДА → запамтити (memory_user_edits)           ║
-║   НЕ → забележити али не чувати               ║
+║ → PITAJ KORISNIKA: „Dodati u biblioteku?"     ║
+║   DA → zapamtiti (memory_user_edits)           ║
+║   NE → zabeležiti ali ne čuvati               ║
 ╚════════════════════════════════════════════════╝
 ```
 
-### Праћење фреквенције и успешности
+### Praćenje frekvencije i uspešnosti
 
-За сваки образац који се КОРИСТИ у пракси, бележи:
+Za svaki obrazac koji se KORISTI u praksi, beleži:
 ```
-ОБРАЗАЦ: [ознака]
-  Коришћен у предметима: [број]
-  Успешност (кад год корисник јави исход):
-    ✅ Успело: [N] пута
-    🟡 Делимично: [N] пута
-    ❌ Није успело: [N] пута
-  ФРЕКВЕНЦИЈА: [ретко / повремено / често / увек]
+OBRAZAC: [oznaka]
+  Korišćen u predmetima: [broj]
+  Uspešnost (kad god korisnik javi ishod):
+    ✅ Uspelo: [N] puta
+    🟡 Delimično: [N] puta
+    ❌ Nije uspelo: [N] puta
+  FREKVENCIJA: [retko / povremeno / često / uvek]
 ```
 
-**god-skill 8А (Сатурација) додатак:** Током анализе, ако препознаш
-образац — провери: да ли је НОВИ или постоји у библиотеци?
-Ако је нови → предложи додавање. Ово је како библиотека РАСТЕ.
+**god-skill 8A (Saturacija) dodatak:** Tokom analize, ako prepoznaš
+obrazac — proveri: da li je NOVI ili postoji u biblioteci?
+Ako je novi → predloži dodavanje. Ovo je kako biblioteka RASTE.

@@ -1,56 +1,56 @@
-# Ф3.6 — Пуна матрица квантификације ризика (релоцирано из SKILL.md v4.1 — ВЕРБАТИМ)
+# F3.6 — Puna matrica kvantifikacije rizika (relocirano iz SKILL.md v4.1 — VERBATIM)
 
-У FULL режиму попуњава се ЦЕЛА матрица — свако поље. У СТАНДАРД режиму довољан је
-сажетак из тела SKILL.md (три осе + просек + финансијски ред), али и тада се оцена
-САОПШТАВА кориснику.
+U FULL režimu popunjava se CELA matrica — svako polje. U STANDARD režimu dovoljan je
+sažetak iz tela SKILL.md (tri ose + prosek + finansijski red), ali i tada se ocena
+SAOPŠTAVA korisniku.
 
 ---
 
-#### 3.6 КВАНТИФИКАЦИЈА РИЗИКА (ново)
+#### 3.6 KVANTIFIKACIJA RIZIKA (novo)
 
-За сваки предмет, СТРУКТУРИРАНО процени ризик:
+Za svaki predmet, STRUKTURIRANO proceni rizik:
 
 ```
 ╔════════════════════════════════════════════════╗
-║ МАТРИЦА РИЗИКА: [предмет]                      ║
+║ MATRICA RIZIKA: [predmet]                      ║
 ╠════════════════════════════════════════════════╣
 ║                                                ║
-║ ПРАВНИ РИЗИК (да ли закон подржава нашу тезу?) ║
-║  □ Јасна правна основа? [да/делимично/не]      ║
-║  □ Судска пракса? [за нас/против/мешовита/нема]║
-║  □ Оцена: [1-10]                               ║
+║ PRAVNI RIZIK (da li zakon podržava našu tezu?) ║
+║  □ Jasna pravna osnova? [da/delimično/ne]      ║
+║  □ Sudska praksa? [za nas/protiv/mešovita/nema]║
+║  □ Ocena: [1-10]                               ║
 ║                                                ║
-║ ЧИЊЕНИЧНИ РИЗИК (да ли чињенице иду у корист?) ║
-║  □ Директни докази? [јаки/слаби/нема]          ║
-║  □ Контрадикције у корист? [да/не]             ║
-║  □ Контрадикције против? [да/не]               ║
-║  □ Оцена: [1-10]                               ║
+║ ČINJENIČNI RIZIK (da li činjenice idu u korist?) ║
+║  □ Direktni dokazi? [jaki/slabi/nema]          ║
+║  □ Kontradikcije u korist? [da/ne]             ║
+║  □ Kontradikcije protiv? [da/ne]               ║
+║  □ Ocena: [1-10]                               ║
 ║                                                ║
-║ ПРОЦЕСНИ РИЗИК (да ли постоје процесне замке?) ║
-║  □ Рок: [у року/близу/истекао]                 ║
-║  □ Надлежност: [тачна/спорна]                  ║
-║  □ Легитимација: [несумњива/спорна]            ║
-║  □ Застарелост: [безбедна/ризична/истекла]     ║
-║  □ Оцена: [1-10]                               ║
+║ PROCESNI RIZIK (da li postoje procesne zamke?) ║
+║  □ Rok: [u roku/blizu/istekao]                 ║
+║  □ Nadležnost: [tačna/sporna]                  ║
+║  □ Legitimacija: [nesumnjiva/sporna]            ║
+║  □ Zastarelost: [bezbedna/rizična/istekla]     ║
+║  □ Ocena: [1-10]                               ║
 ║                                                ║
-║ ФИНАНСИЈСКИ РИЗИК                              ║
-║  □ ВСП: [износ]                                ║
-║  □ Трошкови поступка (процена): [износ]        ║
-║  □ Ризик плаћања противничких трошкова: [износ]║
-║  □ ROI: вредност спора / укупни трошкови = [X] ║
-║  □ Да ли вреди? [да/условно/не]                ║
+║ FINANSIJSKI RIZIK                              ║
+║  □ VSP: [iznos]                                ║
+║  □ Troškovi postupka (procena): [iznos]        ║
+║  □ Rizik plaćanja protivničkih troškova: [iznos]║
+║  □ ROI: vrednost spora / ukupni troškovi = [X] ║
+║  □ Da li vredi? [da/uslovno/ne]                ║
 ║                                                ║
-║ УКУПНА ОЦЕНА РИЗИКА:                          ║
-║  Правни [X] + Чињенични [Y] + Процесни [Z]    ║
-║  = ПРОСЕК [W/10]                               ║
+║ UKUPNA OCENA RIZIKA:                          ║
+║  Pravni [X] + Činjenični [Y] + Procesni [Z]    ║
+║  = PROSEK [W/10]                               ║
 ║                                                ║
-║  8-10: НИЗАК ризик → агресивна стратегија       ║
-║  5-7:  СРЕДЊИ → пажљива стратегија + алтернатива║
-║  1-4:  ВИСОК → размотри поравнање/повлачење     ║
+║  8-10: NIZAK rizik → agresivna strategija       ║
+║  5-7:  SREDNJI → pažljiva strategija + alternativa║
+║  1-4:  VISOK → razmotri poravnanje/povlačenje     ║
 ╚════════════════════════════════════════════════╝
 ```
 
-**ОБАВЕЗНО:** Оцену ризика САОПШТИТИ кориснику. Не скривати
-лоше прогнозе. Адвокат Мишић МОРА знати реално стање.
+**OBAVEZNO:** Ocenu rizika SAOPŠTITI korisniku. Ne skrivati
+loše prognoze. Advokat Mišić MORA znati realno stanje.
 
 ---

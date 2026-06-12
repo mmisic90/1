@@ -1,10 +1,10 @@
-# Handoff протокол — `pravna-analiza` → `krivica`
+# Handoff protokol — `pravna-analiza` → `krivica`
 
-## Сврха
+## Svrha
 
-Овај фајл описује **тачан формат** и **обавезне елементе** handoff пакета који `pravna-analiza` предаје `krivica` skill-у. Без овога, две stack компоненте губе контекст и раде дупли посао.
+Ovaj fajl opisuje **tačan format** i **obavezne elemente** handoff paketa koji `pravna-analiza` predaje `krivica` skill-u. Bez ovoga, dve stack komponente gube kontekst i rade dupli posao.
 
-## Обавезан формат пакета
+## Obavezan format paketa
 
 ```yaml
 handoff:
@@ -12,31 +12,31 @@ handoff:
   target: "krivica v2"
   timestamp: ISO-8601
   predmet:
-    broj: "К. 63/2026"
-    stranka: "Богуновић Виктор"
-    sud: "Основни суд Бечеј, Одељење Нови Бечеј"
-    sudija: "Ивана Аврамов"
+    broj: "K. 63/2026"
+    stranka: "Bogunović Viktor"
+    sud: "Osnovni sud Bečej, Odeljenje Novi Bečej"
+    sudija: "Ivana Avramov"
   
-  # ① ТЕОРИЈА СЛУЧАЈА (Ф0)
+  # ① TEORIJA SLUČAJA (F0)
   teorija_slucaja:
     jedna_recenica: "..."
     hipoteza: "..."
     verovatnoca: "[0-100]%"
   
-  # ② ЧИЊЕНИЧНА МАПА (Ф1-2)
+  # ② ČINJENIČNA MAPA (F1-2)
   cinjenicna_mapa:
     - cinjenica: "..."
-      klasa: "П1/П2/П3"
-      izvor: "стр. X, пасус Y"
-      status: "потврђено / спорно / оспорено"
+      klasa: "P1/P2/P3"
+      izvor: "str. X, pasus Y"
+      status: "potvrđeno / sporno / osporeno"
     # ...
     kontradikcije: []
   
-  # ③ АРГУМЕНТИ (Ф3)
+  # ③ ARGUMENTI (F3)
   argumenti:
     jaki:
       - tekst: "..."
-        osnov: "чл. X ЗКП/КЗ"
+        osnov: "čl. X ZKP/KZ"
         snaga: 9
         nezavisnost: true
     srednji: []
@@ -45,23 +45,23 @@ handoff:
       nezavisnih: 3
       ukupnih: 7
   
-  # ④ ADVERSARIAL (Ф4)
+  # ④ ADVERSARIAL (F4)
   adversarial:
     sudija_prezivelo: 5
     sudija_odbacilo: 2
     protivnik_prezivelo: 4
     protivnik_odbacilo: 3
   
-  # ⑤ „ЈЕДНА СТВАР" (Ф5) — ИДЕ ПРВА
+  # ⑤ „JEDNA STVAR" (F5) — IDE PRVA
   jedna_stvar:
     argument: "..."
     zasto: "..."
-    dokaz: "стр. X + Y ← ✅П1"
+    dokaz: "str. X + Y ← ✅P1"
     neodbrativo: "..."
   
-  # ⑥ ВЕРИФИКОВАНА ПРАКСА (из istrazivanje-prakse)
+  # ⑥ VERIFIKOVANA PRAKSA (iz istrazivanje-prakse)
   praksa:
-    - sud: "ВС"
+    - sud: "VS"
       broj: "Kzz 498/2022"
       datum: "..."
       link: "https://..."
@@ -69,7 +69,7 @@ handoff:
       verifikovano: true
     # ...
   
-  # ⑦ СТРАТЕШКА ПРОЦЕНА
+  # ⑦ STRATEŠKA PROCENA
   strateska_procena:
     najbolji_ishod: "..."
     realan_ishod: "..."
@@ -78,38 +78,38 @@ handoff:
     preporuka: "..."
 ```
 
-## Валидациона правила
+## Validaciona pravila
 
-Пре него што `krivica` прихвати handoff, мора да провери:
+Pre nego što `krivica` prihvati handoff, mora da proveri:
 
-1. **Сви 7 елемената** (teorija_slucaja, cinjenicna_mapa, argumenti, adversarial, jedna_stvar, praksa, strateska_procena) су присутни.
-2. `jedna_stvar.argument` није празан.
-3. `praksa` садржи минимум 1 одлуку са `verifikovano: true` И `link`/`tekst`.
-4. `cinjenicna_mapa` не садржи ниједан П4.
-5. `strateska_procena.rizik_1_10` је число 1–10.
+1. **Svi 7 elemenata** (teorija_slucaja, cinjenicna_mapa, argumenti, adversarial, jedna_stvar, praksa, strateska_procena) su prisutni.
+2. `jedna_stvar.argument` nije prazan.
+3. `praksa` sadrži minimum 1 odluku sa `verifikovano: true` I `link`/`tekst`.
+4. `cinjenicna_mapa` ne sadrži nijedan P4.
+5. `strateska_procena.rizik_1_10` je čislo 1–10.
 
-**Ако било шта од овога недостаје → СТОП. Јави кориснику.**
+**Ako bilo šta od ovoga nedostaje → STOP. Javi korisniku.**
 
-## Шта `krivica` ради са пакетом
+## Šta `krivica` radi sa paketom
 
-1. Чита `jedna_stvar` → поставља у првих 3 пасуса документа
-2. Чита `cinjenicna_mapa` → сваку чињеницу уграђује са одговарајућом класом и извором
-3. Чита `argumenti.jaki` → уграђује као главне тачке аргументације
-4. Чита `praksa` → уграђује парафразирано са „вид. [суд] [број]" интерним референцама
-5. Чита `strateska_procena.preporuka` → обликује предлог суду
+1. Čita `jedna_stvar` → postavlja u prvih 3 pasusa dokumenta
+2. Čita `cinjenicna_mapa` → svaku činjenicu ugrađuje sa odgovarajućom klasom i izvorom
+3. Čita `argumenti.jaki` → ugrađuje kao glavne tačke argumentacije
+4. Čita `praksa` → ugrađuje parafrazirano sa „vid. [sud] [broj]" internim referencama
+5. Čita `strateska_procena.preporuka` → oblikuje predlog sudu
 
-## Шта `krivica` НЕ ради
+## Šta `krivica` NE radi
 
-- Не додаје аргументе који нису у пакету.
-- Не мења класификацију тврдњи.
-- Не претражује додатну праксу (то је посао `istrazivanje-prakse`).
-- Не правa сопствену теорију случаја.
+- Ne dodaje argumente koji nisu u paketu.
+- Ne menja klasifikaciju tvrdnji.
+- Ne pretražuje dodatnu praksu (to je posao `istrazivanje-prakse`).
+- Ne prava sopstvenu teoriju slučaja.
 
-## Fallback: кад нема handoff-а
+## Fallback: kad nema handoff-a
 
-Ако `krivica` прима захтев без handoff-а (нпр. корисник тражи бланко акт), ради у **fallback режиму**:
+Ako `krivica` prima zahtev bez handoff-a (npr. korisnik traži blanko akt), radi u **fallback režimu**:
 
-1. Обавести корисника: „Нема pravna-analiza handoff-а. Квалитет ће бити нижи него у пуном режиму."
-2. Тражи минимум: тип акта, странке, основ, кључне чињенице.
-3. И даље делегира претрагу праксе у `istrazivanje-prakse`.
-4. Compliance извештај експлицитно наводи: „К0: ⛔ handoff није примљен, fallback режим."
+1. Obavesti korisnika: „Nema pravna-analiza handoff-a. Kvalitet će biti niži nego u punom režimu."
+2. Traži minimum: tip akta, stranke, osnov, ključne činjenice.
+3. I dalje delegira pretragu prakse u `istrazivanje-prakse`.
+4. Compliance izveštaj eksplicitno navodi: „K0: ⛔ handoff nije primljen, fallback režim."

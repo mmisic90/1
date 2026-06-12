@@ -1,175 +1,175 @@
-# Adversarial Simulator — Симулација противника, судије и апелације
+# Adversarial Simulator — Simulacija protivnika, sudije i apelacije
 
-## ТРИ ПЕРСПЕКТИВЕ
+## TRI PERSPEKTIVE
 
-Пре писања коначног документа, ОБАВЕЗНО симулирај три перспективе.
-Не површно („шта би противник рекао") — ДУБОКО. Уђи у главу
-сваком од њих.
-
----
-
-## ПЕРСПЕКТИВА А: СУДИЈА
-
-### Како судија ЧИТА поднесак
-
-Судија је преоптерећен. Има 300+ предмета. Читај свој документ
-ОЧИМА СУДИЈЕ:
-
-**Првих 30 секунди:** Судија чита изреку/петит. Да ли је јасно
-ШТА се тражи? Ако није — лоше.
-
-**Први минут:** Судија чита прве 2-3 пасуса образложења.
-Да ли одмах види суштину? Ако мора да копа — лоше.
-
-**Наредних 5 минута:** Судија пролази кроз аргументе. Да ли
-су логично поређани? Да ли сваки имплицира следећи? Ако скаче
-са теме на тему — лоше.
-
-**На крају:** Судија чита предлог суду. Да ли одговара
-аргументацији? Да ли је КОНКРЕТАН? („Молимо суд да..." — шта?)
-
-### Шта УБЕЂУЈЕ судију
-- Чињенице (не реторика)
-- Прецизност (тачни бројеви, датуми, чланови)
-- Логичан след (А → Б → В → закључак)
-- Судска пракса ВКС (судије поштују)
-- Кратко и јасно (не 50 страна кад може 15)
-
-### Шта ИРИТИРА судију
-- Понављање истог аргумента 3 пута различитим речима
-- Емоционалне тираде без чињеничне подлоге
-- Нетачни бројеви одлука или чланови закона
-- Тврдње без ДОКАЗ:
-- Лоше форматирање (нечитљиво, без структуре)
-- Површне генеричке фразе (нпр. „повређена су права окривљеног")
-
-### Тест судије (примени на свој документ)
-```
-□ Да ли је суштина јасна у прва 2 пасуса?
-□ Да ли је петит/предлог КОНКРЕТАН и ЈАСАН?
-□ Да ли су сви бројеви и датуми ТАЧНИ?
-□ Да ли има непотребних понављања? (избаци их)
-□ Да ли аргументи теку ЛОГИЧНО?
-□ Да ли би судија за 10 минута разумео целу аргументацију?
-```
+Pre pisanja konačnog dokumenta, OBAVEZNO simuliraj tri perspektive.
+Ne površno („šta bi protivnik rekao") — DUBOKO. Uđi u glavu
+svakom od njih.
 
 ---
 
-## ПЕРСПЕКТИВА Б: ПРОТИВНА СТРАНА
+## PERSPEKTIVA A: SUDIJA
 
-### Како противник НАПАДА твоје аргументе
+### Kako sudija ČITA podnesak
 
-За СВАКИ аргумент из Фазе 3, попуни:
+Sudija je preopterećen. Ima 300+ predmeta. Čitaj svoj dokument
+OČIMA SUDIJE:
+
+**Prvih 30 sekundi:** Sudija čita izreku/petit. Da li je jasno
+ŠTA se traži? Ako nije — loše.
+
+**Prvi minut:** Sudija čita prve 2-3 pasusa obrazloženja.
+Da li odmah vidi suštinu? Ako mora da kopa — loše.
+
+**Narednih 5 minuta:** Sudija prolazi kroz argumente. Da li
+su logično poređani? Da li svaki implicira sledeći? Ako skače
+sa teme na temu — loše.
+
+**Na kraju:** Sudija čita predlog sudu. Da li odgovara
+argumentaciji? Da li je KONKRETAN? („Molimo sud da..." — šta?)
+
+### Šta UBEĐUJE sudiju
+- Činjenice (ne retorika)
+- Preciznost (tačni brojevi, datumi, članovi)
+- Logičan sled (A → B → V → zaključak)
+- Sudska praksa VKS (sudije poštuju)
+- Kratko i jasno (ne 50 strana kad može 15)
+
+### Šta IRITIRA sudiju
+- Ponavljanje istog argumenta 3 puta različitim rečima
+- Emocionalne tirade bez činjenične podloge
+- Netačni brojevi odluka ili članovi zakona
+- Tvrdnje bez DOKAZ:
+- Loše formatiranje (nečitljivo, bez strukture)
+- Površne generičke fraze (npr. „povređena su prava okrivljenog")
+
+### Test sudije (primeni na svoj dokument)
+```
+□ Da li je suština jasna u prva 2 pasusa?
+□ Da li je petit/predlog KONKRETAN i JASAN?
+□ Da li su svi brojevi i datumi TAČNI?
+□ Da li ima nepotrebnih ponavljanja? (izbaci ih)
+□ Da li argumenti teku LOGIČNO?
+□ Da li bi sudija za 10 minuta razumeo celu argumentaciju?
+```
+
+---
+
+## PERSPEKTIVA B: PROTIVNA STRANA
+
+### Kako protivnik NAPADA tvoje argumente
+
+Za SVAKI argument iz Faze 3, popuni:
 
 ```
 ╔═══════════════════════════════════════════╗
-║ АРГУМЕНТ #[N]: [мој]                      ║
+║ ARGUMENT #[N]: [moj]                      ║
 ╠═══════════════════════════════════════════╣
-║ НАПАД НА ЧИЊЕНИЦЕ:                        ║
-║   Шта би противник рекао о мојим          ║
-║   чињеницама? „Тo није тачно јер..."      ║
+║ NAPAD NA ČINJENICE:                        ║
+║   Šta bi protivnik rekao o mojim          ║
+║   činjenicama? „To nije tačno jer..."      ║
 ║                                            ║
-║ НАПАД НА ПРАВО:                            ║
-║   Да ли ће тврдити да се ДРУГА норма       ║
-║   примењује? Да ли ће другачије тумачити?  ║
+║ NAPAD NA PRAVO:                            ║
+║   Da li će tvrditi da se DRUGA norma       ║
+║   primenjuje? Da li će drugačije tumačiti?  ║
 ║                                            ║
-║ НАПАД НА ЛОГИКУ:                           ║
-║   Да ли ће рећи да закључак НЕ СЛЕДИ       ║
-║   из премиса? Да ли постоји алтернативно   ║
-║   објашњење?                               ║
+║ NAPAD NA LOGIKU:                           ║
+║   Da li će reći da zaključak NE SLEDI       ║
+║   iz premisa? Da li postoji alternativno   ║
+║   objašnjenje?                               ║
 ║                                            ║
-║ МОЈ ОДГОВОР НА НАПАДЕ:                     ║
-║   [конкретно — шта одговарам]              ║
+║ MOJ ODGOVOR NA NAPADE:                     ║
+║   [konkretno — šta odgovaram]              ║
 ║                                            ║
-║ ПРЕЖИВЉАВА? [да/ослабљен/не]              ║
+║ PREŽIVLJAVA? [da/oslabljen/ne]              ║
 ╚═══════════════════════════════════════════╝
 ```
 
-### Типичне тактике противника (по областима)
+### Tipične taktike protivnika (po oblastima)
 
-**Тужилац у кривици:**
-- „Суд је правилно оценио доказе" (генерички одговор)
-- „Жалба напада слободну оцену доказа" (покушај да дисквалификује)
-- „Олакшавајуће су цењене" (без конкретизације)
-- Противтактика: Инсистирај на КОНКРЕТНИМ доказима, не генеричким фразама
+**Tužilac u krivici:**
+- „Sud je pravilno ocenio dokaze" (generički odgovor)
+- „Žalba napada slobodnu ocenu dokaza" (pokušaj da diskvalifikuje)
+- „Olakšavajuće su cenjene" (bez konkretizacije)
+- Protivtaktika: Insistiraj na KONKRETNIM dokazima, ne generičkim frazama
 
-**Тужени у парници:**
-- Приговор застарелости (УВЕК проверити пре подношења)
-- „Тужилац нема активну легитимацију"
-- „Износ је преувеличан"
-- „Уговор је ништав / раскинут"
-- Противтактика: Предупреди приговоре у самој тужби
+**Tuženi u parnici:**
+- Prigovor zastarelosti (UVEK proveriti pre podnošenja)
+- „Tužilac nema aktivnu legitimaciju"
+- „Iznos je preuveličan"
+- „Ugovor je ništav / raskinut"
+- Protivtaktika: Predupredi prigovore u samoj tužbi
 
-**Извршни дужник:**
-- „Већ исплаћено" (тражи ДОКАЗ)
-- „Извршна исправа није правноснажна"
-- „Компензација / пребијање"
-- Противтактика: У предлогу навести да дужник НИЈЕ доставио доказ исплате
-
----
-
-## ПЕРСПЕКТИВА В: АПЕЛАЦИОНИ/ВИШИ СУД
-
-### Шта апелациони суд гледа
-
-Апелациони суд НЕ СУДИ ПОНОВО. Он проверава да ли је
-првостепени суд ПРАВИЛНО ПОСТУПИО. Различит фокус:
-
-```
-ПИТАЊА АПЕЛАЦИОНОГ СУДА:
-├── Да ли је поступак био ПРАВИЛАН? (чл. 438 ЗКП)
-├── Да ли је ЗАКОН правилно примењен? (чл. 439 ЗКП)
-├── Да ли је чињенично стање ПОТПУНО утврђено? (чл. 440-441)
-├── Да ли је санкција СРАЗМЕРНА? (чл. 441а)
-└── Да ли постоји АПСОЛУТНА битна повреда? (чл. 438 ст. 1)
-```
-
-### „Жалбено отпорни" аргументи
-
-Неки аргументи имају велику шансу да прођу на апелацији:
-- **Апсолутне битне повреде** (чл. 438 ст. 1 тач. 1-12 ЗКП) — суд
-  МОРА да их испита по службеној дужности
-- **Неоцењени докази** (тач. 11) — лако проверљиво: изведен доказ →
-  помиње се у образложењу? Ако не → повреда.
-- **Контрадикторност изреке и образложења** — лако видљиво
-
-### „Жалбено ризични" аргументи (апелациони суд одбија)
-- „Суд није правилно оценио доказе" → апелација каже: „Слободна
-  оцена доказа. Жалба оспорава оцену, не чињенице."
-- „Казна је превисока" → без конкретне анализе законског распона,
-  апелација одбија
-- Генеричке фразе без поткрепљења
-
-### Тест апелације (за свој документ)
-```
-□ Ако се противна страна жали — да ли би апелациони суд
-  подржао МОЈ аргумент?
-□ Да ли су моји жалбени разлози АПСОЛУТНИ (обавезно испитивање)
-  или РЕЛАТИВНИ (суд одлучује да ли ће)
-□ Да ли сам предвидео одговор на типичне формулације одбијања?
-```
+**Izvršni dužnik:**
+- „Već isplaćeno" (traži DOKAZ)
+- „Izvršna isprava nije pravnosnažna"
+- „Kompenzacija / prebijanje"
+- Protivtaktika: U predlogu navesti da dužnik NIJE dostavio dokaz isplate
 
 ---
 
-## ПРОВЕРА КОМПЛЕТНОСТИ (после симулације)
+## PERSPEKTIVA V: APELACIONI/VIŠI SUD
+
+### Šta apelacioni sud gleda
+
+Apelacioni sud NE SUDI PONOVO. On proverava da li je
+prvostepeni sud PRAVILNO POSTUPIO. Različit fokus:
 
 ```
-□ Размотрени СВИ законски основи за овај тип акта?
-□ Пропуштен доказ У КОРИСТ клијента?
-□ Пропуштен доказ ПРОТИВ клијента? → РЕЦИ КОРИСНИКУ
-□ Процесна препрека? (рок, надлежност, легитимација)
-□ Застарелост? (УВЕК рачуницу проверити)
-□ Петит/предлог одговара аргументацији?
-□ Постоји ли БОЉА правна квалификација?
-□ Да ли би „мудар противник" предложио поравнање?
-□ Да ли постоји ЕСЉП пракса коју нисам размотрио?
-□ Да ли постоји уставноправни аргумент?
+PITANJA APELACIONOG SUDA:
+├── Da li je postupak bio PRAVILAN? (čl. 438 ZKP)
+├── Da li je ZAKON pravilno primenjen? (čl. 439 ZKP)
+├── Da li je činjenično stanje POTPUNO utvrđeno? (čl. 440-441)
+├── Da li je sankcija SRAZMERNA? (čl. 441a)
+└── Da li postoji APSOLUTNA bitna povreda? (čl. 438 st. 1)
 ```
 
-## ОБАВЕЗНО ПОНОВНО ЧИТАЊЕ ДОКУМЕНТА
+### „Žalbeno otporni" argumenti
 
-Пре завршетка Фазе 4, ФИЗИЧКИ се врати на документ:
-1. Стране 3 најјачих аргумената — прочитај ПОНОВО
-2. Стране контрадикција из Фазе 2 — прочитај ПОНОВО
-3. Изрека/диспозитив — прочитај ПОНОВО
-4. Нешто ново? → Ажурирај аргументе. Нема? → Настави.
+Neki argumenti imaju veliku šansu da prođu na apelaciji:
+- **Apsolutne bitne povrede** (čl. 438 st. 1 tač. 1-12 ZKP) — sud
+  MORA da ih ispita po službenoj dužnosti
+- **Neocenjeni dokazi** (tač. 11) — lako proverljivo: izveden dokaz →
+  pominje se u obrazloženju? Ako ne → povreda.
+- **Kontradiktornost izreke i obrazloženja** — lako vidljivo
+
+### „Žalbeno rizični" argumenti (apelacioni sud odbija)
+- „Sud nije pravilno ocenio dokaze" → apelacija kaže: „Slobodna
+  ocena dokaza. Žalba osporava ocenu, ne činjenice."
+- „Kazna je previsoka" → bez konkretne analize zakonskog raspona,
+  apelacija odbija
+- Generičke fraze bez potkrepljenja
+
+### Test apelacije (za svoj dokument)
+```
+□ Ako se protivna strana žali — da li bi apelacioni sud
+  podržao MOJ argument?
+□ Da li su moji žalbeni razlozi APSOLUTNI (obavezno ispitivanje)
+  ili RELATIVNI (sud odlučuje da li će)
+□ Da li sam predvideo odgovor na tipične formulacije odbijanja?
+```
+
+---
+
+## PROVERA KOMPLETNOSTI (posle simulacije)
+
+```
+□ Razmotreni SVI zakonski osnovi za ovaj tip akta?
+□ Propušten dokaz U KORIST klijenta?
+□ Propušten dokaz PROTIV klijenta? → RECI KORISNIKU
+□ Procesna prepreka? (rok, nadležnost, legitimacija)
+□ Zastarelost? (UVEK računicu proveriti)
+□ Petit/predlog odgovara argumentaciji?
+□ Postoji li BOLJA pravna kvalifikacija?
+□ Da li bi „mudar protivnik" predložio poravnanje?
+□ Da li postoji ESLJP praksa koju nisam razmotrio?
+□ Da li postoji ustavnopravni argument?
+```
+
+## OBAVEZNO PONOVNO ČITANJE DOKUMENTA
+
+Pre završetka Faze 4, FIZIČKI se vrati na dokument:
+1. Strane 3 najjačih argumenata — pročitaj PONOVO
+2. Strane kontradikcija iz Faze 2 — pročitaj PONOVO
+3. Izreka/dispozitiv — pročitaj PONOVO
+4. Nešto novo? → Ažuriraj argumente. Nema? → Nastavi.

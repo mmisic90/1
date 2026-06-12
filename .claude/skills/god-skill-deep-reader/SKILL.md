@@ -1,73 +1,75 @@
 ---
 name: god-skill-deep-reader
 description: >
-  Дубоко читање и повезивање чињеница за правни рад адв. Милана Мишића — увек у
-  позадини правног стека. Активирај ЧИМ постоји документ за анализу (пресуда,
-  решење, оптужница, уговор, записник, налаз вештака, спис, извод, закључак
-  извршитеља) — ПРЕ pravna-analiza Ф0. Тригери: учитан документ, „прочитај
-  детаљно", „шта пише у спису", „повежи чињенице", „рентген документа", „дубоко
-  читање". Излаз: структурални рентген документа, контролисано читање (свака
-  страница), мрежа веза пропис ↔ пракса, ХИТ ЛИСТА кључних веза и Бајес улаз за
-  pravna-analiza. НЕ активирати за: бланко задатке без документа, креативни рад,
-  Instagram, технички debugging.
+  Duboko čitanje i povezivanje činjenica za pravni rad adv. Milana Mišića — uvek u
+  pozadini pravnog steka. Aktiviraj ČIM postoji dokument za analizu (presuda,
+  rešenje, optužnica, ugovor, zapisnik, nalaz veštaka, spis, izvod, zaključak
+  izvršitelja) — PRE pravna-analiza F0. Trigeri: učitan dokument, „pročitaj
+  detaljno", „šta piše u spisu", „poveži činjenice", „rentgen dokumenta", „duboko
+  čitanje". Izlaz: strukturalni rentgen dokumenta, kontrolisano čitanje (svaka
+  stranica), mreža veza propis ↔ praksa, HIT LISTA ključnih veza i Bajes ulaz za
+  pravna-analiza. NE aktivirati za: blanko zadatke bez dokumenta, kreativni rad,
+  Instagram, tehnički debugging.
 metadata:
   author: "Milan Mišić, advokat"
-  version: "1.0.0 (омотач — састављен из deep_understanding_module)"
+  version: "1.0.0 (omotač — sastavljen iz deep_understanding_module)"
   composes-with: ["pravna-analiza", "istrazivanje-prakse", "verifikator"]
   required-by: ["pravna-analiza"]
   category: "legal-analysis"
   last-updated: "2026-06-12"
 ---
 
-# God-skill Deep Reader — дубоко разумевање докумената
+# God-skill Deep Reader — duboko razumevanje dokumenata
 
-> **Напомена о пореклу:** Овај SKILL.md је омотач састављен од стране Claude Code-а
-> око корисниковог модула `references/deep-understanding-module.md` (Модул за дубоко
-> разумевање и повезивање чињеница: Пропис ↔ Пракса), да би ланац скилова
-> (pravna-analiza → … → verifikator) имао радни `god-skill-deep-reader`. Ако постоји
-> оригинални SKILL.md овог скила — заменити овај фајл њиме.
+> **Pismo:** instrukcije ovog skila su latinica (token-ekonomija, vidi `_policy/politika-pisma.md`); izlazni pravni akt je uvek ćirilica — kontroliše `stil-pisanja`.
 
-## Сврха
+> **Napomena o poreklu:** Ovaj SKILL.md je omotač sastavljen od strane Claude Code-a
+> oko korisnikovog modula `references/deep-understanding-module.md` (Modul za duboko
+> razumevanje i povezivanje činjenica: Propis ↔ Praksa), da bi lanac skilova
+> (pravna-analiza → … → verifikator) imao radni `god-skill-deep-reader`. Ako postoji
+> originalni SKILL.md ovog skila — zameniti ovaj fajl njime.
 
-Основни RAG приступ („нађи сличан чанк, врати цитат") није разумевање. Овај skill
-намеће начин читања који:
+## Svrha
 
-1. **Парсира структуру правног текста** — разликује ratio decidendi од obiter dicta,
-   обавезу од овлашћења, дефиницију од услова и изузетка;
-2. **Повезује чињенице кроз више докумената** — закон → подзаконски акт → одлука →
-   измена → нова пракса;
-3. **Премошћује јаз пропис ↔ пракса** — детектује кад суд тумачи одредбу другачије
-   од текста (тихе измене, проширења, сужавања, изузеци створени у пракси).
+Osnovni RAG pristup („nađi sličan čank, vrati citat") nije razumevanje. Ovaj skill
+nameće način čitanja koji:
 
-## Протокол (обавезан редослед)
+1. **Parsira strukturu pravnog teksta** — razlikuje ratio decidendi od obiter dicta,
+   obavezu od ovlašćenja, definiciju od uslova i izuzetka;
+2. **Povezuje činjenice kroz više dokumenata** — zakon → podzakonski akt → odluka →
+   izmena → nova praksa;
+3. **Premošćuje jaz propis ↔ praksa** — detektuje kad sud tumači odredbu drugačije
+   od teksta (tihe izmene, proširenja, sužavanja, izuzeci stvoreni u praksi).
 
-1. **Структурални рентген** — пре читања: тип документа, хијерархија (изрека /
-   образложење / чињенично стање / правна оцена), обим, странке, датуми.
-2. **Контролисано читање** — СВАКА страница; класа поузданости за сваку информацију
-   (✅П1 дословно │ 🟡П2 изведено │ 🔴П3 реконструкција │ ⛔П4 не постоји);
-   верификација средине (3 насумичне стране поново); тест гориле.
-3. **Мрежа веза** — повежи чињенице кроз документе: контрадикције, тишине, потврде,
-   допуне, временске рупе; класификуј норме (обавеза/забрана/овлашћење/дефиниција/
-   услов/изузетак/санкција); за одлуке извуци ratio decidendi као: „Када [чињенични
-   услов], тада [правна последица], на основу [правни основ]" — ако ratio није
-   поуздан, напиши то експлицитно.
-4. **ХИТ ЛИСТА** — топ 3 везе које носе предмет (приоритет: оно што ШТЕТИ клијенту).
-5. **Бајес улаз** — почетна процена вероватноће успеха са образложењем, предаје се
-   у pravna-analiza Ф0.
+## Protokol (obavezan redosled)
 
-**Детаљна методологија, шеме и обрасци:** ОБАВЕЗНО учитај
-`references/deep-understanding-module.md` при првој активацији у сесији.
+1. **Strukturalni rentgen** — pre čitanja: tip dokumenta, hijerarhija (izreka /
+   obrazloženje / činjenično stanje / pravna ocena), obim, stranke, datumi.
+2. **Kontrolisano čitanje** — SVAKA stranica; klasa pouzdanosti za svaku informaciju
+   (✅P1 doslovno │ 🟡P2 izvedeno │ 🔴P3 rekonstrukcija │ ⛔P4 ne postoji);
+   verifikacija sredine (3 nasumične strane ponovo); test gorile.
+3. **Mreža veza** — poveži činjenice kroz dokumente: kontradikcije, tišine, potvrde,
+   dopune, vremenske rupe; klasifikuj norme (obaveza/zabrana/ovlašćenje/definicija/
+   uslov/izuzetak/sankcija); za odluke izvuci ratio decidendi kao: „Kada [činjenični
+   uslov], tada [pravna posledica], na osnovu [pravni osnov]" — ako ratio nije
+   pouzdan, napiši to eksplicitno.
+4. **HIT LISTA** — top 3 veze koje nose predmet (prioritet: ono što ŠTETI klijentu).
+5. **Bajes ulaz** — početna procena verovatnoće uspeha sa obrazloženjem, predaje se
+   u pravna-analiza F0.
 
-## Забрањено
+**Detaljna metodologija, šeme i obrasci:** OBAVEZNO učitaj
+`references/deep-understanding-module.md` pri prvoj aktivaciji u sesiji.
 
-1. Тврдња без странице/извора (нема извора = не знаш).
-2. Извођење ratio decidendi „по сећању" — само из текста одлуке.
-3. Прескакање верификације средине код докумената 20+ страна.
-4. Завршетак без ХИТ ЛИСТЕ и Бајес улаза кад следи pravna-analiza.
+## Zabranjeno
 
-## Ланац
+1. Tvrdnja bez stranice/izvora (nema izvora = ne znaš).
+2. Izvođenje ratio decidendi „po sećanju" — samo iz teksta odluke.
+3. Preskakanje verifikacije sredine kod dokumenata 20+ strana.
+4. Završetak bez HIT LISTE i Bajes ulaza kad sledi pravna-analiza.
+
+## Lanac
 
 ```
-ДОКУМЕНТ → god-skill-deep-reader → pravna-analiza (Ф0–Ф6) → [krivica |
+DOKUMENT → god-skill-deep-reader → pravna-analiza (F0–F6) → [krivica |
 tuzba-parnica | izvrsenje] → istrazivanje-prakse → stil-pisanja → verifikator
 ```

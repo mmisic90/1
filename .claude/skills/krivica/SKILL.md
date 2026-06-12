@@ -11,9 +11,7 @@ description: >
   ustavna žalba, ESLJP, čl. 438/439/440/441/482–493/211/500/313–319 ZKP, KZ, ZKP,
   privatna tužba krivica, odgovor na optužnicu, prigovor. Generiše .docx u stilu
   adv. Milana Mišića i adv. Đorđa Nedeljkova, sa perspektive ODBRANE okrivljenog.
-  OBAVEZNO prima handoff od pravna-analiza, OBAVEZNO delegira pretragu sudske
-  prakse u istrazivanje-prakse, i OBAVEZNO predaje izlaz verifikatoru pre
-  dostavljanja korisniku. NE aktivirati za: građanske/parnične sporove, izvršenje,
+  Lanac: pravna-analiza → ovaj skill → istrazivanje-prakse → verifikator. NE aktivirati za: građanske/parnične sporove, izvršenje,
   prekršaje, upravni postupak, knjižice, Instagram, tehnički debugging.
 metadata:
   author: "Milan Mišić, advokat"
@@ -24,1010 +22,1012 @@ metadata:
   last-updated: "2026-04-08"
 ---
 
-# Кривични поступак — Skill v2
+# Krivični postupak — Skill v2
 
-## ⚠️ NEGATIVE TRIGGERS — НЕ АКТИВИРАЈ ЗА:
+> **Pismo:** instrukcije ovog skila su latinica (token-ekonomija, vidi `_policy/politika-pisma.md`); izlazni pravni akt je uvek ćirilica — kontroliše `stil-pisanja`.
 
-| Контекст | Правилан skill |
+## ⚠️ NEGATIVE TRIGGERS — NE AKTIVIRAJ ZA:
+
+| Kontekst | Pravilan skill |
 |---|---|
-| Грађанске/парничне тужбе, одштетни спорови, уговори | `tuzba-parnica` |
-| Извршни поступак, предлог за извршење, противизвршење | `pravna-analiza` + `validate_petit.py` |
-| Прекршајни поступак — жалба/приговор на прекршајни налог | `pravna-analiza` (ЗОП, не КЗ/ЗКП) |
-| Управни поступак, тужба пред Управним судом | `pravna-analiza` |
-| Радни спор, дисциплински поступак | `tuzba-parnica` |
-| Општа правна питања без кривичноправне компоненте | `pravna-analiza` |
-| Knjižice за Релју, Instagram, Cowork debugging, креативни рад | НИЈЕДАН правни skill |
+| Građanske/parnične tužbe, odštetni sporovi, ugovori | `tuzba-parnica` |
+| Izvršni postupak, predlog za izvršenje, protivizvršenje | `pravna-analiza` + `validate_petit.py` |
+| Prekršajni postupak — žalba/prigovor na prekršajni nalog | `pravna-analiza` (ZOP, ne KZ/ZKP) |
+| Upravni postupak, tužba pred Upravnim sudom | `pravna-analiza` |
+| Radni spor, disciplinski postupak | `tuzba-parnica` |
+| Opšta pravna pitanja bez krivičnopravne komponente | `pravna-analiza` |
+| Knjižice za Relju, Instagram, Cowork debugging, kreativni rad | NIJEDAN pravni skill |
 
-**Композабилност:** Овај skill се активира **после** `pravna-analiza` (прима handoff), позива `istrazivanje-prakse` за судску праксу, и предаје финални документ `verifikator`-у пре испоруке. НИКАДА не активира самостално ако постоји документ за анализу.
-
----
-
-## Сврха
-
-Аутоматски израђује потпуне и суду подношене акте у кривичном поступку, у стилу и реторичком маниру адвокатске канцеларије Милана Мишића (адв. Милан Мишић и адв. Ђорђе Недељков), према Кривичном законику (КЗ) и Законику о кривичном поступку (ЗКП), са интеграцијом верификоване актуелне судске праксе и ЕСЉП стандарда.
-
-**ОСНОВНО ПРАВИЛО:** Сваки акт се пише СА СТРАНЕ ОДБРАНЕ, тј. у циљу заштите окривљеног/окривљених. Одбрана увек тражи најповољније решење за окривљеног.
+**Kompozabilnost:** Ovaj skill se aktivira **posle** `pravna-analiza` (prima handoff), poziva `istrazivanje-prakse` za sudsku praksu, i predaje finalni dokument `verifikator`-u pre isporuke. NIKADA ne aktivira samostalno ako postoji dokument za analizu.
 
 ---
 
-## МЕСТО У STACK-У
+## Svrha
+
+Automatski izrađuje potpune i sudu podnošene akte u krivičnom postupku, u stilu i retoričkom maniru advokatske kancelarije Milana Mišića (adv. Milan Mišić i adv. Đorđe Nedeljkov), prema Krivičnom zakoniku (KZ) i Zakoniku o krivičnom postupku (ZKP), sa integracijom verifikovane aktuelne sudske prakse i ESLJP standarda.
+
+**OSNOVNO PRAVILO:** Svaki akt se piše SA STRANE ODBRANE, tj. u cilju zaštite okrivljenog/okrivljenih. Odbrana uvek traži najpovoljnije rešenje za okrivljenog.
+
+---
+
+## MESTO U STACK-U
 
 ```
                     ┌───────────────────────────┐
-                    │  god-skill-deep-reader    │ (увек у позадини)
+                    │  god-skill-deep-reader    │ (uvek u pozadini)
                     └─────────────┬─────────────┘
                                   │
                     ┌─────────────▼─────────────┐
-                    │      pravna-analiza       │ Ф0–Ф5 → handoff
+                    │      pravna-analiza       │ F0–F5 → handoff
                     └─────────────┬─────────────┘
                                   │
                   ┌───────────────┴───────────────┐
                   │                               │
       ┌───────────▼───────────┐       ┌──────────▼──────────┐
-      │  istrazivanje-prakse  │◄──────┤      KRIVICA        │ (овај skill)
-      │     v6 (делегат)      │       │       v2            │
+      │  istrazivanje-prakse  │◄──────┤      KRIVICA        │ (ovaj skill)
+      │     v6 (delegat)      │       │       v2            │
       └───────────┬───────────┘       └──────────┬──────────┘
                   │                              │
                   └──────────────┬───────────────┘
                                  │
                      ┌───────────▼───────────┐
-                     │      verifikator       │ (пре достављања)
+                     │      verifikator       │ (pre dostavljanja)
                      └───────────┬───────────┘
                                  │
                                  ▼
-                          КОРИСНИК (Милан)
+                          KORISNIK (Milan)
 ```
 
-**Правила интеграције:**
-1. Krivica се **НИКАДА не активира самостално** ако постоји документ за анализу — прво се чека handoff од `pravna-analiza`.
-2. Претрага праксе се **АГРЕСИВНО делегира** у `istrazivanje-prakse`. Ако тај skill није активан — `krivica` **СТАЈЕ** и јавља кориснику.
-3. Пре достављања кориснику, документ **ОБАВЕЗНО** пролази кроз `verifikator`.
-4. `krivica` шаље сопствени mini compliance извештај ИСПОД извештаја од `pravna-analiza`.
+**Pravila integracije:**
+1. Krivica se **NIKADA ne aktivira samostalno** ako postoji dokument za analizu — prvo se čeka handoff od `pravna-analiza`.
+2. Pretraga prakse se **AGRESIVNO delegira** u `istrazivanje-prakse`. Ako taj skill nije aktivan — `krivica` **STAJE** i javlja korisniku.
+3. Pre dostavljanja korisniku, dokument **OBAVEZNO** prolazi kroz `verifikator`.
+4. `krivica` šalje sopstveni mini compliance izveštaj ISPOD izveštaja od `pravna-analiza`.
 
 ---
 
-## Корак 0 — Пријем handoff-а од `pravna-analiza`
+## Korak 0 — Prijem handoff-a od `pravna-analiza`
 
-### 0.1 Провера handoff пакета
+### 0.1 Provera handoff paketa
 
-`pravna-analiza` Ф6.1 мора да испоручи следећи пакет пре него што `krivica` крене у писање:
+`pravna-analiza` F6.1 mora da isporuči sledeći paket pre nego što `krivica` krene u pisanje:
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│ HANDOFF ПАКЕТ (обавезан)                                │
+│ HANDOFF PAKET (obavezan)                                │
 ├─────────────────────────────────────────────────────────┤
-│ ① ТЕОРИЈА СЛУЧАЈА (Ф0)                                 │
-│    — 1 реченица: „О чему се овде ради?"                │
-│    — Хипотеза + процена вероватноће                     │
+│ ① TEORIJA SLUČAJA (F0)                                 │
+│    — 1 rečenica: „O čemu se ovde radi?"                │
+│    — Hipoteza + procena verovatnoće                     │
 │                                                         │
-│ ② ЧИЊЕНИЧНА МАПА (Ф1–2 сажето)                         │
-│    — Кључне чињенице са ✅П1 / 🟡П2 / 🔴П3 ознакама   │
-│    — Извор сваке (страница, пасус)                      │
-│    — Контрадикције ако их има                          │
+│ ② ČINJENIČNA MAPA (F1–2 sažeto)                         │
+│    — Ključne činjenice sa ✅P1 / 🟡P2 / 🔴P3 oznakama   │
+│    — Izvor svake (stranica, pasus)                      │
+│    — Kontradikcije ako ih ima                          │
 │                                                         │
-│ ③ АРГУМЕНТИ рангирани + граф зависности (Ф3)           │
-│    — Јаки / средњи / слаби                              │
-│    — Независних од зависних                             │
-│    — ЗКП/КЗ/Устав/ЕКЉП слојеви                         │
+│ ③ ARGUMENTI rangirani + graf zavisnosti (F3)           │
+│    — Jaki / srednji / slabi                              │
+│    — Nezavisnih od zavisnih                             │
+│    — ZKP/KZ/Ustav/EKLJP slojevi                         │
 │                                                         │
-│ ④ ADVERSARIAL резултати (Ф4)                           │
-│    — Који аргументи су преживели симулацију судије     │
-│    — Који су одбачени и зашто                          │
+│ ④ ADVERSARIAL rezultati (F4)                           │
+│    — Koji argumenti su preživeli simulaciju sudije     │
+│    — Koji su odbačeni i zašto                          │
 │                                                         │
-│ ⑤ „ЈЕДНА СТВАР" (Ф5)                                   │
-│    — Најјачи аргумент у 1 реченици                     │
-│    — ОВО ИДЕ ПРВО У ДОКУМЕНТУ                          │
+│ ⑤ „JEDNA STVAR" (F5)                                   │
+│    — Najjači argument u 1 rečenici                     │
+│    — OVO IDE PRVO U DOKUMENTU                          │
 │                                                         │
-│ ⑥ ВЕРИФИКОВАНА СУДСКА ПРАКСА                           │
-│    — Од istrazivanje-prakse v6                         │
-│    — Само одлуке са директним линком или pasted full   │
+│ ⑥ VERIFIKOVANA SUDSKA PRAKSA                           │
+│    — Od istrazivanje-prakse v6                         │
+│    — Samo odluke sa direktnim linkom ili pasted full   │
 │                                                         │
-│ ⑦ СТРАТЕШКА ПРОЦЕНА                                    │
-│    — Најбољи / реалан / најгори исход                  │
-│    — Ризик 1–10                                        │
+│ ⑦ STRATEŠKA PROCENA                                    │
+│    — Najbolji / realan / najgori ishod                  │
+│    — Rizik 1–10                                        │
 └─────────────────────────────────────────────────────────┘
 ```
 
-### 0.2 Шта радити ако handoff НЕ постоји
+### 0.2 Šta raditi ako handoff NE postoji
 
-**Случајеви у којима handoff не постоји:**
-- Корисник тражи бланко акт без документа (нпр. „написи кривичну пријаву против X због увреде")
-- Стандардни акт без нових списа (нпр. „напиши уводно излагање по постојећим подацима")
-- Корисник експлицитно каже „немој да анализираш, само напиши по мом диктату"
+**Slučajevi u kojima handoff ne postoji:**
+- Korisnik traži blanko akt bez dokumenta (npr. „napisi krivičnu prijavu protiv X zbog uvrede")
+- Standardni akt bez novih spisa (npr. „napiši uvodno izlaganje po postojećim podacima")
+- Korisnik eksplicitno kaže „nemoj da analiziraš, samo napiši po mom diktatu"
 
-**У таквим случајевима `krivica` прелази на Корак 1 (прикупљање инпута директно од корисника).** Али **увек обавести корисника:**
+**U takvim slučajevima `krivica` prelazi na Korak 1 (prikupljanje inputa direktno od korisnika).** Ali **uvek obavesti korisnika:**
 
-> *„Нема pravna-analiza handoff-а. Радим директно са твојим инпутом. Ако имаш документ (пресуду, оптужницу, решење) учитај га да активирам pravna-analiza пре писања акта — квалитет ће бити значајно већи."*
+> *„Nema pravna-analiza handoff-a. Radim direktno sa tvojim inputom. Ako imaš dokument (presudu, optužnicu, rešenje) učitaj ga da aktiviram pravna-analiza pre pisanja akta — kvalitet će biti značajno veći."*
 
-### 0.3 Шта радити ако handoff постоји али је НЕПОТПУН
+### 0.3 Šta raditi ako handoff postoji ali je NEPOTPUN
 
-Ако handoff пакет недостаје нешто од ⓵–⓻:
-1. **СТОП. Не пиши акт.**
-2. Јави кориснику шта недостаје.
-3. Тражи од `pravna-analiza` да допуни, или тражи од корисника зелено светло за делимичан рад.
-4. Никад тихо не попуњавај празнине из меморије — то је халуцинација.
-
----
-
-## Корак 0.1 — Класификација акта
-
-### А) Ако је handoff примљен
-
-Тип акта се чита директно из ⑦ СТРАТЕШКА ПРОЦЕНА или ⑤ „Једна ствар". Pravna-analiza већ зна у којој фази поступка се налазимо.
-
-### Б) Ако handoff-а нема
-
-Тип акта се одређује кроз листу тригера. Ако корисник није прецизирао — питај га.
-
-### Типови кривичних аката (18 типова у v2)
-
-**ИСТРАЖНА ФАЗА:**
-
-| # | Тип акта | Тригери | Правни основ |
-|---|---|---|---|
-| 1 | Кривична пријава | „кривична пријава", „пријавити" | чл. 280–284 ЗКП |
-| 2 | Жалба на одбачај кривичне пријаве (ВЈТ) | „одбачај", „приговор ВЈТ", „жалба на одбачај" | чл. 51, 284 ЗКП |
-| 3 | Приговор на одбачај (не ВЈТ) | „приговор одбачај" | чл. 284 ЗКП |
-| 4 | Молба за одлагање крив. гоњења | „одлагање кривичног гоњења", „опортунитет" | чл. 283 ЗКП |
-| 5 | Жалба на притвор | „жалба на притвор", „укидање притвора" | чл. 211–222 ЗКП |
-| 6 | Подносак у истрази | „подносак истрази", „предлог докази" | чл. 78, 301 ЗКП |
-
-**ФАЗА ОПТУЖЕЊА:**
-
-| # | Тип акта | Тригери | Правни основ |
-|---|---|---|---|
-| 7 | Одговор на оптужницу (општи поступак) | „одговор на оптужницу", „изјашњење" | чл. 336–344 ЗКП |
-| 8 | Приговор на оптужни предлог (скраћени поступак) | „приговор на оптужни предлог", „приговор ОП" | чл. 500 ЗКП |
-| 9 | Жалба на решење о потврђивању оптужнице | „жалба на потврђивање" | чл. 345 ЗКП |
-
-**ГЛАВНИ ПРЕТРЕС:**
-
-| # | Тип акта | Тригери | Правни основ |
-|---|---|---|---|
-| 10 | Уводно излагање | „уводно излагање", „почетак претреса" | чл. 396 ЗКП |
-| 11 | Завршна реч | „завршна реч", „закључна реч" | чл. 412 ЗКП |
-| 12 | Споразум о признању кривичног дела | „споразум о признању", „nagodba" | чл. 313–319 ЗКП |
-| 13 | Приватна тужба | „приватна тужба кривица" (за увреду/клевету) | чл. 65 ЗКП + чл. 170–173 КЗ |
-
-**РЕДОВНИ И ВАНРЕДНИ ПРАВНИ ЛЕКОВИ:**
-
-| # | Тип акта | Тригери | Правни основ |
-|---|---|---|---|
-| 14 | Жалба на пресуду | „жалба на пресуду", „жалба" | чл. 430–467 ЗКП |
-| 15 | Захтев за заштиту законитости (ЗЗЗ) | „ЗЗЗ", „заштита законитости" | чл. 482–493 ЗКП |
-| 16 | Предлог за понављање поступка | „понављање поступка", „нови докази" | чл. 470–479 ЗКП |
-
-**УСТАВНИ И МЕЂУНАРОДНИ НИВО:**
-
-| # | Тип акта | Тригери | Правни основ |
-|---|---|---|---|
-| 17 | Уставна жалба (кривична) | „уставна жалба", „Устав кривица" | чл. 170 Устава + чл. 82 ЗУС |
-| 18 | Представка ЕСЉП | „ЕСЉП представка", „Стразбур" | чл. 34 ЕКЉП |
+Ako handoff paket nedostaje nešto od ⓵–⓻:
+1. **STOP. Ne piši akt.**
+2. Javi korisniku šta nedostaje.
+3. Traži od `pravna-analiza` da dopuni, ili traži od korisnika zeleno svetlo za delimičan rad.
+4. Nikad tiho ne popunjavaj praznine iz memorije — to je halucinacija.
 
 ---
 
-## Корак 1 — Прикупљање инпута (fallback кад нема handoff-а)
+## Korak 0.1 — Klasifikacija akta
 
-Ако Корак 0 није примио handoff, прикупи директно од корисника.
+### A) Ako je handoff primljen
 
-### 1.1 Основни подаци
+Tip akta se čita direktno iz ⑦ STRATEŠKA PROCENA ili ⑤ „Jedna stvar". Pravna-analiza već zna u kojoj fazi postupka se nalazimo.
 
-**Окривљени:**
-- Име и презиме
-- Адреса пребивалишта / боравишта
-- ЈМБГ
-- Бранилац (default: „адв. Милан Мишић из Новог Сада, ул. Максима Горког бр. 6")
+### B) Ako handoff-a nema
 
-**Суд:**
-- Назив суда (нпр. Основни суд у Новом Саду, Виши суд у Новом Саду)
-- Број предмета (нпр. К-123/24, КВ-456/23, К. 63/2026)
+Tip akta se određuje kroz listu trigera. Ako korisnik nije precizirao — pitaj ga.
 
-**Тужилаштво (ако је релевантно):**
-- Назив (ОЈТ, ВЈТ)
-- Број оптужнице / кривичне пријаве
+### Tipovi krivičnih akata (18 tipova u v2)
 
-### 1.2 Табела рокова — ЈЕДИНСТВЕНА РЕФЕРЕНЦА
+**ISTRAŽNA FAZA:**
 
-> ⚠️ **КРИТИЧНО:** Сваки рок се броји од дана достављања акта окривљеном ИЛИ његовом браниоцу (први од два). За детаље видети `references/rokovi-tabela.md`.
+| # | Tip akta | Trigeri | Pravni osnov |
+|---|---|---|---|
+| 1 | Krivična prijava | „krivična prijava", „prijaviti" | čl. 280–284 ZKP |
+| 2 | Žalba na odbačaj krivične prijave (VJT) | „odbačaj", „prigovor VJT", „žalba na odbačaj" | čl. 51, 284 ZKP |
+| 3 | Prigovor na odbačaj (ne VJT) | „prigovor odbačaj" | čl. 284 ZKP |
+| 4 | Molba za odlaganje kriv. gonjenja | „odlaganje krivičnog gonjenja", „oportunitet" | čl. 283 ZKP |
+| 5 | Žalba na pritvor | „žalba na pritvor", „ukidanje pritvora" | čl. 211–222 ZKP |
+| 6 | Podnosak u istrazi | „podnosak istrazi", „predlog dokazi" | čl. 78, 301 ZKP |
 
-| Акт | Рок | Извор |
+**FAZA OPTUŽENJA:**
+
+| # | Tip akta | Trigeri | Pravni osnov |
+|---|---|---|---|
+| 7 | Odgovor na optužnicu (opšti postupak) | „odgovor na optužnicu", „izjašnjenje" | čl. 336–344 ZKP |
+| 8 | Prigovor na optužni predlog (skraćeni postupak) | „prigovor na optužni predlog", „prigovor OP" | čl. 500 ZKP |
+| 9 | Žalba na rešenje o potvrđivanju optužnice | „žalba na potvrđivanje" | čl. 345 ZKP |
+
+**GLAVNI PRETRES:**
+
+| # | Tip akta | Trigeri | Pravni osnov |
+|---|---|---|---|
+| 10 | Uvodno izlaganje | „uvodno izlaganje", „početak pretresa" | čl. 396 ZKP |
+| 11 | Završna reč | „završna reč", „zaključna reč" | čl. 412 ZKP |
+| 12 | Sporazum o priznanju krivičnog dela | „sporazum o priznanju", „nagodba" | čl. 313–319 ZKP |
+| 13 | Privatna tužba | „privatna tužba krivica" (za uvredu/klevetu) | čl. 65 ZKP + čl. 170–173 KZ |
+
+**REDOVNI I VANREDNI PRAVNI LEKOVI:**
+
+| # | Tip akta | Trigeri | Pravni osnov |
+|---|---|---|---|
+| 14 | Žalba na presudu | „žalba na presudu", „žalba" | čl. 430–467 ZKP |
+| 15 | Zahtev za zaštitu zakonitosti (ZZZ) | „ZZZ", „zaštita zakonitosti" | čl. 482–493 ZKP |
+| 16 | Predlog za ponavljanje postupka | „ponavljanje postupka", „novi dokazi" | čl. 470–479 ZKP |
+
+**USTAVNI I MEĐUNARODNI NIVO:**
+
+| # | Tip akta | Trigeri | Pravni osnov |
+|---|---|---|---|
+| 17 | Ustavna žalba (krivična) | „ustavna žalba", „Ustav krivica" | čl. 170 Ustava + čl. 82 ZUS |
+| 18 | Predstavka ESLJP | „ESLJP predstavka", „Strazbur" | čl. 34 EKLJP |
+
+---
+
+## Korak 1 — Prikupljanje inputa (fallback kad nema handoff-a)
+
+Ako Korak 0 nije primio handoff, prikupi direktno od korisnika.
+
+### 1.1 Osnovni podaci
+
+**Okrivljeni:**
+- Ime i prezime
+- Adresa prebivališta / boravišta
+- JMBG
+- Branilac (default: „adv. Milan Mišić iz Novog Sada, ul. Maksima Gorkog br. 6")
+
+**Sud:**
+- Naziv suda (npr. Osnovni sud u Novom Sadu, Viši sud u Novom Sadu)
+- Broj predmeta (npr. K-123/24, KV-456/23, K. 63/2026)
+
+**Tužilaštvo (ako je relevantno):**
+- Naziv (OJT, VJT)
+- Broj optužnice / krivične prijave
+
+### 1.2 Tabela rokova — JEDINSTVENA REFERENCA
+
+> ⚠️ **KRITIČNO:** Svaki rok se broji od dana dostavljanja akta okrivljenom ILI njegovom braniocu (prvi od dva). Za detalje videti `references/rokovi-tabela.md`.
+
+| Akt | Rok | Izvor |
 |---|---|---|
-| Жалба на пресуду (општи поступак) | **15 дана** | чл. 432 ЗКП |
-| Жалба на пресуду (скраћени поступак) | **8 дана** | чл. 506 ЗКП |
-| Жалба на пресуду у поступку према малолетницима | **8 дана** | чл. 81 ЗМП |
-| Захтев за заштиту законитости | **30 дана** од правноснажности | чл. 485 ст. 4 ЗКП |
-| Жалба на решење о притвору | **3 дана** од достављања | чл. 214 ст. 4 ЗКП |
-| Жалба на решење о задржавању | **4 сата** од усменог саопштења | чл. 294 ст. 3 ЗКП |
-| Одговор на оптужницу | **8 дана** од достављања | чл. 336 ст. 3 ЗКП |
-| Приговор на оптужни предлог | **8 дана** од достављања | чл. 500 ст. 3 ЗКП |
-| Жалба на решење о одбачају крив. пријаве (ВЈТ) | **8 дана** | чл. 51 ЗКП |
-| Приговор оштећеног на одбачај | **8 дана** од обавештења | чл. 51 ЗКП |
-| Приватна тужба (рок подношења) | **3 месеца** од сазнања | чл. 65 ст. 2 ЗКП |
-| Предлог за понављање поступка | **нема рок** (до застарелости извршења) | чл. 470 ЗКП |
-| Уставна жалба | **30 дана** од пријема правноснажне одлуке | чл. 84 ЗУС |
-| Представка ЕСЉП | **6 месеци** (за старе случајеве) / **4 месеца** (од 1.2.2022) од финалне одлуке | чл. 35 ЕКЉП |
-| Жалба на решење у истрази (КВ) | **3 дана** | чл. 467 ст. 1 ЗКП |
+| Žalba na presudu (opšti postupak) | **15 dana** | čl. 432 ZKP |
+| Žalba na presudu (skraćeni postupak) | **8 dana** | čl. 506 ZKP |
+| Žalba na presudu u postupku prema maloletnicima | **8 dana** | čl. 81 ZMP |
+| Zahtev za zaštitu zakonitosti | **30 dana** od pravnosnažnosti | čl. 485 st. 4 ZKP |
+| Žalba na rešenje o pritvoru | **3 dana** od dostavljanja | čl. 214 st. 4 ZKP |
+| Žalba na rešenje o zadržavanju | **4 sata** od usmenog saopštenja | čl. 294 st. 3 ZKP |
+| Odgovor na optužnicu | **8 dana** od dostavljanja | čl. 336 st. 3 ZKP |
+| Prigovor na optužni predlog | **8 dana** od dostavljanja | čl. 500 st. 3 ZKP |
+| Žalba na rešenje o odbačaju kriv. prijave (VJT) | **8 dana** | čl. 51 ZKP |
+| Prigovor oštećenog na odbačaj | **8 dana** od obaveštenja | čl. 51 ZKP |
+| Privatna tužba (rok podnošenja) | **3 meseca** od saznanja | čl. 65 st. 2 ZKP |
+| Predlog za ponavljanje postupka | **nema rok** (do zastarelosti izvršenja) | čl. 470 ZKP |
+| Ustavna žalba | **30 dana** od prijema pravnosnažne odluke | čl. 84 ZUS |
+| Predstavka ESLJP | **6 meseci** (za stare slučajeve) / **4 meseca** (od 1.2.2022) od finalne odluke | čl. 35 EKLJP |
+| Žalba na rešenje u istrazi (KV) | **3 dana** | čl. 467 st. 1 ZKP |
 
-### 1.3 Рок-аларм протокол
+### 1.3 Rok-alarm protokol
 
-**ОБАВЕЗНО:** Када корисник наведе датум достављања акта, `krivica` АУТОМАТСКИ рачуна рок и испоручује аларм.
+**OBAVEZNO:** Kada korisnik navede datum dostavljanja akta, `krivica` AUTOMATSKI računa rok i isporučuje alarm.
 
 ```
 ╔════════════════════════════════════════════════╗
-║ ⏰ РОК-АЛАРМ                                    ║
+║ ⏰ ROK-ALARM                                    ║
 ╠════════════════════════════════════════════════╣
-║ Тип акта: [X]                                  ║
-║ Достављено: [датум]                            ║
-║ Рок: [N] дана / сати                           ║
-║ КРАЈЊИ ДАТУМ: [датум] до [време]              ║
-║ Данас: [данашњи датум]                         ║
-║ ОСТАЛО: [N] дана                               ║
+║ Tip akta: [X]                                  ║
+║ Dostavljeno: [datum]                            ║
+║ Rok: [N] dana / sati                           ║
+║ KRAJNJI DATUM: [datum] do [vreme]              ║
+║ Danas: [današnji datum]                         ║
+║ OSTALO: [N] dana                               ║
 ╠════════════════════════════════════════════════╣
-║ СТАТУС:                                        ║
-║  🟢 > 7 дана — нормално                        ║
-║  🟡 3–7 дана — приоритет                       ║
-║  🔴 1–2 дана — ХИТНО                           ║
-║  ⛔ < 24 сата — КРИТИЧНО                       ║
+║ STATUS:                                        ║
+║  🟢 > 7 dana — normalno                        ║
+║  🟡 3–7 dana — prioritet                       ║
+║  🔴 1–2 dana — HITNO                           ║
+║  ⛔ < 24 sata — KRITIČNO                       ║
 ╚════════════════════════════════════════════════╝
 ```
 
-**Правила рачунања:**
-- Рок тече од дана ПОСЛЕ достављања (чл. 225 ст. 1 ЗКП)
-- Ако задњи дан пада у нерадни дан → продужава се на први радни дан (чл. 225 ст. 2 ЗКП)
-- Подношење пре 24:00 задњег дана је благовремено
-- Подношење препорученом поштом — релевантан датум на жигу, не датум пријема у суду (чл. 228 ст. 1 ЗКП)
+**Pravila računanja:**
+- Rok teče od dana POSLE dostavljanja (čl. 225 st. 1 ZKP)
+- Ako zadnji dan pada u neradni dan → produžava se na prvi radni dan (čl. 225 st. 2 ZKP)
+- Podnošenje pre 24:00 zadnjeg dana je blagovremeno
+- Podnošenje preporučenom poštom — relevantan datum na žigu, ne datum prijema u sudu (čl. 228 st. 1 ZKP)
 
 
-### 1.4 Специфични подаци по типу акта
+### 1.4 Specifični podaci po tipu akta
 
-**За жалбу на пресуду / ЗЗЗ:**
-- Број и датум побијане пресуде (првостепене и другостепене)
-- Кривично дело за које је осуђен (члан КЗ)
-- Изречена санкција
-- Разлози жалбе (чл. 437 ЗКП):
-  1. Битна повреда одредаба кривичног поступка (чл. 438)
-  2. Повреда кривичног закона (чл. 439)
-  3. Погрешно и непотпуно утврђено чињенично стање (чл. 440–441)
-  4. Одлука о кривичној санкцији и другим одлукама
+**Za žalbu na presudu / ZZZ:**
+- Broj i datum pobijane presude (prvostepene i drugostepene)
+- Krivično delo za koje je osuđen (član KZ)
+- Izrečena sankcija
+- Razlozi žalbe (čl. 437 ZKP):
+  1. Bitna povreda odredaba krivičnog postupka (čl. 438)
+  2. Povreda krivičnog zakona (čl. 439)
+  3. Pogrešno i nepotpuno utvrđeno činjenično stanje (čl. 440–441)
+  4. Odluka o krivičnoj sankciji i drugim odlukama
 
-**За жалбу на притвор:**
-- Број и датум решења о притвору
-- Притворски основ (чл. 211 ЗКП)
-- Тренутна ситуација окривљеног (адреса, запослење, породица)
+**Za žalbu na pritvor:**
+- Broj i datum rešenja o pritvoru
+- Pritvorski osnov (čl. 211 ZKP)
+- Trenutna situacija okrivljenog (adresa, zaposlenje, porodica)
 
-**За кривичну пријаву:**
-- Осумњичени: подаци
-- Оштећени: подаци + пуномоћник
-- Кривично дело: члан КЗ и опис „ШТО ЈЕ"
-- Доказни предлози
+**Za krivičnu prijavu:**
+- Osumnjičeni: podaci
+- Oštećeni: podaci + punomoćnik
+- Krivično delo: član KZ i opis „ŠTO JE"
+- Dokazni predlozi
 
-**За одговор на оптужницу:**
-- Оптужница: број, датум, тужилаштво
-- Кривично дело из оптужнице
-- Став одбране: порицање, признање, делимично признање
-- Доказни предлози одбране
+**Za odgovor na optužnicu:**
+- Optužnica: broj, datum, tužilaštvo
+- Krivično delo iz optužnice
+- Stav odbrane: poricanje, priznanje, delimično priznanje
+- Dokazni predlozi odbrane
 
-**За приговор на оптужни предлог (скраћени поступак):**
-- Оптужни предлог: број, датум, тужилаштво
-- Кривично дело (по правилу до 8 година затвора)
-- Разлози приговора: нема места опт. предлогу, недовољни докази, погрешна квалификација
-- Предлог: одбацивање опт. предлога или допуна истражних радњи
+**Za prigovor na optužni predlog (skraćeni postupak):**
+- Optužni predlog: broj, datum, tužilaštvo
+- Krivično delo (po pravilu do 8 godina zatvora)
+- Razlozi prigovora: nema mesta opt. predlogu, nedovoljni dokazi, pogrešna kvalifikacija
+- Predlog: odbacivanje opt. predloga ili dopuna istražnih radnji
 
-**За споразум о признању кривичног дела:**
-- Оптужница/оптужни предлог: број, датум
-- Кривично дело и запрећена казна
-- Шта се нуди тужиоцу (признање, накнада штете, сарадња)
-- Шта тражи одбрана (казна у доњој граници, услов, укидање мере безбедности)
-- Ограничења: чл. 313 ст. 2 ЗКП (до 12 година само за одређена дела)
+**Za sporazum o priznanju krivičnog dela:**
+- Optužnica/optužni predlog: broj, datum
+- Krivično delo i zaprećena kazna
+- Šta se nudi tužiocu (priznanje, naknada štete, saradnja)
+- Šta traži odbrana (kazna u donjoj granici, uslov, ukidanje mere bezbednosti)
+- Ograničenja: čl. 313 st. 2 ZKP (do 12 godina samo za određena dela)
 
-**За предлог за понављање поступка:**
-- Правноснажна пресуда: број, датум
-- Основ за понављање (чл. 473 ЗКП):
-  - нови докази / нове чињенице
-  - лажан исказ сведока/вештака
-  - фалсификована исправа
-  - непостојеће кривично дело утврђено касније
-- Докази нових чињеница
+**Za predlog za ponavljanje postupka:**
+- Pravnosnažna presuda: broj, datum
+- Osnov za ponavljanje (čl. 473 ZKP):
+  - novi dokazi / nove činjenice
+  - lažan iskaz svedoka/veštaka
+  - falsifikovana isprava
+  - nepostojeće krivično delo utvrđeno kasnije
+- Dokazi novih činjenica
 
-**За уставну жалбу:**
-- Правноснажна одлука: број, датум (укључујући одлуку о свим правним лековима)
-- Повређено уставно право (чл. Устава)
-- Одговарајући члан ЕКЉП
-- Датум пријема финалне одлуке (за рок од 30 дана)
+**Za ustavnu žalbu:**
+- Pravnosnažna odluka: broj, datum (uključujući odluku o svim pravnim lekovima)
+- Povređeno ustavno pravo (čl. Ustava)
+- Odgovarajući član EKLJP
+- Datum prijema finalne odluke (za rok od 30 dana)
 
-**За представку ЕСЉП:**
-- Правноснажна одлука Уставног суда: број, датум, датум пријема
-- Повређени члан ЕКЉП (6, 7, 8, 10, 13...)
-- Чињенице — кратак хронолошки приказ
-- Исцрпљивање домаћих лекова (обавезно)
+**Za predstavku ESLJP:**
+- Pravnosnažna odluka Ustavnog suda: broj, datum, datum prijema
+- Povređeni član EKLJP (6, 7, 8, 10, 13...)
+- Činjenice — kratak hronološki prikaz
+- Iscrpljivanje domaćih lekova (obavezno)
 
 ---
 
-## Корак 2 — Reverse-engineering пресуде (за жалбе, ЗЗЗ, понављање)
+## Korak 2 — Reverse-engineering presude (za žalbe, ZZZ, ponavljanje)
 
-**Ово је стратешки корак који се ради ПРЕ писања — независно од handoff-а.**
+**Ovo je strateški korak koji se radi PRE pisanja — nezavisno od handoff-a.**
 
-Цил je: пронаћи где пресуда „цури" — где образложење не подупире изреку, где су докази погрешно процењени, где је закон погрешно примењен.
+Cil je: pronaći gde presuda „curi" — gde obrazloženje ne podupire izreku, gde su dokazi pogrešno procenjeni, gde je zakon pogrešno primenjen.
 
-### 2.1 Троструко читање
+### 2.1 Trostruko čitanje
 
-**Прво читање — изрека:**
-- Шта је суд изрекао? (осуда / ослобађање / одбијање / обустава)
-- Ком кривичном делу је утврђена кривица?
-- Каква санкција?
-- Који ставови изреке су контрадикторни?
+**Prvo čitanje — izreka:**
+- Šta je sud izrekao? (osuda / oslobađanje / odbijanje / obustava)
+- Kom krivičnom delu je utvrđena krivica?
+- Kakva sankcija?
+- Koji stavovi izreke su kontradiktorni?
 
-**Друго читање — разлози пресуде:**
-- Који докази су прихваћени?
-- Који су одбачени и зашто?
-- Шта суд каже о одбрани окривљеног?
-- Где образложење „скаче" преко логичких корака?
+**Drugo čitanje — razlozi presude:**
+- Koji dokazi su prihvaćeni?
+- Koji su odbačeni i zašto?
+- Šta sud kaže o odbrani okrivljenog?
+- Gde obrazloženje „skače" preko logičkih koraka?
 
-**Треће читање — сравнивање:**
+**Treće čitanje — sravnivanje:**
 ```
 ┌─────────────────────────────────────────────────┐
-│ ТАБЛИЦА ДИСКРЕПАНЦИЈА                           │
+│ TABLICA DISKREPANCIJA                           │
 ├─────────────────────────────────────────────────┤
-│ Тврдња у изреци │ Подршка у разлозима │ Оцена  │
+│ Tvrdnja u izreci │ Podrška u razlozima │ Ocena  │
 │─────────────────┼─────────────────────┼────────│
-│ [шта]           │ [где и како]        │ ✅/❌ │
+│ [šta]           │ [gde i kako]        │ ✅/❌ │
 │ ...             │ ...                 │ ...    │
 └─────────────────────────────────────────────────┘
 ```
 
-**Где год је ❌ → то је тачка нападa за жалбу.**
+**Gde god je ❌ → to je tačka napada za žalbu.**
 
-### 2.2 Матрица „грешка у пресуди → основ жалбе"
+### 2.2 Matrica „greška u presudi → osnov žalbe"
 
-Ово је јединствена референтна матрица коју `krivica` користи за аутоматско мапирање чињеничних грешака у правно релевантне основе жалбе.
+Ovo je jedinstvena referentna matrica koju `krivica` koristi za automatsko mapiranje činjeničnih grešaka u pravno relevantne osnove žalbe.
 
-| Тип грешке у пресуди | Основ жалбе | Члан ЗКП |
+| Tip greške u presudi | Osnov žalbe | Član ZKP |
 |---|---|---|
-| Неразумљива изрека | Битна повреда поступка | чл. 438 ст. 1 тач. 11 |
-| Противречност између изреке и образложења | Битна повреда поступка | чл. 438 ст. 2 тач. 2 |
-| Пресуда заснована на недозвољеном доказу | Битна повреда поступка | чл. 438 ст. 2 тач. 1 |
-| Пресуда без одржавања главног претреса у законском саставу | Битна повреда поступка | чл. 438 ст. 1 тач. 1 |
-| Изузета судија учествовала у пресуди | Битна повреда поступка | чл. 438 ст. 1 тач. 4 |
-| Одбрана није имала реч на главном претресу | Битна повреда поступка | чл. 438 ст. 1 тач. 7 |
-| Пресуда прекорачује оптужбу (непропорционално) | Битна повреда поступка | чл. 438 ст. 1 тач. 9 |
-| Суд није утврдио битна обележја кривичног дела | Повреда кривичног закона | чл. 439 тач. 1 |
-| Погрешна правна квалификација дела | Повреда кривичног закона | чл. 439 тач. 2 |
-| Погрешна одлука о кривичној санкцији | Повреда кривичног закона | чл. 439 тач. 3 |
-| Застарелост кривичног гоњења / извршења | Повреда кривичног закона | чл. 439 тач. 4 |
-| Непотпуно утврђено чињенично стање | Погрешно/непотпуно УЧС | чл. 441 |
-| Погрешно утврђено чињенично стање | Погрешно/непотпуно УЧС | чл. 440 |
-| Одбијени доказни предлози одбране | Битна повреда + погрешно УЧС | чл. 395 ст. 4 + чл. 440 |
-| Пресуда без образлагања одлучних чињеница | Битна повреда поступка | чл. 438 ст. 2 тач. 2 |
+| Nerazumljiva izreka | Bitna povreda postupka | čl. 438 st. 1 tač. 11 |
+| Protivrečnost između izreke i obrazloženja | Bitna povreda postupka | čl. 438 st. 2 tač. 2 |
+| Presuda zasnovana na nedozvoljenom dokazu | Bitna povreda postupka | čl. 438 st. 2 tač. 1 |
+| Presuda bez održavanja glavnog pretresa u zakonskom sastavu | Bitna povreda postupka | čl. 438 st. 1 tač. 1 |
+| Izuzeta sudija učestvovala u presudi | Bitna povreda postupka | čl. 438 st. 1 tač. 4 |
+| Odbrana nije imala reč na glavnom pretresu | Bitna povreda postupka | čl. 438 st. 1 tač. 7 |
+| Presuda prekoračuje optužbu (neproporcionalno) | Bitna povreda postupka | čl. 438 st. 1 tač. 9 |
+| Sud nije utvrdio bitna obeležja krivičnog dela | Povreda krivičnog zakona | čl. 439 tač. 1 |
+| Pogrešna pravna kvalifikacija dela | Povreda krivičnog zakona | čl. 439 tač. 2 |
+| Pogrešna odluka o krivičnoj sankciji | Povreda krivičnog zakona | čl. 439 tač. 3 |
+| Zastarelost krivičnog gonjenja / izvršenja | Povreda krivičnog zakona | čl. 439 tač. 4 |
+| Nepotpuno utvrđeno činjenično stanje | Pogrešno/nepotpuno UČS | čl. 441 |
+| Pogrešno utvrđeno činjenično stanje | Pogrešno/nepotpuno UČS | čl. 440 |
+| Odbijeni dokazni predlozi odbrane | Bitna povreda + pogrešno UČS | čl. 395 st. 4 + čl. 440 |
+| Presuda bez obrazlaganja odlučnih činjenica | Bitna povreda postupka | čl. 438 st. 2 tač. 2 |
 
-Детаљно: `references/tipovi-greshaka-presude.md`
+Detaljno: `references/tipovi-greshaka-presude.md`
 
-### 2.3 „Једна ствар" провера
+### 2.3 „Jedna stvar" provera
 
-Из handoff-а или сопствене анализе — идентификуј **ОДМАХ** „једну ствар" која мења све. У жалби она иде у првих 3 пасуса, пре било чега другог.
+Iz handoff-a ili sopstvene analize — identifikuj **ODMAH** „jednu stvar" koja menja sve. U žalbi ona ide u prvih 3 pasusa, pre bilo čega drugog.
 
-**Тест за „једну ствар":**
-1. Ако бих могао да напишем САМО ЈЕДАН пасус другостепеном суду — који би то био?
-2. Шта другостепени суд НЕ МОЖЕ да одбије без контрадикције са својом пресудом?
-3. Где је првостепени суд НАЈВИШЕ погрешио — толико да даље читање постаје сувишно?
+**Test za „jednu stvar":**
+1. Ako bih mogao da napišem SAMO JEDAN pasus drugostepenom sudu — koji bi to bio?
+2. Šta drugostepeni sud NE MOŽE da odbije bez kontradikcije sa svojom presudom?
+3. Gde je prvostepeni sud NAJVIŠE pogrešio — toliko da dalje čitanje postaje suvišno?
 
 ---
 
-## Корак 3 — Претрага судске праксе (ДЕЛЕГАЦИЈА у `istrazivanje-prakse`)
+## Korak 3 — Pretraga sudske prakse (DELEGACIJA u `istrazivanje-prakse`)
 
-### 3.1 Протокол делегације
+### 3.1 Protokol delegacije
 
-**`krivica` НИКАДА сама не претражује праксу.** Уместо тога:
+**`krivica` NIKADA sama ne pretražuje praksu.** Umesto toga:
 
 ```
-① ПРОВЕРА: Да ли је istrazivanje-prakse skill активан?
-   НЕ → СТОП. Порука кориснику:
-       „Активирај istrazivanje-prakse пре него што наставим.
-        Не пишем кривични акт без верификоване праксе.
-        Ризик халуцинације је неприхватљив."
-   ДА → настави на ②
+① PROVERA: Da li je istrazivanje-prakse skill aktivan?
+   NE → STOP. Poruka korisniku:
+       „Aktiviraj istrazivanje-prakse pre nego što nastavim.
+        Ne pišem krivični akt bez verifikovane prakse.
+        Rizik halucinacije je neprihvatljiv."
+   DA → nastavi na ②
 
-② ПАКОВАЊЕ УПИТА:
+② PAKOVANJE UPITA:
    ┌─────────────────────────────────────────────┐
-   │ ПАКЕТ ЗА istrazivanje-prakse               │
+   │ PAKET ZA istrazivanje-prakse               │
    ├─────────────────────────────────────────────┤
-   │ • Тип акта: [из Корака 0.1]                │
-   │ • Правни проблем: [1 реченица]             │
-   │ • Кључне норме: [чл. КЗ/ЗКП]              │
-   │ • Тражени тип извора:                      │
-   │   - VS/ВКС/ВСС (увек)                      │
-   │   - Апелациони судови (за жалбе)          │
-   │   - ЕСЉП (за уставне жалбе, представке)   │
-   │   - Уставни суд (за ЗЗЗ, уставне жалбе)   │
+   │ • Tip akta: [iz Koraka 0.1]                │
+   │ • Pravni problem: [1 rečenica]             │
+   │ • Ključne norme: [čl. KZ/ZKP]              │
+   │ • Traženi tip izvora:                      │
+   │   - VS/VKS/VSS (uvek)                      │
+   │   - Apelacioni sudovi (za žalbe)          │
+   │   - ESLJP (za ustavne žalbe, predstavke)   │
+   │   - Ustavni sud (za ZZZ, ustavne žalbe)   │
    │ • MODE: FULL / STANDARD                    │
-   │ • Контра-претрага: ДА (увек)              │
+   │ • Kontra-pretraga: DA (uvek)              │
    └─────────────────────────────────────────────┘
 
-③ ПРИЈЕМ РЕЗУЛТАТА:
-   Само одлуке са:
-   - директним линком, ИЛИ
-   - pasted full текстом + атрибуцијом
-   Све остало = ⛔ одбачено.
+③ PRIJEM REZULTATA:
+   Samo odluke sa:
+   - direktnim linkom, ILI
+   - pasted full tekstom + atribucijom
+   Sve ostalo = ⛔ odbačeno.
 
-④ ПРЕДАЈА У verifikator ПРЕ УГРАДЊЕ У АКТ
+④ PREDAJA U verifikator PRE UGRADNJE U AKT
 ```
 
-### 3.2 Кључне речи за претрагу (по типу акта)
+### 3.2 Ključne reči za pretragu (po tipu akta)
 
-За сваки тип акта, `krivica` даје `istrazivanje-prakse` јасан сет кључних речи:
+Za svaki tip akta, `krivica` daje `istrazivanje-prakse` jasan set ključnih reči:
 
-**Жалба на пресуду:**
-- „битна повреда чл. 438 ЗКП"
-- „погрешно утврђено чињенично стање чл. 440"
-- „недозвољени доказ чл. 84 чл. 438 ст. 2 тач. 1"
-- „неразумљива изрека чл. 438 ст. 1 тач. 11"
+**Žalba na presudu:**
+- „bitna povreda čl. 438 ZKP"
+- „pogrešno utvrđeno činjenično stanje čl. 440"
+- „nedozvoljeni dokaz čl. 84 čl. 438 st. 2 tač. 1"
+- „nerazumljiva izreka čl. 438 st. 1 tač. 11"
 
-**ЗЗЗ:**
-- „захтев за заштиту законитости Kzz [предмет]"
-- „чл. 485 ЗКП повреда КЗ"
-- „застарелост кривичног гоњења чл. 103 КЗ"
+**ZZZ:**
+- „zahtev za zaštitu zakonitosti Kzz [predmet]"
+- „čl. 485 ZKP povreda KZ"
+- „zastarelost krivičnog gonjenja čl. 103 KZ"
 
-**Уставна жалба:**
-- „Уж кривица чл. 32 Устава"
-- „претпоставка невиности чл. 34 Устава"
-- „чл. 6 ЕКЉП правично суђење"
+**Ustavna žalba:**
+- „Už krivica čl. 32 Ustava"
+- „pretpostavka nevinosti čl. 34 Ustava"
+- „čl. 6 EKLJP pravično suđenje"
 
-**Представка ЕСЉП:**
-- Кључни ЕСЉП случајеви по повређеном члану:
-  - чл. 6 (fair trial) → Salduz, Ibrahim, Al-Khawaja
-  - чл. 7 (нема казне без закона) → Scoppola, Del Río Prada
-  - чл. 10 (слобода изражавања за увреду/клевету) → Lingens, Feldek, Castells
-  - **СВЕ кроз `istrazivanje-prakse` HUDOC претрагу — никад из меморије**
+**Predstavka ESLJP:**
+- Ključni ESLJP slučajevi po povređenom članu:
+  - čl. 6 (fair trial) → Salduz, Ibrahim, Al-Khawaja
+  - čl. 7 (nema kazne bez zakona) → Scoppola, Del Río Prada
+  - čl. 10 (sloboda izražavanja za uvredu/klevetu) → Lingens, Feldek, Castells
+  - **SVE kroz `istrazivanje-prakse` HUDOC pretragu — nikad iz memorije**
 
-Детаљно: `references/esljp-krivica.md`
+Detaljno: `references/esljp-krivica.md`
 
-### 3.3 Судска пракса — шта се ради са резултатом
+### 3.3 Sudska praksa — šta se radi sa rezultatom
 
-1. Сваки резултат иде кроз `verifikator` за DIFF провер извора.
-2. За сваку коришћену одлуку — засебан .docx фајл (тренутно правило из твојих инструкција).
-3. У кривични акт се уграђује **парафразирано** у аргументацију, са „вид. ВС Kzz [број]/[год]" као интерна референца.
-4. Никад дословни цитати дужи од 15 речи без атрибуције и линка.
+1. Svaki rezultat ide kroz `verifikator` za DIFF prover izvora.
+2. Za svaku korišćenu odluku — zaseban .docx fajl (trenutno pravilo iz tvojih instrukcija).
+3. U krivični akt se ugrađuje **parafrazirano** u argumentaciju, sa „vid. VS Kzz [broj]/[god]" kao interna referenca.
+4. Nikad doslovni citati duži od 15 reči bez atribucije i linka.
 
 
 ---
 
-## Корак 4 — Структура документа по типу акта
+## Korak 4 — Struktura dokumenta po tipu akta
 
-Сви шаблони су у ћирилици. Фонт: Times New Roman 12pt. Формат: A4, маргине 2,54 цм.
+Svi šabloni su u ćirilici. Font: Times New Roman 12pt. Format: A4, margine 2,54 cm.
 
-### 4.1 ЖАЛБА НА ПРЕСУДУ (чл. 430–467 ЗКП)
+### 4.1 ŽALBA NA PRESUDU (čl. 430–467 ZKP)
 
 ```
-[ВИШЕМ/АПЕЛАЦИОНОМ СУДУ У ___]
-путем
-[Основног/Вишег суда у ___]
-На бр. К-___/____
+[VIŠEM/APELACIONOM SUDU U ___]
+putem
+[Osnovnog/Višeg suda u ___]
+Na br. K-___/____
 
-ОКРИВЉЕНИ:  [Подаци], кога по пуномоћи у списима брани адв. Милан Мишић
-             из Новог Сада, ул. Максима Горког бр. 6:
+OKRIVLJENI:  [Podaci], koga po punomoći u spisima brani adv. Milan Mišić
+             iz Novog Sada, ul. Maksima Gorkog br. 6:
 
-              Ж А Л Б А
-              [N] примерака, [N] прилога
+              Ž A L B A
+              [N] primeraka, [N] priloga
 
-Против Пресуде [суд] бр. К-___/___ од ___.___._____. године,
-бранилац окривљеног [Име] у законом остављеном року изјављује
+Protiv Presude [sud] br. K-___/___ od ___.___._____. godine,
+branilac okrivljenog [Ime] u zakonom ostavljenom roku izjavljuje
 
-                Жалбу
+                Žalbu
 
-Због:
-1. битне повреде одредаба кривичног поступка,
-2. повреде кривичног закона,
-3. погрешно и непотпуно утврђеног чињеничног стања,
-4. одлуке о кривичној санкцији и другим одлукама
+Zbog:
+1. bitne povrede odredaba krivičnog postupka,
+2. povrede krivičnog zakona,
+3. pogrešno i nepotpuno utvrđenog činjeničnog stanja,
+4. odluke o krivičnoj sankciji i drugim odlukama
 
-и предлаже да се ова Жалба са списима предмета достави на одлучивање
-већу [другостепеног суда], које молимо да у смислу одредаба члана 447
-ЗКП-а, о дану и часу одржавања седнице обавести окривљеног и његовог
-браниоца пошто исти желе да присуствују јавном делу седнице, те да
-након тога:
+i predlaže da se ova Žalba sa spisima predmeta dostavi na odlučivanje
+veću [drugostepenog suda], koje molimo da u smislu odredaba člana 447
+ZKP-a, o danu i času održavanja sednice obavesti okrivljenog i njegovog
+branioca pošto isti žele da prisustvuju javnom delu sednice, te da
+nakon toga:
 
-Жалбу уважи и побијану првостепену пресуду преиначи тако што ће
-окривљеног ослободити од одговорности ИЛИ да првостепену пресуду
-укине и врати предмет на поновно суђење.
+Žalbu uvaži i pobijanu prvostepenu presudu preinači tako što će
+okrivljenog osloboditi od odgovornosti ILI da prvostepenu presudu
+ukine i vrati predmet na ponovno suđenje.
 
-              ОБРАЗЛОЖЕЊЕ
+              OBRAZLOŽENJE
 
-[„ЈЕДНА СТВАР" иде овде, у првих 2–3 пасуса — не чекати средину]
+[„JEDNA STVAR" ide ovde, u prvih 2–3 pasusa — ne čekati sredinu]
 
-[Детаљно образложење по основима жалбе — одвојено по тачкама,
- са ДОКАЗ: после сваке чињеничне тврдње]
+[Detaljno obrazloženje po osnovima žalbe — odvojeno po tačkama,
+ sa DOKAZ: posle svake činjenične tvrdnje]
 
 _______________________________________________________________
-ПРЕДЛОГ ДРУГОСТЕПЕНОМ СУДУ
+PREDLOG DRUGOSTEPENOM SUDU
 
-Сходно свему напред наведеном, предлажем да [другостепени суд]
-усвоји ову Жалбу, те [преиначи/укине] побијану Пресуду...
+Shodno svemu napred navedenom, predlažem da [drugostepeni sud]
+usvoji ovu Žalbu, te [preinači/ukine] pobijanu Presudu...
 
-[Место], [Датум]
-                              бранилац окривљеног
-                              адв. Милан Мишић
+[Mesto], [Datum]
+                              branilac okrivljenog
+                              adv. Milan Mišić
 ```
 
-**Рок:** 15 дана (општи) / 8 дана (скраћени)
+**Rok:** 15 dana (opšti) / 8 dana (skraćeni)
 
-### 4.2 ЗАХТЕВ ЗА ЗАШТИТУ ЗАКОНИТОСТИ (чл. 482–493 ЗКП)
+### 4.2 ZAHTEV ZA ZAŠTITU ZAKONITOSTI (čl. 482–493 ZKP)
 
 ```
-ВРХОВНОМ СУДУ
+VRHOVNOM SUDU
 
-ОКРИВЉЕНИ:  [Подаци], кога по пуномоћи у списима брани адв. [Име]
+OKRIVLJENI:  [Podaci], koga po punomoći u spisima brani adv. [Ime]
 
-              ЗАХТЕВ
-              ЗА ЗАШТИТУ ЗАКОНИТОСТИ
-              [N] примерака, [N] прилога + пуномоћ
+              ZAHTEV
+              ZA ZAŠTITU ZAKONITOSTI
+              [N] primeraka, [N] priloga + punomoć
 
-Против Пресуде [првостепени суд] бр. ___ и Пресуде [другостепени суд]
-бр. ___, у законски остављеном року окривљени путем браниоца изјављује
+Protiv Presude [prvostepeni sud] br. ___ i Presude [drugostepeni sud]
+br. ___, u zakonski ostavljenom roku okrivljeni putem branioca izjavljuje
 
-              Захтев за заштиту законитости
+              Zahtev za zaštitu zakonitosti
 
-Из разлога предвиђених чл. 485 ЗКП, односно:
-- Повреде ЗКП,
-- Погрешно примењен КЗ,
+Iz razloga predviđenih čl. 485 ZKP, odnosno:
+- Povrede ZKP,
+- Pogrešno primenjen KZ,
 
-па предлажемо да Врховни суд усвоји овај Захтев за заштиту законитости,
-укине у целости побијане пресуде... те врати предмет на поновно суђење,
-као и да ОДЛОЖИ ИЗВРШЕЊЕ правноснажне пресуде, ДОК не реши о овом
-Захтеву за заштиту законитости, а такође да од првостепеног и
-другостепеног суда затражи комплетне списе предмета.
+pa predlažemo da Vrhovni sud usvoji ovaj Zahtev za zaštitu zakonitosti,
+ukine u celosti pobijane presude... te vrati predmet na ponovno suđenje,
+kao i da ODLOŽI IZVRŠENJE pravnosnažne presude, DOK ne reši o ovom
+Zahtevu za zaštitu zakonitosti, a takođe da od prvostepenog i
+drugostepenog suda zatraži kompletne spise predmeta.
 
-              ОБРАЗЛОЖЕЊЕ
-[„Једна ствар" → па детаљно по тачкама, нумерисано: 1., 2., 3.]
+              OBRAZLOŽENJE
+[„Jedna stvar" → pa detaljno po tačkama, numerisano: 1., 2., 3.]
 
 _______________________________________________________________
-Сходно свему наведеном, предлажемо да Врховни суд усвоји овај ЗЗЗ...
+Shodno svemu navedenom, predlažemo da Vrhovni sud usvoji ovaj ZZZ...
 
-[Место], [Датум]
-                              адв. [Име]
+[Mesto], [Datum]
+                              adv. [Ime]
 ```
 
-**Рок:** 30 дана од правноснажности
-**Подноси:** Окривљени ИСКЉУЧИВО преко браниоца (чл. 483 ЗКП)
-**Цитирање суда:** за одлуке до 2010 — ВСС; 2010–2024 — ВКС; од 2024 — ВС (видети `istrazivanje-prakse`)
+**Rok:** 30 dana od pravnosnažnosti
+**Podnosi:** Okrivljeni ISKLJUČIVO preko branioca (čl. 483 ZKP)
+**Citiranje suda:** za odluke do 2010 — VSS; 2010–2024 — VKS; od 2024 — VS (videti `istrazivanje-prakse`)
 
-### 4.3 ЗАВРШНА РЕЧ (чл. 412 ЗКП)
-
-```
-[СУДУ]
-На бр. К-___/____
-
-              ЗАВРШНА РЕЧ
-              БРАНИОЦА ОКРИВЉЕНОГ [ИМЕ]
-
-Поштована председнице и чланови судског већа,
-[или: Поштована судија,]
-
-[Уводно — „Једна ствар" — став одбране]
-
-[Анализа доказа — детаљно, по сваком доказу]
-
-[Правна аргументација]
-
-[Закључак — предлог суду]
-
-Сходно свему наведеном, предлажемо да суд донесе ОСЛОБАЂАЈУЋУ ПРЕСУДУ,
-све према начелу ин дубио про рео.
-
-[Место], [Датум]
-                              адв. [Име]
-```
-
-### 4.4 УВОДНО ИЗЛАГАЊЕ (чл. 396 ЗКП)
+### 4.3 ZAVRŠNA REČ (čl. 412 ZKP)
 
 ```
-[СУДУ]
-На бр. К-___/____
+[SUDU]
+Na br. K-___/____
 
-              УВОДНО ИЗЛАГАЊЕ
-              БРАНИОЦА ОКРИВЉЕНОГ,
+              ZAVRŠNA REČ
+              BRANIOCA OKRIVLJENOG [IME]
 
-Поштована председнице и чланови већа,
+Poštovana predsednice i članovi sudskog veća,
+[ili: Poštovana sudija,]
 
-[Кратак став одбране — шта одбрана тврди, „Једна ствар" у једној реченици]
+[Uvodno — „Jedna stvar" — stav odbrane]
 
-[Доказни предлози]
+[Analiza dokaza — detaljno, po svakom dokazu]
 
-Задржавамо право да у току поступка предложимо доказе који нам
-нису били познати.
+[Pravna argumentacija]
 
-[Место], [Датум]
-                              адв. [Име]
+[Zaključak — predlog sudu]
+
+Shodno svemu navedenom, predlažemo da sud donese OSLOBAĐAJUĆU PRESUDU,
+sve prema načelu in dubio pro reo.
+
+[Mesto], [Datum]
+                              adv. [Ime]
 ```
 
-### 4.5 КРИВИЧНА ПРИЈАВА (чл. 280–284 ЗКП)
+### 4.4 UVODNO IZLAGANJE (čl. 396 ZKP)
 
 ```
-[ЈАВНОМ ТУЖИЛАШТВУ]
+[SUDU]
+Na br. K-___/____
 
-ОСУМЊИЧЕНИ:  [Подаци]
-ОШТЕЋЕНИ:    [Подаци], кога по пуномоћи заступа адв. [Име]:
+              UVODNO IZLAGANJE
+              BRANIOCA OKRIVLJENOG,
 
-              КРИВИЧНА ПРИЈАВА
-              Због: кривичног дела [назив] из чл. ___ КЗ
+Poštovana predsednice i članovi veća,
 
-ШТО ЈЕ:
-[Чињенични опис радње извршења — хронолошки, детаљно]
+[Kratak stav odbrane — šta odbrana tvrdi, „Jedna stvar" u jednoj rečenici]
 
-чиме је извршио кривично дело [назив] из члана ___ Кривичног законика.
+[Dokazni predlozi]
 
-              П Р Е Д Л А Ж Е М О
-[Доказни предлози — нумерисани]
+Zadržavamo pravo da u toku postupka predložimo dokaze koji nam
+nisu bili poznati.
 
-Напомена: имовинско-правни захтев постављамо...
-
-[Место], [Датум]
-                              адв. [Име]
-
-Трошковник:
-Састав ове Кривичне пријаве........[износ],00 динара
+[Mesto], [Datum]
+                              adv. [Ime]
 ```
 
-### 4.6 ОДГОВОР НА ОПТУЖНИЦУ (чл. 336–344 ЗКП) — ОПШТИ ПОСТУПАК
+### 4.5 KRIVIČNA PRIJAVA (čl. 280–284 ZKP)
 
 ```
-[СУДУ] — већу из чл. 21 ст. 4 ЗКП
-На бр. КВ ___/____
+[JAVNOM TUŽILAŠTVU]
 
-ОКРИВЉЕНИ:  [Подаци], кога брани адв. [Име]:
+OSUMNJIČENI:  [Podaci]
+OŠTEĆENI:    [Podaci], koga po punomoći zastupa adv. [Ime]:
 
-              ОДГОВОР НА ОПТУЖНИЦУ
-              [N] примерака
+              KRIVIČNA PRIJAVA
+              Zbog: krivičnog dela [naziv] iz čl. ___ KZ
 
-На основу чл. 336 ст. 2 ЗКП бранилац окривљеног адв. [Име] доставља
-Одговор на Оптужницу бр. ___ са предлогом да веће [суда] из чл. 21
-ст. 4 ЗКП на основу Одговора на оптужницу и саме Оптужнице исту
-испита, те донесе Решење о обустави поступка на основу чл. 338 ст. 1
-тачка ___ ЗКП.
+ŠTO JE:
+[Činjenični opis radnje izvršenja — hronološki, detaljno]
 
-              Образложење
+čime je izvršio krivično delo [naziv] iz člana ___ Krivičnog zakonika.
 
-[Детаљно — зашто нема места оптужби]
+              P R E D L A Ž E M O
+[Dokazni predlozi — numerisani]
 
-Сходно свему наведеном, предлажемо да веће [суда] из чл. 21 ст. 4 ЗКП
-на основу овог Одговора на оптужницу и саме Оптужнице исте испита,
-те донесе Решење о обустави предметног поступка на основу чл. 338
-ст. 1 тачка ___ ЗКП.
+Napomena: imovinsko-pravni zahtev postavljamo...
 
-[Место], [Датум]
-                              адв. [Име]
+[Mesto], [Datum]
+                              adv. [Ime]
+
+Troškovnik:
+Sastav ove Krivične prijave........[iznos],00 dinara
 ```
 
-**Рок:** 8 дана од достављања оптужнице (чл. 336 ст. 3 ЗКП)
-
-### 4.7 ЖАЛБА НА ПРИТВОР (чл. 211–222 ЗКП)
+### 4.6 ODGOVOR NA OPTUŽNICU (čl. 336–344 ZKP) — OPŠTI POSTUPAK
 
 ```
-[АПЕЛАЦИОНОМ/ВИШЕМ СУДУ]
-путем
-[Суда који је одредио притвор]
-На бр. КВ-___/____
+[SUDU] — veću iz čl. 21 st. 4 ZKP
+Na br. KV ___/____
 
-ОКРИВЉЕНИ:  [Подаци], кога брани адв. [Име]:
+OKRIVLJENI:  [Podaci], koga brani adv. [Ime]:
 
-              Ж А Л Б А
-              [N] примерака
+              ODGOVOR NA OPTUŽNICU
+              [N] primeraka
 
-Против Решења [суда] бр. ___ од ___.___.____. године, бранилац
-окривљеног [Име] у остављеном року изјављује
+Na osnovu čl. 336 st. 2 ZKP branilac okrivljenog adv. [Ime] dostavlja
+Odgovor na Optužnicu br. ___ sa predlogom da veće [suda] iz čl. 21
+st. 4 ZKP na osnovu Odgovora na optužnicu i same Optužnice istu
+ispita, te donese Rešenje o obustavi postupka na osnovu čl. 338 st. 1
+tačka ___ ZKP.
 
-              Жалбу
+              Obrazloženje
 
-Због:
-- Погрешно и непотпуно утврђеног чињеничног стања,
-- Битних повреда одредаба кривичног поступка,
-- Погрешне одлуке о другим мерама,
+[Detaljno — zašto nema mesta optužbi]
 
-те предлажем да [суд] усвоји ову Жалбу, те преиначи побијано Решење,
-тако што ће укинути притвор окривљеном [Име] или притвор замени
-блажом мером забрана напуштања боравишта.
+Shodno svemu navedenom, predlažemo da veće [suda] iz čl. 21 st. 4 ZKP
+na osnovu ovog Odgovora na optužnicu i same Optužnice iste ispita,
+te donese Rešenje o obustavi predmetnog postupka na osnovu čl. 338
+st. 1 tačka ___ ZKP.
 
-              ОБРАЗЛОЖЕЊЕ
-[Детаљно — зашто нема основа за притвор]
+[Mesto], [Datum]
+                              adv. [Ime]
+```
+
+**Rok:** 8 dana od dostavljanja optužnice (čl. 336 st. 3 ZKP)
+
+### 4.7 ŽALBA NA PRITVOR (čl. 211–222 ZKP)
+
+```
+[APELACIONOM/VIŠEM SUDU]
+putem
+[Suda koji je odredio pritvor]
+Na br. KV-___/____
+
+OKRIVLJENI:  [Podaci], koga brani adv. [Ime]:
+
+              Ž A L B A
+              [N] primeraka
+
+Protiv Rešenja [suda] br. ___ od ___.___.____. godine, branilac
+okrivljenog [Ime] u ostavljenom roku izjavljuje
+
+              Žalbu
+
+Zbog:
+- Pogrešno i nepotpuno utvrđenog činjeničnog stanja,
+- Bitnih povreda odredaba krivičnog postupka,
+- Pogrešne odluke o drugim merama,
+
+te predlažem da [sud] usvoji ovu Žalbu, te preinači pobijano Rešenje,
+tako što će ukinuti pritvor okrivljenom [Ime] ili pritvor zameni
+blažom merom zabrana napuštanja boravišta.
+
+              OBRAZLOŽENJE
+[Detaljno — zašto nema osnova za pritvor]
 
 _______________________________________________________________
-ПРЕДЛОГ ДРУГОСТЕПЕНОМ СУДУ
-[Предлог]
+PREDLOG DRUGOSTEPENOM SUDU
+[Predlog]
 
-[Место], [Датум]
-                              адв. [Име]
+[Mesto], [Datum]
+                              adv. [Ime]
 ```
 
-**Притворски основи (чл. 211 ЗКП):**
-- тач. 1 — опасност од бекства
-- тач. 2 — утицај на сведоке/доказе
-- тач. 3 — понављање дела
-- тач. 4 — тежина дела (преко 10 год.)
+**Pritvorski osnovi (čl. 211 ZKP):**
+- tač. 1 — opasnost od bekstva
+- tač. 2 — uticaj na svedoke/dokaze
+- tač. 3 — ponavljanje dela
+- tač. 4 — težina dela (preko 10 god.)
 
-**Аргументација одбране (УВЕК):**
-- Окривљени има адресу, запослење, породицу → нема опасности од бекства
-- Блаже мере су довољне (забрана напуштања, јављање полицији)
-- Притвор је КРАЈЊА мера → примењује се само ако блаже нису довољне
+**Argumentacija odbrane (UVEK):**
+- Okrivljeni ima adresu, zaposlenje, porodicu → nema opasnosti od bekstva
+- Blaže mere su dovoljne (zabrana napuštanja, javljanje policiji)
+- Pritvor je KRAJNJA mera → primenjuje se samo ako blaže nisu dovoljne
 
-**Рокови — КРИТИЧНО:**
-- **Жалба на решење о притвору:** 3 дана од достављања решења (чл. 214 ст. 4 ЗКП)
-- **Жалба на решење о задржавању:** 4 сата од усменог саопштења решења (чл. 294 ст. 3 ЗКП)
+**Rokovi — KRITIČNO:**
+- **Žalba na rešenje o pritvoru:** 3 dana od dostavljanja rešenja (čl. 214 st. 4 ZKP)
+- **Žalba na rešenje o zadržavanju:** 4 sata od usmenog saopštenja rešenja (čl. 294 st. 3 ZKP)
 
-### 4.8 ПРИВАТНА ТУЖБА (чл. 65 ЗКП + чл. 170–173 КЗ)
-
-```
-[СУДУ]
-
-ПРИВАТНИ ТУЖИЛАЦ (ОШТЕЋЕНИ): [Подаци]
-ОКРИВЉЕНИ: [Подаци]
-
-              ПРИВАТНА ТУЖБА
-              ради: кривичног дела [увреда/клевета] из чл. [170/171] КЗ
-
-[Чињенични опис]
-[Правна квалификација — обавезно цитирати чл. 170 или 171 КЗ]
-[Доказни предлози]
-[Предлог санкције]
-
-[Место], [Датум]
-                              адв. [Име]
-```
-
-**Рок подношења:** 3 месеца од сазнања за дело и учиниоца (чл. 65 ст. 2 ЗКП)
-**Основ:** чл. 170 КЗ (увреда), чл. 171 КЗ (клевета), чл. 172 КЗ (изношење личних и породичних прилика), чл. 173 КЗ (повреда угледа због расне припадности)
-
-
-### 4.9 ПРИГОВОР НА ОПТУЖНИ ПРЕДЛОГ (чл. 500 ЗКП) — СКРАЋЕНИ ПОСТУПАК
+### 4.8 PRIVATNA TUŽBA (čl. 65 ZKP + čl. 170–173 KZ)
 
 ```
-[СУДУ]
-На бр. К-___/____
+[SUDU]
 
-ОКРИВЉЕНИ:  [Подаци], кога брани адв. [Име]:
+PRIVATNI TUŽILAC (OŠTEĆENI): [Podaci]
+OKRIVLJENI: [Podaci]
 
-              ПРИГОВОР
-              НА ОПТУЖНИ ПРЕДЛОГ
-              [N] примерака
+              PRIVATNA TUŽBA
+              radi: krivičnog dela [uvreda/kleveta] iz čl. [170/171] KZ
 
-На основу чл. 500 ст. 1 ЗКП бранилац окривљеног адв. [Име] у законом
-остављеном року од 8 дана изјављује
+[Činjenični opis]
+[Pravna kvalifikacija — obavezno citirati čl. 170 ili 171 KZ]
+[Dokazni predlozi]
+[Predlog sankcije]
 
-              Приговор
-
-Против Оптужног предлога [ОЈТ] Кт бр. ___ од ___.___.____. године,
-те предлажем да суд овај Приговор усвоји и побијани Оптужни предлог
-одбаци у целости на основу чл. 500 ст. 5 ЗКП, или га врати тужиоцу
-на допуну.
-
-              Образложење
-
-[„Једна ствар" → детаљно образложење]
-
-Разлози за одбацивање:
-1. Нема основане сумње да је окривљени учинио кривично дело
-2. Кривично дело није предвиђено законом као кривично дело
-3. Наступила је застарелост или друга околност која искључује гоњење
-4. [други разлози]
-
-Сходно свему наведеном, предлажемо да судија одбаци Оптужни предлог
-на основу чл. 500 ст. 5 ЗКП.
-
-[Место], [Датум]
-                              адв. [Име]
+[Mesto], [Datum]
+                              adv. [Ime]
 ```
 
-**Рок:** 8 дана од достављања оптужног предлога (чл. 500 ст. 3 ЗКП)
-**Разлика од одговора на оптужницу:** Приговор на оптужни предлог постоји САМО у скраћеном поступку (до 8 година затвора као запрећена казна). О њему одлучује судија појединац, не веће.
+**Rok podnošenja:** 3 meseca od saznanja za delo i učinioca (čl. 65 st. 2 ZKP)
+**Osnov:** čl. 170 KZ (uvreda), čl. 171 KZ (kleveta), čl. 172 KZ (iznošenje ličnih i porodičnih prilika), čl. 173 KZ (povreda ugleda zbog rasne pripadnosti)
 
-### 4.10 ЖАЛБА НА РЕШЕЊЕ О ОДБАЧАЈУ КРИВИЧНЕ ПРИЈАВЕ (чл. 51 ЗКП)
 
-```
-[ВИШЕМ ЈАВНОМ ТУЖИЛАШТВУ У ___]
-путем
-[ОЈТ ___]
-
-ОШТЕЋЕНИ:  [Подаци], кога по пуномоћи заступа адв. [Име]:
-
-              ПРИГОВОР
-              НА РЕШЕЊЕ О ОДБАЧАЈУ КРИВИЧНЕ ПРИЈАВЕ
-              [N] примерака, [N] прилога
-
-На основу чл. 51 ст. 2 ЗКП оштећени преко пуномоћника у законом
-остављеном року од 8 дана изјављује
-
-              Приговор
-
-Против Решења [ОЈТ ___] Кт бр. ___ од ___.___.____. године, којим
-је одбачена кривична пријава [број, датум] поднета против осумњиченог
-[Име] за кривично дело [назив] из чл. ___ КЗ.
-
-              Образложење
-
-[Детаљно — зашто је одбачај неправилан:
- - докази који нису размотрени
- - логичке грешке у образложењу
- - погрешна правна квалификација
- - недовољно испитан догађај]
-
-Предлажем Вишем јавном тужилаштву да усвоји овај Приговор, укине
-побијано Решење о одбачају, и наложи ОЈТ-у да настави са кривичним
-гоњењем у складу са чл. 51 ст. 3 ЗКП.
-
-[Место], [Датум]
-                              адв. [Име]
-```
-
-**Рок:** 8 дана од достављања решења (чл. 51 ст. 2 ЗКП)
-**Важно:** Ако ВЈТ одбије приговор, оштећени може преузети кривично гоњење као супсидијарни тужилац (чл. 52 ЗКП), у року од 8 дана од обавештења.
-
-### 4.11 СПОРАЗУМ О ПРИЗНАЊУ КРИВИЧНОГ ДЕЛА (чл. 313–319 ЗКП)
+### 4.9 PRIGOVOR NA OPTUŽNI PREDLOG (čl. 500 ZKP) — SKRAĆENI POSTUPAK
 
 ```
-[ОСНОВНОМ/ВИШЕМ ЈАВНОМ ТУЖИЛАШТВУ]
-[или: СУДУ, ако је предмет већ пред судом]
+[SUDU]
+Na br. K-___/____
 
-ОКРИВЉЕНИ:  [Подаци], кога брани адв. [Име]:
+OKRIVLJENI:  [Podaci], koga brani adv. [Ime]:
 
-              ПРЕДЛОГ ЗА ЗАКЉУЧЕЊЕ
-              СПОРАЗУМА О ПРИЗНАЊУ КРИВИЧНОГ ДЕЛА
-              у смислу чл. 313–319 ЗКП
+              PRIGOVOR
+              NA OPTUŽNI PREDLOG
+              [N] primeraka
 
-Бранилац окривљеног адв. [Име], на основу чл. 314 ст. 2 ЗКП, предлаже
-закључење споразума о признању кривичног дела под следећим условима:
+Na osnovu čl. 500 st. 1 ZKP branilac okrivljenog adv. [Ime] u zakonom
+ostavljenom roku od 8 dana izjavljuje
 
-              ПРЕДМЕТ СПОРАЗУМА
+              Prigovor
 
-1. Окривљени признаје извршење кривичног дела [назив] из чл. ___ КЗ,
-   како је описано у [оптужници/оптужном предлогу/кривичној пријави]
-   бр. ___ од ___.___.____. године.
+Protiv Optužnog predloga [OJT] Kt br. ___ od ___.___.____. godine,
+te predlažem da sud ovaj Prigovor usvoji i pobijani Optužni predlog
+odbaci u celosti na osnovu čl. 500 st. 5 ZKP, ili ga vrati tužiocu
+na dopunu.
 
-2. За признато дело, окривљени пристаје на:
-   - казну [врста и висина]
-   - [евентуално: мера безбедности, имовинскоправни захтев]
-   - накнаду трошкова поступка
+              Obrazloženje
 
-3. Окривљени се одриче права на жалбу у складу са чл. 319 ст. 3 ЗКП.
+[„Jedna stvar" → detaljno obrazloženje]
 
-              ОБРАЗЛОЖЕЊЕ
+Razlozi za odbacivanje:
+1. Nema osnovane sumnje da je okrivljeni učinio krivično delo
+2. Krivično delo nije predviđeno zakonom kao krivično delo
+3. Nastupila je zastarelost ili druga okolnost koja isključuje gonjenje
+4. [drugi razlozi]
 
-[Зашто је споразум у интересу окривљеног:
- - признавањем се остварује олакшавајућа околност
- - избегавање ризика строже казне након главног претреса
- - процесна економија]
+Shodno svemu navedenom, predlažemo da sudija odbaci Optužni predlog
+na osnovu čl. 500 st. 5 ZKP.
 
-              ПРЕДЛОГ
-
-Предлажемо закључење споразума по наведеним условима, уз предлог
-да се изречена казна изрекне у доњој граници запрећене казне за
-кривично дело из чл. ___ КЗ, имајући у виду све олакшавајуће
-околности.
-
-[Место], [Датум]
-                              адв. [Име]
+[Mesto], [Datum]
+                              adv. [Ime]
 ```
 
-**ОГРАНИЧЕЊА (чл. 313 ст. 2 ЗКП):**
-- Споразум се може закључити за сва кривична дела
-- Суд испитује законитост и ваљаност споразума
-- Нема жалбе (чл. 319 ст. 3 ЗКП), осим у изузетним случајевима
+**Rok:** 8 dana od dostavljanja optužnog predloga (čl. 500 st. 3 ZKP)
+**Razlika od odgovora na optužnicu:** Prigovor na optužni predlog postoji SAMO u skraćenom postupku (do 8 godina zatvora kao zaprećena kazna). O njemu odlučuje sudija pojedinac, ne veće.
 
-**СТРАТЕШКА НАПОМЕНА:** Споразум се не предлаже без експлицитне инструкције клијента. Одлука о признању је крајње лична и мора бити донета уз потпуно обавештавање о последицама.
-
-### 4.12 ПРЕДЛОГ ЗА ПОНАВЉАЊЕ КРИВИЧНОГ ПОСТУПКА (чл. 470–479 ЗКП)
+### 4.10 ŽALBA NA REŠENJE O ODBAČAJU KRIVIČNE PRIJAVE (čl. 51 ZKP)
 
 ```
-[СУДУ КОЈИ ЈЕ ДОНЕО ПРАВНОСНАЖНУ ПРЕСУДУ]
-На бр. К-___/____
+[VIŠEM JAVNOM TUŽILAŠTVU U ___]
+putem
+[OJT ___]
 
-ОКРИВЉЕНИ:  [Подаци], кога по пуномоћи брани адв. [Име]:
+OŠTEĆENI:  [Podaci], koga po punomoći zastupa adv. [Ime]:
 
-              ПРЕДЛОГ
-              ЗА ПОНАВЉАЊЕ КРИВИЧНОГ ПОСТУПКА
-              [N] примерака, [N] прилога + пуномоћ
+              PRIGOVOR
+              NA REŠENJE O ODBAČAJU KRIVIČNE PRIJAVE
+              [N] primeraka, [N] priloga
 
-На основу чл. 470 ЗКП у вези са чл. 473 ЗКП, осуђени преко браниоца
-подноси Предлог за понављање кривичног поступка који је правноснажно
-окончан Пресудом [суд] бр. ___ од ___.___.____. године.
+Na osnovu čl. 51 st. 2 ZKP oštećeni preko punomoćnika u zakonom
+ostavljenom roku od 8 dana izjavljuje
 
-              РАЗЛОГ ЗА ПОНАВЉАЊЕ
+              Prigovor
 
-[Избор једног или више разлога из чл. 473 ЗКП:]
+Protiv Rešenja [OJT ___] Kt br. ___ od ___.___.____. godine, kojim
+je odbačena krivična prijava [broj, datum] podneta protiv osumnjičenog
+[Ime] za krivično delo [naziv] iz čl. ___ KZ.
 
-1. Нове чињенице и нови докази (чл. 473 ст. 1 тач. 3 ЗКП)
-   [Опис нових чињеница и доказа који нису били познати у време
-    раније одлуке]
+              Obrazloženje
 
-2. Лажан исказ сведока/вештака (чл. 473 ст. 1 тач. 1 ЗКП)
-   [Опис + правноснажна пресуда којом је утврђен лажан исказ]
+[Detaljno — zašto je odbačaj nepravilan:
+ - dokazi koji nisu razmotreni
+ - logičke greške u obrazloženju
+ - pogrešna pravna kvalifikacija
+ - nedovoljno ispitan događaj]
 
-3. Фалсификована исправа (чл. 473 ст. 1 тач. 2 ЗКП)
-   [Опис + правноснажна пресуда о фалсификату]
+Predlažem Višem javnom tužilaštvu da usvoji ovaj Prigovor, ukine
+pobijano Rešenje o odbačaju, i naloži OJT-u da nastavi sa krivičnim
+gonjenjem u skladu sa čl. 51 st. 3 ZKP.
 
-4. Кривично дело судије или тужиоца (чл. 473 ст. 1 тач. 4 ЗКП)
-
-              ОБРАЗЛОЖЕЊЕ
-
-[Детаљно образложење новог доказа / нове чињенице и зашто
- би довела до другачије одлуке]
-
-Сходно наведеном, предлажем да суд на основу чл. 477 ЗКП усвоји овај
-Предлог и дозволи понављање кривичног поступка окончаног Пресудом
-бр. ___ од ___.___.____. године.
-
-[Место], [Датум]
-                              адв. [Име]
+[Mesto], [Datum]
+                              adv. [Ime]
 ```
 
-**Рок:** Нема формалног рока — може се поднети до наступања застарелости извршења казне (чл. 470 ст. 3 ЗКП).
-**Последица усвојеног предлога:** Поступак се враћа у стање главног претреса.
+**Rok:** 8 dana od dostavljanja rešenja (čl. 51 st. 2 ZKP)
+**Važno:** Ako VJT odbije prigovor, oštećeni može preuzeti krivično gonjenje kao supsidijarni tužilac (čl. 52 ZKP), u roku od 8 dana od obaveštenja.
 
-### 4.13 УСТАВНА ЖАЛБА (чл. 170 Устава + чл. 82 ЗУС)
+### 4.11 SPORAZUM O PRIZNANJU KRIVIČNOG DELA (čl. 313–319 ZKP)
 
 ```
-УСТАВНОМ СУДУ РЕПУБЛИКЕ СРБИЈЕ
+[OSNOVNOM/VIŠEM JAVNOM TUŽILAŠTVU]
+[ili: SUDU, ako je predmet već pred sudom]
 
-ПОДНОСИЛАЦ УСТАВНЕ ЖАЛБЕ:
-[Подаци окривљеног], кога по пуномоћи у списима заступа адв. [Име]:
+OKRIVLJENI:  [Podaci], koga brani adv. [Ime]:
 
-              УСТАВНА ЖАЛБА
-              [N] примерака, [N] прилога + пуномоћ
+              PREDLOG ZA ZAKLJUČENJE
+              SPORAZUMA O PRIZNANJU KRIVIČNOG DELA
+              u smislu čl. 313–319 ZKP
 
-На основу чл. 170 Устава Републике Србије и чл. 82 Закона о Уставном
-суду, подносилац Уставне жалбе преко пуномоћника у законом остављеном
-року од 30 дана подноси
+Branilac okrivljenog adv. [Ime], na osnovu čl. 314 st. 2 ZKP, predlaže
+zaključenje sporazuma o priznanju krivičnog dela pod sledećim uslovima:
 
-              Уставну жалбу
+              PREDMET SPORAZUMA
 
-Против:
-- Пресуде [првостепени суд] К-___/___ од ___.___._____. године,
-- Пресуде [другостепени суд] Кж1-___/___ од ___.___._____. године,
-- [евентуално] Одлуке Врховног суда Кзз-___/___ од ___.___._____. године
+1. Okrivljeni priznaje izvršenje krivičnog dela [naziv] iz čl. ___ KZ,
+   kako je opisano u [optužnici/optužnom predlogu/krivičnoj prijavi]
+   br. ___ od ___.___.____. godine.
 
-Повреда уставних права:
-- чл. 32 Устава — право на правично суђење
-- чл. 33 Устава — претпоставка невиности
-- чл. 34 Устава — посебна права окривљеног
-- чл. 46 Устава — слобода мишљења и изражавања [ако је релевантно]
-- [други повређени чланови]
+2. Za priznato delo, okrivljeni pristaje na:
+   - kaznu [vrsta i visina]
+   - [eventualno: mera bezbednosti, imovinskopravni zahtev]
+   - naknadu troškova postupka
 
-У вези са:
-- чл. 6 ЕКЉП — право на правично суђење
-- чл. 7 ЕКЉП — нема казне без закона
-- чл. 10 ЕКЉП — слобода изражавања [ако је релевантно]
+3. Okrivljeni se odriče prava na žalbu u skladu sa čl. 319 st. 3 ZKP.
 
-              ОБРАЗЛОЖЕЊЕ
+              OBRAZLOŽENJE
 
-I  ПРЕТХОДНО ИЗВРШЕЊЕ ДОМАЋИХ ПРАВНИХ ЛЕКОВА
+[Zašto je sporazum u interesu okrivljenog:
+ - priznavanjem se ostvaruje olakšavajuća okolnost
+ - izbegavanje rizika strože kazne nakon glavnog pretresa
+ - procesna ekonomija]
 
-[Хронолошки преглед свих лекова који су исцрпљени — ОБАВЕЗНО
- по чл. 82 ст. 1 ЗУС]
+              PREDLOG
 
-II  „ЈЕДНА СТВАР" — ПОВРЕДА УСТАВНОГ ПРАВА
+Predlažemo zaključenje sporazuma po navedenim uslovima, uz predlog
+da se izrečena kazna izrekne u donjoj granici zaprećene kazne za
+krivično delo iz čl. ___ KZ, imajući u vidu sve olakšavajuće
+okolnosti.
 
-[Кључан аргумент — 2–3 пасуса]
-
-III  ДЕТАЉНО ПО ПОВРЕЂЕНИМ ПРАВИМА
-
-[Нумерисано по члановима Устава и ЕКЉП]
-
-IV  ПРАКСА УСТАВНОГ СУДА И ЕСЉП
-
-[Цитати релевантних одлука УС и ЕСЉП — увек верификовано кроз
- istrazivanje-prakse, никад из меморије]
-
-              ПРЕДЛОГ
-
-Предлажемо да Уставни суд усвоји ову Уставну жалбу, утврди повреду
-[наведеног уставног права], поништи побијане одлуке и врати предмет
-на поновно одлучивање.
-
-[Место], [Датум]
-                              адв. [Име]
+[Mesto], [Datum]
+                              adv. [Ime]
 ```
 
-**Рок:** 30 дана од пријема правноснажне одлуке (чл. 84 ЗУС)
-**УСЛОВ:** Претходно исцрпљени сви делотворни правни лекови (чл. 82 ст. 1 ЗУС)
-**ВАЖНО:** Уставна жалба је предуслов за представку ЕСЉП.
+**OGRANIČENJA (čl. 313 st. 2 ZKP):**
+- Sporazum se može zaključiti za sva krivična dela
+- Sud ispituje zakonitost i valjanost sporazuma
+- Nema žalbe (čl. 319 st. 3 ZKP), osim u izuzetnim slučajevima
 
-### 4.14 ПРЕДСТАВКА ЕВРОПСКОМ СУДУ ЗА ЉУДСКА ПРАВА (чл. 34 ЕКЉП)
+**STRATEŠKA NAPOMENA:** Sporazum se ne predlaže bez eksplicitne instrukcije klijenta. Odluka o priznanju je krajnje lična i mora biti doneta uz potpuno obaveštavanje o posledicama.
+
+### 4.12 PREDLOG ZA PONAVLJANJE KRIVIČNOG POSTUPKA (čl. 470–479 ZKP)
+
+```
+[SUDU KOJI JE DONEO PRAVNOSNAŽNU PRESUDU]
+Na br. K-___/____
+
+OKRIVLJENI:  [Podaci], koga po punomoći brani adv. [Ime]:
+
+              PREDLOG
+              ZA PONAVLJANJE KRIVIČNOG POSTUPKA
+              [N] primeraka, [N] priloga + punomoć
+
+Na osnovu čl. 470 ZKP u vezi sa čl. 473 ZKP, osuđeni preko branioca
+podnosi Predlog za ponavljanje krivičnog postupka koji je pravnosnažno
+okončan Presudom [sud] br. ___ od ___.___.____. godine.
+
+              RAZLOG ZA PONAVLJANJE
+
+[Izbor jednog ili više razloga iz čl. 473 ZKP:]
+
+1. Nove činjenice i novi dokazi (čl. 473 st. 1 tač. 3 ZKP)
+   [Opis novih činjenica i dokaza koji nisu bili poznati u vreme
+    ranije odluke]
+
+2. Lažan iskaz svedoka/veštaka (čl. 473 st. 1 tač. 1 ZKP)
+   [Opis + pravnosnažna presuda kojom je utvrđen lažan iskaz]
+
+3. Falsifikovana isprava (čl. 473 st. 1 tač. 2 ZKP)
+   [Opis + pravnosnažna presuda o falsifikatu]
+
+4. Krivično delo sudije ili tužioca (čl. 473 st. 1 tač. 4 ZKP)
+
+              OBRAZLOŽENJE
+
+[Detaljno obrazloženje novog dokaza / nove činjenice i zašto
+ bi dovela do drugačije odluke]
+
+Shodno navedenom, predlažem da sud na osnovu čl. 477 ZKP usvoji ovaj
+Predlog i dozvoli ponavljanje krivičnog postupka okončanog Presudom
+br. ___ od ___.___.____. godine.
+
+[Mesto], [Datum]
+                              adv. [Ime]
+```
+
+**Rok:** Nema formalnog roka — može se podneti do nastupanja zastarelosti izvršenja kazne (čl. 470 st. 3 ZKP).
+**Posledica usvojenog predloga:** Postupak se vraća u stanje glavnog pretresa.
+
+### 4.13 USTAVNA ŽALBA (čl. 170 Ustava + čl. 82 ZUS)
+
+```
+USTAVNOM SUDU REPUBLIKE SRBIJE
+
+PODNOSILAC USTAVNE ŽALBE:
+[Podaci okrivljenog], koga po punomoći u spisima zastupa adv. [Ime]:
+
+              USTAVNA ŽALBA
+              [N] primeraka, [N] priloga + punomoć
+
+Na osnovu čl. 170 Ustava Republike Srbije i čl. 82 Zakona o Ustavnom
+sudu, podnosilac Ustavne žalbe preko punomoćnika u zakonom ostavljenom
+roku od 30 dana podnosi
+
+              Ustavnu žalbu
+
+Protiv:
+- Presude [prvostepeni sud] K-___/___ od ___.___._____. godine,
+- Presude [drugostepeni sud] Kž1-___/___ od ___.___._____. godine,
+- [eventualno] Odluke Vrhovnog suda Kzz-___/___ od ___.___._____. godine
+
+Povreda ustavnih prava:
+- čl. 32 Ustava — pravo na pravično suđenje
+- čl. 33 Ustava — pretpostavka nevinosti
+- čl. 34 Ustava — posebna prava okrivljenog
+- čl. 46 Ustava — sloboda mišljenja i izražavanja [ako je relevantno]
+- [drugi povređeni članovi]
+
+U vezi sa:
+- čl. 6 EKLJP — pravo na pravično suđenje
+- čl. 7 EKLJP — nema kazne bez zakona
+- čl. 10 EKLJP — sloboda izražavanja [ako je relevantno]
+
+              OBRAZLOŽENJE
+
+I  PRETHODNO IZVRŠENJE DOMAĆIH PRAVNIH LEKOVA
+
+[Hronološki pregled svih lekova koji su iscrpljeni — OBAVEZNO
+ po čl. 82 st. 1 ZUS]
+
+II  „JEDNA STVAR" — POVREDA USTAVNOG PRAVA
+
+[Ključan argument — 2–3 pasusa]
+
+III  DETALJNO PO POVREĐENIM PRAVIMA
+
+[Numerisano po članovima Ustava i EKLJP]
+
+IV  PRAKSA USTAVNOG SUDA I ESLJP
+
+[Citati relevantnih odluka US i ESLJP — uvek verifikovano kroz
+ istrazivanje-prakse, nikad iz memorije]
+
+              PREDLOG
+
+Predlažemo da Ustavni sud usvoji ovu Ustavnu žalbu, utvrdi povredu
+[navedenog ustavnog prava], poništi pobijane odluke i vrati predmet
+na ponovno odlučivanje.
+
+[Mesto], [Datum]
+                              adv. [Ime]
+```
+
+**Rok:** 30 dana od prijema pravnosnažne odluke (čl. 84 ZUS)
+**USLOV:** Prethodno iscrpljeni svi delotvorni pravni lekovi (čl. 82 st. 1 ZUS)
+**VAŽNO:** Ustavna žalba je preduslov za predstavku ESLJP.
+
+### 4.14 PREDSTAVKA EVROPSKOM SUDU ZA LJUDSKA PRAVA (čl. 34 EKLJP)
 
 ```
 EUROPEAN COURT OF HUMAN RIGHTS
@@ -1069,395 +1069,395 @@ VI. ANNEXES
 Date: [Date]                Signature: [adv. Name]
 ```
 
-**НАПОМЕНА:** Представка ЕСЉП се подноси на енглеском или француском (изузетно на српском за прву фазу). Садржај је према Rules of Court, Rule 47. **Обавезно користити званични Application Form са hudoc.echr.coe.int**.
+**NAPOMENA:** Predstavka ESLJP se podnosi na engleskom ili francuskom (izuzetno na srpskom za prvu fazu). Sadržaj je prema Rules of Court, Rule 47. **Obavezno koristiti zvanični Application Form sa hudoc.echr.coe.int**.
 
-**Рок:** 4 месеца од финалне домаће одлуке (за случајеве настале после 1.2.2022); 6 месеци за раније (чл. 35 § 1 ЕКЉП)
+**Rok:** 4 meseca od finalne domaće odluke (za slučajeve nastale posle 1.2.2022); 6 meseci za ranije (čl. 35 § 1 EKLJP)
 
-**УСЛОВИ (чл. 35 ЕКЉП):**
-- Исцрпљени сви домаћи правни лекови (укључујући уставну жалбу)
-- Представка није анонимна
-- Исти предмет није разматран пре тога од стране ЕСЉП
-- Представка није очигледно неоснована
+**USLOVI (čl. 35 EKLJP):**
+- Iscrpljeni svi domaći pravni lekovi (uključujući ustavnu žalbu)
+- Predstavka nije anonimna
+- Isti predmet nije razmatran pre toga od strane ESLJP
+- Predstavka nije očigledno neosnovana
 
 ---
 
-## Корак 5 — Имовинскоправни захтев у кривичном поступку (чл. 252–260 ЗКП)
+## Korak 5 — Imovinskopravni zahtev u krivičnom postupku (čl. 252–260 ZKP)
 
-Одбрана се мора изјаснити о имовинскоправном захтеву оштећеног — то није опционо.
+Odbrana se mora izjasniti o imovinskopravnom zahtevu oštećenog — to nije opciono.
 
-### 5.1 Сценарији
+### 5.1 Scenariji
 
-| Ситуација | Стратегија одбране |
+| Situacija | Strategija odbrane |
 |---|---|
-| Оштећени поднео ИПЗ уз кривичну пријаву | Оспорити постојање штете или висину, предложити упуштање на парницу (чл. 258 ст. 3 ЗКП) |
-| Оштећени поднео ИПЗ тек на главном претресу | Инсистирати на упуштању на парницу — кривични поступак није место за доказивање висине штете |
-| Нема ИПЗ-а | Ништа се не ради, али се прати да тужилац не „провуче" кроз образложење |
-| Ослобађајућа пресуда | Суд МОРА упутити оштећеног на парницу (чл. 258 ст. 3 ЗКП) |
+| Oštećeni podneo IPZ uz krivičnu prijavu | Osporiti postojanje štete ili visinu, predložiti upuštanje na parnicu (čl. 258 st. 3 ZKP) |
+| Oštećeni podneo IPZ tek na glavnom pretresu | Insistirati na upuštanju na parnicu — krivični postupak nije mesto za dokazivanje visine štete |
+| Nema IPZ-a | Ništa se ne radi, ali se prati da tužilac ne „provuče" kroz obrazloženje |
+| Oslobađajuća presuda | Sud MORA uputiti oštećenog na parnicu (čl. 258 st. 3 ZKP) |
 
-### 5.2 Формула за изјашњење одбране
+### 5.2 Formula za izjašnjenje odbrane
 
 ```
-О имовинскоправном захтеву оштећеног [Име], који [опис захтева]:
+O imovinskopravnom zahtevu oštećenog [Ime], koji [opis zahteva]:
 
-Одбрана оспорава основаност и висину постављеног имовинскоправног
-захтева. Предлажемо да суд, у складу са чл. 258 ст. 3 ЗКП, оштећеног
-упути на парницу ради остваривања имовинскоправног захтева, имајући
-у виду да утврђивање свих релевантних чињеница за основаност и
-висину штете превазилази оквир кривичног поступка.
+Odbrana osporava osnovanost i visinu postavljenog imovinskopravnog
+zahteva. Predlažemo da sud, u skladu sa čl. 258 st. 3 ZKP, oštećenog
+uputi na parnicu radi ostvarivanja imovinskopravnog zahteva, imajući
+u vidu da utvrđivanje svih relevantnih činjenica za osnovanost i
+visinu štete prevazilazi okvir krivičnog postupka.
 ```
 
-### 5.3 Ризик који се не сме пропустити
+### 5.3 Rizik koji se ne sme propustiti
 
-Ако суд одлучи о ИПЗ-у у кривичном поступку, та одлука постаје део пресуде и подлеже истим правним лековима. **Пропустити да се изјасни о ИПЗ-у = пропустити и основ жалбе** (чл. 437 ст. 1 тач. 4 — одлука о другим одлукама).
+Ako sud odluči o IPZ-u u krivičnom postupku, ta odluka postaje deo presude i podleže istim pravnim lekovima. **Propustiti da se izjasni o IPZ-u = propustiti i osnov žalbe** (čl. 437 st. 1 tač. 4 — odluka o drugim odlukama).
 
 ---
 
-## Корак 6 — Трошковник по Адвокатској тарифи (кривица)
+## Korak 6 — Troškovnik po Advokatskoj tarifi (krivica)
 
-### 6.1 Обавезна претрага
+### 6.1 Obavezna pretraga
 
-Пре сваког генерисања трошковника — претражи важећу Адвокатску тарифу кроз `istrazivanje-prakse`:
-- `site:aks.org.rs тарифа тарифни број [текућа година]`
-- Потврдити вредност поена и тарифне бројеве за кривицу
+Pre svakog generisanja troškovnika — pretraži važeću Advokatsku tarifu kroz `istrazivanje-prakse`:
+- `site:aks.org.rs tarifa tarifni broj [tekuća godina]`
+- Potvrditi vrednost poena i tarifne brojeve za krivicu
 
-### 6.2 Релевантни тарифни бројеви за кривицу (АТ)
+### 6.2 Relevantni tarifni brojevi za krivicu (AT)
 
-| Тар. бр. | Опис | Оквир |
+| Tar. br. | Opis | Okvir |
 |---|---|---|
-| Тар. бр. 1 | Састав поднеска у крив. поступку | По запрећеној казни |
-| Тар. бр. 2 | Одбрана на главном претресу | По запрећеној казни |
-| Тар. бр. 3 | Састав жалбе / одговора на жалбу | Двоструко од Тар. бр. 1 |
-| Тар. бр. 4 | Састав ЗЗЗ / представке / уставне жалбе | Троструко од Тар. бр. 1 |
-| Тар. бр. 5 | Претрес, саслушање, увиђај | По сату/радњи |
-| Тар. бр. 6 | Консултације и студирање списа | По сату |
-| Тар. бр. 7 | Путни трошкови и одсуство из канцеларије | Стварни трошкови + накнада |
+| Tar. br. 1 | Sastav podneska u kriv. postupku | Po zaprećenoj kazni |
+| Tar. br. 2 | Odbrana na glavnom pretresu | Po zaprećenoj kazni |
+| Tar. br. 3 | Sastav žalbe / odgovora na žalbu | Dvostruko od Tar. br. 1 |
+| Tar. br. 4 | Sastav ZZZ / predstavke / ustavne žalbe | Trostruko od Tar. br. 1 |
+| Tar. br. 5 | Pretres, saslušanje, uviđaj | Po satu/radnji |
+| Tar. br. 6 | Konsultacije i studiranje spisa | Po satu |
+| Tar. br. 7 | Putni troškovi i odsustvo iz kancelarije | Stvarni troškovi + naknada |
 
-> ⚠️ Тарифни бројеви и њихов садржај се мењају. **Увек проверити актуелну тарифу** пре свaкe израде трошковника. Никад из меморије.
+> ⚠️ Tarifni brojevi i njihov sadržaj se menjaju. **Uvek proveriti aktuelnu tarifu** pre svake izrade troškovnika. Nikad iz memorije.
 
-### 6.3 Формула трошковника на крају акта
+### 6.3 Formula troškovnika na kraju akta
 
 ```
-                      Т Р О Ш К О В Н И К
+                      T R O Š K O V N I K
 
-1. Састав ове [назив акта] по Тар. бр. [X]        ....... [износ],00 дин.
-2. [други тар. бројеви по потреби]                ....... [износ],00 дин.
-3. [евент. путни трошкови]                        ....... [износ],00 дин.
+1. Sastav ove [naziv akta] po Tar. br. [X]        ....... [iznos],00 din.
+2. [drugi tar. brojevi po potrebi]                ....... [iznos],00 din.
+3. [event. putni troškovi]                        ....... [iznos],00 din.
                                                   ──────────────────
-УКУПНО:                                                   [износ],00 дин.
+UKUPNO:                                                   [iznos],00 din.
 
-Образложење: Обрачун је сачињен применом Адвокатске тарифе
-             („Сл. гласник РС", бр. [___]).
+Obrazloženje: Obračun je sačinjen primenom Advokatske tarife
+             („Sl. glasnik RS", br. [___]).
 ```
 
-Детаљно: `references/trashkovnik-krivica.md`
+Detaljno: `references/trashkovnik-krivica.md`
 
 ---
 
-## Корак 7 — Правила стила (стил Мишић / Недељков)
+## Korak 7 — Pravila stila (stil Mišić / Nedeljkov)
 
-> ℹ️ **Ова секција је намерно задржана у krivica skill-у** (на захтев корисника). Није делегирана у заједнички `references/stil-misic.md`.
+> ℹ️ **Ova sekcija je namerno zadržana u krivica skill-u** (na zahtev korisnika). Nije delegirana u zajednički `references/stil-misic.md`.
 
-### 7.1 ЈЕЗИК И ПИСМО
-- **Ћирилица** — основно писмо за све акте
-- Пословна имена, стране речи и специфични термини → латиница дозвољена
-- Начела на латиници: „ин дубио про рео", „реформатио ин пеиус"
-- Скраћенице: окр. = окривљени, млт. = малолетна, крив. = кривично
+### 7.1 JEZIK I PISMO
+- **Ćirilica** — osnovno pismo za sve akte
+- Poslovna imena, strane reči i specifični termini → latinica dozvoljena
+- Načela na latinici: „in dubio pro reo", „reformatio in peius"
+- Skraćenice: okr. = okrivljeni, mlt. = maloletna, kriv. = krivično
 
-### 7.2 РЕТОРИЧКИ СТИЛ
-- **Директан, одлучан, борбен** — никад пасиван или неодлучан
-- **Капсловање** (ВЕЛИКА СЛОВА) за кључне тврдње одбране:
-  - „ВЕЋ ГОТОВО НИШТА НИЈЕ ПОТВРДИЛА"
-  - „НЕ МОЖЕ СЕ ИСКЉУЧИТИ МОГУЋНОСТ ДА ДОГАЂАЈ НИЈЕ РЕАЛНО ЗАСНОВАН"
-  - „ШТЕТЕ ЗА ФОНД НЕ ПОСТОЈИ"
-- **Дословно цитирање** записника и налаза — у наводницима „..."
-- **ДОКАЗ:** после сваке чињеничне тврдње, курзивом, увучено табулатором
-  - Формат: `ДОКАЗ:	[Назив документа], стр. [X], пасус [Y]`
-- **Реторичка питања** за ефекат:
-  - „Одакле окр. Боснићу такве телесне повреде...?!"
-  - „Одакле Тужилаштву слобода да...?"
-- **„Да појасним"** / „Да појаснимо" — транзициона фраза
-- **„Наиме,"** — најчешћа уводна реч за аргумент
-- **„Стога,"** / „Сходно свему наведеном," — за закључке
-- **„Штавише,"** — за појачавање аргумента
-- **„Потпуно је несхватљиво"** / „Правни нонсенс" — за апсурдне судске ставове
+### 7.2 RETORIČKI STIL
+- **Direktan, odlučan, borben** — nikad pasivan ili neodlučan
+- **Kapslovanje** (VELIKA SLOVA) za ključne tvrdnje odbrane:
+  - „VEĆ GOTOVO NIŠTA NIJE POTVRDILA"
+  - „NE MOŽE SE ISKLJUČITI MOGUĆNOST DA DOGAĐAJ NIJE REALNO ZASNOVAN"
+  - „ŠTETE ZA FOND NE POSTOJI"
+- **Doslovno citiranje** zapisnika i nalaza — u navodnicima „..."
+- **DOKAZ:** posle svake činjenične tvrdnje, kurzivom, uvučeno tabulatorom
+  - Format: `DOKAZ:	[Naziv dokumenta], str. [X], pasus [Y]`
+- **Retorička pitanja** za efekat:
+  - „Odakle okr. Bosniću takve telesne povrede...?!"
+  - „Odakle Tužilaštvu sloboda da...?"
+- **„Da pojasnim"** / „Da pojasnimo" — tranziciona fraza
+- **„Naime,"** — najčešća uvodna reč za argument
+- **„Stoga,"** / „Shodno svemu navedenom," — za zaključke
+- **„Štaviše,"** — za pojačavanje argumenta
+- **„Potpuno je neshvatljivo"** / „Pravni nonsens" — za apsurdne sudske stavove
 
-### 7.3 СТРУКТУРА АРГУМЕНТАЦИЈЕ
-- **„Једна ствар" иде ПРВА** — не крити је за крај
-- **Нумерација:** 1., 2., 3. или _____ линијама раздвајају
-- **Хоризонтална линија** `_______________` одваја целине
-- **Резиме на крају** — понављање кључних аргумената
-- **Предлог суду** увек на крају — јасан, конкретан
+### 7.3 STRUKTURA ARGUMENTACIJE
+- **„Jedna stvar" ide PRVA** — ne kriti je za kraj
+- **Numeracija:** 1., 2., 3. ili _____ linijama razdvajaju
+- **Horizontalna linija** `_______________` odvaja celine
+- **Rezime na kraju** — ponavljanje ključnih argumenata
+- **Predlog sudu** uvek na kraju — jasan, konkretan
 
-### 7.4 ФОРМАЛНОСТИ
-- **Обраћање:** „Поштована председнице и чланови (судског) већа,"
-- **Потпис:** десно поравнато — „адв. Милан Мишић" или „адв. Ђорђе Недељков"
-- **Место и датум:** лево — „Нови Сад," / „дана ___.___.____. године"
-- **Број примерака:** увек наведен испод наслова акта
-- **Пуномоћ:** „кога по пуномоћи у списима брани адв. [Име]"
+### 7.4 FORMALNOSTI
+- **Obraćanje:** „Poštovana predsednice i članovi (sudskog) veća,"
+- **Potpis:** desno poravnato — „adv. Milan Mišić" ili „adv. Đorđe Nedeljkov"
+- **Mesto i datum:** levo — „Novi Sad," / „dana ___.___.____. godine"
+- **Broj primeraka:** uvek naveden ispod naslova akta
+- **Punomoć:** „koga po punomoći u spisima brani adv. [Ime]"
 
-### 7.5 ПРАВНА ТЕХНИКА
-- **Чл. 16 ЗКП** — ин дубио про рео: увек инсистирати ако нема доказа ван разумне сумње
-- **Чл. 84 ЗКП** — недозвољени докази: „плодови отровног дрвета"
-- **Чл. 438 ЗКП** — битне повреде поступка: неразумљива изрека, контрадикторност
-- **Чл. 439 ЗКП** — повреда кривичног закона: погрешна правна квалификација
-- **ЕКЉП чл. 6** — правично суђење
-- **ЕКЉП чл. 7** — нема казне без закона
-- **Уставна права** — чл. 32, 33, 34 Устава (претпоставка невиности, права окр.)
+### 7.5 PRAVNA TEHNIKA
+- **Čl. 16 ZKP** — in dubio pro reo: uvek insistirati ako nema dokaza van razumne sumnje
+- **Čl. 84 ZKP** — nedozvoljeni dokazi: „plodovi otrovnog drveta"
+- **Čl. 438 ZKP** — bitne povrede postupka: nerazumljiva izreka, kontradiktornost
+- **Čl. 439 ZKP** — povreda krivičnog zakona: pogrešna pravna kvalifikacija
+- **EKLJP čl. 6** — pravično suđenje
+- **EKLJP čl. 7** — nema kazne bez zakona
+- **Ustavna prava** — čl. 32, 33, 34 Ustava (pretpostavka nevinosti, prava okr.)
 
-### ❌ ЗАБРАЊЕНО
-- Пасивно или неодлучно изражавање
-- Писање у корист тужилаштва
-- Измишљање судске праксе или бројева одлука
-- Изостављање ДОКАЗ: после чињеничних тврдњи
-- Латиница у телу текста (осим за имена и правне термине)
-- Дуги директни цитати (>15 речи) без атрибуције и линка
+### ❌ ZABRANJENO
+- Pasivno ili neodlučno izražavanje
+- Pisanje u korist tužilaštva
+- Izmišljanje sudske prakse ili brojeva odluka
+- Izostavljanje DOKAZ: posle činjeničnih tvrdnji
+- Latinica u telu teksta (osim za imena i pravne termine)
+- Dugi direktni citati (>15 reči) bez atribucije i linka
 
 ---
 
-## Корак 8 — П1/П2/П3/П4 класификација тврдњи у кривичном акту
+## Korak 8 — P1/P2/P3/P4 klasifikacija tvrdnji u krivičnom aktu
 
-**У сваком кривичном акту свака чињенична тврдња мора бити класификована:**
+**U svakom krivičnom aktu svaka činjenična tvrdnja mora biti klasifikovana:**
 
-| Класа | Значење | Како писати |
+| Klasa | Značenje | Kako pisati |
 |---|---|---|
-| ✅ **П1** | Директно доказано документом (страница, пасус) | Без ограда. „Окривљени је дана X.Y.Z. ..." + ДОКАЗ |
-| 🟡 **П2** | Разумно изведено из више доказа | „Из изведених доказа произлази да..." |
-| 🔴 **П3** | Тврдња одбране без директног доказа | „Одбрана тврди да..." или „Предлог одбране је да..." |
-| ⛔ **П4** | Неверификовано / могућа халуцинација | **НИКАД не улази у документ** |
+| ✅ **P1** | Direktno dokazano dokumentom (stranica, pasus) | Bez ograda. „Okrivljeni je dana X.Y.Z. ..." + DOKAZ |
+| 🟡 **P2** | Razumno izvedeno iz više dokaza | „Iz izvedenih dokaza proizlazi da..." |
+| 🔴 **P3** | Tvrdnja odbrane bez direktnog dokaza | „Odbrana tvrdi da..." ili „Predlog odbrane je da..." |
+| ⛔ **P4** | Neverifikovano / moguća halucinacija | **NIKAD ne ulazi u dokument** |
 
-### 8.1 Правило преласка
+### 8.1 Pravilo prelaska
 
-- Ниједан П3 не сме бити прикривен као П1. Свака тврдња одбране мора бити експлицитно маркирана као тврдња одбране.
-- Ако се у току писања испостави да је нешто П4 (нпр. цитат одлуке ВС који не могу верификовати) — **СТОП, не уграђуј**, пошаљи у `istrazivanje-prakse` за верификацију.
+- Nijedan P3 ne sme biti prikriven kao P1. Svaka tvrdnja odbrane mora biti eksplicitno markirana kao tvrdnja odbrane.
+- Ako se u toku pisanja ispostavi da je nešto P4 (npr. citat odluke VS koji ne mogu verifikovati) — **STOP, ne ugrađuj**, pošalji u `istrazivanje-prakse` za verifikaciju.
 
-### 8.2 Разлог
+### 8.2 Razlog
 
-Кривични поступак је простор где претпоставка невиности (чл. 34 Устава) значи да одбрана НЕ МОРА да доказује — али такође значи да се не сме претварати да доказ постоји ако не постоји. Прикривен П3 у облику П1 је ризик за кредибилитет браниоца код суда и ризик од дисциплинске одговорности.
+Krivični postupak je prostor gde pretpostavka nevinosti (čl. 34 Ustava) znači da odbrana NE MORA da dokazuje — ali takođe znači da se ne sme pretvarati da dokaz postoji ako ne postoji. Prikriven P3 u obliku P1 je rizik za kredibilitet branioca kod suda i rizik od disciplinske odgovornosti.
 
 ---
 
-## Корак 9 — Генерисање .docx фајла
+## Korak 9 — Generisanje .docx fajla
 
-Увек прочитати `docx` skill пре генерисања. Користити Node.js са `docx` библиотеком и `Packer.toBuffer()`.
+Uvek pročitati `docx` skill pre generisanja. Koristiti Node.js sa `docx` bibliotekom i `Packer.toBuffer()`.
 
 ```javascript
 // Font: Times New Roman, 12pt
 // Page: A4 (11906 x 16838 DXA)
 // Margins: top/right/bottom/left = 1440 DXA (2,54 cm)
-// Encoding: Unicode (UTF-8 — ћирилица)
+// Encoding: Unicode (UTF-8 — ćirilica)
 // Line spacing: 1.15
 ```
 
-| Елемент | Форматинг |
+| Element | Formating |
 |---|---|
-| Назив суда | Bold, left (не center) |
-| „путем" | Normal, left |
-| На бр. | Normal, left |
-| ОКРИВЉЕНИ лабела | Bold, left, tab-aligned |
-| Назив акта (ЖАЛБА итд.) | Bold, caps, center, размакнута слова |
-| Примерци/прилози | Normal, center |
-| Уводна формулација | Normal, justify |
-| „Жалбу" / „Захтев" | Bold, center |
-| „Због:" листа | Normal, left, нумерисано |
-| Предлог суду | Normal, justify |
-| ОБРАЗЛОЖЕЊЕ | Bold, caps, center |
-| Тело | Normal, justify, 1.15 spacing |
-| ДОКАЗ: | Italic, tab indent (720 DXA) |
-| Хоризонтална линија | ___ (70 знакова) |
-| ПРЕДЛОГ / РЕЗИМЕ | Bold, left или center |
-| Потпис | Right-aligned |
-| Трошковник | Normal, нумерисано |
+| Naziv suda | Bold, left (ne center) |
+| „putem" | Normal, left |
+| Na br. | Normal, left |
+| OKRIVLJENI labela | Bold, left, tab-aligned |
+| Naziv akta (ŽALBA itd.) | Bold, caps, center, razmaknuta slova |
+| Primerci/prilozi | Normal, center |
+| Uvodna formulacija | Normal, justify |
+| „Žalbu" / „Zahtev" | Bold, center |
+| „Zbog:" lista | Normal, left, numerisano |
+| Predlog sudu | Normal, justify |
+| OBRAZLOŽENJE | Bold, caps, center |
+| Telo | Normal, justify, 1.15 spacing |
+| DOKAZ: | Italic, tab indent (720 DXA) |
+| Horizontalna linija | ___ (70 znakova) |
+| PREDLOG / REZIME | Bold, left ili center |
+| Potpis | Right-aligned |
+| Troškovnik | Normal, numerisano |
 
-**Валидација:** Сваки генерисани .docx МОРА проћи кроз `validate.py` пре достављања кориснику (из пројектних инструкција).
+**Validacija:** Svaki generisani .docx MORA proći kroz `validate.py` pre dostavljanja korisniku (iz projektnih instrukcija).
 
-**Именовање фајла:** По корисничкој преференци:
-`[stranka] [protivnastranka] [tippodneska] [kratakopis].docx` — без дијакритика, без подвлаке, малим словима.
+**Imenovanje fajla:** Po korisničkoj preferenci:
+`[stranka] [protivnastranka] [tippodneska] [kratakopis].docx` — bez dijakritika, bez podvlake, malim slovima.
 
 ---
 
-## Корак 10 — Compliance извештај (krivica mini)
+## Korak 10 — Compliance izveštaj (krivica mini)
 
-**ОБАВЕЗАН после сваког генерисаног кривичног акта.** Додаје се ИСПОД pravna-analiza compliance извештаја.
+**OBAVEZAN posle svakog generisanog krivičnog akta.** Dodaje se ISPOD pravna-analiza compliance izveštaja.
 
 ```
 ╔═══════════════════════════════════════════════════════════════╗
-║ ⚖️ COMPLIANCE ИЗВЕШТАЈ — KRIVICA v2                          ║
+║ ⚖️ COMPLIANCE IZVEŠTAJ — KRIVICA v2                          ║
 ╠═══════════════════════════════════════════════════════════════╣
-║ ПРЕДМЕТ: [назив/број]                                        ║
-║ ОКРИВЉЕНИ: [име]                                              ║
-║ ТИП АКТА: [#N из Корака 0.1]                                 ║
-║ СУД/ТУЖИЛАШТВО: [назив]                                      ║
+║ PREDMET: [naziv/broj]                                        ║
+║ OKRIVLJENI: [ime]                                              ║
+║ TIP AKTA: [#N iz Koraka 0.1]                                 ║
+║ SUD/TUŽILAŠTVO: [naziv]                                      ║
 ╠═══════════════════════════════════════════════════════════════╣
-║ КОРАК │ СТАТУС  │ КЉУЧНИ ИЗЛАЗ                              ║
+║ KORAK │ STATUS  │ KLJUČNI IZLAZ                              ║
 ║───────┼─────────┼───────────────────────────────────────────║
-║ К0    │ ✅/⛔   │ Handoff: [примљен/нема/непотпун]          ║
-║ К0.1  │ ✅      │ Класификација: тип #[N]                    ║
-║ К1.2  │ ✅      │ Рок: [N] дана, преостало [M]              ║
-║ К1.3  │ ✅      │ Рок-аларм: 🟢/🟡/🔴/⛔                    ║
-║ К2    │ ✅/⏭️   │ Reverse-eng: [N] дискрепанција            ║
-║ К3    │ ✅/⛔   │ istrazivanje-prakse: [активиран/није]    ║
-║       │         │ Одлуке пронађене: [N], верификоване: [M]   ║
-║ К4    │ ✅      │ Шаблон: [4.X]                              ║
-║ К4а   │ ✅      │ „Једна ствар" у првих 3 пасуса: [да/не]   ║
-║ К5    │ ✅/⏭️   │ ИПЗ изјашњење: [урађено/није потребно]    ║
-║ К6    │ ✅/⏭️   │ Трошковник: [износ] или [прескочено]      ║
-║ К7    │ ✅      │ Стил Мишић/Недељков: [применљен]          ║
-║ К8    │ ✅      │ П1: [N] / П2: [N] / П3: [N] / П4: [0]    ║
-║ К9    │ ✅      │ .docx генерисан: [путања] + validate.py   ║
+║ K0    │ ✅/⛔   │ Handoff: [primljen/nema/nepotpun]          ║
+║ K0.1  │ ✅      │ Klasifikacija: tip #[N]                    ║
+║ K1.2  │ ✅      │ Rok: [N] dana, preostalo [M]              ║
+║ K1.3  │ ✅      │ Rok-alarm: 🟢/🟡/🔴/⛔                    ║
+║ K2    │ ✅/⏭️   │ Reverse-eng: [N] diskrepancija            ║
+║ K3    │ ✅/⛔   │ istrazivanje-prakse: [aktiviran/nije]    ║
+║       │         │ Odluke pronađene: [N], verifikovane: [M]   ║
+║ K4    │ ✅      │ Šablon: [4.X]                              ║
+║ K4a   │ ✅      │ „Jedna stvar" u prvih 3 pasusa: [da/ne]   ║
+║ K5    │ ✅/⏭️   │ IPZ izjašnjenje: [urađeno/nije potrebno]    ║
+║ K6    │ ✅/⏭️   │ Troškovnik: [iznos] ili [preskočeno]      ║
+║ K7    │ ✅      │ Stil Mišić/Nedeljkov: [primenljen]          ║
+║ K8    │ ✅      │ P1: [N] / P2: [N] / P3: [N] / P4: [0]    ║
+║ K9    │ ✅      │ .docx generisan: [putanja] + validate.py   ║
 ╠═══════════════════════════════════════════════════════════════╣
-║ ✅ ЧЕКЛИСТА:                                                 ║
-║  [ ] Тип акта правилно одређен                              ║
-║  [ ] istrazivanje-prakse делегација извршена                ║
-║  [ ] Свака цитирана одлука са линком/текстом                 ║
-║  [ ] Правни основ тачно наведен                              ║
-║  [ ] Рок испоштован                                          ║
-║  [ ] Сваки чињенични навод има ДОКАЗ:                       ║
-║  [ ] Ниједан П4 у документу                                 ║
-║  [ ] Свi П3 експлицитно маркирани као тврдња одбране       ║
-║  [ ] „Једна ствар" у првих 3 пасуса                         ║
-║  [ ] Предлог суду јасан и конкретан                          ║
-║  [ ] Ћирилица кроз цео акт                                  ║
-║  [ ] Потпис, место, датум                                    ║
-║  [ ] Акт пише са стране одбране                              ║
-║  [ ] .docx валидиран                                         ║
-║  [ ] verifikator активиран за DIFF                           ║
+║ ✅ ČEKLISTA:                                                 ║
+║  [ ] Tip akta pravilno određen                              ║
+║  [ ] istrazivanje-prakse delegacija izvršena                ║
+║  [ ] Svaka citirana odluka sa linkom/tekstom                 ║
+║  [ ] Pravni osnov tačno naveden                              ║
+║  [ ] Rok ispoštovan                                          ║
+║  [ ] Svaki činjenični navod ima DOKAZ:                       ║
+║  [ ] Nijedan P4 u dokumentu                                 ║
+║  [ ] Svi P3 eksplicitno markirani kao tvrdnja odbrane       ║
+║  [ ] „Jedna stvar" u prvih 3 pasusa                         ║
+║  [ ] Predlog sudu jasan i konkretan                          ║
+║  [ ] Ćirilica kroz ceo akt                                  ║
+║  [ ] Potpis, mesto, datum                                    ║
+║  [ ] Akt piše sa strane odbrane                              ║
+║  [ ] .docx validiran                                         ║
+║  [ ] verifikator aktiviran za DIFF                           ║
 ╠═══════════════════════════════════════════════════════════════╣
-║ ⚠️ ЗА РУЧНУ ПРОВЕРУ (Милан):                                ║
-║  [1] [тврдња/број/цитат] → [страница извора]                ║
+║ ⚠️ ZA RUČNU PROVERU (Milan):                                ║
+║  [1] [tvrdnja/broj/citat] → [stranica izvora]                ║
 ║  [2] ...                                                      ║
 ║  [3] ...                                                      ║
 ╚═══════════════════════════════════════════════════════════════╝
 ```
 
-**Правила:**
-1. Извештај је **ОБАВЕЗАН** — без изузетка.
-2. Ако К3 статус = ⛔ — документ се **НЕ ШАЉЕ** кориснику. Прво се решава.
-3. Ако има П4 у документу — документ се **НЕ ШАЉЕ**. Враћа се на К8.
-4. „За ручну проверу" мора да има минимум 3 ставке — оне које су најризичније или најважније.
+**Pravila:**
+1. Izveštaj je **OBAVEZAN** — bez izuzetka.
+2. Ako K3 status = ⛔ — dokument se **NE ŠALJE** korisniku. Prvo se rešava.
+3. Ako ima P4 u dokumentu — dokument se **NE ŠALJE**. Vraća se na K8.
+4. „Za ručnu proveru" mora da ima minimum 3 stavke — one koje su najrizičnije ili najvažnije.
 
 ---
 
-## Корак 11 — Предаја у `verifikator`
+## Korak 11 — Predaja u `verifikator`
 
-Пре него што документ иде кориснику, прошао кроз:
+Pre nego što dokument ide korisniku, prošao kroz:
 
 ```
-krivica → verifikator → корисник
+krivica → verifikator → korisnik
 
-Шта verifikator добија:
-├── Генерисан .docx (путања)
-├── Compliance извештај krivica
-├── Compliance извештај pravna-analiza
-├── Handoff пакет (оригинал)
-├── Листа цитираних одлука
-└── Листа чињеничних тврдњи са изворима
+Šta verifikator dobija:
+├── Generisan .docx (putanja)
+├── Compliance izveštaj krivica
+├── Compliance izveštaj pravna-analiza
+├── Handoff paket (original)
+├── Lista citiranih odluka
+└── Lista činjeničnih tvrdnji sa izvorima
 ```
 
-Verifikator врши:
-1. **ПРОТОКОЛ А** — DIFF сваке чињеничне тврдње против оригиналног документа
-2. **ПРОТОКОЛ Б** — верификација свих бројева (датуми, износи, чланови закона)
-3. **Spot-check листа** — 3 ставке које корисник ручно проверава
+Verifikator vrši:
+1. **PROTOKOL A** — DIFF svake činjenične tvrdnje protiv originalnog dokumenta
+2. **PROTOKOL B** — verifikacija svih brojeva (datumi, iznosi, članovi zakona)
+3. **Spot-check lista** — 3 stavke koje korisnik ručno proverava
 
-**Ако verifikator врати ❌ на било шта — документ се поправља пре достављања.**
+**Ako verifikator vrati ❌ na bilo šta — dokument se popravlja pre dostavljanja.**
 
 ---
 
-## РЕФЕРЕНТНИ ФАЈЛОВИ
+## REFERENTNI FAJLOVI
 
-| Фајл | Садржај |
+| Fajl | Sadržaj |
 |---|---|
-| `references/handoff-protokol.md` | Детаљан протокол пријема handoff-а од pravna-analiza |
-| `references/rokovi-tabela.md` | Комплетна табела рокова + калкулација + изузеци |
-| `references/tipovi-greshaka-presude.md` | Матрица повреда чл. 438/439/440/441 ЗКП |
-| `references/esljp-krivica.md` | Кључни ЕСЉП случајеви (СКЕЛЕТ — пунити кроз istrazivanje-prakse) |
-| `references/shabloni-unakrsno.md` | Шаблони питања за унакрсно испитивање по делима |
-| `references/trashkovnik-krivica.md` | Обрачун трошкова одбране по АТ |
-| `references/compliance-krivica.md` | Формат mini compliance извештаја |
-| `references/sudska-praksa-vks.md` | ПОСТОЈЕЋИ — проширује се кроз istrazivanje-prakse |
-| **`references/sabloni/`** | **КОМПОЗИЦИОНИ ШАБЛОНИ АКАТА (NOVO v3.0.0 — из корпуса 2022-2026)** |
-| &nbsp;&nbsp;├─ `01_krivicna_prijava.md` | Кривична пријава (са/без привремене мере) |
-| &nbsp;&nbsp;├─ `02_prigovor_odbacaj_kp.md` | Приговор на одбачaj КП (Вуковић Бенz модел) |
-| &nbsp;&nbsp;├─ `03_zalba_na_resenje.md` | Жалба на решење (Калентић модел) |
-| &nbsp;&nbsp;├─ `04_zalba_na_presudu_krivica.md` | Жалба на пресуду (чл. 432, 437 ЗКП) |
-| &nbsp;&nbsp;├─ `05_odgovor_na_optuznicu.md` | Одговор на оптужницу / приговор на оптужни предлог |
-| &nbsp;&nbsp;├─ `06_zzz.md` ⭐ | **Захтев за заштиту законитости (Врховни суд — Вуковић модел)** |
-| &nbsp;&nbsp;├─ `07_molba_odlaganje.md` | Молба за одлагање кривичног гоњења (Јушкић модел) |
-| &nbsp;&nbsp;├─ `08_predstavka_esljp.md` | Представка ЕСЉП (Страсбур) |
-| &nbsp;&nbsp;└─ `09_ustavna_zalba.md` | Уставна жалба (Уставни суд РС) |
+| `references/handoff-protokol.md` | Detaljan protokol prijema handoff-a od pravna-analiza |
+| `references/rokovi-tabela.md` | Kompletna tabela rokova + kalkulacija + izuzeci |
+| `references/tipovi-greshaka-presude.md` | Matrica povreda čl. 438/439/440/441 ZKP |
+| `references/esljp-krivica.md` | Ključni ESLJP slučajevi (SKELET — puniti kroz istrazivanje-prakse) |
+| `references/shabloni-unakrsno.md` | Šabloni pitanja za unakrsno ispitivanje po delima |
+| `references/trashkovnik-krivica.md` | Obračun troškova odbrane po AT |
+| `references/compliance-krivica.md` | Format mini compliance izveštaja |
+| `references/sudska-praksa-vks.md` | POSTOJEĆI — proširuje se kroz istrazivanje-prakse |
+| **`references/sabloni/`** | **KOMPOZICIONI ŠABLONI AKATA (NOVO v3.0.0 — iz korpusa 2022-2026)** |
+| &nbsp;&nbsp;├─ `01_krivicna_prijava.md` | Krivična prijava (sa/bez privremene mere) |
+| &nbsp;&nbsp;├─ `02_prigovor_odbacaj_kp.md` | Prigovor na odbačaj KP (Vuković Benz model) |
+| &nbsp;&nbsp;├─ `03_zalba_na_resenje.md` | Žalba na rešenje (Kalentić model) |
+| &nbsp;&nbsp;├─ `04_zalba_na_presudu_krivica.md` | Žalba na presudu (čl. 432, 437 ZKP) |
+| &nbsp;&nbsp;├─ `05_odgovor_na_optuznicu.md` | Odgovor na optužnicu / prigovor na optužni predlog |
+| &nbsp;&nbsp;├─ `06_zzz.md` ⭐ | **Zahtev za zaštitu zakonitosti (Vrhovni sud — Vuković model)** |
+| &nbsp;&nbsp;├─ `07_molba_odlaganje.md` | Molba za odlaganje krivičnog gonjenja (Juškić model) |
+| &nbsp;&nbsp;├─ `08_predstavka_esljp.md` | Predstavka ESLJP (Strasbur) |
+| &nbsp;&nbsp;└─ `09_ustavna_zalba.md` | Ustavna žalba (Ustavni sud RS) |
 
-**⚠️ Критично правило за шаблоне:** Пре писања акта, **ОБАВЕЗНО** отвори одговарајући шаблон. Шаблон садржи:
-- Када се користи + рок + надлежност
-- Терминологију (ОКРИВЉЕНИ/ОСУМЊИЧЕНИ/ОСУЂЕНИ по фази)
-- Матрицу потписа (Милан / Ђорђе / оба)
-- Тарифу из корпуса
-- Комплетан mock-up са примењеном типографијом
-- Checklist пре испоруке
+**⚠️ Kritično pravilo za šablone:** Pre pisanja akta, **OBAVEZNO** otvori odgovarajući šablon. Šablon sadrži:
+- Kada se koristi + rok + nadležnost
+- Terminologiju (OKRIVLJENI/OSUMNJIČENI/OSUĐENI po fazi)
+- Matricu potpisa (Milan / Đorđe / oba)
+- Tarifu iz korpusa
+- Kompletan mock-up sa primenjenom tipografijom
+- Checklist pre isporuke
 
-Шаблон **не замењује** `pravna-analiza` — нити handoff. Он је финална **композиционa структура** после анализе.
-
----
-
-## ЗАБРАЊЕНО (апсолутно, без изузетка)
-
-1. **Активирати се самостално ако постоји документ за анализу** — прво pravna-analiza.
-2. **Самостално претраживати праксу** — увек делегација у istrazivanje-prakse.
-3. **Цитирати судску праксу или ЕСЉП из меморије** — верификација кроз истраживање-праксе.
-4. **Писати акт без „Једне ствари"** у првих 3 пасуса.
-5. **Прикривати П3 као П1** — свака тврдња одбране мора бити маркирана.
-6. **Ставити било шта означено П4** у документ.
-7. **Заобилазити verifikator** — пре достављања кориснику.
-8. **Заобилазити compliance извештај** — без њега skill није примењен.
-9. **Писати у корист тужилаштва**.
-10. **Измишљати чланове закона, бројеве одлука, датуме, имена.**
-11. **Генерисати акт без експлицитног зеленог светла корисника** („иди" / „генериши" / „крени").
+Šablon **ne zamenjuje** `pravna-analiza` — niti handoff. On je finalna **kompoziciona struktura** posle analize.
 
 ---
 
-## ⛔ ЗАВРШНА ИНСТРУКЦИЈА
+## ZABRANJENO (apsolutno, bez izuzetka)
 
-**krivica v2 је део stack-а, не самостални алат.**
+1. **Aktivirati se samostalno ako postoji dokument za analizu** — prvo pravna-analiza.
+2. **Samostalno pretraživati praksu** — uvek delegacija u istrazivanje-prakse.
+3. **Citirati sudsku praksu ili ESLJP iz memorije** — verifikacija kroz istraživanje-prakse.
+4. **Pisati akt bez „Jedne stvari"** u prvih 3 pasusa.
+5. **Prikrivati P3 kao P1** — svaka tvrdnja odbrane mora biti markirana.
+6. **Staviti bilo šta označeno P4** u dokument.
+7. **Zaobilaziti verifikator** — pre dostavljanja korisniku.
+8. **Zaobilaziti compliance izveštaj** — bez njega skill nije primenjen.
+9. **Pisati u korist tužilaštva**.
+10. **Izmišljati članove zakona, brojeve odluka, datume, imena.**
+11. **Generisati akt bez eksplicitnog zelenog svetla korisnika** („idi" / „generiši" / „kreni").
 
-- Без `pravna-analiza` → ради, али на фалбек режиму, уз упозорење.
-- Без `istrazivanje-prakse` → **СТАЈЕ**. Нема праксе = нема акта.
-- Без `verifikator` → **СТАЈЕ**. Нема DIFF-а = нема достављања.
-- Без `god-skill-deep-reader` у позадини → смањен квалитет читања.
+---
 
-**Kvalitet je uvek ispred brzine.** Ако је рок близак а fallback-ови не раде — јави Милану и чекај одлуку. Никад тихо решавати.
+## ⛔ ZAVRŠNA INSTRUKCIJA
+
+**krivica v2 je deo stack-a, ne samostalni alat.**
+
+- Bez `pravna-analiza` → radi, ali na falbek režimu, uz upozorenje.
+- Bez `istrazivanje-prakse` → **STAJE**. Nema prakse = nema akta.
+- Bez `verifikator` → **STAJE**. Nema DIFF-a = nema dostavljanja.
+- Bez `god-skill-deep-reader` u pozadini → smanjen kvalitet čitanja.
+
+**Kvalitet je uvek ispred brzine.** Ako je rok blizak a fallback-ovi ne rade — javi Milanu i čekaj odluku. Nikad tiho rešavati.
 
 
-### 3.4 Протокол уградње верификованих ЕСЉП предмета у кривични акт
+### 3.4 Protokol ugradnje verifikovanih ESLJP predmeta u krivični akt
 
-**Овај протокол се примењује кад год `krivica` уграђује ЕСЉП праксу у акт.**
+**Ovaj protokol se primenjuje kad god `krivica` ugrađuje ESLJP praksu u akt.**
 
-#### А) Услов за уградњу
+#### A) Uslov za ugradnju
 
-Само предмети из `esljp-krivica.md` секција VII са статусом ✅ ВЕРИФИКОВАНО.
-Ако предмет има статус ⛔ → не уграђивати, не цитирати, не помињати.
+Samo predmeti iz `esljp-krivica.md` sekcija VII sa statusom ✅ VERIFIKOVANO.
+Ako predmet ima status ⛔ → ne ugrađivati, ne citirati, ne pominjati.
 
-#### Б) Формат цитата у акту
+#### B) Format citata u aktu
 
 ```
-ЕСЉП, [Предмет] против [Државе], представка бр. [XXXXX/XX],
-пресуда од [датум], §[N].
+ESLJP, [Predmet] protiv [Države], predstavka br. [XXXXX/XX],
+presuda od [datum], §[N].
 ```
 
-За ЗЛАТНИ ЛАНАЦ (чл. 170/171 КЗ — увреда/клевета):
-1. Прво Lingens v. Austria (9815/82, §46) — темељ разликовања чињ./вред.
-2. Затим Feldek v. Slovakia (29032/95, §86) — развој: чињ. основа не мора бити експлицитна
-3. Закуцати Bodrožić v. Serbia (32550/05, §52) — ПРЕСУДА ПРОТИВ СРБИЈЕ
-   ⚠️ НИКАДА 38435/05 (то је Bodrožić i Vujin — засебан предмет!)
+Za ZLATNI LANAC (čl. 170/171 KZ — uvreda/kleveta):
+1. Prvo Lingens v. Austria (9815/82, §46) — temelj razlikovanja činj./vred.
+2. Zatim Feldek v. Slovakia (29032/95, §86) — razvoj: činj. osnova ne mora biti eksplicitna
+3. Zakucati Bodrožić v. Serbia (32550/05, §52) — PRESUDA PROTIV SRBIJE
+   ⚠️ NIKADA 38435/05 (to je Bodrožić i Vujin — zaseban predmet!)
 
-#### В) Где у акту стоји ЕСЉП пракса
+#### V) Gde u aktu stoji ESLJP praksa
 
-- У жалби/ЗЗЗ: после правне аргументације, пре предлога суду
-- У одговору на оптужницу: у правном делу образложења
-- У уставној жалби: посебна секција IV (видети шаблон 4.13)
-- У представци ЕСЉП: секција III (Statement of Alleged Violations)
+- U žalbi/ZZZ: posle pravne argumentacije, pre predloga sudu
+- U odgovoru na optužnicu: u pravnom delu obrazloženja
+- U ustavnoj žalbi: posebna sekcija IV (videti šablon 4.13)
+- U predstavci ESLJP: sekcija III (Statement of Alleged Violations)
 
-#### Г) Правило параграфног референце
+#### G) Pravilo paragrafnog reference
 
-Никад цитирати „ЕСЉП је рекао да..." без параграфа (§N).
-Параграф је верификован у одговарајућем .docx фајлу.
-Ако §N није у .docx-у → НЕ цитирати, вратити се на istrazivanje-prakse.
+Nikad citirati „ESLJP je rekao da..." bez paragrafa (§N).
+Paragraf je verifikovan u odgovarajućem .docx fajlu.
+Ako §N nije u .docx-u → NE citirati, vratiti se na istrazivanje-prakse.
 
-Детаљно: `references/bodrozic-lanac.md`
+Detaljno: `references/bodrozic-lanac.md`

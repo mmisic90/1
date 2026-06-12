@@ -1,129 +1,129 @@
-# Трошковник у кривичном поступку — обрачун по Адвокатској тарифи
+# Troškovnik u krivičnom postupku — obračun po Advokatskoj tarifi
 
-> ⛔ **ОБАВЕЗНО:** Пре сваког обрачуна, актуелна Адвокатска тарифа се мора претражити кроз `istrazivanje-prakse`. Овај фајл не садржи конкретне износе из меморије — само структуру и формулу.
+> ⛔ **OBAVEZNO:** Pre svakog obračuna, aktuelna Advokatska tarifa se mora pretražiti kroz `istrazivanje-prakse`. Ovaj fajl ne sadrži konkretne iznose iz memorije — samo strukturu i formulu.
 
-## I. ИЗВОРИ
+## I. IZVORI
 
-- **Адвокатска комора Србије:** https://aks.org.rs
-- **Важећа тарифа:** претражити кроз `istrazivanje-prakse` актуелну верзију
-- **Кључне речи за претрагу:** `адвокатска тарифа тарифни бројеви кривица [година] АКС сл. гласник`
+- **Advokatska komora Srbije:** https://aks.org.rs
+- **Važeća tarifa:** pretražiti kroz `istrazivanje-prakse` aktuelnu verziju
+- **Ključne reči za pretragu:** `advokatska tarifa tarifni brojevi krivica [godina] AKS sl. glasnik`
 
-## II. ТАРИФНИ БРОЈЕВИ РЕЛЕВАНТНИ ЗА КРИВИЦУ
+## II. TARIFNI BROJEVI RELEVANTNI ZA KRIVICU
 
-> Следе категорије — конкретни износи се извлаче из актуелне тарифе, никад из меморије.
+> Slede kategorije — konkretni iznosi se izvlače iz aktuelne tarife, nikad iz memorije.
 
-### Група А — Састав поднесака (Тар. бр. 1)
+### Grupa A — Sastav podnesaka (Tar. br. 1)
 
-| Подкатегорија | Основ обрачуна |
+| Podkategorija | Osnov obračuna |
 |---|---|
-| Састав кривичне пријаве | По запрећеној казни за дело |
-| Састав одговора на оптужницу / приговор на оптужни предлог | По запрећеној казни за дело |
-| Састав завршне речи у писменом облику | По запрећеној казни за дело |
-| Састав другог поднеска у кривичном поступку | Редукован проценат Тар. бр. 1 |
+| Sastav krivične prijave | Po zaprećenoj kazni za delo |
+| Sastav odgovora na optužnicu / prigovor na optužni predlog | Po zaprećenoj kazni za delo |
+| Sastav završne reči u pismenom obliku | Po zaprećenoj kazni za delo |
+| Sastav drugog podneska u krivičnom postupku | Redukovan procenat Tar. br. 1 |
 
-### Група Б — Одбрана на главном претресу (Тар. бр. 2)
+### Grupa B — Odbrana na glavnom pretresu (Tar. br. 2)
 
-| Подкатегорија | Основ обрачуна |
+| Podkategorija | Osnov obračuna |
 |---|---|
-| Присуство на главном претресу | По запрећеној казни + по сату |
-| Присуство на седници (без претреса) | Редукован проценат |
-| Присуство уводном излагању | По запрећеној казни |
-| Завршна реч усмено | По запрећеној казни |
+| Prisustvo na glavnom pretresu | Po zaprećenoj kazni + po satu |
+| Prisustvo na sednici (bez pretresa) | Redukovan procenat |
+| Prisustvo uvodnom izlaganju | Po zaprećenoj kazni |
+| Završna reč usmeno | Po zaprećenoj kazni |
 
-### Група В — Правни лекови (Тар. бр. 3)
+### Grupa V — Pravni lekovi (Tar. br. 3)
 
-| Подкатегорија | Основ обрачуна |
+| Podkategorija | Osnov obračuna |
 |---|---|
-| Састав жалбе на пресуду | Двоструки износ Тар. бр. 1 |
-| Састав одговора на жалбу противника | Једнак износ као Тар. бр. 1 |
-| Састав жалбе на решење | Пропорционално |
+| Sastav žalbe na presudu | Dvostruki iznos Tar. br. 1 |
+| Sastav odgovora na žalbu protivnika | Jednak iznos kao Tar. br. 1 |
+| Sastav žalbe na rešenje | Proporcionalno |
 
-### Група Г — Ванредни правни лекови (Тар. бр. 4)
+### Grupa G — Vanredni pravni lekovi (Tar. br. 4)
 
-| Подкатегорија | Основ обрачуна |
+| Podkategorija | Osnov obračuna |
 |---|---|
-| Захтев за заштиту законитости | Троструки износ Тар. бр. 1 |
-| Предлог за понављање поступка | Двоструки износ Тар. бр. 1 |
-| Уставна жалба | Троструки износ Тар. бр. 1 |
-| Представка ЕСЉП | Посебни обрачун (по сату + накнада) |
+| Zahtev za zaštitu zakonitosti | Trostruki iznos Tar. br. 1 |
+| Predlog za ponavljanje postupka | Dvostruki iznos Tar. br. 1 |
+| Ustavna žalba | Trostruki iznos Tar. br. 1 |
+| Predstavka ESLJP | Posebni obračun (po satu + naknada) |
 
-### Група Д — Помоћне радње
+### Grupa D — Pomoćne radnje
 
-| Подкатегорија | Тар. бр. |
+| Podkategorija | Tar. br. |
 |---|---|
-| Претрес, саслушање, увиђај | Тар. бр. 5 |
-| Консултације и студирање списа | Тар. бр. 6 — по сату |
-| Путни трошкови | Тар. бр. 7 + стварни трошкови |
-| Одсуство из канцеларије | Тар. бр. 7 — по сату |
+| Pretres, saslušanje, uviđaj | Tar. br. 5 |
+| Konsultacije i studiranje spisa | Tar. br. 6 — po satu |
+| Putni troškovi | Tar. br. 7 + stvarni troškovi |
+| Odsustvo iz kancelarije | Tar. br. 7 — po satu |
 
-## III. ФОРМУЛА ОБРАЧУНА
+## III. FORMULA OBRAČUNA
 
 ```
-1. Утврди запрећену казну за кривично дело
-   - чл. КЗ → распон казне → категорија Тар. бр. 1
+1. Utvrdi zaprećenu kaznu za krivično delo
+   - čl. KZ → raspon kazne → kategorija Tar. br. 1
 
-2. Претражи актуелну тарифу
-   - AKS → тарифни број → вредност награде у поенима
+2. Pretraži aktuelnu tarifu
+   - AKS → tarifni broj → vrednost nagrade u poenima
 
-3. Помножи поене са вредношћу поена
-   - Вредност поена се мења — ОБАВЕЗНО провера
+3. Pomnoži poene sa vrednošću poena
+   - Vrednost poena se menja — OBAVEZNO provera
 
-4. Додај све помоћне радње (Тар. бр. 5, 6, 7)
-   - Путни трошкови су стварни
-   - Консултације по сату
+4. Dodaj sve pomoćne radnje (Tar. br. 5, 6, 7)
+   - Putni troškovi su stvarni
+   - Konsultacije po satu
 
-5. Збир без ПДВ-а + евентуално ПДВ
+5. Zbir bez PDV-a + eventualno PDV
 ```
 
-## IV. СТАНДАРДНИ ФОРМАТ НА КРАЈУ АКТА
+## IV. STANDARDNI FORMAT NA KRAJU AKTA
 
 ```
-                      Т Р О Ш К О В Н И К
+                      T R O Š K O V N I K
 
-1. Састав [назив акта] по Тар. бр. [X] АТ ......... [износ],00 дин.
-2. Приступ на главни претрес [дан/датум] по Тар. бр. 2 ... [износ],00 дин.
-3. [друге радње]                                   ......... [износ],00 дин.
-4. Путни трошкови (Нови Сад — [место]
-   + повратак, стварни трошкови) ................. [износ],00 дин.
+1. Sastav [naziv akta] po Tar. br. [X] AT ......... [iznos],00 din.
+2. Pristup na glavni pretres [dan/datum] po Tar. br. 2 ... [iznos],00 din.
+3. [druge radnje]                                   ......... [iznos],00 din.
+4. Putni troškovi (Novi Sad — [mesto]
+   + povratak, stvarni troškovi) ................. [iznos],00 din.
                                                    ──────────────────
-СВЕУКУПНО:                                                [износ],00 дин.
+SVEUKUPNO:                                                [iznos],00 din.
 
-Образложење: Обрачун сачињен применом Адвокатске тарифе
-             („Сл. гласник РС", бр. [___]).
-             Вредност поена: [износ] дин.
+Obrazloženje: Obračun sačinjen primenom Advokatske tarife
+             („Sl. glasnik RS", br. [___]).
+             Vrednost poena: [iznos] din.
 
-Предлажемо да суд обавеже супротну страну / Републику Србију
-на накнаду ових трошкова у складу са чл. 261–269 ЗКП.
+Predlažemo da sud obaveže suprotnu stranu / Republiku Srbiju
+na naknadu ovih troškova u skladu sa čl. 261–269 ZKP.
 
-                                              адв. [Име]
+                                              adv. [Ime]
 ```
 
-## V. КАДА СЕ ТРОШКОВНИК ТРАЖИ
+## V. KADA SE TROŠKOVNIK TRAŽI
 
-- **Увек на крају свих аката** који се подносе суду или тужилаштву
-- **Обавезан у жалбама и ванредним правним лековима** — без њега се не могу досудити
-- У актима према ВЈТ (приговор на одбачај) — трошкови не иду, јер тужилаштво није надлежно за досуђивање
-- У представци ЕСЉП — посебни образац, just satisfaction (чл. 41 ЕКЉП)
+- **Uvek na kraju svih akata** koji se podnose sudu ili tužilaštvu
+- **Obavezan u žalbama i vanrednim pravnim lekovima** — bez njega se ne mogu dosuditi
+- U aktima prema VJT (prigovor na odbačaj) — troškovi ne idu, jer tužilaštvo nije nadležno za dosuđivanje
+- U predstavci ESLJP — posebni obrazac, just satisfaction (čl. 41 EKLJP)
 
-## VI. ТРОШКОВИ У СЛУЧАЈУ ОСЛОБАЂАЈУЋЕ ПРЕСУДЕ
+## VI. TROŠKOVI U SLUČAJU OSLOBAĐAJUĆE PRESUDE
 
-У случају ослобађајуће пресуде или обуставе поступка, **трошкови одбране падају на терет буџетских средстава** (чл. 265 ст. 1 ЗКП). Окривљени има право да их тражи у законском року, а суд одлучује у форми решења.
+U slučaju oslobađajuće presude ili obustave postupka, **troškovi odbrane padaju na teret budžetskih sredstava** (čl. 265 st. 1 ZKP). Okrivljeni ima pravo da ih traži u zakonskom roku, a sud odlučuje u formi rešenja.
 
-Формат захтева:
+Format zahteva:
 
 ```
-ЗАХТЕВ ЗА НАКНАДУ ТРОШКОВА ОДБРАНЕ
-по чл. 265 ст. 1 ЗКП
+ZAHTEV ZA NAKNADU TROŠKOVA ODBRANE
+po čl. 265 st. 1 ZKP
 
 [...]
 ```
 
-## VII. ПРАВИЛО КАД НИЈЕ ПОЗНАТА АКТУЕЛНА ТАРИФА
+## VII. PRAVILO KAD NIJE POZNATA AKTUELNA TARIFA
 
-Ако `istrazivanje-prakse` не може да пронађе актуелну тарифу (сервер недоступан), **обавести корисника** и понуди опције:
+Ako `istrazivanje-prakse` ne može da pronađe aktuelnu tarifu (server nedostupan), **obavesti korisnika** i ponudi opcije:
 
-1. „Пронашао сам тарифу од [година]. Користимо то уз напомену да се провери."
-2. „Трошковник нека буде празан — Милан да га попуни ручно."
-3. „Одложимо завршавање акта док не стигнем до актуелне тарифе."
+1. „Pronašao sam tarifu od [godina]. Koristimo to uz napomenu da se proveri."
+2. „Troškovnik neka bude prazan — Milan da ga popuni ručno."
+3. „Odložimo završavanje akta dok ne stignem do aktuelne tarife."
 
-**Никад не извлачи поене или износе из меморије.** То је директан ризик од халуцинације, а за трошковник — и практична грешка која штети клијенту.
+**Nikad ne izvlači poene ili iznose iz memorije.** To je direktan rizik od halucinacije, a za troškovnik — i praktična greška koja šteti klijentu.
