@@ -66,10 +66,14 @@ Nejasno između dva registra → **1 kratko pitanje korisniku**, ne pogađaj.
 
 ```
 [dokument?] god-skill-deep-reader ─► pravna-analiza (F0–F6 + RUTER)
-   ─► krivica | tuzba-parnica | izvrsenje      (RUTER bira u F0)
-   ─► istrazivanje-prakse  (kad treba praksa/ESLJP)
+   ─► krivica | tuzba-parnica | izvrsenje      (RUTER bira u F0; F6.1 handoff)
    ─► stil-pisanja  ─► verifikator  ─► ISPORUKA
 ```
+
+**`istrazivanje-prakse` je SERVIS, ne karika u nizu:** pozivaju ga
+`pravna-analiza` (F3.3) i domenski skil (Korak 3) kad god treba praksa,
+verifikacija norme ili ESLJP. Rezultat koji ulazi u akt obavezno prolazi
+kroz `verifikator`.
 
 **Pravila predaje (tanko, bez duplikata):**
 1. Postoji dokument za analizu → **prvo `god-skill-deep-reader`**, pa `pravna-analiza`.
@@ -108,9 +112,11 @@ Grupiši po registru, pa unutar pravnog dela po prioritetu: ① rok < 5 dana
 
 ## STANJE LANCA (ispiši u svakom pravnom odgovoru)
 
+Identično formatu iz `pravna-analiza` v5, sa prefiksom rute:
+
 ```
 LANAC: prompt-master[ruta] → god-skill[✅/⏭️] → pravna-analiza[faza]
-       → <target>[✅učitan/⛔] → istrazivanje-prakse[✅/⏭️/⛔]
+       → istrazivanje-prakse[✅/⏭️/⛔] → <target>[✅učitan/⛔]
        → stil-pisanja[✅/⏭️] → verifikator[✅/⏭️]
 ```
 
