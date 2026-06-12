@@ -2,11 +2,17 @@
 
 Guidance for Claude Code in this repository.
 
+## Komunikacija
+
+- **Uvek komuniciraj sa korisnikom isključivo na srpskom jeziku, ekavski izgovor (ekavica).**
+- Ekavica važi svuda: u chatu, u dokumentima koje pišeš (.md, izveštaji), u commit porukama i PR opisima. Ne ijekavica: ne "prije/provjera/dio" → već "pre/provera/deo".
+- Engleski samo gde je prirodno: tehnički termini, nazivi alata/komandi i kod.
+
 ## Project Overview
 
 Vanilla JavaScript web app, no build step and no bundler — open the HTML files directly in a browser.
 
-1. **Business Ideas Carousel** (`index.html`, `lang="bs"`) — step-by-step card carousel of LegalTech business ideas, with per-idea voting. Also embeds an incomplete "Advokat Misić" law-firm landing page (hero, about, areas of law).
+1. **Law Firm Site** (`index.html`, `lang="bs"`) — the landing page for the "Advokat Misić" law firm. Opens with a full-screen cinematic intro video (`public/reels/reel-03-lineage-animatic.mp4`) that ends on the founder's portrait and routes the visitor into the "O meni" (about) section. Sections: hero, about, areas of law (oblasti), contact (kontakt), footer.
 2. **TV Remote Control** (`remote.html`) — media remote UI (power, volume, channel, d-pad, playback, number pad, input sources). Links back to `index.html`.
 
 ## Commands
@@ -61,4 +67,6 @@ remote.html     # imports createRemote from src/remote.js; wires it onto window
 
 ## Known issues
 
-- **Incomplete landing page**: `#kontakt` is linked in the nav and hero CTA but the section doesn't exist in the body; `.contact-wrap`/`.contact-form`/`footer` CSS is unused; the `#oblasti .areas-grid` has no `.area-card` elements (the CSS exists).
+- None outstanding — the landing page is complete: `#kontakt` section with contact details and a form, footer, and three `.area-card` elements in `#oblasti .areas-grid` (Krivično, Građansko, Privredno i radno pravo).
+- The business-ideas carousel was removed from `index.html`. `src/carousel.js` and `src/ideas.js` remain as standalone modules with their own passing unit tests, but are no longer wired into any page.
+- On load, `index.html` shows a full-screen intro overlay (`#intro` + `#introVideo`): muted autoplay, "Preskoči" skip → `#hero`, end-of-video CTA → `#about`, shown once per session via `sessionStorage`.
