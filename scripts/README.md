@@ -17,12 +17,19 @@ predmeta, datum). Stranica odluke (npr. `/sr-lat/kzz-1182013`) ima zvanični
 preuzima. Ako PDF ne postoji, kao rezerva snima se HTML tekst odluke
 (`field-name-body`).
 
+Za svaku odluku snima se i **`.txt`** (čist tekst odluke + zaglavlje sa
+oznakom predmeta, datumom i izvornim linkovima) — ekonomičan format za
+pretragu i pravnu analizu. Na kraju punog preuzimanja pravi se i jedan
+**indeks** `_INDEKS-presuda.html` sa klikabilnim linkovima ka svakoj presudi
+(„Presuda Kzz 118/2013" → otvara odluku; uz „PDF" za zvanični dokument).
+
 ## Komande
 
 ```bash
 node scripts/download-krivicne.mjs popis                 # skupi sve linkove -> out/manifest.json
-node scripts/download-krivicne.mjs download              # preuzmi PDF-ove -> out/krivicne/*.pdf
+node scripts/download-krivicne.mjs download              # preuzmi PDF + .txt, pa napravi indeks
 node scripts/download-krivicne.mjs download --limit 50   # probni batch
+node scripts/download-krivicne.mjs index                 # (ponovo) napravi _INDEKS-presuda.html
 node scripts/download-krivicne.mjs status                # pregled napretka
 ```
 
@@ -61,5 +68,6 @@ za pun set bolji `rclone`.
 ## Provera ispravnosti
 
 1. `popis` → broj u manifestu treba da bude **== 11.069** (brojač na sajtu). ✓ provereno
-2. `download --limit 5` → snima ispravne PDF-ove (`%PDF`, 2–4 strane). ✓ provereno
-3. Na kraju: broj fajlova u Drive folderu == broj preuzetih u `out/krivicne/`.
+2. `download --limit N` → uz svaki PDF (`%PDF`, 2–4 strane) i `.txt` sa čistim tekstom. ✓ provereno
+3. `index` → `_INDEKS-presuda.html` sa svih 11.069 klikabilnih linkova. ✓ provereno
+4. Na kraju: broj fajlova u Drive folderu == broj u `out/krivicne/`.
