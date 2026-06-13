@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>30 predloga komandi (skills) — adv. Milan Mišić</title>
+<style>
+  :root {
+    --bg: #f4f1ea;
+    --paper: #ffffff;
+    --ink: #1d1d1b;
+    --accent: #6b1f2a;
+    --accent-soft: #f0e3e0;
+    --line: #d9d2c5;
+    --muted: #6b675f;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: Georgia, 'Times New Roman', serif;
+    line-height: 1.5;
+    padding: 24px 14px 120px;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; }
+  header.top {
+    text-align: center;
+    border-bottom: 3px double var(--accent);
+    padding-bottom: 18px;
+    margin-bottom: 22px;
+  }
+  header.top h1 { font-size: 26px; margin: 0 0 6px; color: var(--accent); }
+  header.top p { margin: 4px 0; color: var(--muted); font-size: 15px; }
+  .howto {
+    background: var(--accent-soft);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 26px;
+    font-size: 15px;
+  }
+  .howto b { color: var(--accent); }
+  .counter-bar {
+    position: sticky; top: 0; z-index: 5;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 10px 14px;
+    margin-bottom: 18px;
+    display: flex; align-items: center; justify-content: space-between;
+    font-family: system-ui, sans-serif; font-size: 14px;
+    box-shadow: 0 2px 6px rgba(0,0,0,.06);
+  }
+  .counter-bar strong { color: var(--accent); font-size: 16px; }
+  .cat { margin: 26px 0 10px; }
+  .cat h2 {
+    font-size: 14px; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--accent); margin: 0 0 10px; font-family: system-ui, sans-serif;
+    border-bottom: 1px solid var(--line); padding-bottom: 6px;
+  }
+  label.item {
+    display: flex; gap: 12px; align-items: flex-start;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: border-color .15s, background .15s;
+  }
+  label.item:hover { border-color: var(--accent); }
+  label.item.checked { background: var(--accent-soft); border-color: var(--accent); }
+  label.item input { width: 22px; height: 22px; margin-top: 2px; accent-color: var(--accent); flex: 0 0 auto; }
+  .item .body { flex: 1; }
+  .item .num { font-family: system-ui, sans-serif; font-size: 12px; color: var(--muted); }
+  .item .name { font-weight: bold; font-size: 16px; }
+  .item .desc { font-size: 14px; color: var(--muted); margin-top: 2px; }
+  .actions {
+    position: fixed; left: 0; right: 0; bottom: 0;
+    background: var(--paper);
+    border-top: 2px solid var(--accent);
+    padding: 12px 14px;
+    display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;
+    font-family: system-ui, sans-serif;
+  }
+  button {
+    font-family: system-ui, sans-serif; font-size: 15px;
+    border: none; border-radius: 8px; padding: 12px 18px; cursor: pointer;
+  }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-ghost { background: #eee; color: #333; }
+  .result {
+    margin-top: 22px;
+    background: var(--paper);
+    border: 2px solid var(--accent);
+    border-radius: 10px;
+    padding: 16px;
+    display: none;
+  }
+  .result.show { display: block; }
+  .result h3 { margin: 0 0 10px; color: var(--accent); }
+  textarea {
+    width: 100%; min-height: 160px; font-family: system-ui, monospace;
+    font-size: 14px; border: 1px solid var(--line); border-radius: 8px; padding: 10px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <h1>30 predloga komandi (skills)</h1>
+    <p>za advokatsku kancelariju — adv. Milan Mišić, Novi Sad</p>
+  </header>
+
+  <div class="howto">
+    <b>Kako se koristi:</b> pročitaj predloge i <b>klikni kvačicu</b> kod onih koje želiš da ti napravim.
+    Na dnu klikni <b>„Prikaži moj izbor"</b> → dobiješ spisak. Taj spisak mi
+    <b>prekopiraj u chat ili slikaj</b> i ja ću napraviti izabrane komande.
+  </div>
+
+  <div class="counter-bar">
+    <span>Izabrano komandi:</span>
+    <strong id="count">0</strong>
+  </div>
+
+  <div id="list"></div>
+
+  <div class="result" id="result">
+    <h3>Tvoj izbor — pošalji mi ovo</h3>
+    <textarea id="out" readonly></textarea>
+    <div style="margin-top:10px; display:flex; gap:10px; flex-wrap:wrap;">
+      <button class="btn-primary" onclick="copyOut()">Kopiraj spisak</button>
+      <span id="copied" style="align-self:center; color:var(--accent); display:none;">Kopirano ✔</span>
+    </div>
+  </div>
+</div>
+
+<div class="actions">
+  <button class="btn-primary" onclick="showResult()">Prikaži moj izbor</button>
+  <button class="btn-ghost" onclick="clearAll()">Poništi sve</button>
+</div>
+
+<script>
+const data = [
+  { cat: 'Izrada akata', items: [
+    ['Tužba — brza', 'Sastavi tužbu iz par tvojih rečenica, u tvom stilu i sa potpisom.'],
+    ['Odgovor na tužbu', 'Napravi odgovor na tužbu sa prigovorima i protivdokazima.'],
+    ['Žalba na presudu', 'Žalba sa bitnim povredama postupka i pogrešno utvrđenim činjenicama.'],
+    ['Prigovor na rešenje o izvršenju', 'Gotov prigovor sa razlozima i predlogom.'],
+    ['Predlog za izvršenje', 'Na osnovu izvršne ili verodostojne isprave, sa proračunom troškova.'],
+    ['Krivična prijava', 'Sastavi krivičnu prijavu sa činjeničnim opisom i kvalifikacijom.'],
+    ['Ugovor — nacrt', 'Nacrt ugovora (kupoprodaja, zakup, o delu, zajam…) po tvojim parametrima.'],
+    ['Opomena pred utuženje', 'Kratka, oštra opomena dužniku sa rokom i upozorenjem.'],
+  ]},
+  { cat: 'Analiza i čitanje', items: [
+    ['Pregled presude', 'Iz nalepljenog teksta izvuče rokove, ključne tačke i sledeći korak.'],
+    ['Rendgen spisa', 'Duboko čitanje dokumenta — poveže činjenice i nađe slabe tačke.'],
+    ['Provera zastarelosti', 'Računa da li je potraživanje/gonjenje zastarelo i po kom članu.'],
+    ['Šanse u sporu', 'Trezvena procena izgleda za uspeh sa argumentima za i protiv.'],
+    ['Sažmi dugačak dokument', 'Od 50 strana napravi 1 stranu suštine, bez gubljenja bitnog.'],
+  ]},
+  { cat: 'Rokovi i organizacija', items: [
+    ['Računanje rokova', 'Od datuma prijema računa rok za žalbu, prigovor, reviziju.'],
+    ['Podsetnik za ročišta', 'Napravi pregled predmeta i narednih ročišta po datumu.'],
+    ['Ček-lista za predmet', 'Šta sve treba prikupiti/uraditi za konkretan tip spora.'],
+    ['Troškovnik', 'Obračun troškova postupka po AT (advokatska tarifa).'],
+    ['Punomoćje', 'Generiše punomoćje za zastupanje, prilagođeno predmetu.'],
+  ]},
+  { cat: 'Klijenti i komunikacija', items: [
+    ['Objasni klijentu', 'Pravnu situaciju prevede na jezik koji klijent razume.'],
+    ['Email klijentu', 'Pristojan, jasan mejl sa statusom predmeta i sledećim koracima.'],
+    ['Ponuda za zastupanje', 'Sastavi ponudu sa opisom posla i procenom troškova.'],
+    ['Pitanja za klijenta', 'Lista pravih pitanja na prvom sastanku za dati tip predmeta.'],
+  ]},
+  { cat: 'Istraživanje', items: [
+    ['Nađi sudsku praksu', 'Pretraga relevantnih odluka za konkretan član/pitanje.'],
+    ['Provera člana zakona', 'Tačan tekst i tumačenje člana, sa povezanim odredbama.'],
+    ['ESLJP praksa', 'Nađe relevantne presude Evropskog suda za ljudska prava.'],
+    ['Pravno mišljenje', 'Kratko obrazloženo mišljenje o spornom pitanju.'],
+  ]},
+  { cat: 'Marketing i lično', items: [
+    ['Instagram objava', 'Edukativna pravna objava „Uz Rame Sa Studentima", u tvom tonu.'],
+    ['Blog / članak', 'Stručan ali čitljiv tekst o pravnoj temi za sajt.'],
+    ['Knjižica za sina', 'Mala ilustrovana priča/knjižica po zadatoj temi.'],
+    ['Sredi moj stil', 'Bilo koji tekst preuredi u tvoj vizuelni stil dokumenta (.docx izgled).'],
+  ]},
+];
+
+const list = document.getElementById('list');
+let idx = 0;
+data.forEach(group => {
+  const sec = document.createElement('div');
+  sec.className = 'cat';
+  sec.innerHTML = '<h2>' + group.cat + '</h2>';
+  group.items.forEach(([name, desc]) => {
+    idx++;
+    const id = 'sk' + idx;
+    const label = document.createElement('label');
+    label.className = 'item';
+    label.innerHTML =
+      '<input type="checkbox" id="' + id + '" data-name="' + name + '">' +
+      '<span class="body"><span class="num">#' + idx + '</span>' +
+      '<div class="name">' + name + '</div>' +
+      '<div class="desc">' + desc + '</div></span>';
+    const cb = label.querySelector('input');
+    cb.addEventListener('change', () => {
+      label.classList.toggle('checked', cb.checked);
+      updateCount();
+    });
+    sec.appendChild(label);
+  });
+  list.appendChild(sec);
+});
+
+function checked() {
+  return Array.from(document.querySelectorAll('input[type=checkbox]:checked'));
+}
+function updateCount() {
+  document.getElementById('count').textContent = checked().length;
+}
+function showResult() {
+  const items = checked().map((c, i) => (i + 1) + '. ' + c.dataset.name);
+  const out = document.getElementById('out');
+  const res = document.getElementById('result');
+  if (items.length === 0) {
+    out.value = 'Nisi izabrao nijednu komandu. Klikni kvačice pa probaj ponovo.';
+  } else {
+    out.value = 'Hoću da mi napraviš ove komande:\n\n' + items.join('\n');
+  }
+  res.classList.add('show');
+  res.scrollIntoView({ behavior: 'smooth' });
+}
+function clearAll() {
+  checked().forEach(c => { c.checked = false; c.closest('.item').classList.remove('checked'); });
+  updateCount();
+  document.getElementById('result').classList.remove('show');
+}
+function copyOut() {
+  const out = document.getElementById('out');
+  out.select();
+  navigator.clipboard.writeText(out.value).then(() => {
+    const c = document.getElementById('copied');
+    c.style.display = 'inline';
+    setTimeout(() => c.style.display = 'none', 2000);
+  });
+}
+</script>
+</body>
+</html>
