@@ -196,7 +196,6 @@ There is **no icon system**. Icons in the codebase today are:
 
 ```
 .
-├── .mcp.json              # Project-scoped MCP servers (claude-context)
 ├── CLAUDE.md              # Instructions for Claude Code
 ├── design-system-rules.md # This file
 ├── index.html             # Carousel UI + lawyer landing page (one file)
