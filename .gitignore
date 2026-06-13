@@ -1,2 +1,5 @@
 node_modules/
 .claude/settings.local.json
+
+# Preuzete odluke (generisani artefakti — ne komituju se)
+out/
