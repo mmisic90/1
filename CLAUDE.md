@@ -38,7 +38,7 @@ tests/          # vitest + jsdom; one *.test.js per src module (~90 tests total)
 index.html      # carousel + voting + landing page; <script type="module"> imports from src/
 remote.html     # imports createRemote from src/remote.js; wires it onto window
 .github/workflows/
-  tests.yml         # runs npm ci && npm test on push (default branch) and all PRs
+  test.yml          # runs npm ci && npm test on push to main and all PRs
   deploy-pages.yml  # deploys static site to GitHub Pages
   claude.yml        # Claude Code Action on @claude mentions
 ```
@@ -61,7 +61,7 @@ remote.html     # imports createRemote from src/remote.js; wires it onto window
 ## Verification
 
 - A **Stop hook** (`.claude/hooks/run-tests.sh`) runs `npm test` when `src/`/`tests/` JS changed and blocks the turn until it passes.
-- `tests.yml` runs the suite on every PR.
+- `test.yml` runs the suite on every PR.
 - For a fresh-context review of a diff, use the `code-review` subagent.
 - Run `npm test` before committing. When you add or remove ideas in `ideas.js`, update the length assertion in `tests/ideas.test.js`.
 
