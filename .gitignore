@@ -1,5 +1,8 @@
 node_modules/
 .claude/settings.local.json
 
+# Local screenshot/preview tooling (Playwright)
+.shots.mjs
+
 # Preuzete odluke (generisani artefakti — ne komituju se)
 out/

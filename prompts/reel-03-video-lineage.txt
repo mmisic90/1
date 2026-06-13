@@ -1,0 +1,108 @@
+REEL 03 — "THE LINEAGE" (video / image-to-video)
+=================================================
+
+KONCEPT
+-------
+Subjektivni kadar (POV ili tracking iza figure advokata): osoba
+polako prolazi kroz dostojanstvenu pravnu biblioteku, prilazi
+trima portretima velikana srpsko-jugoslovenske pravne tradicije,
+zastane, pročita njihova imena, pa skrene DESNO — gde visi četvrti
+portret: adv. Milan Misić. Naslednik loze.
+
+Ton: tih, dostojanstven, Kubrick-ovska simetrija, topla volframska
+svetlost, navy + zlato. Bez žurbe. Reverentno.
+
+Trajanje: 10–14 s. Format: 9:16 vertikalno. 30 fps (ili 24 za film look).
+
+
+KEYFRAME-OVI (production input za image-to-video)
+-------------------------------------------------
+Ovi modeli (Higgsfield, Kling, Runway Gen-3, Luma) rade NAJBOLJE kad
+im daš početni i krajnji kadar segmenta + opis pokreta. Koristi:
+
+  Segment 1 (establishing + prilazak):
+    start  -> public/reels/storyboards/reel-03-storyboard-v3.png
+    end    -> public/reels/storyboards/reel-03-storyboard-v5.png
+  Segment 2 (čitanje imena, polagani push-in):
+    start/end -> public/reels/storyboards/reel-03-storyboard-v5.png
+  Segment 3 (skretanje desno -> reveal):
+    start  -> public/reels/storyboards/reel-03-storyboard-v5.png
+    end    -> public/reels/storyboards/reel-03b-misic-portrait.png
+
+Previz animatik (tajming/montaža, NIJE finalni kvalitet):
+    public/reels/reel-03-lineage-animatic.mp4
+
+
+SHOT BREAKDOWN (beats)
+----------------------
+[0.0 – 2.0s]  Establishing. Kamera kreće niz biblioteku, spori
+              push-in. Knjige sa strane, topla lampa u dnu. Prašina
+              lebdi u snopu svetla. Tišina.
+
+[2.0 – 6.5s]  Tri portreta na centralnom zidu, frontalno, simetrično.
+              Vrlo spori push-in. Ispod svakog rama, ugravirano
+              zlatno ime postaje čitljivo:
+                  Valtazar Bogišić  |  Svetozar Miletić  |  Slobodan Jovanović
+              Kratak beat zadržavanja — pogled prelazi preko lica.
+
+[6.5 – 7.0s]  Kamera SKREĆE DESNO. Brz, gladak pan sa blagim motion
+              blurom (kao da osoba okreće glavu/telo udesno).
+
+[7.0 – 12.0s] REVEAL. Četvrti portret, sam, pod picture light-om:
+              savremeni advokat u tamnom odelu, zlatni barokni ram.
+              Spori push-in ka mesinganoj pločici:
+                  Adv. Milan Misić
+              Zadržati 1–1.5 s na imenu. Fade ili cut.
+
+
+KAMERA / POKRET
+---------------
+- Pokret spor i namerno "težak" (dolly, ne hektičan handheld).
+- Push-in ~10–18% zoom po segmentu, ease-in/ease-out.
+- Skretanje desno: jedini brz pokret u celom kadru — daje udar.
+- Bez naglih rezova osim eventualno na samom revealu.
+- Dubinska oštrina plitka; lica i pločice u fokusu, ostalo meko.
+
+
+PROMPT ZA VIDEO MODEL (zalepi uz keyframe-ove)
+----------------------------------------------
+"Slow cinematic dolly move through a dignified, dimly lit private law
+library. Deep navy walls, dark walnut bookshelves filled with antique
+leather-bound legal tomes with gold-embossed spines, herringbone
+parquet floor, warm tungsten light, dust motes floating in the light
+beam. The camera glides forward toward three large ornate gilt-framed
+oil portraits of distinguished 19th-century jurists hung in a row on
+the back wall, slowly pushing in so their engraved gold nameplates
+become legible. After a brief reverent hold, the camera turns smoothly
+to the right with a soft motion-blurred whip, revealing a fourth
+portrait hanging alone under a focused picture light: a dignified
+modern lawyer in a dark navy suit in a baroque gilt frame, brass
+nameplate below. The camera pushes in gently on the nameplate and
+holds. Photorealistic, shallow depth of field, Kubrick symmetry,
+Barry Lyndon warmth, navy and gold palette, reverent and quiet,
+no people walking in frame, no text artifacts. 9:16 vertical."
+
+Negativni prompt: cartoon, illustration, distorted faces, extra
+fingers, warped frames, garbled text, watermark, logo, oversaturated,
+fisheye, fast cuts.
+
+
+AUDIO (predlog)
+---------------
+- Sporo solo piano ili gudači (legato), tih.
+- Diskretni room tone (tišina biblioteke), korak ili dva po parketu.
+- Bez voiceover-a, ili vrlo kratak na revealu (npr. ime firme).
+- Na revealu Misića: jedan topli akord / svetli ton.
+
+
+VAŽNO — PRAVA LICA U POST-PRODUKCIJI
+------------------------------------
+Lica na sva četiri portreta su AI placeholderi i NISU prepoznatljivi.
+Pre objave zameniti:
+  - Bogišić / Miletić / Jovanović -> javno-dostupne (public domain)
+    fotografije (70+ godina od smrti, PD u regionu), uramljene u
+    zlatne barokne okvire (digital overlay na portret-ravni).
+  - Četvrti portret -> STVARNA profesionalna fotografija
+    adv. Milana Misića u tamnom odelu, ista poza/osvetljenje.
+Imena su već postavljena (Pillow overlay) i tačna; pri zameni lica
+zadržati iste pozicije teksta.

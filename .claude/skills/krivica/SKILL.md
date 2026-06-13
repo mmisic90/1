@@ -11,7 +11,7 @@ description: >
   ustavna žalba, ESLJP, čl. 438/439/440/441/482–493/211/500/313–319 ZKP, KZ, ZKP,
   privatna tužba krivica, odgovor na optužnicu, prigovor. Generiše .docx u stilu
   adv. Milana Mišića i adv. Đorđa Nedeljkova, sa perspektive ODBRANE okrivljenog.
-  Lanac: pravna-analiza → ovaj skill → istrazivanje-prakse → verifikator. NE aktivirati za: građanske/parnične sporove, izvršenje,
+  Lanac: pravna-analiza → ovaj skill → stil-pisanja → verifikator (istrazivanje-prakse se poziva kao servis u Koraku 3). NE aktivirati za: građanske/parnične sporove, izvršenje,
   prekršaje, upravni postupak, knjižice, Instagram, tehnički debugging.
 metadata:
   author: "Milan Mišić, advokat"

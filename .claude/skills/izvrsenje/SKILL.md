@@ -9,7 +9,7 @@ description: >
   isprava, II-, IIv-, PI-, javni izvršitelj, blokada računa, zaplena, popis, procena,
   prodaja nepokretnosti, zabrana raspolaganja, poriz na dodatnu vrednost dodeljena
   imovina, namirenje. Generiše .docx u stilu adv. Milana Mišića, sa perspektive
-  IZVRŠNOG POVERIOCA ili IZVRŠNOG DUŽNIKA zavisno od akta. Lanac: pravna-analiza → ovaj skill → istrazivanje-prakse → verifikator. NE aktivirati
+  IZVRŠNOG POVERIOCA ili IZVRŠNOG DUŽNIKA zavisno od akta. Lanac: pravna-analiza → ovaj skill → stil-pisanja → verifikator (istrazivanje-prakse se poziva kao servis u Koraku 3). NE aktivirati
   za: parnične sporove (tuzba-parnica), krivične postupke (krivica), prekršajne
   postupanje, upravne sporove, knjižice, Instagram, tehnički debugging.
 metadata:

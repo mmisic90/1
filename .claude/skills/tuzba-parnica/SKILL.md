@@ -10,7 +10,7 @@ description: >
   revizija, žalba na presudu parnica, tuzba za naknadu štete, tuzba za utvrdjenje,
   tuzba za proboj pravne ličnosti, tuzba za razvod, tuzba za ispunjenje ugovora,
   privremena mera parnica. Generiše .docx u stilu adv. Milana Mišića, sa perspektive
-  TUŽIOCA ili TUŽENOG zavisno od akta. Lanac: pravna-analiza → ovaj skill → istrazivanje-prakse → verifikator. NE aktivirati za: krivične postupke,
+  TUŽIOCA ili TUŽENOG zavisno od akta. Lanac: pravna-analiza → ovaj skill → stil-pisanja → verifikator (istrazivanje-prakse se poziva kao servis u Koraku 3). NE aktivirati za: krivične postupke,
   izvršni postupak, prekršajne postupke, upravne sporove, knjižice, Instagram,
   tehnički debugging.
 metadata:
